@@ -76,7 +76,7 @@
     "yaml-eslint-parser": "^1.2.2"
   },
   "devDependencies": {
-    "@luxass/eslint-config": "workspace:*",
+    "@luxass/eslint-config": "file:./",
     "@stylistic/eslint-plugin-migrate": "0.0.4",
     "@types/node": "18.17.19",
     "eslint": "^8.50.0",

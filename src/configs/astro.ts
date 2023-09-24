@@ -1,21 +1,19 @@
-import { type FlatESLintConfigItem } from "eslint-define-config";
-import { parserAstro, parserTs, pluginAstro } from "../plugins";
+import { type FlatESLintConfigItem } from 'eslint-define-config'
+import { parserAstro, parserTs, pluginAstro } from '../plugins'
 
 interface AstroOptions {
-  typescript?: boolean;
+  typescript?: boolean
 }
 
 export function astro(options: AstroOptions = {}): FlatESLintConfigItem[] {
-  console.log("astro", options);
-
   return [
     {
-      files: ["*.astro"],
+      files: ['*.astro'],
       languageOptions: {
         parser: parserAstro,
         parserOptions: {
           parser: options.typescript ? (parserTs as any) : null,
-          extraFileExtensions: [".astro"],
+          extraFileExtensions: ['.astro'],
         },
       },
       plugins: {
@@ -25,5 +23,5 @@ export function astro(options: AstroOptions = {}): FlatESLintConfigItem[] {
         ...(pluginAstro.configs.recommended.rules as any),
       },
     },
-  ];
+  ]
 }

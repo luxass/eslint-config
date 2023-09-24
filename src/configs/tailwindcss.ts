@@ -1,3 +1,3 @@
-import { type FlatESLintConfigItem } from "eslint-define-config";
+import { type FlatESLintConfigItem } from 'eslint-define-config'
 
-export const tailwindcss: FlatESLintConfigItem[] = [];
+export const tailwindcss: FlatESLintConfigItem[] = []

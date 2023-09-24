@@ -1,14 +1,14 @@
-import { type FlatESLintConfigItem } from "eslint-define-config";
-import { pluginUnoCSS } from "../plugins";
+import { type FlatESLintConfigItem } from 'eslint-define-config'
+import { pluginUnoCSS } from '../plugins'
 
 export const unocss: FlatESLintConfigItem[] = [
   {
     plugins: {
-      "@unocss": pluginUnoCSS,
+      '@unocss': pluginUnoCSS,
     },
     // @ts-expect-error aaa
     rules: {
       ...pluginUnoCSS.configs.recommended.rules,
     },
   },
-];
+]

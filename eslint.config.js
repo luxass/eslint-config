@@ -1,7 +1,7 @@
-import stylisticMigrate from '@stylistic/eslint-plugin-migrate';
-import sortKeys from 'eslint-plugin-sort-keys';
+import stylisticMigrate from '@stylistic/eslint-plugin-migrate'
+import sortKeys from 'eslint-plugin-sort-keys'
 
-import { luxass } from "@luxass/eslint-config";
+import { luxass } from '@luxass/eslint-config'
 
 export default luxass([
   {
@@ -20,6 +20,5 @@ export default luxass([
       '@stylistic/migrate/rules': 'error',
       'sort-keys/sort-keys-fix': 'error',
     },
-  }
-]);
-
+  },
+])

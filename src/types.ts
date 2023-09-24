@@ -6,42 +6,42 @@ export interface Options {
    *
    * @default auto-detect based on the dependencies
    */
-  typescript?: boolean;
+  typescript?: boolean
 
   /**
    * Enable Vue support.
    *
    * @default auto-detect based on the dependencies
    */
-  vue?: boolean;
+  vue?: boolean
 
   /**
    * Enable React support.
    *
    * @default auto-detect based on the dependencies
    */
-  react?: boolean;
+  react?: boolean
 
   /**
    * Enable Astro support.
    *
    * @default auto-detect based on the dependencies
    */
-  astro?: boolean;
+  astro?: boolean
 
   /**
    * Enable Astro support.
    *
    * @default auto-detect based on the dependencies
    */
-  svelte?: boolean;
+  svelte?: boolean
 
   /**
    * Enable UnoCSS support.
    *
    * @default auto-detect based on the dependencies
    */
-  unocss?: boolean;
+  unocss?: boolean
 
   /**
    * Enable TailwindCSS support.
@@ -49,7 +49,7 @@ export interface Options {
    * This is conflicting with UnoCSS preset, so you can only enable one of them.
    * @default auto-detect based on the dependencies
    */
-  tailwindcss?: boolean;
+  tailwindcss?: boolean
 
   /**
    * Enable JSON support.
@@ -58,32 +58,32 @@ export interface Options {
    *
    * @default true
    */
-  json?: boolean;
+  json?: boolean
 
   /**
    * Enable YAML support.
    *
    * @default true
    */
-  yaml?: boolean;
+  yaml?: boolean
 
   /**
    * Enable Markdown support.
    *
    * @default true
    */
-  markdown?: boolean;
+  markdown?: boolean
 
   /**
    * Enable stylistic rules.
    *
    * @default true
    */
-  stylistic?: boolean;
+  stylistic?: boolean
 
   /**
    * Control to disable some rules in editors.
    * @default auto-detect based on the process.env
    */
-  editorEnabled?: boolean;
+  editorEnabled?: boolean
 }

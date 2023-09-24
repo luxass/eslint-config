@@ -1,11 +1,11 @@
-import { type FlatESLintConfigItem } from "eslint-define-config";
+import { type FlatESLintConfigItem } from 'eslint-define-config'
 
 interface SvelteOptions {
-  typescript?: boolean;
+  typescript?: boolean
 }
 
 export function svelte(options: SvelteOptions = {}): FlatESLintConfigItem[] {
-  console.log("svelte", options);
+  console.log('svelte', options)
 
-  return [{}];
+  return [{}]
 }
