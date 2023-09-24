@@ -34,8 +34,7 @@ export { default as pluginUnusedImports } from "eslint-plugin-unused-imports";
 // @ts-expect-error no types
 export { default as pluginVue } from "eslint-plugin-vue";
 
-// @ts-expect-error no types
-export { default as pluginAstro } from "@astrojs/eslint-plugin-astro";
+export { default as pluginAstro } from "eslint-plugin-astro";
 
 // @ts-expect-error no types
 export { default as pluginTailwindCSS } from "eslint-plugin-tailwindcss";
@@ -52,3 +51,4 @@ export { default as parserTs } from "@typescript-eslint/parser";
 export { default as parserVue } from "vue-eslint-parser";
 export { default as parserYml } from "yaml-eslint-parser";
 export { default as parserJsonc } from "jsonc-eslint-parser";
+export { default as parserAstro } from "astro-eslint-parser";

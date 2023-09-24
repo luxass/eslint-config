@@ -1,7 +1,4 @@
-import {
-  type FlatESLintConfigItem,
-  type Rules,
-} from "eslint-define-config";
+import { type FlatESLintConfigItem, type Rules } from "eslint-define-config";
 import { GLOB_YAML } from "../globs";
 import { parserYml, pluginYml } from "../plugins";
 
@@ -15,10 +12,8 @@ export const yml: FlatESLintConfigItem[] = [
       yml: pluginYml,
     },
     rules: {
-      ...(pluginYml.configs.standard
-        .rules as Rules),
-      ...(pluginYml.configs.prettier
-        .rules as Rules),
+      ...(pluginYml.configs.standard.rules as Rules),
+      ...(pluginYml.configs.prettier.rules as Rules),
       "yml/no-empty-mapping-value": "off",
     },
   },

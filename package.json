@@ -25,24 +25,19 @@
     "dist"
   ],
   "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs"
-    },
-    "./presets": {
-      "types": "./dist/presets.d.ts",
-      "require": "./dist/presets.cjs",
-      "import": "./dist/presets.mjs"
+      "import": "./dist/index.js"
     },
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "tsup",
-    "build:stub": "tsup --no-dts",
+    "build": "tsup src/index.ts --format esm,cjs --clean --dts",
+    "stub": "tsup src/index.ts --format esm",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit"
@@ -59,6 +54,7 @@
     "@unocss/eslint-plugin": "^0.56.1",
     "eslint-define-config": "^1.23.0",
     "eslint-plugin-antfu": "^0.43.1",
+    "eslint-plugin-astro": "^0.29.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-i": "^2.28.1",
     "eslint-plugin-jsdoc": "^46.8.2",
@@ -87,7 +83,6 @@
     "eslint-plugin-sort-keys": "^2.3.5",
     "tsup": "^7.2.0",
     "typescript": "^5.2.2",
-    "unbuild": "^2.0.0",
     "vitest": "^0.34.5"
   },
   "engines": {

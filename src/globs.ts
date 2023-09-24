@@ -32,8 +32,7 @@ export const GLOB_ALL_SRC = [
   GLOB_HTML,
 ];
 
-export const GLOB_NODE_MODULES =
-  "**/node_modules" as const;
+export const GLOB_NODE_MODULES = "**/node_modules" as const;
 export const GLOB_DIST = "**/dist" as const;
 export const GLOB_LOCKFILE = [
   "**/package-lock.json",

@@ -4,14 +4,8 @@ interface SvelteOptions {
   typescript?: boolean;
 }
 
-export function svelte(
-  options: SvelteOptions = {},
-): FlatESLintConfigItem[] {
+export function svelte(options: SvelteOptions = {}): FlatESLintConfigItem[] {
   console.log("svelte", options);
 
-  return [
-    {
-
-    }
-  ];
+  return [{}];
 }

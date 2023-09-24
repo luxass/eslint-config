@@ -1,21 +1,22 @@
 import { type FlatESLintConfigItem } from "eslint-define-config";
 import { GLOB_TS, GLOB_TSX } from "../globs";
-import {
-  TSPlugin,
-  parserTs,
-  pluginAntfu,
-  pluginImport,
-} from "../plugins";
+import { TSPlugin, parserTs, pluginAntfu, pluginImport } from "../plugins";
 import { renameRules } from "../utils";
 
 interface TypeScriptOptions {
-  extensions?: string[]
+  extensions?: string[];
 }
 
-export function typescript(options: TypeScriptOptions = {}): FlatESLintConfigItem[] {
+export function typescript(
+  options: TypeScriptOptions = {},
+): FlatESLintConfigItem[] {
   return [
     {
-      files: [GLOB_TS, GLOB_TSX, ...(options.extensions ?? []).map(ext => `**/*${ext}`)],
+      files: [
+        GLOB_TS,
+        GLOB_TSX,
+        ...(options.extensions ?? []).map((ext) => `**/*${ext}`),
+      ],
       languageOptions: {
         parser: parserTs,
         parserOptions: {
@@ -29,8 +30,7 @@ export function typescript(options: TypeScriptOptions = {}): FlatESLintConfigIte
       },
       rules: {
         ...renameRules(
-          TSPlugin.configs["eslint-recommended"]
-            .overrides![0].rules!,
+          TSPlugin.configs["eslint-recommended"].overrides![0].rules!,
           "@typescript-eslint/",
           "ts/",
         ),
@@ -60,12 +60,8 @@ export function typescript(options: TypeScriptOptions = {}): FlatESLintConfigIte
           },
         ],
         "ts/ban-ts-ignore": "off",
-        "ts/consistent-indexed-object-style":
-          "off",
-        "ts/consistent-type-definitions": [
-          "error",
-          "interface",
-        ],
+        "ts/consistent-indexed-object-style": "off",
+        "ts/consistent-type-definitions": ["error", "interface"],
         "ts/consistent-type-imports": [
           "error",
           {
@@ -75,18 +71,14 @@ export function typescript(options: TypeScriptOptions = {}): FlatESLintConfigIte
         ],
         "ts/explicit-function-return-type": "off",
         "ts/explicit-member-accessibility": "off",
-        "ts/explicit-module-boundary-types":
-          "off",
+        "ts/explicit-module-boundary-types": "off",
         "ts/naming-convention": "off",
         "ts/no-dupe-class-members": "error",
         "ts/no-dynamic-delete": "off",
         "ts/no-empty-function": "off",
         "ts/no-empty-interface": "off",
         "ts/no-explicit-any": "off",
-        "ts/no-extra-parens": [
-          "error",
-          "functions",
-        ],
+        "ts/no-extra-parens": ["error", "functions"],
         "ts/no-invalid-this": "error",
         "ts/no-invalid-void-type": "off",
         "ts/no-loss-of-precision": "error",
@@ -110,8 +102,7 @@ export function typescript(options: TypeScriptOptions = {}): FlatESLintConfigIte
     {
       files: ["**/*.d.ts"],
       rules: {
-        "eslint-comments/no-unlimited-disable":
-          "off",
+        "eslint-comments/no-unlimited-disable": "off",
         "import/no-duplicates": "off",
         "unused-imports/no-unused-vars": "off",
       },
@@ -129,5 +120,5 @@ export function typescript(options: TypeScriptOptions = {}): FlatESLintConfigIte
         "ts/no-var-requires": "off",
       },
     },
-  ]
-};
+  ];
+}

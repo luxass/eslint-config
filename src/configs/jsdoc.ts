@@ -7,9 +7,7 @@ export const jsdoc: FlatESLintConfigItem[] = [
       jsdoc: pluginJsdoc,
     },
     rules: {
-      ...pluginJsdoc.configs[
-        "flat/recommended-typescript"
-      ].rules,
+      ...pluginJsdoc.configs["flat/recommended-typescript"].rules,
       "jsdoc/check-tag-names": "off",
       "jsdoc/check-values": "off",
       "jsdoc/no-undefined-types": "off",

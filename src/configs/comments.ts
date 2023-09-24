@@ -8,8 +8,7 @@ export const comments: FlatESLintConfigItem[] = [
     },
     rules: {
       ...pluginComments.configs.recommended.rules,
-      "eslint-comments/disable-enable-pair":
-        "off",
+      "eslint-comments/disable-enable-pair": "off",
     },
   },
 ];
