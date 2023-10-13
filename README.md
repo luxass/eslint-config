@@ -1,5 +1,8 @@
 # @luxass/eslint-config
 
+> 
+>
+
 > If you are looking for the old config, you can find it [here](https://github.com/luxass/eslint-config-legacy)
 
 ## ✨ Features
@@ -177,4 +180,4 @@ export default [
 
 > Thanks to [sxzz/eslint-config](https://github.com/sxzz/eslint-config) and [antfu/eslint-config](https://github.com/antfu/eslint-config) for the inspiration and references.
 
-Published under [MIT License](./LICENCE).
+Published under [MIT License](./LICENSE).
