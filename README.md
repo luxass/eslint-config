@@ -23,7 +23,7 @@ pnpm add -D eslint @luxass/eslint-config
 ## 🚀 Usage
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import { luxass } from "@luxass/eslint-config"
 
 export default luxass()
 ```
@@ -42,16 +42,15 @@ Install [ESLint extension](https://marketplace.visualstudio.com/items?itemName=d
   "prettier.enable": false,
   "editor.formatOnSave": false,
 
-    // auto fix on save
+  // auto fix on save
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.organizeImports": false
+    "source.fixAll": "explicit",
+    "source.organizeImports": "never"
   },
 
   // silent the stylistic rules in you IDE, but still auto fix them
   "eslint.rules.customizations": [
-    { "rule": "@stylistic/*", "severity": "off" },
-    { "rule": "style*", "severity": "off" },
+    { "rule": "style/*", "severity": "off" },
     { "rule": "*-indent", "severity": "off" },
     { "rule": "*-spacing", "severity": "off" },
     { "rule": "*-spaces", "severity": "off" },
@@ -62,7 +61,7 @@ Install [ESLint extension](https://marketplace.visualstudio.com/items?itemName=d
     { "rule": "*semi", "severity": "off" }
   ],
 
-    // The following is optional.
+  // The following is optional.
   // It's better to put under project setting `.vscode/settings.json`
   // to avoid conflicts with working with different eslint configs
   // that does not support all formats.
@@ -87,7 +86,7 @@ Normally you would only need to import the `luxass` preset:
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import { luxass } from "@luxass/eslint-config"
 
 export default luxass()
 ```
@@ -96,7 +95,7 @@ you can also configure each `config` individually:
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import { luxass } from "@luxass/eslint-config"
 
 export default luxass({
   typescript: true,
@@ -114,16 +113,13 @@ The `luxass` function accepts an arbitrary number of `flat configs` overrides:
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import { luxass } from "@luxass/eslint-config"
 
-export default luxass({},
-  {
-    rules: {}
-  },
-  {
-    rules: {}
-  }
-)
+export default luxass({}, {
+  rules: {}
+}, {
+  rules: {}
+})
 ```
 
 ### Fine Grained Configurations
@@ -153,7 +149,7 @@ import {
   unocss,
   vue,
   yml
-} from '@luxass/eslint-config/configs'
+} from "@luxass/eslint-config/configs"
 
 export default [
   ...astro,
@@ -180,5 +176,7 @@ export default [
 ```
 
 > Thanks to [sxzz/eslint-config](https://github.com/sxzz/eslint-config) and [antfu/eslint-config](https://github.com/antfu/eslint-config) for the inspiration and references.
+
+## 📄 License
 
 Published under [MIT License](./LICENSE).

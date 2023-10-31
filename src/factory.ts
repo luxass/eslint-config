@@ -1,159 +1,176 @@
-import process from 'node:process'
-import { type FlatESLintConfigItem } from 'eslint-define-config'
-import { isPackageExists } from 'local-pkg'
+import process from "node:process"
+import fs from "node:fs"
+import { isPackageExists } from "local-pkg"
+import gitignore from "eslint-config-flat-gitignore"
+import type { ConfigItem, OptionsConfig } from "./types"
 import {
-  astro,
   comments,
   ignores,
   imports,
   javascript,
-  javascriptStylistic,
   jsdoc,
-  json,
+  jsonc,
   markdown,
   node,
-  react,
-  sort,
-  svelte,
-  tailwindcss,
+  sortKeys,
+  sortPackageJson,
+  sortTsconfig,
+  stylistic,
+  test,
   typescript,
-  typescriptStylistic,
   unicorn,
-  unocss,
   vue,
-  yml,
-} from './configs'
-import { type Options } from './types'
-import { combine } from './utils'
+  yaml,
+} from "./configs"
+import { combine } from "./utils"
 
-const flatConfigProps: (keyof FlatESLintConfigItem)[] = [
-  'files',
-  'ignores',
-  'languageOptions',
-  'linterOptions',
-  'processor',
-  'plugins',
-  'rules',
-  'settings',
+const flatConfigProps: (keyof ConfigItem)[] = [
+  "files",
+  "ignores",
+  "languageOptions",
+  "linterOptions",
+  "processor",
+  "plugins",
+  "rules",
+  "settings",
 ]
 
-export function luxass(
-  options: Options & FlatESLintConfigItem = {},
-  ...userConfigs: (FlatESLintConfigItem | FlatESLintConfigItem[])[]
-): FlatESLintConfigItem[] {
-  const editorEnabled
-    = options.editorEnabled
-    ?? !!(
-      (process.env.VSCODE_PID || process.env.JETBRAINS_IDE)
-      && !process.env.CI
-    )
-  const isVueEnabled
-    = options.vue
-    ?? (isPackageExists('vue')
-      || isPackageExists('nuxt')
-      || isPackageExists('vitepress')
-      || isPackageExists('@slidev/cli'))
-  const isReactEnabled
-    = options.react
-    ?? (isPackageExists('react')
-      || isPackageExists('next')
-      || isPackageExists('react-dom'))
-  const isAstroEnabled = options.astro ?? isPackageExists('astro')
-  const isSvelteEnabled = options.svelte ?? isPackageExists('svelte')
-  const isUnoCSSEnabled = options.unocss ?? isPackageExists('unocss')
-  const isTailwindCSSEnabled
-    = options.tailwindcss ?? isPackageExists('tailwindcss')
-  const isTypeScriptEnabled
-    = options.typescript ?? isPackageExists('typescript')
-  const isStylisticEnabled = options.stylistic ?? true
+const VuePackages = [
+  "vue",
+  "nuxt",
+  "vitepress",
+  "@slidev/cli",
+]
 
-  const configs = [
-    ignores,
+/**
+ * Construct an array of ESLint flat config items.
+ */
+export function luxass(options: OptionsConfig & ConfigItem = {}, ...userConfigs: (ConfigItem | ConfigItem[])[]) {
+  const {
+    isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
+    vue: enableVue = VuePackages.some(i => isPackageExists(i)),
+    typescript: enableTypeScript = isPackageExists("typescript"),
+    gitignore: enableGitignore = true,
+    overrides = {},
+    componentExts = [],
+  } = options
+
+  const stylisticOptions = options.stylistic === false
+    ? false
+    : typeof options.stylistic === "object"
+      ? options.stylistic
+      : {}
+  if (stylisticOptions && !("jsx" in stylisticOptions)) {
+    stylisticOptions.jsx = options.jsx ?? true
+  }
+
+  const configs: ConfigItem[][] = []
+
+  if (enableGitignore) {
+    if (typeof enableGitignore !== "boolean") {
+      configs.push([gitignore(enableGitignore)])
+    } else {
+      if (fs.existsSync(".gitignore")) {
+        configs.push([gitignore()])
+      }
+    }
+  }
+
+  // Base configs
+  configs.push(
+    ignores(),
     javascript({
-      editorEnabled,
+      isInEditor,
+      overrides: overrides.javascript,
     }),
-    comments,
-    node,
-    jsdoc,
-    imports,
-    unicorn,
-  ]
+    comments(),
+    node(),
+    jsdoc({
+      stylistic: stylisticOptions,
+    }),
+    imports({
+      stylistic: stylisticOptions,
+    }),
+    unicorn(),
 
-  const extensions: string[] = []
+    // Optional plugins (not enabled by default)
+    sortKeys(),
+  )
 
-  if (isVueEnabled)
-    extensions.push('vue')
-
-  if (isStylisticEnabled)
-    configs.push(javascriptStylistic)
-
-  if (isTypeScriptEnabled) {
-    configs.push(
-      typescript({
-        extensions,
-      }),
-    )
-
-    if (isStylisticEnabled)
-      configs.push(typescriptStylistic)
+  if (enableVue) {
+    componentExts.push("vue")
   }
 
-  if (isVueEnabled) {
-    configs.push(
-      vue({
-        typescript: isTypeScriptEnabled,
-      }),
-    )
+  if (enableTypeScript) {
+    configs.push(typescript({
+      ...typeof enableTypeScript !== "boolean"
+        ? enableTypeScript
+        : {},
+      componentExts,
+      overrides: overrides.typescript,
+    }))
   }
 
-  if (isUnoCSSEnabled)
-    configs.push(unocss)
-
-  if (isTailwindCSSEnabled && !isUnoCSSEnabled)
-    configs.push(tailwindcss)
-
-  if (isReactEnabled) {
-    configs.push(
-      react({
-        typescript: isTypeScriptEnabled,
-      }),
-    )
+  if (stylisticOptions) {
+    configs.push(stylistic(stylisticOptions))
   }
 
-  if (isAstroEnabled) {
-    configs.push(
-      astro({
-        typescript: isTypeScriptEnabled,
-      }),
-    )
+  if (options.test ?? true) {
+    configs.push(test({
+      isInEditor,
+      overrides: overrides.test,
+    }))
   }
 
-  if (isSvelteEnabled) {
+  if (enableVue) {
+    configs.push(vue({
+      overrides: overrides.vue,
+      stylistic: stylisticOptions,
+      typescript: !!enableTypeScript,
+    }))
+  }
+
+  if (options.jsonc ?? true) {
     configs.push(
-      svelte({
-        typescript: isTypeScriptEnabled,
+      jsonc({
+        overrides: overrides.jsonc,
+        stylistic: stylisticOptions,
       }),
+      sortPackageJson(),
+      sortTsconfig(),
     )
   }
 
-  if (options.json ?? true)
-    configs.push(json, sort)
+  if (options.yaml ?? true) {
+    configs.push(yaml({
+      overrides: overrides.yaml,
+      stylistic: stylisticOptions,
+    }))
+  }
 
-  if (options.yaml ?? true)
-    configs.push(yml)
-
-  if (options.markdown ?? true)
-    configs.push(markdown({ extensions }))
+  if (options.markdown ?? true) {
+    configs.push(markdown({
+      componentExts,
+      overrides: overrides.markdown,
+    }))
+  }
 
   // User can optionally pass a flat config item to the first argument
   // We pick the known keys as ESLint would do schema validation
   const fusedConfig = flatConfigProps.reduce((acc, key) => {
-    if (key in options)
-      acc[key] = options[key]
+    if (key in options) {
+      acc[key] = options[key] as any
+    }
     return acc
-  }, {} as FlatESLintConfigItem)
-  if (Object.keys(fusedConfig).length > 0)
+  }, {} as ConfigItem)
+  if (Object.keys(fusedConfig).length) {
     configs.push([fusedConfig])
+  }
 
-  return combine(...configs, ...userConfigs)
+  const merged = combine(
+    ...configs,
+    ...userConfigs,
+  )
+
+  return merged
 }

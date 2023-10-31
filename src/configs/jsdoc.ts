@@ -1,25 +1,41 @@
-import { type FlatESLintConfigItem } from 'eslint-define-config'
-import { pluginJsdoc } from '../plugins'
+import type { ConfigItem, OptionsStylistic } from "../types"
+import { pluginJsdoc } from "../plugins"
 
-export const jsdoc: FlatESLintConfigItem[] = [
-  {
-    plugins: {
-      jsdoc: pluginJsdoc,
+export function jsdoc(options: OptionsStylistic = {}): ConfigItem[] {
+  const {
+    stylistic = true,
+  } = options
+
+  return [
+    {
+      name: "luxass:jsdoc",
+      plugins: {
+        jsdoc: pluginJsdoc,
+      },
+      rules: {
+        "jsdoc/check-access": "warn",
+        "jsdoc/check-param-names": "warn",
+        "jsdoc/check-property-names": "warn",
+        "jsdoc/check-types": "warn",
+        "jsdoc/empty-tags": "warn",
+        "jsdoc/implements-on-classes": "warn",
+        "jsdoc/no-defaults": "warn",
+        "jsdoc/no-multi-asterisks": "warn",
+        "jsdoc/require-param-name": "warn",
+        "jsdoc/require-property": "warn",
+        "jsdoc/require-property-description": "warn",
+        "jsdoc/require-property-name": "warn",
+        "jsdoc/require-returns-check": "warn",
+        "jsdoc/require-returns-description": "warn",
+        "jsdoc/require-yields-check": "warn",
+
+        ...stylistic
+          ? {
+              "jsdoc/check-alignment": "warn",
+              "jsdoc/multiline-blocks": "warn",
+            }
+          : {},
+      },
     },
-    rules: {
-      ...pluginJsdoc.configs['flat/recommended-typescript'].rules,
-      'jsdoc/check-tag-names': 'off',
-      'jsdoc/check-values': 'off',
-      'jsdoc/no-undefined-types': 'off',
-      'jsdoc/require-jsdoc': 'off',
-      'jsdoc/require-param': 'off',
-      'jsdoc/require-param-description': 'off',
-      'jsdoc/require-param-type': 'off',
-      'jsdoc/require-returns': 'off',
-      'jsdoc/require-returns-type': 'off',
-      'jsdoc/require-throws': 'off',
-      'jsdoc/require-yields': 'off',
-      'jsdoc/tag-lines': 'off',
-    },
-  },
-]
+  ]
+}

@@ -1,24 +1,21 @@
-import stylisticMigrate from '@stylistic/eslint-plugin-migrate'
-import sortKeys from 'eslint-plugin-sort-keys'
-
-import { luxass } from '@luxass/eslint-config'
+// @ts-check
+import styleMigrate from "@stylistic/eslint-plugin-migrate"
+import { luxass } from "./dist/index.js"
 
 export default luxass([
   {
     ignores: [
-      'fixtures',
-      '_fixtures',
+      "fixtures",
+      "_fixtures",
     ],
   },
   {
-    files: ['src/**/*.ts'],
+    files: ["src/**/*.ts"],
     plugins: {
-      '@stylistic/migrate': stylisticMigrate,
-      'sort-keys': sortKeys,
+      "style-migrate": styleMigrate,
     },
     rules: {
-      '@stylistic/migrate/rules': 'error',
-      'sort-keys/sort-keys-fix': 'error',
+      "style-migrate/migrate": ["error", { namespaceTo: "style" }],
     },
   },
 ])
