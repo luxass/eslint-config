@@ -1,10 +1,10 @@
-import type { ConfigItem, OptionsStylistic } from "../types"
-import { pluginJsdoc } from "../plugins"
+import type { ConfigItem, OptionsStylistic } from "../types";
+import { pluginJsdoc } from "../plugins";
 
 export function jsdoc(options: OptionsStylistic = {}): ConfigItem[] {
   const {
     stylistic = true,
-  } = options
+  } = options;
 
   return [
     {
@@ -37,5 +37,5 @@ export function jsdoc(options: OptionsStylistic = {}): ConfigItem[] {
           : {},
       },
     },
-  ]
+  ];
 }

@@ -1,5 +1,5 @@
-import type { ConfigItem } from "../types"
-import { pluginComments } from "../plugins"
+import type { ConfigItem } from "../types";
+import { pluginComments } from "../plugins";
 
 export function comments(): ConfigItem[] {
   return [
@@ -15,5 +15,5 @@ export function comments(): ConfigItem[] {
         "eslint-comments/no-unused-enable": "error",
       },
     },
-  ]
+  ];
 }

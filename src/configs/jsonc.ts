@@ -1,16 +1,16 @@
-import type { ConfigItem, OptionsOverrides, OptionsStylistic } from "../types"
-import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from "../globs"
-import { parserJsonc, pluginJsonc } from "../plugins"
+import type { ConfigItem, OptionsOverrides, OptionsStylistic } from "../types";
+import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from "../globs";
+import { parserJsonc, pluginJsonc } from "../plugins";
 
 export function jsonc(options: OptionsStylistic & OptionsOverrides = {}): ConfigItem[] {
   const {
-    stylistic = true,
     overrides = {},
-  } = options
+    stylistic = true,
+  } = options;
 
   const {
     indent = 2,
-  } = typeof stylistic === "boolean" ? {} : stylistic
+  } = typeof stylistic === "boolean" ? {} : stylistic;
 
   return [
     {
@@ -71,5 +71,5 @@ export function jsonc(options: OptionsStylistic & OptionsOverrides = {}): Config
         ...overrides,
       },
     },
-  ]
+  ];
 }

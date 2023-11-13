@@ -1,5 +1,5 @@
-import type { ConfigItem } from "../types"
-import { pluginNode } from "../plugins"
+import type { ConfigItem } from "../types";
+import { pluginNode } from "../plugins";
 
 export function node(): ConfigItem[] {
   return [
@@ -19,5 +19,5 @@ export function node(): ConfigItem[] {
         "node/process-exit-as-throw": "error",
       },
     },
-  ]
+  ];
 }

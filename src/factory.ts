@@ -1,8 +1,8 @@
-import process from "node:process"
-import fs from "node:fs"
-import { isPackageExists } from "local-pkg"
-import gitignore from "eslint-config-flat-gitignore"
-import type { ConfigItem, OptionsConfig } from "./types"
+import process from "node:process";
+import fs from "node:fs";
+import { isPackageExists } from "local-pkg";
+import gitignore from "eslint-config-flat-gitignore";
+import type { ConfigItem, OptionsConfig } from "./types";
 import {
   comments,
   ignores,
@@ -12,7 +12,7 @@ import {
   jsonc,
   markdown,
   node,
-  sortKeys,
+  perfectionist,
   sortPackageJson,
   sortTsconfig,
   stylistic,
@@ -21,8 +21,8 @@ import {
   unicorn,
   vue,
   yaml,
-} from "./configs"
-import { combine } from "./utils"
+} from "./configs";
+import { combine } from "./utils";
 
 const flatConfigProps: (keyof ConfigItem)[] = [
   "files",
@@ -33,45 +33,45 @@ const flatConfigProps: (keyof ConfigItem)[] = [
   "plugins",
   "rules",
   "settings",
-]
+];
 
 const VuePackages = [
   "vue",
   "nuxt",
   "vitepress",
   "@slidev/cli",
-]
+];
 
 /**
  * Construct an array of ESLint flat config items.
  */
 export function luxass(options: OptionsConfig & ConfigItem = {}, ...userConfigs: (ConfigItem | ConfigItem[])[]) {
   const {
-    isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
-    vue: enableVue = VuePackages.some(i => isPackageExists(i)),
-    typescript: enableTypeScript = isPackageExists("typescript"),
-    gitignore: enableGitignore = true,
-    overrides = {},
     componentExts = [],
-  } = options
+    gitignore: enableGitignore = true,
+    isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
+    overrides = {},
+    typescript: enableTypeScript = isPackageExists("typescript"),
+    vue: enableVue = VuePackages.some(i => isPackageExists(i)),
+  } = options;
 
   const stylisticOptions = options.stylistic === false
     ? false
     : typeof options.stylistic === "object"
       ? options.stylistic
-      : {}
+      : {};
   if (stylisticOptions && !("jsx" in stylisticOptions)) {
-    stylisticOptions.jsx = options.jsx ?? true
+    stylisticOptions.jsx = options.jsx ?? true;
   }
 
-  const configs: ConfigItem[][] = []
+  const configs: ConfigItem[][] = [];
 
   if (enableGitignore) {
     if (typeof enableGitignore !== "boolean") {
-      configs.push([gitignore(enableGitignore)])
+      configs.push([gitignore(enableGitignore)]);
     } else {
       if (fs.existsSync(".gitignore")) {
-        configs.push([gitignore()])
+        configs.push([gitignore()]);
       }
     }
   }
@@ -93,12 +93,12 @@ export function luxass(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
     }),
     unicorn(),
 
-    // Optional plugins (not enabled by default)
-    sortKeys(),
-  )
+    // Optional plugins (installed but not enabled by default)
+    perfectionist(),
+  );
 
   if (enableVue) {
-    componentExts.push("vue")
+    componentExts.push("vue");
   }
 
   if (enableTypeScript) {
@@ -108,18 +108,18 @@ export function luxass(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
         : {},
       componentExts,
       overrides: overrides.typescript,
-    }))
+    }));
   }
 
   if (stylisticOptions) {
-    configs.push(stylistic(stylisticOptions))
+    configs.push(stylistic(stylisticOptions));
   }
 
   if (options.test ?? true) {
     configs.push(test({
       isInEditor,
       overrides: overrides.test,
-    }))
+    }));
   }
 
   if (enableVue) {
@@ -127,7 +127,7 @@ export function luxass(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
       overrides: overrides.vue,
       stylistic: stylisticOptions,
       typescript: !!enableTypeScript,
-    }))
+    }));
   }
 
   if (options.jsonc ?? true) {
@@ -138,39 +138,40 @@ export function luxass(options: OptionsConfig & ConfigItem = {}, ...userConfigs:
       }),
       sortPackageJson(),
       sortTsconfig(),
-    )
+    );
   }
 
   if (options.yaml ?? true) {
     configs.push(yaml({
       overrides: overrides.yaml,
       stylistic: stylisticOptions,
-    }))
+    }));
   }
 
   if (options.markdown ?? true) {
     configs.push(markdown({
       componentExts,
       overrides: overrides.markdown,
-    }))
+    }));
   }
 
   // User can optionally pass a flat config item to the first argument
   // We pick the known keys as ESLint would do schema validation
   const fusedConfig = flatConfigProps.reduce((acc, key) => {
     if (key in options) {
-      acc[key] = options[key] as any
+      acc[key] = options[key] as any;
     }
-    return acc
-  }, {} as ConfigItem)
+    return acc;
+  }, {} as ConfigItem);
+
   if (Object.keys(fusedConfig).length) {
-    configs.push([fusedConfig])
+    configs.push([fusedConfig]);
   }
 
   const merged = combine(
     ...configs,
     ...userConfigs,
-  )
+  );
 
-  return merged
+  return merged;
 }

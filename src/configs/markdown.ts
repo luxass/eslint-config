@@ -1,12 +1,12 @@
-import type { ConfigItem, OptionsComponentExts, OptionsOverrides } from "../types"
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from "../globs"
-import { pluginMarkdown } from "../plugins"
+import type { ConfigItem, OptionsComponentExts, OptionsOverrides } from "../types";
+import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from "../globs";
+import { pluginMarkdown } from "../plugins";
 
 export function markdown(options: OptionsComponentExts & OptionsOverrides = {}): ConfigItem[] {
   const {
     componentExts = [],
     overrides = {},
-  } = options
+  } = options;
 
   return [
     {
@@ -37,17 +37,19 @@ export function markdown(options: OptionsComponentExts & OptionsOverrides = {}):
         "antfu/no-cjs-exports": "off",
         "antfu/no-ts-export-equal": "off",
 
+        "import/newline-after-import": "off",
+
         "no-alert": "off",
         "no-console": "off",
         "no-undef": "off",
         "no-unused-expressions": "off",
+
         "no-unused-vars": "off",
 
         "node/prefer-global/process": "off",
-
         "style/comma-dangle": "off",
-        "style/eol-last": "off",
 
+        "style/eol-last": "off",
         "ts/consistent-type-imports": "off",
         "ts/no-namespace": "off",
         "ts/no-redeclare": "off",
@@ -83,5 +85,5 @@ export function markdown(options: OptionsComponentExts & OptionsOverrides = {}):
         ...overrides,
       },
     },
-  ]
+  ];
 }

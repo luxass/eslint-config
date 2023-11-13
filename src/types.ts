@@ -1,5 +1,5 @@
-import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore"
-import type { ParserOptions } from "@typescript-eslint/parser"
+import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
+import type { ParserOptions } from "@typescript-eslint/parser";
 import type {
   EslintCommentsRules,
   EslintRules,
@@ -18,18 +18,18 @@ import type {
   VitestRules,
   VueRules,
   YmlRules,
-} from "@antfu/eslint-define-config"
-import type { Rules as AntfuRules } from "eslint-plugin-antfu"
-import type { UnprefixedRuleOptions } from "@stylistic/eslint-plugin"
+} from "@antfu/eslint-define-config";
+import type { Rules as AntfuRules } from "eslint-plugin-antfu";
+import type { UnprefixedRuleOptions } from "@stylistic/eslint-plugin";
 
 type StylisticMergedRules = MergeIntersection<
   EslintRules &
   Unprefix<ReactRules, "react/"> &
   Unprefix<TypeScriptRules, "@typescript-eslint/">
   & { "jsx-self-closing-comp": ReactRules["react/self-closing-comp"] }
->
+>;
 
-type StylisticRules = Pick<StylisticMergedRules, keyof UnprefixedRuleOptions>
+type StylisticRules = Pick<StylisticMergedRules, keyof UnprefixedRuleOptions>;
 
 export type Rules = MergeIntersection<
   RenamePrefix<TypeScriptRules, "@typescript-eslint/", "ts/"> &
@@ -47,7 +47,7 @@ export type Rules = MergeIntersection<
   {
     "test/no-only-tests": RuleConfig<[]>
   }
->
+>;
 
 export type ConfigItem = Omit<FlatESLintConfigItem<Rules, false>, "plugins"> & {
   /**
@@ -62,7 +62,7 @@ export type ConfigItem = Omit<FlatESLintConfigItem<Rules, false>, "plugins"> & {
    * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
    */
   plugins?: Record<string, any>
-}
+};
 
 export interface OptionsComponentExts {
   /**
@@ -86,7 +86,7 @@ export interface OptionsTypeScriptWithTypes {
    * When this options is provided, type aware rules will be enabled.
    * @see https://typescript-eslint.io/linting/typed-linting/
    */
-  tsconfigPath?: string
+  tsconfigPath?: string | string[]
 }
 
 export interface OptionsHasTypeScript {

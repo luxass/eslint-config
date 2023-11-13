@@ -1,4 +1,4 @@
-import type { ConfigItem } from "../types"
+import type { ConfigItem } from "../types";
 
 /**
  * Sort package.json
@@ -92,7 +92,7 @@ export function sortPackageJson(): ConfigItem[] {
         ],
       },
     },
-  ]
+  ];
 }
 /**
  * Sort tsconfig.json
@@ -223,5 +223,5 @@ export function sortTsconfig(): ConfigItem[] {
         ],
       },
     },
-  ]
+  ];
 }

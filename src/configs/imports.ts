@@ -1,10 +1,10 @@
-import type { ConfigItem, OptionsStylistic } from "../types"
-import { pluginAntfu, pluginImport } from "../plugins"
+import type { ConfigItem, OptionsStylistic } from "../types";
+import { pluginAntfu, pluginImport } from "../plugins";
 
 export function imports(options: OptionsStylistic = {}): ConfigItem[] {
   const {
     stylistic = true,
-  } = options
+  } = options;
 
   return [
     {
@@ -32,5 +32,5 @@ export function imports(options: OptionsStylistic = {}): ConfigItem[] {
           : {},
       },
     },
-  ]
+  ];
 }

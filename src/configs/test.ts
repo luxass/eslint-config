@@ -1,12 +1,12 @@
-import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from "../types"
-import { pluginNoOnlyTests, pluginVitest } from "../plugins"
-import { GLOB_TESTS } from "../globs"
+import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from "../types";
+import { pluginNoOnlyTests, pluginVitest } from "../plugins";
+import { GLOB_TESTS } from "../globs";
 
 export function test(options: OptionsIsInEditor & OptionsOverrides = {}): ConfigItem[] {
   const {
     isInEditor = false,
     overrides = {},
-  } = options
+  } = options;
 
   return [
     {
@@ -16,7 +16,6 @@ export function test(options: OptionsIsInEditor & OptionsOverrides = {}): Config
           ...pluginVitest,
           rules: {
             ...pluginVitest.rules,
-            // extend `test/no-only-tests` rule
             ...pluginNoOnlyTests.rules,
           },
         },
@@ -35,5 +34,5 @@ export function test(options: OptionsIsInEditor & OptionsOverrides = {}): Config
         ...overrides,
       },
     },
-  ]
+  ];
 }

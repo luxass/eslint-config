@@ -1,13 +1,19 @@
-import globals from "globals"
-import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from "../types"
-import { pluginAntfu, pluginUnusedImports } from "../plugins"
-import { GLOB_SRC, GLOB_SRC_EXT } from "../globs"
+import globals from "globals";
+import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from "../types";
+import { pluginAntfu, pluginUnusedImports } from "../plugins";
+import { GLOB_SRC, GLOB_SRC_EXT } from "../globs";
 
 export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): ConfigItem[] {
   const {
     isInEditor = false,
     overrides = {},
-  } = options
+  } = options;
+
+  if (isInEditor) {
+    console.log("Hello");
+  } else {
+    console.log("Hello");
+  }
 
   return [
     {
@@ -42,7 +48,6 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
         "accessor-pairs": ["error", { enforceForClassMembers: true, setWithoutGet: true }],
 
         "array-callback-return": "error",
-        "arrow-parens": ["error", "as-needed", { requireForBlockBody: true }],
         "block-scoped-var": "error",
         "constructor-super": "error",
         "default-case-last": "error",
@@ -57,7 +62,7 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
         "no-class-assign": "error",
         "no-compare-neg-zero": "error",
         "no-cond-assign": ["error", "always"],
-        "no-console": ["error", { allow: ["warn", "error"] }],
+        "no-console": [isInEditor ? "off" : "error", { allow: ["warn", "error"] }],
         "no-const-assign": "error",
         "no-control-regex": "error",
         "no-debugger": "error",
@@ -222,5 +227,5 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
         "no-console": "off",
       },
     },
-  ]
+  ];
 }

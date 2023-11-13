@@ -1,6 +1,6 @@
-import type { ConfigItem, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic } from "../types"
-import { GLOB_VUE } from "../globs"
-import { parserTs, parserVue, pluginVue } from "../plugins"
+import type { ConfigItem, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic } from "../types";
+import { GLOB_VUE } from "../globs";
+import { parserTs, parserVue, pluginVue } from "../plugins";
 
 export function vue(
   options: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic = {},
@@ -8,11 +8,11 @@ export function vue(
   const {
     overrides = {},
     stylistic = true,
-  } = options
+  } = options;
 
   const {
     indent = 2,
-  } = typeof stylistic === "boolean" ? {} : stylistic
+  } = typeof stylistic === "boolean" ? {} : stylistic;
 
   return [
     {
@@ -125,5 +125,5 @@ export function vue(
         ...overrides,
       },
     },
-  ]
+  ];
 }

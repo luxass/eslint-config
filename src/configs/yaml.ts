@@ -1,6 +1,6 @@
-import type { ConfigItem, OptionsOverrides, OptionsStylistic } from "../types"
-import { GLOB_YAML } from "../globs"
-import { parserYaml, pluginYaml } from "../plugins"
+import type { ConfigItem, OptionsOverrides, OptionsStylistic } from "../types";
+import { GLOB_YAML } from "../globs";
+import { parserYaml, pluginYaml } from "../plugins";
 
 export function yaml(
   options: OptionsOverrides & OptionsStylistic = {},
@@ -8,12 +8,12 @@ export function yaml(
   const {
     overrides = {},
     stylistic = true,
-  } = options
+  } = options;
 
   const {
     indent = 2,
-    quotes = "single",
-  } = typeof stylistic === "boolean" ? {} : stylistic
+    quotes = "double",
+  } = typeof stylistic === "boolean" ? {} : stylistic;
 
   return [
     {
@@ -59,5 +59,5 @@ export function yaml(
         ...overrides,
       },
     },
-  ]
+  ];
 }

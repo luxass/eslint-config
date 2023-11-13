@@ -1,5 +1,5 @@
-import type { ConfigItem } from "../types"
-import { pluginUnicorn } from "../plugins"
+import type { ConfigItem } from "../types";
+import { pluginUnicorn } from "../plugins";
 
 export function unicorn(): ConfigItem[] {
   return [
@@ -37,5 +37,5 @@ export function unicorn(): ConfigItem[] {
         "unicorn/throw-new-error": "error",
       },
     },
-  ]
+  ];
 }
