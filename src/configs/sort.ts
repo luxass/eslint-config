@@ -1,11 +1,11 @@
-import type { ConfigItem } from "../types";
+import type { FlatConfigItem } from "../types";
 
 /**
  * Sort package.json
  *
  * Requires `jsonc` config
  */
-export function sortPackageJson(): ConfigItem[] {
+export function sortPackageJson(): FlatConfigItem[] {
   return [
     {
       files: ["**/package.json"],
@@ -81,12 +81,7 @@ export function sortPackageJson(): ConfigItem[] {
             pathPattern: "^pnpm.overrides$",
           },
           {
-            order: [
-              "types",
-              "import",
-              "require",
-              "default",
-            ],
+            order: ["types", "import", "require", "default"],
             pathPattern: "^exports.*$",
           },
         ],
@@ -100,7 +95,7 @@ export function sortPackageJson(): ConfigItem[] {
  * Requires `jsonc` config
  */
 
-export function sortTsconfig(): ConfigItem[] {
+export function sortTsconfig(): FlatConfigItem[] {
   return [
     {
       files: ["**/tsconfig.json", "**/tsconfig.*.json"],

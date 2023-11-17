@@ -1,16 +1,14 @@
-import type { ConfigItem, OptionsStylistic } from "../types";
-import { pluginJsdoc } from "../plugins";
+import type { FlatConfigItem, OptionsStylistic } from "../types";
+import { interop } from "../utils";
 
-export function jsdoc(options: OptionsStylistic = {}): ConfigItem[] {
-  const {
-    stylistic = true,
-  } = options;
+export async function jsdoc(options: OptionsStylistic = {}): Promise<FlatConfigItem[]> {
+  const { stylistic = true } = options;
 
   return [
     {
       name: "luxass:jsdoc",
       plugins: {
-        jsdoc: pluginJsdoc,
+        jsdoc: await interop(import("eslint-plugin-jsdoc")),
       },
       rules: {
         "jsdoc/check-access": "warn",
@@ -29,12 +27,12 @@ export function jsdoc(options: OptionsStylistic = {}): ConfigItem[] {
         "jsdoc/require-returns-description": "warn",
         "jsdoc/require-yields-check": "warn",
 
-        ...stylistic
+        ...(stylistic
           ? {
               "jsdoc/check-alignment": "warn",
               "jsdoc/multiline-blocks": "warn",
             }
-          : {},
+          : {}),
       },
     },
   ];

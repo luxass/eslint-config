@@ -4,8 +4,6 @@
 > The configuration is not currently finished, and the old config should be used. You can find it [here](https://github.com/luxass/eslint-config-legacy)
 
 
-> If you are looking for the old config, you can find it [here](https://github.com/luxass/eslint-config-legacy)
-
 ## ✨ Features
 
 - Designed to work with JavaScript, Typescript, React, Svelte, Astro, Vue out of the box.
@@ -104,7 +102,6 @@ export default luxass({
   astro: true,
   svelte: false,
   unocss: true,
-  tailwindcss: false,
   stylistic: true
 });
 ```

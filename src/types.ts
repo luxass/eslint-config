@@ -9,47 +9,49 @@ import type {
   MergeIntersection,
   NRules,
   Prefix,
-  ReactRules,
   RenamePrefix,
   RuleConfig,
-  TypeScriptRules,
-  UnicornRules,
-  Unprefix,
   VitestRules,
   VueRules,
   YmlRules,
 } from "@antfu/eslint-define-config";
+import type { RuleOptions as JSDocRules } from "@eslint-types/jsdoc/types";
+import type { RuleOptions as TypeScriptRules } from "@eslint-types/typescript-eslint/types";
+import type { RuleOptions as UnicornRules } from "@eslint-types/unicorn/types";
 import type { Rules as AntfuRules } from "eslint-plugin-antfu";
-import type { UnprefixedRuleOptions } from "@stylistic/eslint-plugin";
+import type {
+  StylisticCustomizeOptions,
+  UnprefixedRuleOptions as StylisticRules,
+} from "@stylistic/eslint-plugin";
+import type { Linter } from "eslint";
 
-type StylisticMergedRules = MergeIntersection<
-  EslintRules &
-  Unprefix<ReactRules, "react/"> &
-  Unprefix<TypeScriptRules, "@typescript-eslint/">
-  & { "jsx-self-closing-comp": ReactRules["react/self-closing-comp"] }
+export type WrapRuleConfig<T extends { [key: string]: any }> = {
+  [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>;
+};
+
+export type Awaitable<T> = T | Promise<T>;
+
+export type Rules = WrapRuleConfig<
+  MergeIntersection<
+    RenamePrefix<TypeScriptRules, "@typescript-eslint/", "ts/"> &
+    RenamePrefix<VitestRules, "vitest/", "test/"> &
+    RenamePrefix<YmlRules, "yml/", "yaml/"> &
+    RenamePrefix<NRules, "n/", "node/"> &
+    Prefix<StylisticRules, "style/"> &
+    Prefix<AntfuRules, "antfu/"> &
+    JSDocRules &
+    ImportRules &
+    EslintRules &
+    JsoncRules &
+    VueRules &
+    UnicornRules &
+    EslintCommentsRules & {
+      "test/no-only-tests": RuleConfig<[]>
+    }
+  >
 >;
 
-type StylisticRules = Pick<StylisticMergedRules, keyof UnprefixedRuleOptions>;
-
-export type Rules = MergeIntersection<
-  RenamePrefix<TypeScriptRules, "@typescript-eslint/", "ts/"> &
-  RenamePrefix<VitestRules, "vitest/", "test/"> &
-  RenamePrefix<YmlRules, "yml/", "yaml/"> &
-  RenamePrefix<NRules, "n/", "node/"> &
-  Prefix<StylisticRules, "style/"> &
-  Prefix<AntfuRules, "antfu/"> &
-  ImportRules &
-  EslintRules &
-  JsoncRules &
-  VueRules &
-  UnicornRules &
-  EslintCommentsRules &
-  {
-    "test/no-only-tests": RuleConfig<[]>
-  }
->;
-
-export type ConfigItem = Omit<FlatESLintConfigItem<Rules, false>, "plugins"> & {
+export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, "plugins"> & {
   /**
    * Custom name of each config item
    */
@@ -63,6 +65,8 @@ export type ConfigItem = Omit<FlatESLintConfigItem<Rules, false>, "plugins"> & {
    */
   plugins?: Record<string, any>
 };
+
+export type UserConfigItem = FlatConfigItem | Linter.FlatConfig;
 
 export interface OptionsComponentExts {
   /**
@@ -94,21 +98,22 @@ export interface OptionsHasTypeScript {
 }
 
 export interface OptionsStylistic {
-  stylistic?: boolean | StylisticConfig
+  stylistic?: StylisticConfig | boolean
 }
 
-export interface StylisticConfig {
-  indent?: number | "tab"
-  quotes?: "single" | "double"
-  jsx?: boolean
-}
+export interface StylisticConfig
+  extends Pick<StylisticCustomizeOptions, "jsx"> { }
 
 export interface OptionsOverrides {
-  overrides?: ConfigItem["rules"]
+  overrides?: FlatConfigItem["rules"]
 }
 
 export interface OptionsIsInEditor {
   isInEditor?: boolean
+}
+
+export interface OptionsPerfectionist {
+  enableRules?: boolean
 }
 
 export interface OptionsConfig extends OptionsComponentExts {
@@ -120,16 +125,20 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @see https://github.com/antfu/eslint-config-flat-gitignore
    * @default true
    */
-  gitignore?: boolean | FlatGitignoreOptions
+  gitignore?: FlatGitignoreOptions | boolean
 
   /**
-   * Enable TypeScript support.
-   *
-   * Passing an object to enable TypeScript Language Server support.
-   *
-   * @default auto-detect based on the dependencies
+   * Control to disable some rules in editors.
+   * @default auto-detect based on the process.env
    */
-  typescript?: boolean | OptionsTypeScriptWithTypes | OptionsTypeScriptParserOptions
+  isInEditor?: boolean
+
+  /**
+   * Enable JSONC support.
+   *
+   * @default true
+   */
+  jsonc?: boolean
 
   /**
    * Enable JSX related rules.
@@ -141,11 +150,83 @@ export interface OptionsConfig extends OptionsComponentExts {
   jsx?: boolean
 
   /**
+   * Enable Markdown support.
+   *
+   * @default true
+   */
+  markdown?: boolean
+
+  /**
+   * Enable Perfectionist rules.
+   *
+   * @default false
+   *
+   * NOTE: This plugin has some very opinionated rules, use with caution.
+   */
+  perfectionist?: boolean
+
+  /**
+   * Enable NextJS support.
+   *
+   * @default auto-detect based on the dependencies
+   */
+  nextjs?: boolean
+
+  /**
+   * Enable React support.
+   *
+   * @default auto-detect based on the dependencies
+   */
+  react?: boolean
+
+  /**
+   * Provide overrides for rules for each integration.
+   */
+  overrides?: {
+    javascript?: FlatConfigItem["rules"]
+    jsonc?: FlatConfigItem["rules"]
+    markdown?: FlatConfigItem["rules"]
+    test?: FlatConfigItem["rules"]
+    typescript?: FlatConfigItem["rules"]
+    unocss?: FlatConfigItem["rules"]
+    vue?: FlatConfigItem["rules"]
+    yaml?: FlatConfigItem["rules"]
+    nextjs?: FlatConfigItem["rules"]
+    react?: FlatConfigItem["rules"]
+  }
+
+  /**
+   * Enable stylistic rules.
+   *
+   * @default true
+   */
+  stylistic?: StylisticConfig | boolean
+
+  /**
    * Enable test support.
    *
    * @default true
    */
   test?: boolean
+
+  /**
+   * Enable TypeScript support.
+   *
+   * Passing an object to enable TypeScript Language Server support.
+   *
+   * @default auto-detect based on the dependencies
+   */
+  typescript?:
+    | OptionsTypeScriptParserOptions
+    | OptionsTypeScriptWithTypes
+    | boolean
+
+  /**
+   * Enable UnoCSS support.
+   *
+   * @default auto-detect based on the dependencies
+   */
+  unocss?: boolean
 
   /**
    * Enable Vue support.
@@ -155,49 +236,9 @@ export interface OptionsConfig extends OptionsComponentExts {
   vue?: boolean
 
   /**
-   * Enable JSONC support.
-   *
-   * @default true
-   */
-  jsonc?: boolean
-
-  /**
    * Enable YAML support.
    *
    * @default true
    */
   yaml?: boolean
-
-  /**
-   * Enable Markdown support.
-   *
-   * @default true
-   */
-  markdown?: boolean
-
-  /**
-   * Enable stylistic rules.
-   *
-   * @default true
-   */
-  stylistic?: boolean | StylisticConfig
-
-  /**
-   * Control to disable some rules in editors.
-   * @default auto-detect based on the process.env
-   */
-  isInEditor?: boolean
-
-  /**
-   * Provide overrides for rules for each integration.
-   */
-  overrides?: {
-    javascript?: ConfigItem["rules"]
-    typescript?: ConfigItem["rules"]
-    test?: ConfigItem["rules"]
-    vue?: ConfigItem["rules"]
-    jsonc?: ConfigItem["rules"]
-    markdown?: ConfigItem["rules"]
-    yaml?: ConfigItem["rules"]
-  }
 }

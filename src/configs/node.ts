@@ -1,7 +1,7 @@
-import type { ConfigItem } from "../types";
+import type { FlatConfigItem } from "../types";
 import { pluginNode } from "../plugins";
 
-export function node(): ConfigItem[] {
+export function node(): FlatConfigItem[] {
   return [
     {
       name: "luxass:node",

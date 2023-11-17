@@ -1,19 +1,25 @@
 import process from "node:process";
-import type { ConfigItem, OptionsComponentExts, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from "../types";
+import type {
+  FlatConfigItem,
+  OptionsComponentExts,
+  OptionsOverrides,
+  OptionsTypeScriptParserOptions,
+  OptionsTypeScriptWithTypes,
+} from "../types";
 import { GLOB_SRC } from "../globs";
-import { parserTs, pluginAntfu, pluginImport, pluginTs } from "../plugins";
-import { renameRules, toArray } from "../utils";
+import { pluginAntfu } from "../plugins";
+import { interop, renameRules, toArray } from "../utils";
 
-export function typescript(
+export async function typescript(
   options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions,
-): ConfigItem[] {
+): Promise<FlatConfigItem[]> {
   const {
     componentExts = [],
     overrides = {},
     parserOptions = {},
   } = options ?? {};
 
-  const typeAwareRules: ConfigItem["rules"] = {
+  const typeAwareRules: FlatConfigItem["rules"] = {
     "dot-notation": "off",
     "no-implied-eval": "off",
     "no-throw-literal": "off",
@@ -39,33 +45,37 @@ export function typescript(
     ? toArray(options.tsconfigPath)
     : undefined;
 
+  const [
+    pluginTs,
+    parserTs,
+  ] = await Promise.all([
+    interop(import("@typescript-eslint/eslint-plugin")),
+    interop(import("@typescript-eslint/parser")),
+  ] as const);
+
   return [
     {
       // Install the plugins without globs, so they can be configured separately.
       name: "luxass:typescript:setup",
       plugins: {
         antfu: pluginAntfu,
-        import: pluginImport,
         ts: pluginTs as any,
       },
     },
     {
-      files: [
-        GLOB_SRC,
-        ...componentExts.map(ext => `**/*.${ext}`),
-      ],
+      files: [GLOB_SRC, ...componentExts.map((ext) => `**/*.${ext}`)],
       languageOptions: {
         parser: parserTs,
         parserOptions: {
-          extraFileExtensions: componentExts.map(ext => `.${ext}`),
+          extraFileExtensions: componentExts.map((ext) => `.${ext}`),
           sourceType: "module",
-          ...tsconfigPath
+          ...(tsconfigPath
             ? {
                 project: tsconfigPath,
                 tsconfigRootDir: process.cwd(),
               }
-            : {},
-          ...parserOptions as any,
+            : {}),
+          ...(parserOptions as any),
         },
       },
       name: "luxass:typescript:rules",
@@ -91,10 +101,16 @@ export function typescript(
         "no-redeclare": "off",
         "no-use-before-define": "off",
         "no-useless-constructor": "off",
-        "ts/ban-ts-comment": ["error", { "ts-ignore": "allow-with-description" }],
+        "ts/ban-ts-comment": [
+          "error",
+          { "ts-ignore": "allow-with-description" },
+        ],
         "ts/ban-types": ["error", { types: { Function: false } }],
         "ts/consistent-type-definitions": ["error", "interface"],
-        "ts/consistent-type-imports": ["error", { disallowTypeAnnotations: false, prefer: "type-imports" }],
+        "ts/consistent-type-imports": [
+          "error",
+          { disallowTypeAnnotations: false, prefer: "type-imports" },
+        ],
         "ts/no-dupe-class-members": "error",
         "ts/no-dynamic-delete": "off",
         "ts/no-explicit-any": "off",
@@ -107,13 +123,16 @@ export function typescript(
         "ts/no-redeclare": "error",
         "ts/no-require-imports": "error",
         "ts/no-unused-vars": "off",
-        "ts/no-use-before-define": ["error", { classes: false, functions: false, variables: true }],
+        "ts/no-use-before-define": [
+          "error",
+          { classes: false, functions: false, variables: true },
+        ],
         "ts/no-useless-constructor": "off",
         "ts/prefer-ts-expect-error": "error",
         "ts/triple-slash-reference": "off",
         "ts/unified-signatures": "off",
 
-        ...tsconfigPath ? typeAwareRules : {},
+        ...(tsconfigPath ? typeAwareRules : {}),
         ...overrides,
       },
     },
