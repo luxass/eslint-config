@@ -1,7 +1,7 @@
-import type { ConfigItem } from "../types"
-import { pluginUnicorn } from "../plugins"
+import type { FlatConfigItem } from "../types";
+import { pluginUnicorn } from "../plugins";
 
-export function unicorn(): ConfigItem[] {
+export function unicorn(): FlatConfigItem[] {
   return [
     {
       name: "luxass:unicorn",
@@ -37,5 +37,5 @@ export function unicorn(): ConfigItem[] {
         "unicorn/throw-new-error": "error",
       },
     },
-  ]
+  ];
 }

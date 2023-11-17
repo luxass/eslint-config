@@ -1,19 +1,19 @@
-import type { ConfigItem, OptionsOverrides, OptionsStylistic } from "../types"
-import { GLOB_YAML } from "../globs"
-import { parserYaml, pluginYaml } from "../plugins"
+import type { FlatConfigItem, OptionsOverrides, OptionsStylistic } from "../types";
+import { GLOB_YAML } from "../globs";
+import { interop } from "../utils";
 
-export function yaml(
+export async function yaml(
   options: OptionsOverrides & OptionsStylistic = {},
-): ConfigItem[] {
-  const {
-    overrides = {},
-    stylistic = true,
-  } = options
+): Promise<FlatConfigItem[]> {
+  const { overrides = {}, stylistic = true } = options;
 
-  const {
-    indent = 2,
-    quotes = "single",
-  } = typeof stylistic === "boolean" ? {} : stylistic
+  const [
+    pluginYaml,
+    parserYaml,
+  ] = await Promise.all([
+    interop(import("eslint-plugin-yml")),
+    interop(import("yaml-eslint-parser")),
+  ] as const);
 
   return [
     {
@@ -40,7 +40,7 @@ export function yaml(
 
         "yaml/vue-custom-block/no-parsing-error": "error",
 
-        ...stylistic
+        ...(stylistic
           ? {
               "yaml/block-mapping-question-indicator-newline": "error",
               "yaml/block-sequence-hyphen-indicator-newline": "error",
@@ -48,16 +48,19 @@ export function yaml(
               "yaml/flow-mapping-curly-spacing": "error",
               "yaml/flow-sequence-bracket-newline": "error",
               "yaml/flow-sequence-bracket-spacing": "error",
-              "yaml/indent": ["error", indent === "tab" ? 2 : indent],
+              "yaml/indent": ["error", 2],
               "yaml/key-spacing": "error",
               "yaml/no-tab-indent": "error",
-              "yaml/quotes": ["error", { avoidEscape: false, prefer: quotes }],
+              "yaml/quotes": [
+                "error",
+                { avoidEscape: false, prefer: "double" },
+              ],
               "yaml/spaced-comment": "error",
             }
-          : {},
+          : {}),
 
         ...overrides,
       },
     },
-  ]
+  ];
 }

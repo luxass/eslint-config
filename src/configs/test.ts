@@ -1,12 +1,19 @@
-import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from "../types"
-import { pluginNoOnlyTests, pluginVitest } from "../plugins"
-import { GLOB_TESTS } from "../globs"
+import type { FlatConfigItem, OptionsIsInEditor, OptionsOverrides } from "../types";
+import { GLOB_TESTS } from "../globs";
+import { interop } from "../utils";
 
-export function test(options: OptionsIsInEditor & OptionsOverrides = {}): ConfigItem[] {
-  const {
-    isInEditor = false,
-    overrides = {},
-  } = options
+export async function test(
+  options: OptionsIsInEditor & OptionsOverrides = {},
+): Promise<FlatConfigItem[]> {
+  const { isInEditor = false, overrides = {} } = options;
+
+  const [
+    pluginVitest,
+    pluginNoOnlyTests,
+  ] = await Promise.all([
+    interop(import("eslint-plugin-vitest")),
+    interop(import("eslint-plugin-no-only-tests")),
+  ] as const);
 
   return [
     {
@@ -16,7 +23,6 @@ export function test(options: OptionsIsInEditor & OptionsOverrides = {}): Config
           ...pluginVitest,
           rules: {
             ...pluginVitest.rules,
-            // extend `test/no-only-tests` rule
             ...pluginNoOnlyTests.rules,
           },
         },
@@ -26,7 +32,10 @@ export function test(options: OptionsIsInEditor & OptionsOverrides = {}): Config
       files: GLOB_TESTS,
       name: "luxass:test:rules",
       rules: {
-        "test/consistent-test-it": ["error", { fn: "it", withinDescribe: "it" }],
+        "test/consistent-test-it": [
+          "error",
+          { fn: "it", withinDescribe: "it" },
+        ],
         "test/no-identical-title": "error",
         "test/no-only-tests": isInEditor ? "off" : "error",
         "test/prefer-hooks-in-order": "error",
@@ -35,5 +44,5 @@ export function test(options: OptionsIsInEditor & OptionsOverrides = {}): Config
         ...overrides,
       },
     },
-  ]
+  ];
 }

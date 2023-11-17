@@ -1,7 +1,7 @@
-import type { ConfigItem } from "../types"
-import { pluginComments } from "../plugins"
+import type { FlatConfigItem } from "../types";
+import { pluginComments } from "../plugins";
 
-export function comments(): ConfigItem[] {
+export async function comments(): Promise<FlatConfigItem[]> {
   return [
     {
       name: "luxass:eslint-comments",
@@ -15,5 +15,5 @@ export function comments(): ConfigItem[] {
         "eslint-comments/no-unused-enable": "error",
       },
     },
-  ]
+  ];
 }

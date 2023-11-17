@@ -1,18 +1,21 @@
-import type { ConfigItem, OptionsComponentExts, OptionsOverrides } from "../types"
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from "../globs"
-import { pluginMarkdown } from "../plugins"
+import type {
+  FlatConfigItem,
+  OptionsComponentExts,
+  OptionsOverrides,
+} from "../types";
+import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from "../globs";
+import { interop } from "../utils";
 
-export function markdown(options: OptionsComponentExts & OptionsOverrides = {}): ConfigItem[] {
-  const {
-    componentExts = [],
-    overrides = {},
-  } = options
+export async function markdown(
+  options: OptionsComponentExts & OptionsOverrides = {},
+): Promise<FlatConfigItem[]> {
+  const { componentExts = [], overrides = {} } = options;
 
   return [
     {
       name: "luxass:markdown:setup",
       plugins: {
-        markdown: pluginMarkdown,
+        markdown: await interop(import("eslint-plugin-markdown")),
       },
     },
     {
@@ -23,7 +26,7 @@ export function markdown(options: OptionsComponentExts & OptionsOverrides = {}):
     {
       files: [
         GLOB_MARKDOWN_CODE,
-        ...componentExts.map(ext => `${GLOB_MARKDOWN}/**/*.${ext}`),
+        ...componentExts.map((ext) => `${GLOB_MARKDOWN}/**/*.${ext}`),
       ],
       languageOptions: {
         parserOptions: {
@@ -37,17 +40,19 @@ export function markdown(options: OptionsComponentExts & OptionsOverrides = {}):
         "antfu/no-cjs-exports": "off",
         "antfu/no-ts-export-equal": "off",
 
+        "import/newline-after-import": "off",
+
         "no-alert": "off",
         "no-console": "off",
         "no-undef": "off",
         "no-unused-expressions": "off",
+
         "no-unused-vars": "off",
 
         "node/prefer-global/process": "off",
-
         "style/comma-dangle": "off",
-        "style/eol-last": "off",
 
+        "style/eol-last": "off",
         "ts/consistent-type-imports": "off",
         "ts/no-namespace": "off",
         "ts/no-redeclare": "off",
@@ -83,5 +88,5 @@ export function markdown(options: OptionsComponentExts & OptionsOverrides = {}):
         ...overrides,
       },
     },
-  ]
+  ];
 }

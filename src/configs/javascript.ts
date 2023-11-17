@@ -1,13 +1,12 @@
-import globals from "globals"
-import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from "../types"
-import { pluginAntfu, pluginUnusedImports } from "../plugins"
-import { GLOB_SRC, GLOB_SRC_EXT } from "../globs"
+import globals from "globals";
+import type { FlatConfigItem, OptionsIsInEditor, OptionsOverrides } from "../types";
+import { pluginAntfu, pluginUnusedImports } from "../plugins";
+import { GLOB_SRC, GLOB_SRC_EXT } from "../globs";
 
-export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): ConfigItem[] {
-  const {
-    isInEditor = false,
-    overrides = {},
-  } = options
+export async function javascript(
+  options: OptionsIsInEditor & OptionsOverrides = {},
+): Promise<FlatConfigItem[]> {
+  const { isInEditor = false, overrides = {} } = options;
 
   return [
     {
@@ -39,16 +38,21 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
         "unused-imports": pluginUnusedImports,
       },
       rules: {
-        "accessor-pairs": ["error", { enforceForClassMembers: true, setWithoutGet: true }],
+        "accessor-pairs": [
+          "error",
+          { enforceForClassMembers: true, setWithoutGet: true },
+        ],
 
         "array-callback-return": "error",
-        "arrow-parens": ["error", "as-needed", { requireForBlockBody: true }],
         "block-scoped-var": "error",
         "constructor-super": "error",
         "default-case-last": "error",
         "dot-notation": ["error", { allowKeywords: true }],
         "eqeqeq": ["error", "smart"],
-        "new-cap": ["error", { capIsNew: false, newIsCap: true, properties: true }],
+        "new-cap": [
+          "error",
+          { capIsNew: false, newIsCap: true, properties: true },
+        ],
         "no-alert": "error",
         "no-array-constructor": "error",
         "no-async-promise-executor": "error",
@@ -57,7 +61,10 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
         "no-class-assign": "error",
         "no-compare-neg-zero": "error",
         "no-cond-assign": ["error", "always"],
-        "no-console": ["error", { allow: ["warn", "error"] }],
+        "no-console": [
+          isInEditor ? "off" : "error",
+          { allow: ["warn", "error"] },
+        ],
         "no-const-assign": "error",
         "no-control-regex": "error",
         "no-debugger": "error",
@@ -107,11 +114,27 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
         ],
         "no-restricted-properties": [
           "error",
-          { message: "Use `Object.getPrototypeOf` or `Object.setPrototypeOf` instead.", property: "__proto__" },
-          { message: "Use `Object.defineProperty` instead.", property: "__defineGetter__" },
-          { message: "Use `Object.defineProperty` instead.", property: "__defineSetter__" },
-          { message: "Use `Object.getOwnPropertyDescriptor` instead.", property: "__lookupGetter__" },
-          { message: "Use `Object.getOwnPropertyDescriptor` instead.", property: "__lookupSetter__" },
+          {
+            message:
+              "Use `Object.getPrototypeOf` or `Object.setPrototypeOf` instead.",
+            property: "__proto__",
+          },
+          {
+            message: "Use `Object.defineProperty` instead.",
+            property: "__defineGetter__",
+          },
+          {
+            message: "Use `Object.defineProperty` instead.",
+            property: "__defineSetter__",
+          },
+          {
+            message: "Use `Object.getOwnPropertyDescriptor` instead.",
+            property: "__lookupGetter__",
+          },
+          {
+            message: "Use `Object.getOwnPropertyDescriptor` instead.",
+            property: "__lookupSetter__",
+          },
         ],
         "no-restricted-syntax": [
           "error",
@@ -138,18 +161,27 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
         "no-unreachable-loop": "error",
         "no-unsafe-finally": "error",
         "no-unsafe-negation": "error",
-        "no-unused-expressions": ["error", {
-          allowShortCircuit: true,
-          allowTaggedTemplates: true,
-          allowTernary: true,
-        }],
-        "no-unused-vars": ["error", {
-          args: "none",
-          caughtErrors: "none",
-          ignoreRestSiblings: true,
-          vars: "all",
-        }],
-        "no-use-before-define": ["error", { classes: false, functions: false, variables: true }],
+        "no-unused-expressions": [
+          "error",
+          {
+            allowShortCircuit: true,
+            allowTaggedTemplates: true,
+            allowTernary: true,
+          },
+        ],
+        "no-unused-vars": [
+          "error",
+          {
+            args: "none",
+            caughtErrors: "none",
+            ignoreRestSiblings: true,
+            vars: "all",
+          },
+        ],
+        "no-use-before-define": [
+          "error",
+          { classes: false, functions: false, variables: true },
+        ],
         "no-useless-backreference": "error",
         "no-useless-call": "error",
         "no-useless-catch": "error",
@@ -205,9 +237,17 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
 
         "unused-imports/no-unused-vars": [
           "error",
-          { args: "after-used", argsIgnorePattern: "^_", vars: "all", varsIgnorePattern: "^_" },
+          {
+            args: "after-used",
+            argsIgnorePattern: "^_",
+            vars: "all",
+            varsIgnorePattern: "^_",
+          },
         ],
-        "use-isnan": ["error", { enforceForIndexOf: true, enforceForSwitchCase: true }],
+        "use-isnan": [
+          "error",
+          { enforceForIndexOf: true, enforceForSwitchCase: true },
+        ],
         "valid-typeof": ["error", { requireStringLiterals: true }],
         "vars-on-top": "error",
         "yoda": ["error", "never"],
@@ -222,5 +262,5 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
         "no-console": "off",
       },
     },
-  ]
+  ];
 }
