@@ -9,8 +9,8 @@ dependencies:
     specifier: ^1.23.0-2
     version: 1.23.0-2
   '@eslint-types/jsdoc':
-    specifier: 46.8.2-1
-    version: 46.8.2-1
+    specifier: 46.9.0
+    version: 46.9.0
   '@eslint-types/typescript-eslint':
     specifier: ^6.11.0
     version: 6.11.0
@@ -117,7 +117,7 @@ devDependencies:
     version: 8.44.7
   '@types/node':
     specifier: ^18.17.19
-    version: 18.17.19
+    version: 18.18.9
   eslint:
     specifier: ^8.53.0
     version: 8.53.0
@@ -402,8 +402,8 @@ packages:
     resolution: {integrity: sha512-B4PzCMuFke5Viw7nCcptQi30hSvtY+cYJAOH/3tcqinpslejkD4Z2FGzb9NCzAaLh2qWiV9kYG8hHmC6ylGmgQ==}
     dev: true
 
-  /@eslint-types/jsdoc@46.8.2-1:
-    resolution: {integrity: sha512-FwD7V0xX0jyaqj8Ul5ZY+TAAPohDfVqtbuXJNHb+OIv1aTIqZi5+Zn3F2UwQ5O3BnQd2mTduyK0+HjGx3/AMFg==}
+  /@eslint-types/jsdoc@46.9.0:
+    resolution: {integrity: sha512-8ReQAHsUh5LzuDdrzCOsITR9EYgC99amt2qGyU2fJ8EAC2Q7Wnu+JI70dARzhfzTeOJ904LytLfUieBvIqpE9A==}
     dev: false
 
   /@eslint-types/typescript-eslint@6.11.0:
@@ -688,8 +688,10 @@ packages:
       '@types/unist': 2.0.9
     dev: false
 
-  /@types/node@18.17.19:
-    resolution: {integrity: sha512-+pMhShR3Or5GR0/sp4Da7FnhVmTalWm81M6MkEldbwjETSaPalw138Z4KdpQaistvqQxLB7Cy4xwYdxpbSOs9Q==}
+  /@types/node@18.18.9:
+    resolution: {integrity: sha512-0f5klcuImLnG4Qreu9hPj/rEfFq6YRc5n2mAjSsH+ec/mJL+3voBH0+8T7o8RpFjH7ovc+TRsL/c7OYIQsPTfQ==}
+    dependencies:
+      undici-types: 5.26.5
     dev: true
 
   /@types/normalize-package-data@2.4.3:
@@ -3830,6 +3832,10 @@ packages:
       jiti: 1.21.0
       mlly: 1.4.2
     dev: false
+
+  /undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+    dev: true
 
   /unist-util-stringify-position@2.0.3:
     resolution: {integrity: sha512-3faScn5I+hy9VleOq/qNbAd6pAx7iH5jYBMS9I1HgQVijz/4mv5Bvw5iw1sC/90CODiKo81G/ps8AJrISn687g==}
