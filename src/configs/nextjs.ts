@@ -67,8 +67,9 @@ export async function nextjs(
     },
     {
       files: GLOB_NEXTJS_OG,
-      name: "luxass:nextjs:allow-tw-property",
+      name: "luxass:nextjs:og-override",
       rules: {
+        "@next/next/no-img-element": "off",
         "react/no-unknown-property": ["error", {
           ignore: ["tw"],
         }],
