@@ -1,11 +1,11 @@
-import type { FlatConfigItem, OptionsIsInEditor, OptionsOverrides } from "../types";
+import type { FlatConfigItem, InEditorOptions, OverrideOptions } from "../types";
 import { GLOB_TESTS } from "../globs";
 import { interop } from "../utils";
 
 export async function test(
-  options: OptionsIsInEditor & OptionsOverrides = {},
+  options: InEditorOptions & OverrideOptions = {},
 ): Promise<FlatConfigItem[]> {
-  const { isInEditor = false, overrides = {} } = options;
+  const { isEditor = false, overrides = {} } = options;
 
   const [
     pluginVitest,
@@ -37,7 +37,7 @@ export async function test(
           { fn: "it", withinDescribe: "it" },
         ],
         "test/no-identical-title": "error",
-        "test/no-only-tests": isInEditor ? "off" : "error",
+        "test/no-only-tests": isEditor ? "off" : "error",
         "test/prefer-hooks-in-order": "error",
         "test/prefer-lowercase-title": "error",
 

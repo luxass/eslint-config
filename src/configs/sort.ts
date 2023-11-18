@@ -89,12 +89,12 @@ export function sortPackageJson(): FlatConfigItem[] {
     },
   ];
 }
+
 /**
  * Sort tsconfig.json
  *
  * Requires `jsonc` config
  */
-
 export function sortTsconfig(): FlatConfigItem[] {
   return [
     {

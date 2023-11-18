@@ -1,7 +1,7 @@
-import type { FlatConfigItem, OptionsStylistic } from "../types";
+import type { FlatConfigItem, StylisticOptions } from "../types";
 import { interop } from "../utils";
 
-export async function jsdoc(options: OptionsStylistic = {}): Promise<FlatConfigItem[]> {
+export async function jsdoc(options: StylisticOptions = {}): Promise<FlatConfigItem[]> {
   const { stylistic = true } = options;
 
   return [

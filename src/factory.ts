@@ -1,5 +1,5 @@
 import process from "node:process";
-import fs from "node:fs";
+import { existsSync } from "node:fs";
 import { isPackageExists } from "local-pkg";
 import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from "./types";
 import {
@@ -17,6 +17,7 @@ import {
   sortPackageJson,
   sortTsconfig,
   stylistic,
+  tailwindcss,
   test,
   typescript,
   unicorn,
@@ -25,22 +26,8 @@ import {
   yaml,
 } from "./configs";
 import { combine, interop } from "./utils";
-import { REACT_PACKAGES, UNO_PACKAGES, VUE_PACKAGES } from "./constants";
+import { FLAT_CONFIG_PROPS, REACT_PACKAGES, UNO_PACKAGES, VUE_PACKAGES } from "./constants";
 
-const flatConfigProps: (keyof FlatConfigItem)[] = [
-  "files",
-  "ignores",
-  "languageOptions",
-  "linterOptions",
-  "processor",
-  "plugins",
-  "rules",
-  "settings",
-];
-
-/**
- * Construct an array of ESLint flat config items.
- */
 export async function luxass(
   options: OptionsConfig & FlatConfigItem = {},
   ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
@@ -48,14 +35,15 @@ export async function luxass(
   const {
     componentExts = [],
     gitignore: enableGitignore = true,
-    isInEditor = !!(
+    isEditor = !!(
       (process.env.VSCODE_PID || process.env.JETBRAINS_IDE)
       && !process.env.CI
     ),
     nextjs: enableNextJS = isPackageExists("next"),
     overrides = {},
-    perfectionist: enablePerfectionist = false,
+    perfectionist: enablePerfectionistRules = false,
     react: enableReact = REACT_PACKAGES.some((i) => isPackageExists(i)),
+    tailwindcss: enableTailwindCSS = isPackageExists("tailwindcss"),
     typescript: enableTypeScript = isPackageExists("typescript"),
     unocss: enableUnoCSS = UNO_PACKAGES.some((i) => isPackageExists(i)),
     vue: enableVue = VUE_PACKAGES.some((i) => isPackageExists(i)),
@@ -77,7 +65,7 @@ export async function luxass(
     if (typeof enableGitignore !== "boolean") {
       configs.push(interop(import("eslint-config-flat-gitignore")).then((plugin) => [plugin(enableGitignore)]));
     } else {
-      if (fs.existsSync(".gitignore")) {
+      if (existsSync(".gitignore")) {
         configs.push(interop(import("eslint-config-flat-gitignore")).then((plugin) => [plugin()]));
       }
     }
@@ -87,7 +75,7 @@ export async function luxass(
   configs.push(
     ignores(),
     javascript({
-      isInEditor,
+      isEditor,
       overrides: overrides.javascript,
     }),
     comments(),
@@ -100,13 +88,9 @@ export async function luxass(
     }),
     unicorn(),
     perfectionist({
-      enableRules: enablePerfectionist,
+      enableAllRules: enablePerfectionistRules,
     }),
   );
-
-  if (enablePerfectionist) {
-    configs.push();
-  }
 
   if (enableVue) {
     componentExts.push("vue");
@@ -129,7 +113,7 @@ export async function luxass(
   if (options.test ?? true) {
     configs.push(
       test({
-        isInEditor,
+        isEditor,
         overrides: overrides.test,
       }),
     );
@@ -143,7 +127,12 @@ export async function luxass(
 
   if (enableNextJS) {
     configs.push(
-      nextjs(),
+      nextjs({
+        overrides: overrides.nextjs,
+        rootDir: typeof options.nextjs === "object"
+          ? options.nextjs.rootDir
+          : options.nextjs,
+      }),
     );
   }
 
@@ -159,6 +148,16 @@ export async function luxass(
 
   if (enableUnoCSS) {
     configs.push(unocss());
+  }
+
+  if (enableTailwindCSS) {
+    configs.push(tailwindcss({
+      callees: typeof enableTailwindCSS === "object" ? enableTailwindCSS.callees : ["classnames", "clsx", "cx", "cn"],
+      classRegex: typeof enableTailwindCSS === "object" ? enableTailwindCSS.classRegex : "^class(Name)?$",
+      config: typeof enableTailwindCSS === "object" ? enableTailwindCSS.config : undefined,
+      nextjs: typeof enableNextJS === "object" ? true : enableNextJS,
+      removeDuplicates: typeof enableTailwindCSS === "object" ? enableTailwindCSS.removeDuplicates : true,
+    }));
   }
 
   if (options.jsonc ?? true) {
@@ -192,7 +191,7 @@ export async function luxass(
 
   // User can optionally pass a flat config item to the first argument
   // We pick the known keys as ESLint would do schema validation
-  const fusedConfig = flatConfigProps.reduce((acc, key) => {
+  const fusedConfig = FLAT_CONFIG_PROPS.reduce((acc, key) => {
     if (key in options) {
       acc[key] = options[key] as any;
     }

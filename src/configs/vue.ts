@@ -1,14 +1,14 @@
 import type {
+  ConfigurationOptions,
   FlatConfigItem,
-  OptionsHasTypeScript,
-  OptionsOverrides,
-  OptionsStylistic,
+  OverrideOptions,
+  StylisticOptions,
 } from "../types";
 import { GLOB_VUE } from "../globs";
 import { interop } from "../utils";
 
 export async function vue(
-  options: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic = {},
+  options: ConfigurationOptions<"typescript"> & OverrideOptions & StylisticOptions = {},
 ): Promise<FlatConfigItem[]> {
   const { overrides = {}, stylistic = true } = options;
 

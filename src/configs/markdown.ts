@@ -1,13 +1,13 @@
 import type {
   FlatConfigItem,
   OptionsComponentExts,
-  OptionsOverrides,
+  OverrideOptions,
 } from "../types";
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from "../globs";
 import { interop } from "../utils";
 
 export async function markdown(
-  options: OptionsComponentExts & OptionsOverrides = {},
+  options: OptionsComponentExts & OverrideOptions = {},
 ): Promise<FlatConfigItem[]> {
   const { componentExts = [], overrides = {} } = options;
 

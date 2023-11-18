@@ -1,17 +1,18 @@
+/* eslint-disable perfectionist/sort-objects */
 import process from "node:process";
 import type {
   FlatConfigItem,
   OptionsComponentExts,
-  OptionsOverrides,
   OptionsTypeScriptParserOptions,
   OptionsTypeScriptWithTypes,
+  OverrideOptions,
 } from "../types";
 import { GLOB_SRC } from "../globs";
 import { pluginAntfu } from "../plugins";
 import { interop, renameRules, toArray } from "../utils";
 
 export async function typescript(
-  options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions,
+  options?: OptionsComponentExts & OverrideOptions & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions,
 ): Promise<FlatConfigItem[]> {
   const {
     componentExts = [],
@@ -105,7 +106,51 @@ export async function typescript(
           "error",
           { "ts-ignore": "allow-with-description" },
         ],
-        "ts/ban-types": ["error", { types: { Function: false } }],
+        "ts/ban-types": ["error", {
+          extendDefaults: false,
+          types: {
+            "BigInt": {
+              fixWith: "bigint",
+              message: "Use `bigint` instead.",
+            },
+            "Boolean": {
+              fixWith: "boolean",
+              message: "Use `boolean` instead.",
+            },
+            "Function":
+              "Use a specific function type instead, like `() => void`.",
+            "Number": {
+              fixWith: "number",
+              message: "Use `number` instead.",
+            },
+            "Object": {
+              fixWith: "Record<string, unknown>",
+              message:
+                "The `Object` type is mostly the same as `unknown`. You probably want `Record<string, unknown>` instead. See https://github.com/typescript-eslint/typescript-eslint/pull/848",
+            },
+            "String": {
+              fixWith: "string",
+              message: "Use `string` instead.",
+            },
+            "Symbol": {
+              fixWith: "symbol",
+              message: "Use `symbol` instead.",
+            },
+            "[]": {
+              message: "Don't use the empty array type `[]`. It only allows empty arrays. Use `SomeType[]` instead.",
+            },
+            "object": {
+              fixWith: "Record<string, unknown>",
+              message:
+                "The `object` type is hard to use. Use `Record<string, unknown>` instead. See: https://github.com/typescript-eslint/typescript-eslint/pull/848",
+            },
+            "{}": {
+              fixWith: "Record<string, unknown>",
+              message:
+                "The `{}` type is mostly the same as `unknown`. You probably want `Record<string, unknown>` instead.",
+            },
+          },
+        }],
         "ts/consistent-type-definitions": ["error", "interface"],
         "ts/consistent-type-imports": [
           "error",
@@ -161,5 +206,6 @@ export async function typescript(
         "ts/no-var-requires": "off",
       },
     },
+
   ];
 }

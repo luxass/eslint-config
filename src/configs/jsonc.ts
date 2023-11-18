@@ -1,9 +1,9 @@
-import type { FlatConfigItem, OptionsOverrides, OptionsStylistic } from "../types";
+import type { FlatConfigItem, OverrideOptions, StylisticOptions } from "../types";
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from "../globs";
 import { interop } from "../utils";
 
 export async function jsonc(
-  options: OptionsStylistic & OptionsOverrides = {},
+  options: StylisticOptions & OverrideOptions = {},
 ): Promise<FlatConfigItem[]> {
   const { overrides = {}, stylistic = true } = options;
 

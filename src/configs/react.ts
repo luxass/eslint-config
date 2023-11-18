@@ -368,7 +368,7 @@ export async function react(): Promise<FlatConfigItem[]> {
         "react/no-will-update-set-state": ["error"],
         "react/prefer-es6-class": ["error", "always"],
         "react/prefer-exact-props": ["error"],
-        "react/prefer-read-only-props": ["error"],
+        "react/prefer-read-only-props": "off",
         "react/prefer-stateless-function": [
           "error",
           { ignorePureComponents: true },
@@ -447,6 +447,11 @@ export async function react(): Promise<FlatConfigItem[]> {
         "react/static-property-placement": ["error", "property assignment"],
         "react/style-prop-object": ["error", { allow: ["FormattedNumber"] }],
         "react/void-dom-elements-no-children": ["error"],
+      },
+      settings: {
+        react: {
+          version: "detect",
+        },
       },
     },
   ];

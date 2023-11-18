@@ -7,7 +7,7 @@ export const GLOB_JSX = "**/*.?([cm])jsx";
 export const GLOB_TS = "**/*.?([cm])ts";
 export const GLOB_TSX = "**/*.?([cm])tsx";
 
-export const GLOB_REACT = "**/*.?([cm])?(j|t)sx";
+export const GLOB_JSX_EXT = "[jt]sx";
 
 export const GLOB_STYLE = "**/*.{c,le,sc}ss";
 export const GLOB_CSS = "**/*.css";
@@ -20,6 +20,7 @@ export const GLOB_JSONC = "**/*.jsonc";
 
 export const GLOB_MARKDOWN = "**/*.md";
 export const GLOB_VUE = "**/*.vue";
+export const GLOB_REACT = GLOB_SRC;
 export const GLOB_YAML = "**/*.y?(a)ml";
 export const GLOB_HTML = "**/*.htm?(l)";
 
@@ -33,6 +34,24 @@ export const GLOB_TESTS = [
   `**/*.benchmark.${GLOB_SRC_EXT}`,
 ];
 
+export const GLOB_NEXTJS_OG = [
+  `**/app/**/opengraph-image.${GLOB_JSX_EXT}`,
+  `**/app/**/twitter-image.${GLOB_JSX_EXT}`,
+  `**/app/**/route.${GLOB_JSX_EXT}`,
+];
+
+export const GLOB_NEXTJS_ROUTES = [
+  `**/app/**/page.${GLOB_SRC_EXT}`,
+  `**/app/**/layout.${GLOB_SRC_EXT}`,
+  `**/app/**/error.${GLOB_SRC_EXT}`,
+  `**/app/**/template.${GLOB_SRC_EXT}`,
+  `**/app/**/not-found.${GLOB_SRC_EXT}`,
+  `**/app/**/loading.${GLOB_SRC_EXT}`,
+  `**/app/**/robots.${GLOB_SRC_EXT}`,
+  `**/app/**/sitemap.${GLOB_SRC_EXT}`,
+  `**/pages/**/*.${GLOB_SRC_EXT}`,
+];
+
 export const GLOB_ALL_SRC = [
   GLOB_SRC,
   GLOB_STYLE,
@@ -42,11 +61,14 @@ export const GLOB_ALL_SRC = [
   GLOB_VUE,
   GLOB_YAML,
   GLOB_HTML,
+  GLOB_REACT,
 ];
 
 export const GLOB_EXCLUDE = [
   "**/node_modules",
   "**/dist",
+  "**/out",
+  "**/build",
   "**/package-lock.json",
   "**/yarn.lock",
   "**/pnpm-lock.yaml",

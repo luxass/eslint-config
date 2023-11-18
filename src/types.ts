@@ -46,7 +46,7 @@ export type Rules = WrapRuleConfig<
     VueRules &
     UnicornRules &
     EslintCommentsRules & {
-      "test/no-only-tests": RuleConfig<[]>
+      "test/no-only-tests": RuleConfig<any[]>
     }
   >
 >;
@@ -72,7 +72,7 @@ export interface OptionsComponentExts {
   /**
    * Additional extensions for components.
    *
-   * @example ['vue']
+   * @example ["vue"]
    * @default []
    */
   componentExts?: string[]
@@ -93,27 +93,65 @@ export interface OptionsTypeScriptWithTypes {
   tsconfigPath?: string | string[]
 }
 
-export interface OptionsHasTypeScript {
-  typescript?: boolean
+export type ConfigurationOptions<TConfigs extends keyof OptionsConfig> = {
+  [K in TConfigs]?: boolean
+};
+
+export interface NextJSOptions {
+  /**
+   * Tell the plugin where the root directory is.
+   * @see https://nextjs.org/docs/app/building-your-application/configuring/eslint#rootdir
+   *
+   * @default true
+   */
+  rootDir?: boolean | string
 }
 
-export interface OptionsStylistic {
-  stylistic?: StylisticConfig | boolean
+export interface OptionsTailwindCSS {
+  /**
+   * Tell the plugin where the config file is located.
+   * If not provided, the plugin will try to find the config file automatically.
+   */
+  config?: string
+
+  /**
+   * Tell the plugin to remove duplicate classes.
+   *
+   * @default true
+   */
+  removeDuplicates?: boolean
+
+  /**
+   * Tell the plugin which function names to look for.
+   * @default ["classnames", "clsx", "cx", "cn"]
+   *
+   * If NextJS is enabled, the default value will also include `tw`
+   * to support NextJS's Image Response.
+   */
+  callees?: string[]
+
+  /**
+   * Tell the plugin which class regex to look for.
+   *
+   * @default "^class(Name)?$"
+   */
+  classRegex?: string
 }
 
-export interface StylisticConfig
-  extends Pick<StylisticCustomizeOptions, "jsx"> { }
+export type StylisticOptions = Pick<OptionsConfig, "stylistic">;
 
-export interface OptionsOverrides {
+export type StylisticConfig = Pick<StylisticCustomizeOptions, "jsx" | "indent" | "quotes" | "semi">;
+
+export interface OverrideOptions {
   overrides?: FlatConfigItem["rules"]
 }
 
-export interface OptionsIsInEditor {
-  isInEditor?: boolean
+export interface InEditorOptions {
+  isEditor?: boolean
 }
 
-export interface OptionsPerfectionist {
-  enableRules?: boolean
+export interface PerfectionistOptions {
+  enableAllRules?: boolean
 }
 
 export interface OptionsConfig extends OptionsComponentExts {
@@ -131,7 +169,7 @@ export interface OptionsConfig extends OptionsComponentExts {
    * Control to disable some rules in editors.
    * @default auto-detect based on the process.env
    */
-  isInEditor?: boolean
+  isEditor?: boolean
 
   /**
    * Enable JSONC support.
@@ -170,7 +208,7 @@ export interface OptionsConfig extends OptionsComponentExts {
    *
    * @default auto-detect based on the dependencies
    */
-  nextjs?: boolean
+  nextjs?: boolean | NextJSOptions
 
   /**
    * Enable React support.
@@ -189,6 +227,7 @@ export interface OptionsConfig extends OptionsComponentExts {
     test?: FlatConfigItem["rules"]
     typescript?: FlatConfigItem["rules"]
     unocss?: FlatConfigItem["rules"]
+    tailwind?: FlatConfigItem["rules"]
     vue?: FlatConfigItem["rules"]
     yaml?: FlatConfigItem["rules"]
     nextjs?: FlatConfigItem["rules"]
@@ -227,6 +266,13 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default auto-detect based on the dependencies
    */
   unocss?: boolean
+
+  /**
+   * Enable TailwindCSS support.
+   *
+   * @default auto-detect based on the dependencies
+   */
+  tailwindcss?: boolean | OptionsTailwindCSS
 
   /**
    * Enable Vue support.

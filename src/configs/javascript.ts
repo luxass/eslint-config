@@ -1,12 +1,12 @@
 import globals from "globals";
-import type { FlatConfigItem, OptionsIsInEditor, OptionsOverrides } from "../types";
+import type { FlatConfigItem, InEditorOptions, OverrideOptions } from "../types";
 import { pluginAntfu, pluginUnusedImports } from "../plugins";
 import { GLOB_SRC, GLOB_SRC_EXT } from "../globs";
 
 export async function javascript(
-  options: OptionsIsInEditor & OptionsOverrides = {},
+  options: InEditorOptions & OverrideOptions = {},
 ): Promise<FlatConfigItem[]> {
-  const { isInEditor = false, overrides = {} } = options;
+  const { isEditor = false, overrides = {} } = options;
 
   return [
     {
@@ -62,7 +62,7 @@ export async function javascript(
         "no-compare-neg-zero": "error",
         "no-cond-assign": ["error", "always"],
         "no-console": [
-          isInEditor ? "off" : "error",
+          isEditor ? "off" : "error",
           { allow: ["warn", "error"] },
         ],
         "no-const-assign": "error",
@@ -233,7 +233,7 @@ export async function javascript(
 
         "symbol-description": "error",
         "unicode-bom": ["error", "never"],
-        "unused-imports/no-unused-imports": isInEditor ? "off" : "error",
+        "unused-imports/no-unused-imports": isEditor ? "off" : "error",
 
         "unused-imports/no-unused-vars": [
           "error",

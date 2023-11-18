@@ -1,9 +1,9 @@
-import type { FlatConfigItem, OptionsOverrides, OptionsStylistic } from "../types";
+import type { FlatConfigItem, OverrideOptions, StylisticOptions } from "../types";
 import { GLOB_YAML } from "../globs";
 import { interop } from "../utils";
 
 export async function yaml(
-  options: OptionsOverrides & OptionsStylistic = {},
+  options: OverrideOptions & StylisticOptions = {},
 ): Promise<FlatConfigItem[]> {
   const { overrides = {}, stylistic = true } = options;
 

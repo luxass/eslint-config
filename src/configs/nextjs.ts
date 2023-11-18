@@ -1,9 +1,13 @@
-import { GLOB_SRC } from "../globs";
-import type { FlatConfigItem } from "../types";
+import { GLOB_NEXTJS_OG, GLOB_NEXTJS_ROUTES, GLOB_SRC } from "../globs";
+import type { FlatConfigItem, NextJSOptions, OverrideOptions } from "../types";
 import { interop } from "../utils";
 
-export async function nextjs(): Promise<FlatConfigItem[]> {
+export async function nextjs(
+  options: NextJSOptions & OverrideOptions = {},
+): Promise<FlatConfigItem[]> {
   const pluginNextjs = await interop(import("@next/eslint-plugin-next"));
+
+  const { overrides, rootDir } = options;
 
   return [
     {
@@ -39,12 +43,14 @@ export async function nextjs(): Promise<FlatConfigItem[]> {
         "@next/next/no-typos": ["warn"],
         "@next/next/no-unwanted-polyfillio": ["warn"],
         "jsx-a11y/anchor-is-valid": ["off"],
+
         // This rule creates errors with webpack parsing on edge runtime
         "unicorn/prefer-node-protocol": ["off"],
+        ...overrides,
       },
       settings: {
         next: {
-          rootDir: true,
+          rootDir: rootDir ?? true,
         },
         react: {
           pragma: "React",
@@ -53,20 +59,19 @@ export async function nextjs(): Promise<FlatConfigItem[]> {
       },
     },
     {
-      files: [
-        "**/app/**/page.{js,jsx,tsx}",
-        "**/app/**/layout.{js,jsx,tsx}",
-        "**/app/**/error.{js,jsx,tsx}",
-        "**/app/**/template.{js,jsx,tsx}",
-        "**/app/**/not-found.{js,jsx,tsx}",
-        "**/app/**/loading.{js,jsx,tsx}",
-        "**/app/**/robots.{js,jsx,ts,tsx}",
-        "**/app/**/sitemap.{js,jsx,ts,tsx}",
-        "**/pages/**/*.{js,jsx,tsx}",
-      ],
+      files: GLOB_NEXTJS_ROUTES,
       name: "luxass:nextjs:default-export-override",
       rules: {
-        "import/no-default-export": "off",
+        "import/prefer-default-export": "error",
+      },
+    },
+    {
+      files: GLOB_NEXTJS_OG,
+      name: "luxass:nextjs:allow-tw-property",
+      rules: {
+        "react/no-unknown-property": ["error", {
+          ignore: ["tw"],
+        }],
       },
     },
   ];

@@ -15,5 +15,6 @@ export * from "./yaml";
 export * from "./test";
 export * from "./perfectionist";
 export * from "./unocss";
+export * from "./tailwindcss";
 export * from "./nextjs";
 export * from "./react";
