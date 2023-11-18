@@ -27,7 +27,7 @@ export async function stylistic(options: StylisticConfig = {}): Promise<FlatConf
       rules: {
         ...config.rules,
         "antfu/consistent-list-newline": "error",
-        "antfu/if-newline": "error",
+        "antfu/if-newline": "off",
         "antfu/indent-binary-ops": ["error", { indent }],
         "antfu/top-level-function": "error",
         "curly": ["error", "multi-line", "consistent"],
