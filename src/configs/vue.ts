@@ -20,6 +20,10 @@ export async function vue(
     interop(import("vue-eslint-parser")),
   ] as const);
 
+  const {
+    indent = 2,
+  } = typeof stylistic === "boolean" ? {} : stylistic;
+
   return [
     {
       name: "luxass:vue:setup",
@@ -75,7 +79,7 @@ export async function vue(
         "vue/dot-location": ["error", "property"],
         "vue/dot-notation": ["error", { allowKeywords: true }],
         "vue/eqeqeq": ["error", "smart"],
-        "vue/html-indent": ["error", 2],
+        "vue/html-indent": ["error", indent],
         "vue/html-quotes": ["error", "double"],
         "vue/max-attributes-per-line": "off",
         "vue/multi-word-component-names": "off",

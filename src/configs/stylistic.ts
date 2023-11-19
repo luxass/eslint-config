@@ -3,18 +3,17 @@ import { pluginAntfu } from "../plugins";
 import { interop } from "../utils";
 
 export async function stylistic(options: StylisticConfig = {}): Promise<FlatConfigItem[]> {
-  const { jsx = true } = options;
+  const { indent = 2, jsx = true, quotes = "double", semi = true } = options;
 
   const pluginStylistic = await interop(import("@stylistic/eslint-plugin"));
 
-  const indent = 2;
   const config = pluginStylistic.configs.customize({
     flat: true,
     indent,
     jsx,
     pluginName: "style",
-    quotes: "double",
-    semi: true,
+    quotes,
+    semi,
   });
 
   return [

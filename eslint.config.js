@@ -5,6 +5,10 @@ export default luxass(
   {
     vue: true,
     typescript: true,
+    react: {
+      a11y: true,
+    },
+    nextjs: true,
   },
   {
     files: ["src/**/*.ts"],

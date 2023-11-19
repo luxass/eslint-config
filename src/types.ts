@@ -107,6 +107,10 @@ export interface NextJSOptions {
   rootDir?: boolean | string
 }
 
+export interface ReactOptions {
+  a11y?: boolean
+}
+
 export interface OptionsTailwindCSS {
   /**
    * Tell the plugin where the config file is located.
@@ -215,7 +219,7 @@ export interface OptionsConfig extends OptionsComponentExts {
    *
    * @default auto-detect based on the dependencies
    */
-  react?: boolean
+  react?: boolean | ReactOptions
 
   /**
    * Provide overrides for rules for each integration.

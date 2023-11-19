@@ -15,6 +15,11 @@ export async function yaml(
     interop(import("yaml-eslint-parser")),
   ] as const);
 
+  const {
+    indent = 2,
+    quotes = "double",
+  } = typeof stylistic === "boolean" ? {} : stylistic;
+
   return [
     {
       name: "luxass:yaml:setup",
@@ -48,12 +53,12 @@ export async function yaml(
               "yaml/flow-mapping-curly-spacing": "error",
               "yaml/flow-sequence-bracket-newline": "error",
               "yaml/flow-sequence-bracket-spacing": "error",
-              "yaml/indent": ["error", 2],
+              "yaml/indent": ["error", indent === "tab" ? 2 : indent],
               "yaml/key-spacing": "error",
               "yaml/no-tab-indent": "error",
               "yaml/quotes": [
                 "error",
-                { avoidEscape: false, prefer: "double" },
+                { avoidEscape: false, prefer: quotes },
               ],
               "yaml/spaced-comment": "error",
             }

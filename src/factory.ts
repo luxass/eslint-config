@@ -121,7 +121,11 @@ export async function luxass(
 
   if (enableReact) {
     configs.push(
-      react(),
+      react({
+        ...(typeof enableReact !== "boolean" ? enableReact : {}),
+        overrides: overrides.react,
+        typescript: !!enableTypeScript,
+      }),
     );
   }
 
@@ -129,9 +133,7 @@ export async function luxass(
     configs.push(
       nextjs({
         overrides: overrides.nextjs,
-        rootDir: typeof options.nextjs === "object"
-          ? options.nextjs.rootDir
-          : options.nextjs,
+        ...(typeof enableNextJS !== "boolean" ? enableNextJS : {}),
       }),
     );
   }
