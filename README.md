@@ -1,8 +1,8 @@
 # @luxass/eslint-config
 
 > [!IMPORTANT]
-> The configuration is not currently finished, and the old config should be used. You can find it [here](https://github.com/luxass/eslint-config-legacy)
-
+> The configuration is not currently finished.  
+> I could change at any moment.
 
 ## ✨ Features
 
