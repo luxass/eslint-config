@@ -6,6 +6,9 @@ export default luxass(
     vue: true,
     typescript: true,
     astro: true,
+    react: {
+      a11y: true,
+    },
   },
   {
     files: ["src/**/*.ts"],
