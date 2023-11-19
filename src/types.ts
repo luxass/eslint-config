@@ -111,6 +111,10 @@ export interface ReactOptions {
   a11y?: boolean
 }
 
+export interface AstroOptions {
+  a11y?: boolean
+}
+
 export interface OptionsTailwindCSS {
   /**
    * Tell the plugin where the config file is located.
@@ -236,6 +240,7 @@ export interface OptionsConfig extends OptionsComponentExts {
     yaml?: FlatConfigItem["rules"]
     nextjs?: FlatConfigItem["rules"]
     react?: FlatConfigItem["rules"]
+    astro?: FlatConfigItem["rules"]
   }
 
   /**
@@ -284,6 +289,13 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default auto-detect based on the dependencies
    */
   vue?: boolean
+
+  /**
+   * Enable Astro support.
+   *
+   * @default auto-detect based on the dependencies
+   */
+  astro?: boolean | AstroOptions
 
   /**
    * Enable YAML support.

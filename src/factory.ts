@@ -3,6 +3,7 @@ import { existsSync } from "node:fs";
 import { isPackageExists } from "local-pkg";
 import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from "./types";
 import {
+  astro,
   comments,
   ignores,
   imports,
@@ -33,6 +34,7 @@ export async function luxass(
   ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
 ): Promise<UserConfigItem[]> {
   const {
+    astro: enableAstro = isPackageExists("astro"),
     componentExts = [],
     gitignore: enableGitignore = true,
     isEditor = !!(
@@ -132,8 +134,8 @@ export async function luxass(
   if (enableNextJS) {
     configs.push(
       nextjs({
-        overrides: overrides.nextjs,
         ...(typeof enableNextJS !== "boolean" ? enableNextJS : {}),
+        overrides: overrides.nextjs,
       }),
     );
   }
@@ -143,6 +145,16 @@ export async function luxass(
       vue({
         overrides: overrides.vue,
         stylistic: stylisticOptions,
+        typescript: !!enableTypeScript,
+      }),
+    );
+  }
+
+  if (enableAstro) {
+    configs.push(
+      astro({
+        ...(typeof enableAstro !== "boolean" ? enableAstro : {}),
+        overrides: overrides.astro,
         typescript: !!enableTypeScript,
       }),
     );

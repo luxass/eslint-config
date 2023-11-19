@@ -1,5 +1,5 @@
 import globals from "globals";
-import { GLOB_JSX, GLOB_TSX } from "../globs";
+import { GLOB_JSX } from "../globs";
 import type { ConfigurationOptions, FlatConfigItem, OverrideOptions, ReactOptions } from "../types";
 import { interop } from "../utils";
 
@@ -30,7 +30,7 @@ export async function react(options: ConfigurationOptions<"typescript"> & Overri
       },
     },
     {
-      files: [GLOB_JSX, GLOB_TSX],
+      files: [GLOB_JSX],
       languageOptions: {
         ...pluginReact.configs.recommended.languageOptions,
         globals: {

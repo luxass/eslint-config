@@ -18,3 +18,4 @@ export * from "./unocss";
 export * from "./tailwindcss";
 export * from "./nextjs";
 export * from "./react";
+export * from "./astro";
