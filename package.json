@@ -1,7 +1,7 @@
 {
   "name": "@luxass/eslint-config",
   "type": "module",
-  "version": "4.0.0-beta.3",
+  "version": "4.0.0-beta.4",
   "packageManager": "pnpm@8.10.5",
   "description": "ESLint config for @luxass",
   "author": {
