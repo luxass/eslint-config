@@ -1,7 +1,7 @@
 // @ts-check
 import { luxass } from "./dist/index.mjs";
 
-export default luxass(
+export default await luxass(
   {
     vue: true,
     typescript: true,

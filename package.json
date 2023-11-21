@@ -72,6 +72,7 @@
   "peerDependencies": {
     "@next/eslint-plugin-next": "^14.0.3",
     "eslint": ">=8.0.0",
+    "eslint-plugin-astro": "^0.29.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
@@ -92,21 +93,22 @@
     },
     "eslint-plugin-tailwindcss": {
       "optional": true
+    },
+    "eslint-plugin-astro": {
+      "optional": true
     }
   },
   "dependencies": {
     "@antfu/eslint-define-config": "^1.23.0-2",
     "@eslint-types/jsdoc": "46.9.0",
-    "@eslint-types/typescript-eslint": "^6.11.0",
+    "@eslint-types/typescript-eslint": "^6.12.0",
     "@eslint-types/unicorn": "^49.0.0",
-    "@stylistic/eslint-plugin": "^1.3.2",
-    "@typescript-eslint/eslint-plugin": "^6.11.0",
-    "@typescript-eslint/parser": "^6.11.0",
-    "@unocss/eslint-plugin": "^0.57.5",
-    "astro-eslint-parser": "^0.16.0",
+    "@stylistic/eslint-plugin": "^1.4.0",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "@unocss/eslint-plugin": "^0.57.7",
     "eslint-config-flat-gitignore": "^0.1.1",
-    "eslint-plugin-antfu": "^1.0.9",
-    "eslint-plugin-astro": "^0.29.1",
+    "eslint-plugin-antfu": "^1.0.10",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "eslint-plugin-i": "^2.29.0",
     "eslint-plugin-jsdoc": "^46.9.0",
@@ -119,7 +121,7 @@
     "eslint-plugin-sort-keys": "^2.3.5",
     "eslint-plugin-unicorn": "^49.0.0",
     "eslint-plugin-unused-imports": "^3.0.0",
-    "eslint-plugin-vitest": "^0.3.9",
+    "eslint-plugin-vitest": "^0.3.10",
     "eslint-plugin-vue": "^9.18.1",
     "eslint-plugin-yml": "^1.10.0",
     "globals": "^13.23.0",
@@ -130,14 +132,20 @@
     "yaml-eslint-parser": "^1.2.2"
   },
   "devDependencies": {
-    "@stylistic/eslint-plugin-migrate": "^1.3.2",
+    "@next/eslint-plugin-next": "^14.0.3",
+    "@stylistic/eslint-plugin-migrate": "^1.4.0",
     "@types/eslint": "^8.44.7",
     "@types/node": "^18.17.19",
-    "eslint": "^8.53.0",
+    "eslint": "^8.54.0",
+    "eslint-plugin-astro": "^0.29.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.4",
+    "eslint-plugin-tailwindcss": "^3.13.0",
     "lint-staged": "^15.1.0",
     "simple-git-hooks": "^2.9.0",
-    "tsup": "^7.3.0",
-    "typescript": "^5.2.2"
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.2"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
