@@ -27,7 +27,7 @@ import {
   yaml,
 } from "./configs";
 import { combine, interop } from "./utils";
-import { FLAT_CONFIG_PROPS, REACT_PACKAGES, UNO_PACKAGES, VUE_PACKAGES } from "./constants";
+import { FLAT_CONFIG_PROPS, UNO_PACKAGES, VUE_PACKAGES } from "./constants";
 
 export async function luxass(
   options: OptionsConfig & FlatConfigItem = {},
@@ -41,11 +41,11 @@ export async function luxass(
       (process.env.VSCODE_PID || process.env.JETBRAINS_IDE)
       && !process.env.CI
     ),
-    nextjs: enableNextJS = isPackageExists("next"),
+    nextjs: enableNextJS = false,
     overrides = {},
     perfectionist: enablePerfectionistRules = false,
-    react: enableReact = REACT_PACKAGES.some((i) => isPackageExists(i)),
-    tailwindcss: enableTailwindCSS = isPackageExists("tailwindcss"),
+    react: enableReact = false,
+    tailwindcss: enableTailwindCSS = false,
     typescript: enableTypeScript = isPackageExists("typescript"),
     unocss: enableUnoCSS = UNO_PACKAGES.some((i) => isPackageExists(i)),
     vue: enableVue = VUE_PACKAGES.some((i) => isPackageExists(i)),

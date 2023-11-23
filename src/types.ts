@@ -214,14 +214,14 @@ export interface OptionsConfig extends OptionsComponentExts {
   /**
    * Enable NextJS support.
    *
-   * @default auto-detect based on the dependencies
+   * @default false
    */
   nextjs?: boolean | NextJSOptions
 
   /**
    * Enable React support.
    *
-   * @default auto-detect based on the dependencies
+   * @default false
    */
   react?: boolean | ReactOptions
 
@@ -279,7 +279,7 @@ export interface OptionsConfig extends OptionsComponentExts {
   /**
    * Enable TailwindCSS support.
    *
-   * @default auto-detect based on the dependencies
+   * @default false
    */
   tailwindcss?: boolean | OptionsTailwindCSS
 

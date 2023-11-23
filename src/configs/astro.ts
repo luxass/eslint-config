@@ -3,6 +3,18 @@ import type { ConfigurationOptions, FlatConfigItem, OverrideOptions, ReactOption
 import { interop } from "../utils";
 
 export async function astro(options: ConfigurationOptions<"typescript"> & OverrideOptions & ReactOptions): Promise<FlatConfigItem[]> {
+  const {
+    a11y = false,
+    overrides = {},
+    // typescript = true,
+  } = options;
+
+  await interop([
+    "eslint-plugin-astro",
+    "astro-eslint-parser",
+    ...(options.a11y ? ["eslint-plugin-jsx-a11y"] : []),
+  ]);
+
   const [
     pluginAstro,
     parserAstro,
@@ -12,12 +24,6 @@ export async function astro(options: ConfigurationOptions<"typescript"> & Overri
     interop(import("astro-eslint-parser")),
     ...(options.a11y ? [interop(import("eslint-plugin-jsx-a11y"))] : []),
   ] as const);
-
-  const {
-    a11y = false,
-    overrides = {},
-    // typescript = true,
-  } = options;
 
   return [
     {

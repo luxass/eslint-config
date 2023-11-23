@@ -1,6 +1,6 @@
 import { GLOB_HTML, GLOB_SRC } from "../globs";
 import type { ConfigurationOptions, FlatConfigItem, OptionsTailwindCSS } from "../types";
-import { interop } from "../utils";
+import { ensure, interop } from "../utils";
 
 const DEFAULT_TAILWIND_CALLEES = ["classnames", "clsx", "cx", "cn"];
 const DEFAULT_CLASS_REGEX = "^class(Name)?$";
@@ -8,8 +8,6 @@ const DEFAULT_CLASS_REGEX = "^class(Name)?$";
 export async function tailwindcss(
   options: OptionsTailwindCSS & ConfigurationOptions<"nextjs"> = {},
 ): Promise<FlatConfigItem[]> {
-  const pluginTailwindCSS = await interop(import("eslint-plugin-tailwindcss"));
-
   const {
     callees = DEFAULT_TAILWIND_CALLEES,
     classRegex = DEFAULT_CLASS_REGEX,
@@ -17,6 +15,12 @@ export async function tailwindcss(
     nextjs,
     removeDuplicates = true,
   } = options;
+
+  await ensure([
+    "eslint-plugin-tailwindcss",
+  ]);
+
+  const pluginTailwindCSS = await interop(import("eslint-plugin-tailwindcss"));
 
   const tailwindCSSCallee = callees ?? DEFAULT_TAILWIND_CALLEES;
 

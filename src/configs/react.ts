@@ -1,8 +1,21 @@
 import { GLOB_JSX } from "../globs";
 import type { ConfigurationOptions, FlatConfigItem, OverrideOptions, ReactOptions } from "../types";
-import { interop } from "../utils";
+import { ensure, interop } from "../utils";
 
 export async function react(options: ConfigurationOptions<"typescript"> & OverrideOptions & ReactOptions): Promise<FlatConfigItem[]> {
+  const {
+    a11y = false,
+    overrides = {},
+    typescript = true,
+  } = options;
+
+  await ensure([
+    "eslint-plugin-react",
+    "eslint-plugin-react-hooks",
+    "eslint-plugin-react-refresh",
+    ...(options.a11y ? ["eslint-plugin-jsx-a11y"] : []),
+  ]);
+
   const [
     pluginReact,
     pluginReactHooks,
@@ -14,12 +27,6 @@ export async function react(options: ConfigurationOptions<"typescript"> & Overri
     interop(import("eslint-plugin-react-refresh")),
     ...(options.a11y ? [interop(import("eslint-plugin-jsx-a11y"))] : []),
   ] as const);
-
-  const {
-    a11y = false,
-    overrides = {},
-    typescript = true,
-  } = options;
 
   return [
     {

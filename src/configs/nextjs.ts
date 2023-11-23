@@ -1,13 +1,17 @@
 import { GLOB_NEXTJS_OG, GLOB_NEXTJS_ROUTES, GLOB_SRC } from "../globs";
 import type { FlatConfigItem, NextJSOptions, OverrideOptions } from "../types";
-import { interop } from "../utils";
+import { ensure, interop } from "../utils";
 
 export async function nextjs(
   options: NextJSOptions & OverrideOptions = {},
 ): Promise<FlatConfigItem[]> {
-  const pluginNextjs = await interop(import("@next/eslint-plugin-next"));
-
   const { overrides, rootDir } = options;
+
+  await ensure([
+    "@next/eslint-plugin-next",
+  ]);
+
+  const pluginNextjs = await interop(import("@next/eslint-plugin-next"));
 
   return [
     {
