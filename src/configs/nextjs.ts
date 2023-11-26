@@ -67,6 +67,7 @@ export async function nextjs(
       name: "luxass:nextjs:default-export-override",
       rules: {
         "import/prefer-default-export": "error",
+        "react-refresh/only-export-components": "off",
       },
     },
     {

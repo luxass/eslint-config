@@ -121,7 +121,7 @@ export async function luxass(
     );
   }
 
-  if (enableReact) {
+  if (enableReact || enableNextJS) {
     configs.push(
       react({
         ...(typeof enableReact !== "boolean" ? enableReact : {}),
