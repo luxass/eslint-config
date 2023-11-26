@@ -161,7 +161,12 @@ export async function luxass(
   }
 
   if (enableUnoCSS) {
-    configs.push(unocss());
+    configs.push(
+      unocss({
+        ...(typeof enableUnoCSS !== "boolean" ? enableUnoCSS : {}),
+        overrides: overrides.unocss,
+      }),
+    );
   }
 
   if (enableTailwindCSS) {
@@ -170,6 +175,7 @@ export async function luxass(
       classRegex: typeof enableTailwindCSS === "object" ? enableTailwindCSS.classRegex : "^class(Name)?$",
       config: typeof enableTailwindCSS === "object" ? enableTailwindCSS.config : undefined,
       nextjs: typeof enableNextJS === "object" ? true : enableNextJS,
+      overrides: overrides.tailwindCSS,
       removeDuplicates: typeof enableTailwindCSS === "object" ? enableTailwindCSS.removeDuplicates : true,
     }));
   }

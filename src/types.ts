@@ -115,7 +115,7 @@ export interface AstroOptions {
   a11y?: boolean
 }
 
-export interface OptionsTailwindCSS {
+export interface TailwindCSSOptions {
   /**
    * Tell the plugin where the config file is located.
    * If not provided, the plugin will try to find the config file automatically.
@@ -144,6 +144,13 @@ export interface OptionsTailwindCSS {
    * @default "^class(Name)?$"
    */
   classRegex?: string
+}
+
+export interface UnoCSSOptions {
+  /**
+   * Are you using UnoCSS Attributify mode?
+   */
+  attributify?: boolean
 }
 
 export type StylisticOptions = Pick<OptionsConfig, "stylistic">;
@@ -235,7 +242,7 @@ export interface OptionsConfig extends OptionsComponentExts {
     test?: FlatConfigItem["rules"]
     typescript?: FlatConfigItem["rules"]
     unocss?: FlatConfigItem["rules"]
-    tailwind?: FlatConfigItem["rules"]
+    tailwindCSS?: FlatConfigItem["rules"]
     vue?: FlatConfigItem["rules"]
     yaml?: FlatConfigItem["rules"]
     nextjs?: FlatConfigItem["rules"]
@@ -274,14 +281,14 @@ export interface OptionsConfig extends OptionsComponentExts {
    *
    * @default auto-detect based on the dependencies
    */
-  unocss?: boolean
+  unocss?: boolean | UnoCSSOptions
 
   /**
    * Enable TailwindCSS support.
    *
    * @default false
    */
-  tailwindcss?: boolean | OptionsTailwindCSS
+  tailwindcss?: boolean | TailwindCSSOptions
 
   /**
    * Enable Vue support.

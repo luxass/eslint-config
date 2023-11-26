@@ -1,18 +1,19 @@
 import { GLOB_HTML, GLOB_SRC } from "../globs";
-import type { ConfigurationOptions, FlatConfigItem, OptionsTailwindCSS } from "../types";
+import type { ConfigurationOptions, FlatConfigItem, OverrideOptions, TailwindCSSOptions } from "../types";
 import { ensure, interop } from "../utils";
 
 const DEFAULT_TAILWIND_CALLEES = ["classnames", "clsx", "cx", "cn"];
 const DEFAULT_CLASS_REGEX = "^class(Name)?$";
 
 export async function tailwindcss(
-  options: OptionsTailwindCSS & ConfigurationOptions<"nextjs"> = {},
+  options: TailwindCSSOptions & ConfigurationOptions<"nextjs"> & OverrideOptions = {},
 ): Promise<FlatConfigItem[]> {
   const {
     callees = DEFAULT_TAILWIND_CALLEES,
     classRegex = DEFAULT_CLASS_REGEX,
     config = undefined,
     nextjs,
+    overrides,
     removeDuplicates = true,
   } = options;
 
@@ -42,6 +43,9 @@ export async function tailwindcss(
         "tailwindcss/no-arbitrary-value": ["off"],
         "tailwindcss/no-contradicting-classname": ["error"],
         "tailwindcss/no-custom-classname": ["warn"],
+
+        // overrides
+        ...overrides,
       },
       settings: {
         tailwindcss: {
