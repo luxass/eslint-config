@@ -9,8 +9,8 @@ dependencies:
     specifier: ^1.23.0-2
     version: 1.23.0-2
   '@antfu/install-pkg':
-    specifier: ^0.2.0
-    version: 0.2.0
+    specifier: ^0.3.0
+    version: 0.3.0
   '@eslint-types/jsdoc':
     specifier: 46.9.0
     version: 46.9.0
@@ -168,8 +168,8 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=9.0.0', pnpm: '>= 8.6.0'}
     dev: false
 
-  /@antfu/install-pkg@0.2.0:
-    resolution: {integrity: sha512-gwTQbVnVcdhLXru+ejx2hZoiVcOHBJtjWXxzQmwSt5NePDr2mlVmdxuV1BapjN1JNb5OmA0j860bsQN3iHXr8Q==}
+  /@antfu/install-pkg@0.3.0:
+    resolution: {integrity: sha512-hzTVgEFGBBMXUjsNhIRDdt9jvAkZzPbMLQW8q2wXz455+1zxGFtM0nxPl2pukFWHXcC/Bn/UCHV9rd0+pwYsmw==}
     dependencies:
       execa: 8.0.1
       find-up: 7.0.0
