@@ -9,6 +9,8 @@ import type {
   MergeIntersection,
   NRules,
   Prefix,
+  ReactHooksRules,
+  ReactRules,
   RenamePrefix,
   RuleConfig,
   VitestRules,
@@ -39,6 +41,8 @@ export type Rules = WrapRuleConfig<
     RenamePrefix<NRules, "n/", "node/"> &
     Prefix<StylisticRules, "style/"> &
     Prefix<AntfuRules, "antfu/"> &
+    ReactHooksRules &
+    ReactRules &
     JSDocRules &
     ImportRules &
     EslintRules &
@@ -148,9 +152,16 @@ export interface TailwindCSSOptions {
 
 export interface UnoCSSOptions {
   /**
-   * Are you using UnoCSS Attributify mode?
+   * Enable attributify support.
+   * @default true
    */
   attributify?: boolean
+
+  /**
+   * Enable strict mode by throwing errors about blocklisted classes.
+   * @default false
+   */
+  strict?: boolean
 }
 
 export type StylisticOptions = Pick<OptionsConfig, "stylistic">;
@@ -163,10 +174,6 @@ export interface OverrideOptions {
 
 export interface InEditorOptions {
   isEditor?: boolean
-}
-
-export interface PerfectionistOptions {
-  enableAllRules?: boolean
 }
 
 export interface OptionsConfig extends OptionsComponentExts {
@@ -210,27 +217,26 @@ export interface OptionsConfig extends OptionsComponentExts {
   markdown?: boolean
 
   /**
-   * Enable Perfectionist rules.
-   *
-   * @default false
-   *
-   * NOTE: This plugin has some very opinionated rules, use with caution.
-   */
-  perfectionist?: boolean
-
-  /**
    * Enable NextJS support.
+   *
+   * Requires installing:
+   * - `@next/eslint-plugin-next`
    *
    * @default false
    */
   nextjs?: boolean | NextJSOptions
 
   /**
-   * Enable React support.
+   * Enable react rules.
+   *
+   * Requires installing:
+   * - `eslint-plugin-react`
+   * - `eslint-plugin-react-hooks`
+   * - `eslint-plugin-react-refresh`
    *
    * @default false
    */
-  react?: boolean | ReactOptions
+  react?: boolean
 
   /**
    * Provide overrides for rules for each integration.
@@ -279,12 +285,18 @@ export interface OptionsConfig extends OptionsComponentExts {
   /**
    * Enable UnoCSS support.
    *
-   * @default auto-detect based on the dependencies
+   * Requires installing:
+   * - `@unocss/eslint-plugin`
+   *
+   * @default false
    */
   unocss?: boolean | UnoCSSOptions
 
   /**
    * Enable TailwindCSS support.
+   *
+   * Requires installing:
+   * - `eslint-plugin-tailwindcss`
    *
    * @default false
    */

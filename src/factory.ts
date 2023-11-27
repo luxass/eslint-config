@@ -27,7 +27,7 @@ import {
   yaml,
 } from "./configs";
 import { combine, interop } from "./utils";
-import { FLAT_CONFIG_PROPS, UNO_PACKAGES, VUE_PACKAGES } from "./constants";
+import { FLAT_CONFIG_PROPS, VUE_PACKAGES } from "./constants";
 
 export async function luxass(
   options: OptionsConfig & FlatConfigItem = {},
@@ -43,11 +43,10 @@ export async function luxass(
     ),
     nextjs: enableNextJS = false,
     overrides = {},
-    perfectionist: enablePerfectionistRules = false,
     react: enableReact = false,
     tailwindcss: enableTailwindCSS = false,
     typescript: enableTypeScript = isPackageExists("typescript"),
-    unocss: enableUnoCSS = UNO_PACKAGES.some((i) => isPackageExists(i)),
+    unocss: enableUnoCSS = false,
     vue: enableVue = VUE_PACKAGES.some((i) => isPackageExists(i)),
   } = options;
 
@@ -89,9 +88,7 @@ export async function luxass(
       stylistic: stylisticOptions,
     }),
     unicorn(),
-    perfectionist({
-      enableAllRules: enablePerfectionistRules,
-    }),
+    perfectionist(),
   );
 
   if (enableVue) {

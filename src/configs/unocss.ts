@@ -1,13 +1,23 @@
 import { GLOB_SRC } from "../globs";
 import type { FlatConfigItem, OverrideOptions, UnoCSSOptions } from "../types";
-import { interop } from "../utils";
+import { ensure, interop } from "../utils";
 
 export async function unocss(options: UnoCSSOptions & OverrideOptions): Promise<FlatConfigItem[]> {
-  const pluginUnoCSS = await interop(import("@unocss/eslint-plugin"));
   const {
-    attributify = false,
-    overrides = {},
+    attributify = true,
+    overrides,
+    strict = false,
   } = options;
+
+  await ensure([
+    "@unocss/eslint-plugin",
+  ]);
+
+  const [
+    pluginUnoCSS,
+  ] = await Promise.all([
+    interop(import("@unocss/eslint-plugin")),
+  ] as const);
 
   return [
     {
@@ -16,12 +26,20 @@ export async function unocss(options: UnoCSSOptions & OverrideOptions): Promise<
       ],
       name: "luxass:unocss",
       plugins: {
-        "@unocss": pluginUnoCSS,
+        unocss: pluginUnoCSS,
       },
       rules: {
-        "unocss/order": "error",
-        ...attributify && { "unocss/attributify": "error" },
-        "unocss/blocklist": "error",
+        "unocss/order": "warn",
+        ...(attributify
+          ? {
+              "unocss/order-attributify": "warn",
+            }
+          : {}),
+        ...(strict
+          ? {
+              "unocss/blocklist": "error",
+            }
+          : {}),
 
         // overrides
         ...overrides,
