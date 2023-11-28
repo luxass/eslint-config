@@ -1,5 +1,8 @@
 # @luxass/eslint-config
 
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+
 > [!IMPORTANT]
 > The configuration is not currently finished.  
 > I could change at any moment.
@@ -401,3 +404,10 @@ This project follows [Semantic Versioning](https://semver.org/) for releases. Ho
 ## 📄 License
 
 Published under [MIT License](./LICENSE).
+
+<!-- Badges -->
+
+[npm-version-src]: https://img.shields.io/npm/v/@luxass/eslint-config?style=flat&colorA=18181B&colorB=4169E1
+[npm-version-href]: https://npmjs.com/package/@luxass/eslint-config
+[npm-downloads-src]: https://img.shields.io/npm/dm/@luxass/eslint-config?style=flat&colorA=18181B&colorB=4169E1
+[npm-downloads-href]: https://npmjs.com/package/@luxass/eslint-config
