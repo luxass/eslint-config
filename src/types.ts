@@ -164,6 +164,15 @@ export interface UnoCSSOptions {
   strict?: boolean
 }
 
+export interface VueOptions {
+  /**
+   * Enable Vue A11y support.
+   *
+   * @default true
+   */
+  a11y?: boolean
+}
+
 export type StylisticOptions = Pick<OptionsConfig, "stylistic">;
 
 export type StylisticConfig = Pick<StylisticCustomizeOptions, "jsx" | "indent" | "quotes" | "semi">;
@@ -307,7 +316,7 @@ export interface OptionsConfig extends OptionsComponentExts {
    *
    * @default auto-detect based on the dependencies
    */
-  vue?: boolean
+  vue?: boolean | VueOptions
 
   /**
    * Enable Astro support.

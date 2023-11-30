@@ -3,21 +3,28 @@ import type {
   FlatConfigItem,
   OverrideOptions,
   StylisticOptions,
+  VueOptions,
 } from "../types";
 import { GLOB_VUE } from "../globs";
 import { interop } from "../utils";
 
 export async function vue(
-  options: ConfigurationOptions<"typescript"> & OverrideOptions & StylisticOptions = {},
+  options: ConfigurationOptions<"typescript"> & OverrideOptions & StylisticOptions & VueOptions = {},
 ): Promise<FlatConfigItem[]> {
-  const { overrides = {}, stylistic = true } = options;
+  const {
+    a11y = true,
+    overrides = {},
+    stylistic = true,
+  } = options;
 
   const [
     pluginVue,
     parserVue,
+    pluginA11y,
   ] = await Promise.all([
     interop(import("eslint-plugin-vue")),
     interop(import("vue-eslint-parser")),
+    ...(a11y ? [interop(import("eslint-plugin-vuejs-accessibility"))] : []),
   ] as const);
 
   const {
@@ -29,6 +36,7 @@ export async function vue(
       name: "luxass:vue:setup",
       plugins: {
         vue: pluginVue,
+        ...(a11y ? { "vue-a11y": pluginA11y } : {}),
       },
     },
     {
@@ -49,10 +57,10 @@ export async function vue(
       name: "luxass:vue:rules",
       processor: pluginVue.processors[".vue"],
       rules: {
-        ...(pluginVue.configs.base.rules as any),
-        ...(pluginVue.configs["vue3-essential"].rules as any),
-        ...(pluginVue.configs["vue3-strongly-recommended"].rules as any),
-        ...(pluginVue.configs["vue3-recommended"].rules as any),
+        ...(pluginVue.configs.base.rules),
+        ...(pluginVue.configs["vue3-essential"].rules),
+        ...(pluginVue.configs["vue3-strongly-recommended"].rules),
+        ...(pluginVue.configs["vue3-recommended"].rules),
 
         "node/prefer-global/process": "off",
 

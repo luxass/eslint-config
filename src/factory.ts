@@ -140,6 +140,7 @@ export async function luxass(
   if (enableVue) {
     configs.push(
       vue({
+        ...(typeof enableVue !== "boolean" ? enableVue : {}),
         overrides: overrides.vue,
         stylistic: stylisticOptions,
         typescript: !!enableTypeScript,
