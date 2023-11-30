@@ -9,7 +9,7 @@
 
 ## ✨ Features
 
-- Designed to work with JavaScript, Typescript, React, Svelte, Astro, Vue out of the box.
+- Designed to work with JavaScript, Typescript, React, Astro, Vue out of the box.
 - Support for JSON, YAML, Markdown
 - Sorted imports for `package.json` and `tsconfig.json`
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
