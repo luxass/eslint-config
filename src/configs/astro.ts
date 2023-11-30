@@ -12,7 +12,7 @@ export async function astro(options: ConfigurationOptions<"typescript"> & Overri
   await ensure([
     "eslint-plugin-astro",
     "astro-eslint-parser",
-    ...(options.a11y ? ["eslint-plugin-jsx-a11y"] : []),
+    ...(a11y ? ["eslint-plugin-jsx-a11y"] : []),
   ]);
 
   const [
@@ -22,7 +22,7 @@ export async function astro(options: ConfigurationOptions<"typescript"> & Overri
   ] = await Promise.all([
     interop(import("eslint-plugin-astro")),
     interop(import("astro-eslint-parser")),
-    ...(options.a11y ? [interop(import("eslint-plugin-jsx-a11y"))] : []),
+    ...(a11y ? [interop(import("eslint-plugin-jsx-a11y"))] : []),
   ] as const);
 
   return [
