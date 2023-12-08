@@ -35,7 +35,7 @@ With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package
 // eslint.config.js
 import luxass from "@luxass/eslint-config";
 
-export default await luxass();
+export default luxass();
 ```
 
 With CJS:
@@ -135,7 +135,7 @@ Normally you would only need to import the `luxass` preset:
 // eslint.config.js
 import luxass from "@luxass/eslint-config";
 
-export default await luxass();
+export default luxass();
 ```
 
 you can also configure each `config` individually:
@@ -144,7 +144,7 @@ you can also configure each `config` individually:
 // eslint.config.js
 import luxass from "@luxass/eslint-config";
 
-export default await luxass({
+export default luxass({
   stylistic: true,
   typescript: true,
   vue: true,
@@ -165,7 +165,7 @@ The `luxass` function accepts an arbitrary number of `flat configs` overrides:
 // eslint.config.js
 import luxass from "@luxass/eslint-config";
 
-export default await luxass({
+export default luxass({
   // configuration points for my config
 }, {
   rules: {}
@@ -201,7 +201,7 @@ import {
 
 import { combine } from "@luxass/eslint-config";
 
-export default await combine(
+export default combine(
   ignores(),
   javascript(/* Options */),
   comments(),
@@ -254,7 +254,7 @@ Certain rules would only be enabled in specific files, for example, `ts/*` rules
 // eslint.config.js
 import luxass from "@luxass/eslint-config";
 
-export default await luxass(
+export default luxass(
   { vue: true, typescript: true },
   {
     // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
@@ -429,7 +429,7 @@ You can optionally enable the [type aware rules](https://typescript-eslint.io/li
 // eslint.config.js
 import luxass from "@luxass/eslint-config";
 
-export default await luxass({
+export default luxass({
   typescript: {
     tsconfigPath: "tsconfig.json",
   },
