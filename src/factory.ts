@@ -137,13 +137,14 @@ export async function luxass(
   }
 
   if (enableVue) {
-    configs.push(
-      vue({
-        overrides: overrides.vue,
-        stylistic: stylisticOptions,
-        typescript: !!enableTypeScript,
-      }),
-    );
+    configs.push(vue({
+      ...typeof enableVue !== "boolean"
+        ? enableVue
+        : {},
+      overrides: overrides.vue,
+      stylistic: stylisticOptions,
+      typescript: !!enableTypeScript,
+    }));
   }
 
   if (enableAstro) {

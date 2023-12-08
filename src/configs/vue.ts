@@ -1,28 +1,39 @@
+import { mergeProcessors } from "eslint-merge-processors";
 import type {
   ConfigurationOptions,
   FlatConfigItem,
   OverrideOptions,
   StylisticOptions,
+  VueOptions,
 } from "../types";
 import { GLOB_VUE } from "../globs";
 import { interop } from "../utils";
 
 export async function vue(
-  options: ConfigurationOptions<"typescript"> & OverrideOptions & StylisticOptions = {},
+  options: VueOptions & ConfigurationOptions<"typescript"> & OverrideOptions & StylisticOptions = {},
 ): Promise<FlatConfigItem[]> {
-  const { overrides = {}, stylistic = true } = options;
+  const {
+    overrides = {},
+    stylistic = true,
+  } = options;
 
-  const [
-    pluginVue,
-    parserVue,
-  ] = await Promise.all([
-    interop(import("eslint-plugin-vue")),
-    interop(import("vue-eslint-parser")),
-  ] as const);
+  const sfcBlocks = options.sfcBlocks === true
+    ? {}
+    : options.sfcBlocks ?? {};
 
   const {
     indent = 2,
   } = typeof stylistic === "boolean" ? {} : stylistic;
+
+  const [
+    pluginVue,
+    parserVue,
+    processorVueBlocks,
+  ] = await Promise.all([
+    interop(import("eslint-plugin-vue")),
+    interop(import("vue-eslint-parser")),
+    interop(import("eslint-processor-vue-blocks")),
+  ] as const);
 
   return [
     {
@@ -47,12 +58,24 @@ export async function vue(
         },
       },
       name: "luxass:vue:rules",
-      processor: pluginVue.processors[".vue"],
+      processor: sfcBlocks === false
+        ? pluginVue.processors[".vue"]
+        : mergeProcessors([
+          pluginVue.processors[".vue"],
+          processorVueBlocks({
+            ...sfcBlocks,
+            blocks: {
+              styles: true,
+              ...sfcBlocks.blocks,
+            },
+          }),
+        ]),
       rules: {
         ...(pluginVue.configs.base.rules as any),
-        ...(pluginVue.configs["vue3-essential"].rules as any),
-        ...(pluginVue.configs["vue3-strongly-recommended"].rules as any),
-        ...(pluginVue.configs["vue3-recommended"].rules as any),
+
+        ...pluginVue.configs["vue3-essential"].rules as any,
+        ...pluginVue.configs["vue3-strongly-recommended"].rules as any,
+        ...pluginVue.configs["vue3-recommended"].rules as any,
 
         "node/prefer-global/process": "off",
 

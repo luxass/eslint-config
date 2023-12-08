@@ -127,6 +127,7 @@
     "eslint-plugin-vitest": "^0.3.10",
     "eslint-plugin-vue": "^9.19.2",
     "eslint-plugin-yml": "^1.10.0",
+    "eslint-processor-vue-blocks": "^0.1.1",
     "globals": "^13.23.0",
     "jsonc-eslint-parser": "^2.4.0",
     "local-pkg": "^0.5.0",
@@ -137,7 +138,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-plugin-prettier": "^5.0.1-1",
-    "@next/eslint-plugin-next": "^14.0.3",
+    "@next/eslint-plugin-next": "^14.0.4",
     "@stylistic/eslint-plugin-migrate": "^1.5.0",
     "@types/eslint": "^8.44.8",
     "@types/node": "^18.17.19",
@@ -152,7 +153,7 @@
     "lint-staged": "^15.2.0",
     "simple-git-hooks": "^2.9.0",
     "tsup": "^8.0.1",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.3"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

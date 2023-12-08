@@ -1,5 +1,6 @@
 import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
 import type { ParserOptions } from "@typescript-eslint/parser";
+import type { Options as VueBlocksOptions } from "eslint-processor-vue-blocks";
 import type {
   EslintCommentsRules,
   EslintRules,
@@ -81,6 +82,16 @@ export interface OptionsComponentExts {
    * @default []
    */
   componentExts?: string[]
+}
+
+export interface VueOptions {
+  /**
+   * Create virtual files for Vue SFC blocks to enable linting.
+   *
+   * @see https://github.com/antfu/eslint-processor-vue-blocks
+   * @default true
+   */
+  sfcBlocks?: boolean | VueBlocksOptions
 }
 
 export interface OptionsTypeScriptParserOptions {
@@ -334,7 +345,7 @@ export interface OptionsConfig extends OptionsComponentExts {
    *
    * @default auto-detect based on the dependencies
    */
-  vue?: boolean
+  vue?: boolean | VueOptions
 
   /**
    * Enable Astro support.
