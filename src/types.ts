@@ -92,6 +92,13 @@ export interface VueOptions {
    * @default true
    */
   sfcBlocks?: boolean | VueBlocksOptions
+
+  /**
+   * Enable Vue A11y support.
+   *
+   * @default true
+   */
+  a11y?: boolean
 }
 
 export interface OptionsTypeScriptParserOptions {
@@ -143,6 +150,15 @@ export interface UnoCSSOptions {
    * @default false
    */
   strict?: boolean
+}
+
+export interface VueOptions {
+  /**
+   * Enable Vue A11y support.
+   *
+   * @default true
+   */
+  a11y?: boolean
 }
 
 export type StylisticOptions = Pick<OptionsConfig, "stylistic">;
