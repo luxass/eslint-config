@@ -6,6 +6,7 @@ export default luxass(
   {
     vue: true,
     typescript: true,
+    formatters: true,
   },
   {
     files: ["src/**/*.ts"],

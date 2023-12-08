@@ -1,9 +1,12 @@
+import * as parserPlain from "eslint-parser-plain";
+import { mergeProcessors, processorPassThrough } from "eslint-merge-processors";
+
 import type {
   FlatConfigItem,
   OptionsComponentExts,
   OverrideOptions,
 } from "../types";
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from "../globs";
+import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from "../globs";
 import { interop } from "../utils";
 
 export async function markdown(
@@ -11,17 +14,33 @@ export async function markdown(
 ): Promise<FlatConfigItem[]> {
   const { componentExts = [], overrides = {} } = options;
 
+  const markdown = await interop(import("eslint-plugin-markdown"));
+
   return [
     {
       name: "luxass:markdown:setup",
       plugins: {
-        markdown: await interop(import("eslint-plugin-markdown")),
+        markdown,
       },
     },
     {
       files: [GLOB_MARKDOWN],
+      ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
       name: "luxass:markdown:processor",
-      processor: "markdown/markdown",
+      // `eslint-plugin-markdown` only creates virtual files for code blocks,
+      // but not the markdown file itself. We use `eslint-merge-processors` to
+      // add a pass-through processor for the markdown file itself.
+      processor: mergeProcessors([
+        markdown.processors.markdown,
+        processorPassThrough,
+      ]),
+    },
+    {
+      files: [GLOB_MARKDOWN],
+      languageOptions: {
+        parser: parserPlain,
+      },
+      name: "luxass:markdown:parser",
     },
     {
       files: [
@@ -35,11 +54,8 @@ export async function markdown(
           },
         },
       },
-      name: "luxass:markdown:rules",
+      name: "luxass:markdown:disables",
       rules: {
-        "antfu/no-cjs-exports": "off",
-        "antfu/no-ts-export-equal": "off",
-
         "import/newline-after-import": "off",
 
         "no-alert": "off",

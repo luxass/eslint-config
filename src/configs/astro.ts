@@ -1,6 +1,6 @@
 import { GLOB_ASTRO } from "../globs";
 import type { ConfigurationOptions, FlatConfigItem, OverrideOptions, ReactOptions } from "../types";
-import { ensure, interop } from "../utils";
+import { interop } from "../utils";
 
 export async function astro(options: ConfigurationOptions<"typescript"> & OverrideOptions & ReactOptions): Promise<FlatConfigItem[]> {
   const {
@@ -8,12 +8,6 @@ export async function astro(options: ConfigurationOptions<"typescript"> & Overri
     overrides = {},
     typescript = true,
   } = options;
-
-  await ensure([
-    "eslint-plugin-astro",
-    "astro-eslint-parser",
-    ...(a11y ? ["eslint-plugin-jsx-a11y"] : []),
-  ]);
 
   const [
     pluginAstro,

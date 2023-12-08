@@ -1,5 +1,6 @@
 import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
 import type { ParserOptions } from "@typescript-eslint/parser";
+import type { Options as VueBlocksOptions } from "eslint-processor-vue-blocks";
 import type {
   EslintCommentsRules,
   EslintRules,
@@ -26,6 +27,7 @@ import type {
   UnprefixedRuleOptions as StylisticRules,
 } from "@stylistic/eslint-plugin";
 import type { Linter } from "eslint";
+import type { VendoredPrettierOptions } from "./vendor/prettier-types";
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
   [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>;
@@ -82,6 +84,23 @@ export interface OptionsComponentExts {
   componentExts?: string[]
 }
 
+export interface VueOptions {
+  /**
+   * Create virtual files for Vue SFC blocks to enable linting.
+   *
+   * @see https://github.com/antfu/eslint-processor-vue-blocks
+   * @default true
+   */
+  sfcBlocks?: boolean | VueBlocksOptions
+
+  /**
+   * Enable Vue A11y support.
+   *
+   * @default true
+   */
+  a11y?: boolean
+}
+
 export interface OptionsTypeScriptParserOptions {
   /**
    * Additional parser options for TypeScript.
@@ -119,37 +138,6 @@ export interface AstroOptions {
   a11y?: boolean
 }
 
-export interface TailwindCSSOptions {
-  /**
-   * Tell the plugin where the config file is located.
-   * If not provided, the plugin will try to find the config file automatically.
-   */
-  config?: string
-
-  /**
-   * Tell the plugin to remove duplicate classes.
-   *
-   * @default true
-   */
-  removeDuplicates?: boolean
-
-  /**
-   * Tell the plugin which function names to look for.
-   * @default ["classnames", "clsx", "cx", "cn"]
-   *
-   * If NextJS is enabled, the default value will also include `tw`
-   * to support NextJS's Image Response.
-   */
-  callees?: string[]
-
-  /**
-   * Tell the plugin which class regex to look for.
-   *
-   * @default "^class(Name)?$"
-   */
-  classRegex?: string
-}
-
 export interface UnoCSSOptions {
   /**
    * Enable attributify support.
@@ -176,6 +164,57 @@ export interface VueOptions {
 export type StylisticOptions = Pick<OptionsConfig, "stylistic">;
 
 export type StylisticConfig = Pick<StylisticCustomizeOptions, "jsx" | "indent" | "quotes" | "semi">;
+
+export interface FormattersOptions {
+  /**
+   * Enable formatting support for CSS, Less, Sass, and SCSS.
+   *
+   * Currently only support Prettier.
+   */
+  css?: "prettier" | boolean
+
+  /**
+   * Enable formatting support for HTML.
+   *
+   * Currently only support Prettier.
+   */
+  html?: "prettier" | boolean
+
+  /**
+   * Enable formatting support for TOML.
+   *
+   * Currently only support dprint.
+   */
+  toml?: "dprint" | boolean
+
+  /**
+   * Enable formatting support for Markdown.
+   *
+   * Support both Prettier and dprint.
+   *
+   * When set to `true`, it will use Prettier.
+   */
+  markdown?: "prettier" | "dprint" | boolean
+
+  /**
+   * Enable formatting support for GraphQL.
+   */
+  graphql?: "prettier" | boolean
+
+  /**
+   * Custom options for Prettier.
+   *
+   * By default it's controlled by our own config.
+   */
+  prettierOptions?: VendoredPrettierOptions
+
+  /**
+   * Custom options for dprint.
+   *
+   * By default it's controlled by our own config.
+   */
+  dprintOptions?: boolean
+}
 
 export interface OverrideOptions {
   overrides?: FlatConfigItem["rules"]
@@ -219,7 +258,9 @@ export interface OptionsConfig extends OptionsComponentExts {
   jsx?: boolean
 
   /**
-   * Enable Markdown support.
+   * Enable linting for **code snippets** in Markdown.
+   *
+   * For formatting Markdown content, enable also `formatters.markdown`.
    *
    * @default true
    */
@@ -232,6 +273,8 @@ export interface OptionsConfig extends OptionsComponentExts {
    * - `@next/eslint-plugin-next`
    *
    * @default false
+   *
+   * Note: By enabling this, the `react` option will be enabled automatically.
    */
   nextjs?: boolean | NextJSOptions
 
@@ -246,6 +289,18 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default false
    */
   react?: boolean
+
+  /**
+   * Use external formatters to format files.
+   *
+   * Requires installing:
+   * - `eslint-plugin-format`
+   *
+   * When set to `true`, it will enable all formatters.
+   *
+   * @default false
+   */
+  formatters?: boolean | FormattersOptions
 
   /**
    * Provide overrides for rules for each integration.
@@ -300,16 +355,6 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default false
    */
   unocss?: boolean | UnoCSSOptions
-
-  /**
-   * Enable TailwindCSS support.
-   *
-   * Requires installing:
-   * - `eslint-plugin-tailwindcss`
-   *
-   * @default false
-   */
-  tailwindcss?: boolean | TailwindCSSOptions
 
   /**
    * Enable Vue support.

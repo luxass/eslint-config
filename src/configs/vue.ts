@@ -1,3 +1,4 @@
+import { mergeProcessors } from "eslint-merge-processors";
 import type {
   ConfigurationOptions,
   FlatConfigItem,
@@ -20,12 +21,18 @@ export async function vue(
   const [
     pluginVue,
     parserVue,
+    processorVueBlocks,
     pluginA11y,
   ] = await Promise.all([
     interop(import("eslint-plugin-vue")),
     interop(import("vue-eslint-parser")),
+    interop(import("eslint-processor-vue-blocks")),
     ...(a11y ? [interop(import("eslint-plugin-vuejs-accessibility"))] : []),
   ] as const);
+
+  const sfcBlocks = options.sfcBlocks === true
+    ? {}
+    : options.sfcBlocks ?? {};
 
   const {
     indent = 2,
@@ -55,7 +62,18 @@ export async function vue(
         },
       },
       name: "luxass:vue:rules",
-      processor: pluginVue.processors[".vue"],
+      processor: sfcBlocks === false
+        ? pluginVue.processors[".vue"]
+        : mergeProcessors([
+          pluginVue.processors[".vue"],
+          processorVueBlocks({
+            ...sfcBlocks,
+            blocks: {
+              styles: true,
+              ...sfcBlocks.blocks,
+            },
+          }),
+        ]),
       rules: {
         ...(pluginVue.configs.base.rules),
         ...(pluginVue.configs["vue3-essential"].rules),
