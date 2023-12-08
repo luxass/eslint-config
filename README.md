@@ -9,6 +9,7 @@
 
 ## ✨ Features
 
+- Based on [Antfu's ESLint Config](https://github.com/antfu/eslint-config)
 - Auto fix for formatting (aimed to be used standalone **without** Prettier)
 - Designed to work with TypeScript, JSX, Vue & Astro out-of-box
 - Lints also for json, yaml, markdown
@@ -19,7 +20,6 @@
 - Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
 - Respects `.gitignore` by default
 - Optional [formatters](#formatters) support for CSS, HTML, TOML, etc.
-- Based on [Antfu's ESLint Config](https://github.com/antfu/eslint-config)
 
 ## 📦 Install
 
