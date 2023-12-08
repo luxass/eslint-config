@@ -4,16 +4,22 @@
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 
 > [!IMPORTANT]
-> The configuration is not currently finished.  
+> The configuration is not currently finished.
 > I could change at any moment.
 
 ## ✨ Features
 
-- Designed to work with JavaScript, Typescript, React, Astro, Vue out of the box.
-- Support for JSON, YAML, Markdown
-- Sorted imports for `package.json` and `tsconfig.json`
+- Auto fix for formatting (aimed to be used standalone **without** Prettier)
+- Designed to work with TypeScript, JSX, Vue & Astro out-of-box
+- Lints also for json, yaml, markdown
+- Sorted imports, dangling commas
+- Reasonable defaults, best practices, only one-line of config
+- Opinionated, but [very customizable](#customization)
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
-- Using [ESLint Stylistic](https://eslint.style/guide/why)
+- Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
+- Respects `.gitignore` by default
+- Optional [formatters](#formatters) support for CSS, HTML, TOML, etc.
+- Based on [Antfu's ESLint Config](https://github.com/antfu/eslint-config)
 
 ## 📦 Install
 
@@ -167,6 +173,7 @@ export default await luxass({
   rules: {}
 });
 ```
+
 <details>
 <summary>Advanced Example</summary>
 
@@ -221,15 +228,15 @@ Check out the [configs](https://github.com/luxass/eslint-config/blob/main/src/co
 
 Since flat config requires us to explicitly provide the plugin names (instead of mandatory convention from npm package name), we renamed some plugins to make overall scope more consistent and easier to write.
 
-| New Prefix | Original Prefix | Source Plugin |
-| --- | --- | --- |
-| `import/*` | `i/*` | [eslint-plugin-i](https://github.com/un-es/eslint-plugin-i) |
-| `node/*` | `n/*` | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n) |
-| `yaml/*` | `yml/*` | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml) |
-| `ts/*` | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
-| `style/*` | `@stylistic/*` | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic) |
-| `test/*` | `vitest/*` | [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest) |
-| `test/*` | `no-only-tests/*` | [eslint-plugin-no-only-tests](https://github.com/levibuzolic/eslint-plugin-no-only-tests) |
+| New Prefix | Original Prefix        | Source Plugin                                                                              |
+| ---------- | ---------------------- | ------------------------------------------------------------------------------------------ |
+| `import/*` | `i/*`                  | [eslint-plugin-i](https://github.com/un-es/eslint-plugin-i)                                |
+| `node/*`   | `n/*`                  | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n)                     |
+| `yaml/*`   | `yml/*`                | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)                        |
+| `ts/*`     | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
+| `style/*`  | `@stylistic/*`         | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic)           |
+| `test/*`   | `vitest/*`             | [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest)                    |
+| `test/*`   | `no-only-tests/*`      | [eslint-plugin-no-only-tests](https://github.com/levibuzolic/eslint-plugin-no-only-tests)  |
 
 When you want to override rules, or disable them inline, you need to update to the new prefix:
 
@@ -289,6 +296,50 @@ export default luxass({
 
 We provide some optional configs for specific use cases, that we don't include their dependencies by default.
 
+#### Formatters
+
+> [!WARNING]
+> Experimental feature, changes might not follow semver.
+
+Use external formatters to format files that ESLint cannot handle yet (`.css`, `.html`, etc). Powered by [`eslint-plugin-format`](https://github.com/antfu/eslint-plugin-format).
+
+```js
+// eslint.config.js
+import luxass from "@luxass/eslint-config";
+
+export default luxass({
+  formatters: {
+    /**
+     * Format CSS, LESS, SCSS files, also the `<style>` blocks in Vue
+     * By default uses Prettier
+     */
+    css: true,
+    /**
+     * Format HTML files
+     * By default uses Prettier
+     */
+    html: true,
+    /**
+     * Format TOML files
+     * Currently only supports dprint
+     */
+    toml: "dprint",
+    /**
+     * Format Markdown files
+     * Supports Prettier and dprint
+     * By default uses Prettier
+     */
+    markdown: "prettier"
+  }
+});
+```
+
+Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
+
+```bash
+npm i -D eslint-plugin-format
+```
+
 #### React
 
 To enable React support, need to explicitly turn it on:
@@ -306,6 +357,27 @@ Running `npx eslint` should prompt you to install the required dependencies, oth
 
 ```bash
 npm i -D eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh
+```
+
+#### Next.JS
+
+To enable Next.JS support, need to explicitly turn it on:
+
+Next.JS also enables React support.
+
+```js
+// eslint.config.js
+import luxass from "@luxass/eslint-config";
+
+export default luxass({
+  nextjs: true,
+});
+```
+
+Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
+
+```bash
+npm i -D eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh @next/eslint-plugin-next
 ```
 
 #### UnoCSS
@@ -327,25 +399,6 @@ Running `npx eslint` should prompt you to install the required dependencies, oth
 npm i -D @unocss/eslint-plugin
 ```
 
-#### TailwindCSS
-
-To enable TailwindCSS support, need to explicitly turn it on:
-
-```js
-// eslint.config.js
-import luxass from "@luxass/eslint-config";
-
-export default luxass({
-  tailwindcss: true,
-});
-```
-
-Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
-
-```bash
-npm i -D eslint-plugin-tailwindcss
-```
-
 ### Optional Rules
 
 This config also provides some optional plugins/rules for extended usages.
@@ -354,7 +407,7 @@ This config also provides some optional plugins/rules for extended usages.
 
 This plugin [`eslint-plugin-perfectionist`](https://github.com/azat-io/eslint-plugin-perfectionist) allows you to sorted object keys, imports, etc, with auto-fix.
 
-The plugin is installed but no rules are enabled by default. 
+The plugin is installed but no rules are enabled by default.
 
 It's recommended to opt-in on each file individually using [configuration comments](https://eslint.org/docs/latest/use/configure/rules#using-configuration-comments-1).
 
@@ -367,7 +420,6 @@ const objectWantedToSort = {
 };
 /* eslint perfectionist/sort-objects: "off" */
 ```
-
 
 ### Type Aware Rules
 

@@ -18,7 +18,6 @@ import {
   sortPackageJson,
   sortTsconfig,
   stylistic,
-  tailwindcss,
   test,
   typescript,
   unicorn,
@@ -28,6 +27,7 @@ import {
 } from "./configs";
 import { combine, interop } from "./utils";
 import { FLAT_CONFIG_PROPS, VUE_PACKAGES } from "./constants";
+import { formatters } from "./configs/formatters";
 
 export async function luxass(
   options: OptionsConfig & FlatConfigItem = {},
@@ -44,7 +44,6 @@ export async function luxass(
     nextjs: enableNextJS = false,
     overrides = {},
     react: enableReact = false,
-    tailwindcss: enableTailwindCSS = false,
     typescript: enableTypeScript = isPackageExists("typescript"),
     unocss: enableUnoCSS = false,
     vue: enableVue = VUE_PACKAGES.some((i) => isPackageExists(i)),
@@ -166,17 +165,6 @@ export async function luxass(
     );
   }
 
-  if (enableTailwindCSS) {
-    configs.push(tailwindcss({
-      callees: typeof enableTailwindCSS === "object" ? enableTailwindCSS.callees : ["classnames", "clsx", "cx", "cn"],
-      classRegex: typeof enableTailwindCSS === "object" ? enableTailwindCSS.classRegex : "^class(Name)?$",
-      config: typeof enableTailwindCSS === "object" ? enableTailwindCSS.config : undefined,
-      nextjs: typeof enableNextJS === "object" ? true : enableNextJS,
-      overrides: overrides.tailwindCSS,
-      removeDuplicates: typeof enableTailwindCSS === "object" ? enableTailwindCSS.removeDuplicates : true,
-    }));
-  }
-
   if (options.jsonc ?? true) {
     configs.push(
       jsonc({
@@ -199,11 +187,20 @@ export async function luxass(
 
   if (options.markdown ?? true) {
     configs.push(
-      markdown({
-        componentExts,
-        overrides: overrides.markdown,
-      }),
+      markdown(
+        {
+          componentExts,
+          overrides: overrides.markdown,
+        },
+      ),
     );
+  }
+
+  if (options.formatters) {
+    configs.push(formatters(
+      options.formatters,
+      typeof stylisticOptions === "boolean" ? {} : stylisticOptions,
+    ));
   }
 
   // User can optionally pass a flat config item to the first argument

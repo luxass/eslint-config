@@ -92,10 +92,6 @@ export async function typescript(
           "ts/",
         ),
 
-        "antfu/generic-spacing": "error",
-        "antfu/named-tuple-spacing": "error",
-        "antfu/no-cjs-exports": "error",
-
         "no-dupe-class-members": "off",
         "no-invalid-this": "off",
         "no-loss-of-precision": "off",
