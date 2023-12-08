@@ -1,7 +1,7 @@
 import process from "node:process";
 import { existsSync } from "node:fs";
 import { isPackageExists } from "local-pkg";
-import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from "./types";
+import type { Awaitable, ConfigOptions, FlatConfigItem, UserConfigItem } from "./types";
 import {
   astro,
   comments,
@@ -30,7 +30,7 @@ import { FLAT_CONFIG_PROPS, VUE_PACKAGES } from "./constants";
 import { formatters } from "./configs/formatters";
 
 export async function luxass(
-  options: OptionsConfig & FlatConfigItem = {},
+  options: ConfigOptions & FlatConfigItem = {},
   ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
 ): Promise<UserConfigItem[]> {
   const {

@@ -74,7 +74,7 @@ export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, "plugins">
 
 export type UserConfigItem = FlatConfigItem | Linter.FlatConfig;
 
-export interface OptionsComponentExts {
+export interface ComponentExtsOptions {
   /**
    * Additional extensions for components.
    *
@@ -101,14 +101,12 @@ export interface VueOptions {
   a11y?: boolean
 }
 
-export interface OptionsTypeScriptParserOptions {
+export interface TypeScriptOptions {
   /**
    * Additional parser options for TypeScript.
    */
   parserOptions?: Partial<ParserOptions>
-}
 
-export interface OptionsTypeScriptWithTypes {
   /**
    * When this options is provided, type aware rules will be enabled.
    * @see https://typescript-eslint.io/linting/typed-linting/
@@ -116,7 +114,7 @@ export interface OptionsTypeScriptWithTypes {
   tsconfigPath?: string | string[]
 }
 
-export type ConfigurationOptions<TConfigs extends keyof OptionsConfig> = {
+export type ConfigurationOptions<TConfigs extends keyof ConfigOptions> = {
   [K in TConfigs]?: boolean
 };
 
@@ -161,7 +159,7 @@ export interface VueOptions {
   a11y?: boolean
 }
 
-export type StylisticOptions = Pick<OptionsConfig, "stylistic">;
+export type StylisticOptions = Pick<ConfigOptions, "stylistic">;
 
 export type StylisticConfig = Pick<StylisticCustomizeOptions, "jsx" | "indent" | "quotes" | "semi">;
 
@@ -224,7 +222,7 @@ export interface InEditorOptions {
   isEditor?: boolean
 }
 
-export interface OptionsConfig extends OptionsComponentExts {
+export interface ConfigOptions extends ComponentExtsOptions {
   /**
    * Enable gitignore support.
    *
@@ -342,8 +340,7 @@ export interface OptionsConfig extends OptionsComponentExts {
    * @default auto-detect based on the dependencies
    */
   typescript?:
-    | OptionsTypeScriptParserOptions
-    | OptionsTypeScriptWithTypes
+    | TypeScriptOptions
     | boolean
 
   /**

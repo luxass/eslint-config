@@ -165,7 +165,7 @@ export async function formatters(
       languageOptions: {
         parser: parserPlain,
       },
-      name: "antfu:formatter:markdown",
+      name: "luxass:formatter:markdown",
       rules: {
         [`format/${formater}`]: [
           "error",

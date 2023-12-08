@@ -1,18 +1,17 @@
 /* eslint-disable perfectionist/sort-objects */
 import process from "node:process";
 import type {
+  ComponentExtsOptions,
   FlatConfigItem,
-  OptionsComponentExts,
-  OptionsTypeScriptParserOptions,
-  OptionsTypeScriptWithTypes,
   OverrideOptions,
+  TypeScriptOptions,
 } from "../types";
 import { GLOB_SRC } from "../globs";
 import { pluginAntfu } from "../plugins";
 import { interop, renameRules, toArray } from "../utils";
 
 export async function typescript(
-  options?: OptionsComponentExts & OverrideOptions & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions,
+  options?: ComponentExtsOptions & OverrideOptions & TypeScriptOptions,
 ): Promise<FlatConfigItem[]> {
   const {
     componentExts = [],
