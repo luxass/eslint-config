@@ -286,7 +286,7 @@ export interface ConfigOptions extends ComponentExtsOptions {
    *
    * @default false
    */
-  react?: boolean
+  react?: boolean | ReactOptions
 
   /**
    * Use external formatters to format files.
