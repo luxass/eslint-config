@@ -7,6 +7,9 @@
 > The configuration is not currently finished.
 > I could change at any moment.
 
+> [!NOTE]
+> This configuration is based on [antfu/eslint-config](https://github.com/antfu/eslint-config) with some changes.
+
 ## ✨ Features
 
 - Based on [Antfu's ESLint Config](https://github.com/antfu/eslint-config)

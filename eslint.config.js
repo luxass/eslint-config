@@ -1,6 +1,12 @@
 // @ts-check
+// @ts-expect-error - no types available
 import styleMigrate from "@stylistic/eslint-plugin-migrate";
-import luxass from "./dist/index.mjs";
+
+// @ts-expect-error - no types available
+import _luxass from "./dist/index.mjs";
+
+/** @type {typeof import("./src/index.ts")["luxass"]} */
+const luxass = _luxass;
 
 export default luxass(
   {
