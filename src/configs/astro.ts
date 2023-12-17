@@ -50,6 +50,8 @@ export async function astro(options: ConfigurationOptions<"typescript"> & Overri
         "style/jsx-indent": "off",
         "style/jsx-one-expression-per-line": "off",
         ...pluginAstro.configs.all.rules,
+
+        "style/multiline-ternary": ["error", "never"],
         ...overrides,
       },
     },
