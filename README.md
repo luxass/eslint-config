@@ -4,8 +4,7 @@
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 
 > [!IMPORTANT]
-> The configuration is not currently finished.
-> I could change at any moment.
+> The configuration is not currently finished, it could change at any moment.
 
 ## ✨ Features
 
