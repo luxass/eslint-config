@@ -1,11 +1,38 @@
-import type { FlatConfigItem, OverrideOptions, StylisticOptions } from "../types";
+import type { FlatConfigItem } from "../types";
 import { GLOB_YAML } from "../globs";
 import { interop } from "../utils";
+import type { StylisticConfig } from "./stylistic";
+
+export interface YAMLOptions {
+  /**
+   * Override rules.
+   */
+  overrides?: FlatConfigItem["rules"]
+
+  /**
+   * Enable stylistic rules.
+   *
+   * @default true
+   */
+  stylistic?: boolean | StylisticConfig
+
+  /**
+   * Glob patterns for YAML files.
+   *
+   * @default GLOB_YAML
+   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   */
+  files?: string[]
+}
 
 export async function yaml(
-  options: OverrideOptions & StylisticOptions = {},
+  options: YAMLOptions = {},
 ): Promise<FlatConfigItem[]> {
-  const { overrides = {}, stylistic = true } = options;
+  const {
+    files = [GLOB_YAML],
+    overrides = {},
+    stylistic = true,
+  } = options;
 
   const [
     pluginYaml,
@@ -24,15 +51,15 @@ export async function yaml(
     {
       name: "luxass:yaml:setup",
       plugins: {
-        yaml: pluginYaml as any,
+        yaml: pluginYaml,
       },
     },
     {
-      files: [GLOB_YAML],
+      name: "luxass:yaml:rules",
+      files,
       languageOptions: {
         parser: parserYaml,
       },
-      name: "luxass:yaml:rules",
       rules: {
         "style/spaced-comment": "off",
 

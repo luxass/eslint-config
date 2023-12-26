@@ -1,18 +1,42 @@
 import * as parserPlain from "eslint-parser-plain";
 import { mergeProcessors, processorPassThrough } from "eslint-merge-processors";
-
 import type {
-  ComponentExtsOptions,
   FlatConfigItem,
-  OverrideOptions,
 } from "../types";
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from "../globs";
 import { interop } from "../utils";
 
+export interface MarkdownOptions {
+  /**
+   * Override rules.
+   */
+  overrides?: FlatConfigItem["rules"]
+
+  /**
+   * Additional extensions for components.
+   *
+   * @example ["vue"]
+   * @default []
+   */
+  exts?: string[]
+
+  /**
+   * Glob patterns for Markdown files.
+   *
+   * @default [GLOB_MARKDOWN]
+   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   */
+  files?: string[]
+}
+
 export async function markdown(
-  options: ComponentExtsOptions & OverrideOptions = {},
+  options: MarkdownOptions = {},
 ): Promise<FlatConfigItem[]> {
-  const { componentExts = [], overrides = {} } = options;
+  const {
+    exts = [],
+    files = [GLOB_MARKDOWN],
+    overrides = {},
+  } = options;
 
   const markdown = await interop(import("eslint-plugin-markdown"));
 
@@ -24,9 +48,9 @@ export async function markdown(
       },
     },
     {
-      files: [GLOB_MARKDOWN],
-      ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
       name: "luxass:markdown:processor",
+      files,
+      ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
       // `eslint-plugin-markdown` only creates virtual files for code blocks,
       // but not the markdown file itself. We use `eslint-merge-processors` to
       // add a pass-through processor for the markdown file itself.
@@ -36,16 +60,17 @@ export async function markdown(
       ]),
     },
     {
-      files: [GLOB_MARKDOWN],
+      name: "luxass:markdown:parser",
+      files,
       languageOptions: {
         parser: parserPlain,
       },
-      name: "luxass:markdown:parser",
     },
     {
+      name: "luxass:markdown:disables",
       files: [
         GLOB_MARKDOWN_CODE,
-        ...componentExts.map((ext) => `${GLOB_MARKDOWN}/**/*.${ext}`),
+        ...exts.map((ext) => `${GLOB_MARKDOWN}/**/*.${ext}`),
       ],
       languageOptions: {
         parserOptions: {
@@ -54,7 +79,6 @@ export async function markdown(
           },
         },
       },
-      name: "luxass:markdown:disables",
       rules: {
         "import/newline-after-import": "off",
 
@@ -69,37 +93,35 @@ export async function markdown(
         "style/comma-dangle": "off",
 
         "style/eol-last": "off",
+        // Type aware rules
+        "ts/await-thenable": "off",
         "ts/consistent-type-imports": "off",
+        "ts/dot-notation": "off",
+        "ts/no-floating-promises": "off",
+        "ts/no-for-in-array": "off",
+        "ts/no-implied-eval": "off",
+        "ts/no-misused-promises": "off",
+
         "ts/no-namespace": "off",
         "ts/no-redeclare": "off",
         "ts/no-require-imports": "off",
+
+        "ts/no-throw-literal": "off",
+        "ts/no-unnecessary-type-assertion": "off",
+        "ts/no-unsafe-argument": "off",
+        "ts/no-unsafe-assignment": "off",
+        "ts/no-unsafe-call": "off",
+        "ts/no-unsafe-member-access": "off",
+        "ts/no-unsafe-return": "off",
         "ts/no-unused-vars": "off",
         "ts/no-use-before-define": "off",
         "ts/no-var-requires": "off",
-
+        "ts/restrict-plus-operands": "off",
+        "ts/restrict-template-expressions": "off",
+        "ts/unbound-method": "off",
         "unicode-bom": "off",
         "unused-imports/no-unused-imports": "off",
         "unused-imports/no-unused-vars": "off",
-
-        // Type aware rules
-        ...{
-          "ts/await-thenable": "off",
-          "ts/dot-notation": "off",
-          "ts/no-floating-promises": "off",
-          "ts/no-for-in-array": "off",
-          "ts/no-implied-eval": "off",
-          "ts/no-misused-promises": "off",
-          "ts/no-throw-literal": "off",
-          "ts/no-unnecessary-type-assertion": "off",
-          "ts/no-unsafe-argument": "off",
-          "ts/no-unsafe-assignment": "off",
-          "ts/no-unsafe-call": "off",
-          "ts/no-unsafe-member-access": "off",
-          "ts/no-unsafe-return": "off",
-          "ts/restrict-plus-operands": "off",
-          "ts/restrict-template-expressions": "off",
-          "ts/unbound-method": "off",
-        },
 
         ...overrides,
       },

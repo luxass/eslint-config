@@ -1,9 +1,24 @@
 import { GLOB_NEXTJS_OG, GLOB_NEXTJS_ROUTES, GLOB_SRC } from "../globs";
-import type { FlatConfigItem, NextJSOptions, OverrideOptions } from "../types";
+import type { FlatConfigItem } from "../types";
 import { ensure, interop } from "../utils";
 
+export interface NextJSOptions {
+  /**
+   * Tell the plugin where the root directory is.
+   * @see https://nextjs.org/docs/app/building-your-application/configuring/eslint#rootdir
+   *
+   * @default true
+   */
+  rootDir?: boolean | string
+
+  /**
+   * Override rules.
+   */
+  overrides?: FlatConfigItem["rules"]
+}
+
 export async function nextjs(
-  options: NextJSOptions & OverrideOptions = {},
+  options: NextJSOptions = {},
 ): Promise<FlatConfigItem[]> {
   const { overrides, rootDir } = options;
 
@@ -21,8 +36,8 @@ export async function nextjs(
       },
     },
     {
-      files: [GLOB_SRC],
       name: "luxass:nextjs:rules",
+      files: [GLOB_SRC],
       rules: {
         ...pluginNextjs.configs.recommended.rules,
         ...pluginNextjs.configs["core-web-vitals"].rules,
@@ -63,16 +78,16 @@ export async function nextjs(
       },
     },
     {
-      files: GLOB_NEXTJS_ROUTES,
       name: "luxass:nextjs:default-export-override",
+      files: GLOB_NEXTJS_ROUTES,
       rules: {
         "import/prefer-default-export": "error",
         "react-refresh/only-export-components": "off",
       },
     },
     {
-      files: GLOB_NEXTJS_OG,
       name: "luxass:nextjs:og-override",
+      files: GLOB_NEXTJS_OG,
       rules: {
         "@next/next/no-img-element": "off",
         "react/no-unknown-property": ["error", {

@@ -1,4 +1,3 @@
-import { expect, it } from "vitest";
 import { RuleTester } from "@typescript-eslint/rule-tester";
 import { noOnlyTests } from "../../src/custom-rules/no-only-tests";
 

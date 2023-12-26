@@ -1,6 +1,4 @@
 import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
-import type { ParserOptions } from "@typescript-eslint/parser";
-import type { Options as VueBlocksOptions } from "eslint-processor-vue-blocks";
 import type {
   EslintCommentsRules,
   EslintRules,
@@ -23,11 +21,21 @@ import type { RuleOptions as TypeScriptRules } from "@eslint-types/typescript-es
 import type { RuleOptions as UnicornRules } from "@eslint-types/unicorn/types";
 import type { Rules as AntfuRules } from "eslint-plugin-antfu";
 import type {
-  StylisticCustomizeOptions,
   UnprefixedRuleOptions as StylisticRules,
 } from "@stylistic/eslint-plugin";
 import type { Linter } from "eslint";
 import type { VendoredPrettierOptions } from "./vendor/prettier-types";
+import type { NextJSOptions } from "./configs/nextjs";
+import type { ReactOptions } from "./configs/react";
+import type { StylisticConfig } from "./configs/stylistic";
+import type { TestOptions } from "./configs/test";
+import type { UnoCSSOptions } from "./configs/unocss";
+import type { VueOptions } from "./configs/vue";
+import type { AstroOptions } from "./configs/astro";
+import type { YAMLOptions } from "./configs/yaml";
+import type { JSONOptions } from "./configs/jsonc";
+import type { JavaScriptOptions } from "./configs/javascript";
+import type { TypeScriptOptions } from "./configs/typescript";
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
   [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>;
@@ -73,95 +81,6 @@ export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, "plugins">
 };
 
 export type UserConfigItem = FlatConfigItem | Linter.FlatConfig;
-
-export interface ComponentExtsOptions {
-  /**
-   * Additional extensions for components.
-   *
-   * @example ["vue"]
-   * @default []
-   */
-  componentExts?: string[]
-}
-
-export interface VueOptions {
-  /**
-   * Create virtual files for Vue SFC blocks to enable linting.
-   *
-   * @see https://github.com/antfu/eslint-processor-vue-blocks
-   * @default true
-   */
-  sfcBlocks?: boolean | VueBlocksOptions
-
-  /**
-   * Enable Vue A11y support.
-   *
-   * @default true
-   */
-  a11y?: boolean
-}
-
-export interface TypeScriptOptions {
-  /**
-   * Additional parser options for TypeScript.
-   */
-  parserOptions?: Partial<ParserOptions>
-
-  /**
-   * When this options is provided, type aware rules will be enabled.
-   * @see https://typescript-eslint.io/linting/typed-linting/
-   */
-  tsconfigPath?: string | string[]
-}
-
-export type ConfigurationOptions<TConfigs extends keyof ConfigOptions> = {
-  [K in TConfigs]?: boolean
-};
-
-export interface NextJSOptions {
-  /**
-   * Tell the plugin where the root directory is.
-   * @see https://nextjs.org/docs/app/building-your-application/configuring/eslint#rootdir
-   *
-   * @default true
-   */
-  rootDir?: boolean | string
-}
-
-export interface ReactOptions {
-  a11y?: boolean
-}
-
-export interface AstroOptions {
-  a11y?: boolean
-}
-
-export interface UnoCSSOptions {
-  /**
-   * Enable attributify support.
-   * @default true
-   */
-  attributify?: boolean
-
-  /**
-   * Enable strict mode by throwing errors about blocklisted classes.
-   * @default false
-   */
-  strict?: boolean
-}
-
-export interface VueOptions {
-  /**
-   * Enable Vue A11y support.
-   *
-   * @default true
-   */
-  a11y?: boolean
-}
-
-export type StylisticOptions = Pick<ConfigOptions, "stylistic">;
-
-export type StylisticConfig = Pick<StylisticCustomizeOptions, "jsx" | "indent" | "quotes" | "semi">;
 
 export interface FormattersOptions {
   /**
@@ -214,15 +133,7 @@ export interface FormattersOptions {
   dprintOptions?: boolean
 }
 
-export interface OverrideOptions {
-  overrides?: FlatConfigItem["rules"]
-}
-
-export interface InEditorOptions {
-  isEditor?: boolean
-}
-
-export interface ConfigOptions extends ComponentExtsOptions {
+export interface ConfigOptions {
   /**
    * Enable gitignore support.
    *
@@ -237,14 +148,21 @@ export interface ConfigOptions extends ComponentExtsOptions {
    * Control to disable some rules in editors.
    * @default auto-detect based on the process.env
    */
-  isEditor?: boolean
+  editor?: boolean
+
+  /**
+   * JavaScript options
+   *
+   * NOTE: Can't be disabled.
+   */
+  javascript?: JavaScriptOptions
 
   /**
    * Enable JSONC support.
    *
    * @default true
    */
-  jsonc?: boolean
+  jsonc?: boolean | JSONOptions
 
   /**
    * Enable JSX related rules.
@@ -301,36 +219,18 @@ export interface ConfigOptions extends ComponentExtsOptions {
   formatters?: boolean | FormattersOptions
 
   /**
-   * Provide overrides for rules for each integration.
-   */
-  overrides?: {
-    javascript?: FlatConfigItem["rules"]
-    jsonc?: FlatConfigItem["rules"]
-    markdown?: FlatConfigItem["rules"]
-    test?: FlatConfigItem["rules"]
-    typescript?: FlatConfigItem["rules"]
-    unocss?: FlatConfigItem["rules"]
-    tailwindCSS?: FlatConfigItem["rules"]
-    vue?: FlatConfigItem["rules"]
-    yaml?: FlatConfigItem["rules"]
-    nextjs?: FlatConfigItem["rules"]
-    react?: FlatConfigItem["rules"]
-    astro?: FlatConfigItem["rules"]
-  }
-
-  /**
    * Enable stylistic rules.
    *
    * @default true
    */
-  stylistic?: StylisticConfig | boolean
+  stylistic?: boolean | StylisticConfig
 
   /**
    * Enable test support.
    *
    * @default true
    */
-  test?: boolean
+  test?: boolean | TestOptions
 
   /**
    * Enable TypeScript support.
@@ -339,9 +239,7 @@ export interface ConfigOptions extends ComponentExtsOptions {
    *
    * @default auto-detect based on the dependencies
    */
-  typescript?:
-    | TypeScriptOptions
-    | boolean
+  typescript?: boolean | TypeScriptOptions
 
   /**
    * Enable UnoCSS support.
@@ -372,5 +270,13 @@ export interface ConfigOptions extends ComponentExtsOptions {
    *
    * @default true
    */
-  yaml?: boolean
+  yaml?: boolean | YAMLOptions
+
+  /**
+   * Additional extensions for components.
+   *
+   * @example ["vue"]
+   * @default []
+   */
+  exts?: string[]
 }

@@ -1,6 +1,9 @@
-import type { FlatConfigItem, StylisticConfig } from "../types";
-import { pluginAntfu } from "../plugins";
+import type { StylisticCustomizeOptions } from "@stylistic/eslint-plugin";
+import pluginAntfu from "eslint-plugin-antfu";
+import type { FlatConfigItem } from "../types";
 import { interop } from "../utils";
+
+export type StylisticConfig = Pick<StylisticCustomizeOptions, "jsx" | "indent" | "quotes" | "semi">;
 
 export const StylisticConfigDefaults: StylisticConfig = {
   indent: 2,
@@ -9,10 +12,25 @@ export const StylisticConfigDefaults: StylisticConfig = {
   semi: true,
 };
 
-export async function stylistic(options: StylisticConfig = {}): Promise<FlatConfigItem[]> {
+export interface StylisticOptions {
+  /**
+   * Enable stylistic rules.
+   *
+   * @default true
+   */
+  stylistic?: boolean | StylisticConfig
+
+  /**
+   * Overrides for the config.
+   */
+  overrides?: FlatConfigItem["rules"]
+}
+
+export async function stylistic(options: StylisticOptions = {}): Promise<FlatConfigItem[]> {
   const {
     indent,
     jsx,
+    overrides = {},
     quotes,
     semi,
   } = {
@@ -47,6 +65,8 @@ export async function stylistic(options: StylisticConfig = {}): Promise<FlatConf
         "curly": ["error", "multi-line", "consistent"],
         "style/arrow-parens": ["error", "always", { requireForBlockBody: true }],
         "style/brace-style": ["error", "1tbs", { allowSingleLine: true }],
+
+        ...overrides,
       },
     },
   ];

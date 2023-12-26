@@ -1,6 +1,6 @@
 import process from "node:process";
 import { isPackageExists } from "local-pkg";
-import type { Awaitable, UserConfigItem } from "./types";
+import type { Awaitable, ConfigOptions, UserConfigItem } from "./types";
 
 /**
  * Combine array and non-array configs into a single array.
@@ -44,8 +44,8 @@ export async function ensure(packages: string[]) {
   const { default: prompts } = await import("prompts");
   const { result } = await prompts([
     {
-      message: `${nonExistingPackages.length === 1 ? "Package is" : "Packages are"} required for this config: ${nonExistingPackages.join(", ")}. Do you want to install them?`,
       name: "result",
+      message: `${nonExistingPackages.length === 1 ? "Package is" : "Packages are"} required for this config: ${nonExistingPackages.join(", ")}. Do you want to install them?`,
       type: "confirm",
     },
   ]);
@@ -54,5 +54,30 @@ export async function ensure(packages: string[]) {
       .then((i) => i.installPackage(nonExistingPackages, {
         dev: true,
       }));
+  };
+}
+
+export type ResolvedOptions<T> = T extends boolean
+  ? never
+  : NonNullable<T>;
+
+export function resolveSubOptions<K extends keyof ConfigOptions>(
+  options: ConfigOptions,
+  key: K,
+): ResolvedOptions<ConfigOptions[K]> {
+  return typeof options[key] === "boolean"
+    ? {} as any
+    : options[key] || {};
+}
+
+export function getOverrides<K extends keyof ConfigOptions>(
+  options: ConfigOptions,
+  key: K,
+) {
+  const sub = resolveSubOptions(options, key);
+  return {
+    ..."overrides" in sub
+      ? sub.overrides
+      : {} as any,
   };
 }

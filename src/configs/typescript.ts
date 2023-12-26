@@ -1,20 +1,56 @@
-/* eslint-disable perfectionist/sort-objects */
 import process from "node:process";
+import type { ParserOptions } from "@typescript-eslint/parser";
+import pluginAntfu from "eslint-plugin-antfu";
 import type {
-  ComponentExtsOptions,
   FlatConfigItem,
-  OverrideOptions,
-  TypeScriptOptions,
 } from "../types";
-import { GLOB_SRC } from "../globs";
-import { pluginAntfu } from "../plugins";
+import { GLOB_SRC, GLOB_TS, GLOB_TSX } from "../globs";
 import { interop, renameRules, toArray } from "../utils";
 
+export interface TypeScriptOptions {
+  /**
+   * Additional extensions for components.
+   *
+   * @example ["vue"]
+   * @default []
+   */
+  exts?: string[]
+
+  /**
+   * Additional parser options for TypeScript.
+   */
+  parserOptions?: Partial<ParserOptions>
+
+  /**
+   * When this options is provided, type aware rules will be enabled.
+   * @see https://typescript-eslint.io/linting/typed-linting/
+   */
+  tsconfigPath?: string | string[]
+
+  /**
+   * Glob patterns for TypeScript files.
+   *
+   * @default GLOB_SRC
+   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   */
+  files?: string[]
+
+  /**
+   * Glob patterns for files that should be type aware.
+   * @default ['**\/*.{ts,tsx}']
+   */
+  typeAwareFileS?: string[]
+
+  /**
+   * Overrides for the config.
+   */
+  overrides?: FlatConfigItem["rules"]
+}
 export async function typescript(
-  options?: ComponentExtsOptions & OverrideOptions & TypeScriptOptions,
+  options: TypeScriptOptions = {},
 ): Promise<FlatConfigItem[]> {
   const {
-    componentExts = [],
+    exts = [],
     overrides = {},
     parserOptions = {},
   } = options ?? {};
@@ -41,6 +77,13 @@ export async function typescript(
     "ts/unbound-method": "error",
   };
 
+  const files = options.files ?? [
+    GLOB_SRC,
+    ...exts.map((ext) => `**/*.${ext}`),
+  ];
+
+  const filesTypeAware = options.typeAwareFileS ?? [GLOB_TS, GLOB_TSX];
+
   const tsconfigPath = options?.tsconfigPath
     ? toArray(options.tsconfigPath)
     : undefined;
@@ -63,11 +106,12 @@ export async function typescript(
       },
     },
     {
-      files: [GLOB_SRC, ...componentExts.map((ext) => `**/*.${ext}`)],
+      name: "luxass:typescript:rules",
+      files,
       languageOptions: {
         parser: parserTs,
         parserOptions: {
-          extraFileExtensions: componentExts.map((ext) => `.${ext}`),
+          extraFileExtensions: exts.map((ext) => `.${ext}`),
           sourceType: "module",
           ...(tsconfigPath
             ? {
@@ -78,7 +122,6 @@ export async function typescript(
           ...(parserOptions as any),
         },
       },
-      name: "luxass:typescript:rules",
       rules: {
         ...renameRules(
           pluginTs.configs["eslint-recommended"].overrides![0].rules!,
@@ -104,6 +147,14 @@ export async function typescript(
         "ts/ban-types": ["error", {
           extendDefaults: false,
           types: {
+            "[]": {
+              message: "Don't use the empty array type `[]`. It only allows empty arrays. Use `SomeType[]` instead.",
+            },
+            "{}": {
+              fixWith: "Record<string, unknown>",
+              message:
+                "The `{}` type is mostly the same as `unknown`. You probably want `Record<string, unknown>` instead.",
+            },
             "BigInt": {
               fixWith: "bigint",
               message: "Use `bigint` instead.",
@@ -131,18 +182,10 @@ export async function typescript(
               fixWith: "symbol",
               message: "Use `symbol` instead.",
             },
-            "[]": {
-              message: "Don't use the empty array type `[]`. It only allows empty arrays. Use `SomeType[]` instead.",
-            },
             "object": {
               fixWith: "Record<string, unknown>",
               message:
                 "The `object` type is hard to use. Use `Record<string, unknown>` instead. See: https://github.com/typescript-eslint/typescript-eslint/pull/848",
-            },
-            "{}": {
-              fixWith: "Record<string, unknown>",
-              message:
-                "The `{}` type is mostly the same as `unknown`. You probably want `Record<string, unknown>` instead.",
             },
           },
         }],
@@ -172,13 +215,20 @@ export async function typescript(
         "ts/triple-slash-reference": "off",
         "ts/unified-signatures": "off",
 
-        ...(tsconfigPath ? typeAwareRules : {}),
         ...overrides,
       },
     },
     {
-      files: ["**/*.d.ts"],
+      name: "luxass:typescript:rules-type-aware",
+      files: filesTypeAware,
+      rules: {
+        ...tsconfigPath ? typeAwareRules : {},
+        ...overrides,
+      },
+    },
+    {
       name: "luxass:typescript:dts-overrides",
+      files: ["**/*.d.ts"],
       rules: {
         "eslint-comments/no-unlimited-disable": "off",
         "import/no-duplicates": "off",
@@ -187,20 +237,19 @@ export async function typescript(
       },
     },
     {
-      files: ["**/*.{test,spec}.ts?(x)"],
       name: "luxass:typescript:tests-overrides",
+      files: ["**/*.{test,spec}.ts?(x)"],
       rules: {
         "no-unused-expressions": "off",
       },
     },
     {
-      files: ["**/*.js", "**/*.cjs"],
       name: "luxass:typescript:javascript-overrides",
+      files: ["**/*.js", "**/*.cjs"],
       rules: {
         "ts/no-require-imports": "off",
         "ts/no-var-requires": "off",
       },
     },
-
   ];
 }

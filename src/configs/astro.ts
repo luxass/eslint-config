@@ -1,10 +1,41 @@
 import { GLOB_ASTRO } from "../globs";
-import type { ConfigurationOptions, FlatConfigItem, OverrideOptions, ReactOptions } from "../types";
+import type { FlatConfigItem } from "../types";
 import { interop } from "../utils";
 
-export async function astro(options: ConfigurationOptions<"typescript"> & OverrideOptions & ReactOptions): Promise<FlatConfigItem[]> {
+export interface AstroOptions {
+  /**
+   * Override rules.
+   */
+  overrides?: FlatConfigItem["rules"]
+
+  /**
+   * Enable TypeScript support.
+   *
+   * @default true
+   */
+  typescript?: boolean
+
+  /**
+   * Enable React A11y support.
+   *
+   * @default false
+   */
+  a11y?: boolean
+
+  /**
+   * Glob patterns for Astro files.
+   *
+   * @default GLOB_ASTRO
+   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   */
+  files?: string[]
+
+}
+
+export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {
   const {
     a11y = false,
+    files = [GLOB_ASTRO],
     overrides = {},
     typescript = true,
   } = options;
@@ -28,7 +59,8 @@ export async function astro(options: ConfigurationOptions<"typescript"> & Overri
       },
     },
     {
-      files: [GLOB_ASTRO],
+      name: "luxass:astro:rules",
+      files,
       languageOptions: {
         // @ts-expect-error hmmm
         globals: {
@@ -43,7 +75,6 @@ export async function astro(options: ConfigurationOptions<"typescript"> & Overri
           sourceType: "module",
         },
       },
-      name: "luxass:astro:rules",
       // @ts-expect-error hmmm
       rules: {
         "style/jsx-closing-tag-location": "off",
@@ -56,6 +87,7 @@ export async function astro(options: ConfigurationOptions<"typescript"> & Overri
       },
     },
     {
+      name: "luxass:astro:rules:scripts",
       files: [
         "**/*.astro/*.js",
         "*.astro/*.js",
@@ -69,7 +101,6 @@ export async function astro(options: ConfigurationOptions<"typescript"> & Overri
           sourceType: "module",
         },
       },
-      name: "luxass:astro:rules:scripts",
     },
   ];
 }
