@@ -1,8 +1,8 @@
+// matches ts, js, jsx, tsx, cjs, cts, cjsx, ctsx, mjs, mts, mjsx, mtsx
 export const GLOB_SRC_EXT = "?([cm])[jt]s?(x)";
-export const GLOB_SRC = "**/*.?([cm])[jt]s?(x)";
+export const GLOB_SRC = `**/*.${GLOB_SRC_EXT}`;
 
 export const GLOB_JS = "**/*.?([cm])js";
-
 export const GLOB_TS = "**/*.?([cm])ts";
 
 export const GLOB_JSX_EXT = "[jt]sx";
