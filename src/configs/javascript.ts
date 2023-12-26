@@ -1,15 +1,30 @@
 import globals from "globals";
-import type { FlatConfigItem, InEditorOptions, OverrideOptions } from "../types";
-import { pluginAntfu, pluginUnusedImports } from "../plugins";
+import pluginUnusedImports from "eslint-plugin-unused-imports";
+import pluginAntfu from "eslint-plugin-antfu";
+import type { FlatConfigItem } from "../types";
 import { GLOB_SRC, GLOB_SRC_EXT } from "../globs";
 
+export interface JavaScriptOptions {
+  /**
+   * Whether the config is for an editor.
+   * @default false
+   */
+  editor?: boolean
+
+  /**
+   * Overrides for the config.
+   */
+  overrides?: FlatConfigItem["rules"]
+}
+
 export async function javascript(
-  options: InEditorOptions & OverrideOptions = {},
+  options: JavaScriptOptions = {},
 ): Promise<FlatConfigItem[]> {
-  const { isEditor = false, overrides = {} } = options;
+  const { editor = false, overrides = {} } = options;
 
   return [
     {
+      name: "luxass:javascript",
       languageOptions: {
         ecmaVersion: 2022,
         globals: {
@@ -32,7 +47,6 @@ export async function javascript(
       linterOptions: {
         reportUnusedDisableDirectives: true,
       },
-      name: "luxass:javascript",
       plugins: {
         "antfu": pluginAntfu,
         "unused-imports": pluginUnusedImports,
@@ -62,7 +76,7 @@ export async function javascript(
         "no-compare-neg-zero": "error",
         "no-cond-assign": ["error", "always"],
         "no-console": [
-          isEditor ? "off" : "error",
+          editor ? "off" : "error",
           { allow: ["warn", "error"] },
         ],
         "no-const-assign": "error",
@@ -109,8 +123,8 @@ export async function javascript(
         "no-regex-spaces": "error",
         "no-restricted-globals": [
           "error",
-          { message: "Use `globalThis` instead.", name: "global" },
-          { message: "Use `globalThis` instead.", name: "self" },
+          { name: "global", message: "Use `globalThis` instead." },
+          { name: "self", message: "Use `globalThis` instead." },
         ],
         "no-restricted-properties": [
           "error",
@@ -233,7 +247,7 @@ export async function javascript(
 
         "symbol-description": "error",
         "unicode-bom": ["error", "never"],
-        "unused-imports/no-unused-imports": isEditor ? "off" : "error",
+        "unused-imports/no-unused-imports": editor ? "off" : "error",
 
         "unused-imports/no-unused-vars": [
           "error",
@@ -256,8 +270,8 @@ export async function javascript(
       },
     },
     {
-      files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
       name: "luxass:scripts-overrides",
+      files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
       rules: {
         "no-console": "off",
       },

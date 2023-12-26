@@ -11,7 +11,24 @@ export default luxass(
   {
     files: ["src/**/*.ts"],
     rules: {
-      "perfectionist/sort-objects": "error",
+      "perfectionist/sort-objects": [
+        "error",
+        {
+          "type": "natural",
+          "custom-groups": {
+            top: [
+              "name",
+            ],
+          },
+          "groups": [
+            "top",
+            "files",
+            "languageOptions",
+            "rules",
+            "unknown",
+          ],
+        },
+      ],
     },
   },
   {

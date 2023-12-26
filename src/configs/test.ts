@@ -2,6 +2,10 @@ import type { FlatConfigItem } from "../types";
 import { GLOB_TESTS } from "../globs";
 import { interop } from "../utils";
 
+import {
+  noOnlyTests,
+} from "../custom-rules/no-only-tests";
+
 export interface TestOptions {
   /**
    * Disable some rules when eslint is run in an editor.
@@ -35,10 +39,8 @@ export async function test(
 
   const [
     pluginVitest,
-    pluginNoOnlyTests,
   ] = await Promise.all([
     interop(import("eslint-plugin-vitest")),
-    interop(import("eslint-plugin-no-only-tests")),
   ] as const);
 
   return [
@@ -49,7 +51,7 @@ export async function test(
           ...pluginVitest,
           rules: {
             ...pluginVitest.rules,
-            ...pluginNoOnlyTests.rules,
+            "no-only-tests": noOnlyTests,
           },
         },
       },
@@ -65,8 +67,8 @@ export async function test(
         "test/no-identical-title": "error",
         "test/no-only-tests": editor ? "off" : "error",
         "test/prefer-hooks-in-order": "error",
-        "test/prefer-lowercase-title": "error",
 
+        "test/prefer-lowercase-title": "error",
         ...overrides,
       },
     },

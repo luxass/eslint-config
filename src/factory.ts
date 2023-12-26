@@ -25,7 +25,7 @@ import {
   vue,
   yaml,
 } from "./configs";
-import { combine, interop } from "./utils";
+import { combine, getOverrides, interop, resolveSubOptions } from "./utils";
 import { FLAT_CONFIG_PROPS, VUE_PACKAGES } from "./constants";
 import { formatters } from "./configs/formatters";
 
@@ -35,14 +35,13 @@ export async function luxass(
 ): Promise<UserConfigItem[]> {
   const {
     astro: enableAstro = isPackageExists("astro"),
-    componentExts = [],
-    gitignore: enableGitignore = true,
-    isEditor = !!(
+    editor = !!(
       (process.env.VSCODE_PID || process.env.JETBRAINS_IDE)
       && !process.env.CI
     ),
+    exts = [],
+    gitignore: enableGitignore = true,
     nextjs: enableNextJS = false,
-    overrides = {},
     react: enableReact = false,
     typescript: enableTypeScript = isPackageExists("typescript"),
     unocss: enableUnoCSS = false,
@@ -75,8 +74,8 @@ export async function luxass(
   configs.push(
     ignores(),
     javascript({
-      isEditor,
-      overrides: overrides.javascript,
+      editor,
+      overrides: getOverrides(options, "javascript"),
     }),
     comments(),
     node(),
@@ -91,47 +90,41 @@ export async function luxass(
   );
 
   if (enableVue) {
-    componentExts.push("vue");
+    exts.push("vue");
   }
 
   if (enableTypeScript) {
-    configs.push(
-      typescript({
-        ...(typeof enableTypeScript !== "boolean" ? enableTypeScript : {}),
-        componentExts,
-        overrides: overrides.typescript,
-      }),
-    );
+    configs.push(typescript({
+      ...resolveSubOptions(options, "typescript"),
+      exts,
+    }));
   }
 
   if (stylisticOptions) {
-    configs.push(stylistic(stylisticOptions));
+    configs.push(stylistic({
+      ...stylisticOptions,
+      overrides: getOverrides(options, "stylistic"),
+    }));
   }
 
   if (options.test ?? true) {
-    configs.push(
-      test({
-        isEditor,
-        overrides: overrides.test,
-      }),
-    );
+    configs.push(test({
+      editor,
+      overrides: getOverrides(options, "test"),
+    }));
   }
 
-  if (enableReact || enableNextJS) {
-    configs.push(
-      react({
-        ...(typeof enableReact !== "boolean" ? enableReact : {}),
-        overrides: overrides.react,
-        typescript: !!enableTypeScript,
-      }),
-    );
+  if (enableReact) {
+    configs.push(react({
+      overrides: getOverrides(options, "react"),
+      typescript: !!enableTypeScript,
+    }));
   }
 
   if (enableNextJS) {
     configs.push(
       nextjs({
-        ...(typeof enableNextJS !== "boolean" ? enableNextJS : {}),
-        overrides: overrides.nextjs,
+        ...resolveSubOptions(options, "nextjs"),
       }),
     );
   }
@@ -139,8 +132,7 @@ export async function luxass(
   if (enableVue) {
     configs.push(
       vue({
-        ...(typeof enableVue !== "boolean" ? enableVue : {}),
-        overrides: overrides.vue,
+        ...resolveSubOptions(options, "vue"),
         stylistic: stylisticOptions,
         typescript: !!enableTypeScript,
       }),
@@ -150,26 +142,23 @@ export async function luxass(
   if (enableAstro) {
     configs.push(
       astro({
-        ...(typeof enableAstro !== "boolean" ? enableAstro : {}),
-        overrides: overrides.astro,
+        ...resolveSubOptions(options, "astro"),
         typescript: !!enableTypeScript,
       }),
     );
   }
 
   if (enableUnoCSS) {
-    configs.push(
-      unocss({
-        ...(typeof enableUnoCSS !== "boolean" ? enableUnoCSS : {}),
-        overrides: overrides.unocss,
-      }),
-    );
+    configs.push(unocss({
+      ...resolveSubOptions(options, "unocss"),
+      overrides: getOverrides(options, "unocss"),
+    }));
   }
 
   if (options.jsonc ?? true) {
     configs.push(
       jsonc({
-        overrides: overrides.jsonc,
+        overrides: getOverrides(options, "jsonc"),
         stylistic: stylisticOptions,
       }),
       sortPackageJson(),
@@ -178,20 +167,18 @@ export async function luxass(
   }
 
   if (options.yaml ?? true) {
-    configs.push(
-      yaml({
-        overrides: overrides.yaml,
-        stylistic: stylisticOptions,
-      }),
-    );
+    configs.push(yaml({
+      overrides: getOverrides(options, "yaml"),
+      stylistic: stylisticOptions,
+    }));
   }
 
   if (options.markdown ?? true) {
     configs.push(
       markdown(
         {
-          componentExts,
-          overrides: overrides.markdown,
+          exts,
+          overrides: getOverrides(options, "markdown"),
         },
       ),
     );

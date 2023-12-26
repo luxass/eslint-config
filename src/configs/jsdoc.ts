@@ -1,8 +1,26 @@
-import type { FlatConfigItem, StylisticOptions } from "../types";
+import type { FlatConfigItem } from "../types";
 import { interop } from "../utils";
+import type { StylisticConfig } from "./stylistic";
 
-export async function jsdoc(options: StylisticOptions = {}): Promise<FlatConfigItem[]> {
-  const { stylistic = true } = options;
+export interface JSDOCOptions {
+  /**
+   * Enable stylistic rules.
+   *
+   * @default true
+   */
+  stylistic?: boolean | StylisticConfig
+
+  /**
+   * Overrides for the config.
+   */
+  overrides?: FlatConfigItem["rules"]
+}
+
+export async function jsdoc(options: JSDOCOptions = {}): Promise<FlatConfigItem[]> {
+  const {
+    overrides,
+    stylistic = true,
+  } = options;
 
   return [
     {
@@ -33,6 +51,8 @@ export async function jsdoc(options: StylisticOptions = {}): Promise<FlatConfigI
               "jsdoc/multiline-blocks": "warn",
             }
           : {}),
+
+        ...overrides,
       },
     },
   ];

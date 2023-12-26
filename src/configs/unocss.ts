@@ -1,10 +1,40 @@
 import { GLOB_SRC } from "../globs";
-import type { FlatConfigItem, OverrideOptions, UnoCSSOptions } from "../types";
+import type { FlatConfigItem } from "../types";
 import { ensure, interop } from "../utils";
 
-export async function unocss(options: UnoCSSOptions & OverrideOptions): Promise<FlatConfigItem[]> {
+export interface UnoCSSOptions {
+  /**
+   * Enable strict mode.
+   *
+   * @default false
+   */
+  strict?: boolean
+
+  /**
+   * Enable attributify mode.
+   *
+   * @default true
+   */
+  attributify?: boolean
+
+  /**
+   * Glob patterns for files that includes unocss classes.
+   *
+   * @default GLOB_SRC
+   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   */
+  files?: string[]
+
+  /**
+   * Override rules for for test files.
+   */
+  overrides?: FlatConfigItem["rules"]
+}
+
+export async function unocss(options: UnoCSSOptions = {}): Promise<FlatConfigItem[]> {
   const {
     attributify = true,
+    files = [GLOB_SRC],
     overrides,
     strict = false,
   } = options;
@@ -21,10 +51,8 @@ export async function unocss(options: UnoCSSOptions & OverrideOptions): Promise<
 
   return [
     {
-      files: [
-        GLOB_SRC,
-      ],
       name: "luxass:unocss",
+      files,
       plugins: {
         unocss: pluginUnoCSS,
       },
@@ -41,7 +69,6 @@ export async function unocss(options: UnoCSSOptions & OverrideOptions): Promise<
             }
           : {}),
 
-        // overrides
         ...overrides,
       },
     },

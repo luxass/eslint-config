@@ -1,19 +1,62 @@
 import { mergeProcessors } from "eslint-merge-processors";
+import type { Options as VueBlocksOptions } from "eslint-processor-vue-blocks";
 import type {
-  ConfigurationOptions,
   FlatConfigItem,
-  OverrideOptions,
-  StylisticOptions,
-  VueOptions,
 } from "../types";
 import { GLOB_VUE } from "../globs";
 import { interop } from "../utils";
+import type { StylisticConfig } from "./stylistic";
+
+export interface VueOptions {
+  /**
+   * Override rules.
+   */
+  overrides?: FlatConfigItem["rules"]
+
+  /**
+   * Enable stylistic rules.
+   *
+   * @default true
+   */
+  stylistic?: boolean | StylisticConfig
+
+  /**
+   * Enable TypeScript support.
+   *
+   * @default false
+   */
+  typescript?: boolean
+
+  /**
+   * Create virtual files for Vue SFC blocks to enable linting.
+   *
+   * @see https://github.com/antfu/eslint-processor-vue-blocks
+   * @default true
+   */
+  sfcBlocks?: boolean | VueBlocksOptions
+
+  /**
+   * Enable Vue A11y support.
+   *
+   * @default true
+   */
+  a11y?: boolean
+
+  /**
+   * Glob patterns for Vue files.
+   *
+   * @default GLOB_VUE
+   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   */
+  files?: string[]
+}
 
 export async function vue(
-  options: ConfigurationOptions<"typescript"> & OverrideOptions & StylisticOptions & VueOptions = {},
+  options: VueOptions = {},
 ): Promise<FlatConfigItem[]> {
   const {
     a11y = true,
+    files = [GLOB_VUE],
     overrides = {},
     stylistic = true,
   } = options;
@@ -47,7 +90,8 @@ export async function vue(
       },
     },
     {
-      files: [GLOB_VUE],
+      name: "luxass:vue:rules",
+      files,
       languageOptions: {
         parser: parserVue,
         parserOptions: {
@@ -61,7 +105,6 @@ export async function vue(
           sourceType: "module",
         },
       },
-      name: "luxass:vue:rules",
       processor: sfcBlocks === false
         ? pluginVue.processors[".vue"]
         : mergeProcessors([

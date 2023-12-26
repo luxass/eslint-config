@@ -1,7 +1,18 @@
-import type { FlatConfigItem, StylisticOptions } from "../types";
-import { pluginAntfu, pluginImport } from "../plugins";
+import pluginImport from "eslint-plugin-i";
+import pluginAntfu from "eslint-plugin-antfu";
+import type { FlatConfigItem } from "../types";
+import type { StylisticConfig } from "./stylistic";
 
-export async function imports(options: StylisticOptions = {}): Promise<FlatConfigItem[]> {
+export interface ImportsOptions {
+  /**
+   * Enable stylistic rules.
+   *
+   * @default true
+   */
+  stylistic?: boolean | StylisticConfig
+}
+
+export async function imports(options: ImportsOptions = {}): Promise<FlatConfigItem[]> {
   const {
     stylistic = true,
   } = options;

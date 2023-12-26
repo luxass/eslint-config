@@ -2,8 +2,60 @@ import * as parserPlain from "eslint-parser-plain";
 import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from "../globs";
 import type { VendoredPrettierOptions } from "../vendor/prettier-types";
 import { ensure, interop } from "../utils";
-import type { FlatConfigItem, FormattersOptions, StylisticConfig } from "../types";
+import type { FlatConfigItem } from "../types";
+import type { StylisticConfig } from "./stylistic";
 import { StylisticConfigDefaults } from "./stylistic";
+
+export interface FormattersOptions {
+  /**
+   * Enable formatting support for CSS, Less, Sass, and SCSS.
+   *
+   * Currently only support Prettier.
+   */
+  css?: "prettier" | boolean
+
+  /**
+   * Enable formatting support for HTML.
+   *
+   * Currently only support Prettier.
+   */
+  html?: "prettier" | boolean
+
+  /**
+   * Enable formatting support for TOML.
+   *
+   * Currently only support dprint.
+   */
+  toml?: "dprint" | boolean
+
+  /**
+   * Enable formatting support for Markdown.
+   *
+   * Support both Prettier and dprint.
+   *
+   * When set to `true`, it will use Prettier.
+   */
+  markdown?: "prettier" | "dprint" | boolean
+
+  /**
+   * Enable formatting support for GraphQL.
+   */
+  graphql?: "prettier" | boolean
+
+  /**
+   * Custom options for Prettier.
+   *
+   * By default it's controlled by our own config.
+   */
+  prettierOptions?: VendoredPrettierOptions
+
+  /**
+   * Custom options for dprint.
+   *
+   * By default it's controlled by our own config.
+   */
+  dprintOptions?: boolean
+}
 
 export async function formatters(
   options: FormattersOptions | true = {},
@@ -67,11 +119,11 @@ export async function formatters(
   if (options.css) {
     configs.push(
       {
+        name: "luxass:formatter:css",
         files: [GLOB_CSS, GLOB_POSTCSS],
         languageOptions: {
           parser: parserPlain,
         },
-        name: "luxass:formatter:css",
         rules: {
           "format/prettier": [
             "error",
@@ -83,11 +135,11 @@ export async function formatters(
         },
       },
       {
+        name: "luxass:formatter:scss",
         files: [GLOB_SCSS],
         languageOptions: {
           parser: parserPlain,
         },
-        name: "luxass:formatter:scss",
         rules: {
           "format/prettier": [
             "error",
@@ -99,11 +151,11 @@ export async function formatters(
         },
       },
       {
+        name: "luxass:formatter:less",
         files: [GLOB_LESS],
         languageOptions: {
           parser: parserPlain,
         },
-        name: "luxass:formatter:less",
         rules: {
           "format/prettier": [
             "error",
@@ -119,11 +171,11 @@ export async function formatters(
 
   if (options.html) {
     configs.push({
+      name: "luxass:formatter:html",
       files: ["**/*.html"],
       languageOptions: {
         parser: parserPlain,
       },
-      name: "luxass:formatter:html",
       rules: {
         "format/prettier": [
           "error",
@@ -138,11 +190,11 @@ export async function formatters(
 
   if (options.toml) {
     configs.push({
+      name: "luxass:formatter:toml",
       files: ["**/*.toml"],
       languageOptions: {
         parser: parserPlain,
       },
-      name: "luxass:formatter:toml",
       rules: {
         "format/dprint": [
           "error",
@@ -161,11 +213,11 @@ export async function formatters(
       : options.markdown;
 
     configs.push({
+      name: "luxass:formatter:markdown",
       files: [GLOB_MARKDOWN],
       languageOptions: {
         parser: parserPlain,
       },
-      name: "luxass:formatter:markdown",
       rules: {
         [`format/${formater}`]: [
           "error",
@@ -186,11 +238,11 @@ export async function formatters(
 
   if (options.graphql) {
     configs.push({
+      name: "luxass:formatter:graphql",
       files: ["**/*.graphql"],
       languageOptions: {
         parser: parserPlain,
       },
-      name: "luxass:formatter:graphql",
       rules: {
         "format/prettier": [
           "error",

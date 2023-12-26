@@ -1,6 +1,6 @@
-import type { TSESLint, TSESTree } from "@typescript-eslint/utils";
-import type { RuleFixer, RuleListener } from "@typescript-eslint/utils/ts-eslint";
-import { createESLintRule } from "../utils";
+import type { RuleListener, RuleModule } from "@typescript-eslint/utils/ts-eslint";
+
+import { createRule } from "../utils";
 
 export type Options = [{
   blocks?: string[]
@@ -27,7 +27,7 @@ function getPath(node: any, path: any[] = []) {
   return path;
 }
 
-export const noOnlyTests = createESLintRule<Options, "notPermitted">({
+export const noOnlyTests = createRule<Options, "notPermitted">({
   name: "no-only-tests",
   create: (context, [options]) => {
     const {
@@ -97,4 +97,5 @@ export const noOnlyTests = createESLintRule<Options, "notPermitted">({
     }],
     type: "layout",
   },
-});
+  // i need to have this here, otherwise typechecking fails.
+}) satisfies RuleModule<"notPermitted", Options, RuleListener>;

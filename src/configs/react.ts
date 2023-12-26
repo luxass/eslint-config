@@ -1,10 +1,40 @@
-import { GLOB_JSX } from "../globs";
-import type { ConfigurationOptions, FlatConfigItem, OverrideOptions, ReactOptions } from "../types";
+import { GLOB_JSX, GLOB_TSX } from "../globs";
+import type { FlatConfigItem } from "../types";
 import { ensure, interop } from "../utils";
 
-export async function react(options: ConfigurationOptions<"typescript"> & OverrideOptions & ReactOptions): Promise<FlatConfigItem[]> {
+export interface ReactOptions {
+  /**
+   * Override rules.
+   */
+  overrides?: FlatConfigItem["rules"]
+
+  /**
+   * Enable TypeScript support.
+   *
+   * @default false
+   */
+  typescript?: boolean
+
+  /**
+   * Enable React A11y support.
+   *
+   * @default true
+   */
+  a11y?: boolean
+
+  /**
+   * Glob patterns for JSX & TSX files.
+   *
+   * @default [GLOB_JSX, GLOB_TSX]
+   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   */
+  files?: string[]
+}
+
+export async function react(options: ReactOptions = {}): Promise<FlatConfigItem[]> {
   const {
     a11y = false,
+    files = [GLOB_JSX, GLOB_TSX],
     overrides = {},
     typescript = true,
   } = options;
@@ -39,7 +69,8 @@ export async function react(options: ConfigurationOptions<"typescript"> & Overri
       },
     },
     {
-      files: [GLOB_JSX],
+      name: "luxass:react:rules",
+      files,
       languageOptions: {
         parserOptions: {
           ecmaFeatures: {
@@ -47,7 +78,6 @@ export async function react(options: ConfigurationOptions<"typescript"> & Overri
           },
         },
       },
-      name: "luxass:react:rules",
       rules: {
         ...(a11y
           ? {
@@ -241,17 +271,12 @@ export async function react(options: ConfigurationOptions<"typescript"> & Overri
             }
           : {}),
 
-        // recommended rules react-hooks
-        "react-hooks/exhaustive-deps": "warn",
-        "react-hooks/rules-of-hooks": "error",
-
-        // react refresh
-        "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-
         // recommended rules react
         "react/display-name": "error",
         "react/jsx-key": "error",
+
         "react/jsx-no-comment-textnodes": "error",
+
         "react/jsx-no-duplicate-props": "error",
         "react/jsx-no-target-blank": "error",
         "react/jsx-no-undef": "error",
@@ -270,8 +295,13 @@ export async function react(options: ConfigurationOptions<"typescript"> & Overri
         "react/no-unsafe": "off",
         "react/prop-types": "error",
         "react/react-in-jsx-scope": "off",
-
         "react/require-render-return": "error",
+        // recommended rules react-hooks
+        "react-hooks/exhaustive-deps": "warn",
+        "react-hooks/rules-of-hooks": "error",
+
+        // react refresh
+        "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
 
         ...typescript
           ? {

@@ -1,11 +1,38 @@
-import type { FlatConfigItem, OverrideOptions, StylisticOptions } from "../types";
+import type { FlatConfigItem } from "../types";
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from "../globs";
 import { interop } from "../utils";
+import type { StylisticConfig } from "./stylistic";
+
+export interface JSONOptions {
+  /**
+   * Override rules.
+   */
+  overrides?: FlatConfigItem["rules"]
+
+  /**
+   * Enable stylistic rules.
+   *
+   * @default true
+   */
+  stylistic?: boolean | StylisticConfig
+
+  /**
+   * Glob patterns for JSON files.
+   *
+   * @default [GLOB_JSON, GLOB_JSON5, GLOB_JSONC]
+   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   */
+  files?: string[]
+}
 
 export async function jsonc(
-  options: StylisticOptions & OverrideOptions = {},
+  options: JSONOptions = {},
 ): Promise<FlatConfigItem[]> {
-  const { overrides = {}, stylistic = true } = options;
+  const {
+    files = [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
+    overrides = {},
+    stylistic = true,
+  } = options;
 
   const [
     pluginJsonc,
@@ -23,11 +50,11 @@ export async function jsonc(
       },
     },
     {
-      files: [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
+      name: "luxass:jsonc:rules",
+      files,
       languageOptions: {
         parser: parserJsonc,
       },
-      name: "luxass:jsonc:rules",
       rules: {
         "jsonc/no-bigint-literals": "error",
         "jsonc/no-binary-expression": "error",
