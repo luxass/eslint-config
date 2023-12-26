@@ -1,11 +1,37 @@
-import type { FlatConfigItem, InEditorOptions, OverrideOptions } from "../types";
+import type { FlatConfigItem } from "../types";
 import { GLOB_TESTS } from "../globs";
 import { interop } from "../utils";
 
+export interface TestOptions {
+  /**
+   * Disable some rules when eslint is run in an editor.
+   *
+   * @default false
+   */
+  editor?: boolean
+
+  /**
+   * Glob patterns for test files.
+   *
+   * @default GLOB_TESTS
+   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   */
+  files?: string[]
+
+  /**
+   * Override rules for for test files.
+   */
+  overrides?: FlatConfigItem["rules"]
+}
+
 export async function test(
-  options: InEditorOptions & OverrideOptions = {},
+  options: TestOptions = {},
 ): Promise<FlatConfigItem[]> {
-  const { isEditor = false, overrides = {} } = options;
+  const {
+    editor = false,
+    files = GLOB_TESTS,
+    overrides = {},
+  } = options;
 
   const [
     pluginVitest,
@@ -29,15 +55,15 @@ export async function test(
       },
     },
     {
-      files: GLOB_TESTS,
       name: "luxass:test:rules",
+      files,
       rules: {
         "test/consistent-test-it": [
           "error",
           { fn: "it", withinDescribe: "it" },
         ],
         "test/no-identical-title": "error",
-        "test/no-only-tests": isEditor ? "off" : "error",
+        "test/no-only-tests": editor ? "off" : "error",
         "test/prefer-hooks-in-order": "error",
         "test/prefer-lowercase-title": "error",
 
