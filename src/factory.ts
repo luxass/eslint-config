@@ -28,6 +28,7 @@ import {
 import { combine, getOverrides, interop, resolveSubOptions } from "./utils";
 import { FLAT_CONFIG_PROPS, VUE_PACKAGES } from "./constants";
 import { formatters } from "./configs/formatters";
+import { tailwindcss } from "./configs/tailwindcss";
 
 export async function luxass(
   options: ConfigOptions & FlatConfigItem = {},
@@ -43,6 +44,7 @@ export async function luxass(
     gitignore: enableGitignore = true,
     nextjs: enableNextJS = false,
     react: enableReact = false,
+    tailwindcss: enableTailwindCSS = false,
     typescript: enableTypeScript = isPackageExists("typescript"),
     unocss: enableUnoCSS = false,
     vue: enableVue = VUE_PACKAGES.some((i) => isPackageExists(i)),
@@ -152,6 +154,13 @@ export async function luxass(
     configs.push(unocss({
       ...resolveSubOptions(options, "unocss"),
       overrides: getOverrides(options, "unocss"),
+    }));
+  }
+
+  if (enableTailwindCSS) {
+    configs.push(tailwindcss({
+      ...resolveSubOptions(options, "tailwindcss"),
+      overrides: getOverrides(options, "tailwindcss"),
     }));
   }
 
