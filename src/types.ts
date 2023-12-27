@@ -12,6 +12,7 @@ import type {
   ReactRules,
   RenamePrefix,
   RuleConfig,
+
   VitestRules,
   VueRules,
   YmlRules,
@@ -20,23 +21,26 @@ import type { RuleOptions as JSDocRules } from "@eslint-types/jsdoc/types";
 import type { RuleOptions as TypeScriptRules } from "@eslint-types/typescript-eslint/types";
 import type { RuleOptions as UnicornRules } from "@eslint-types/unicorn/types";
 import type { Rules as AntfuRules } from "eslint-plugin-antfu";
+
 import type {
   UnprefixedRuleOptions as StylisticRules,
 } from "@stylistic/eslint-plugin";
 import type { Linter } from "eslint";
 import type { VendoredPrettierOptions } from "./vendor/prettier-types";
-import type { NextJSOptions } from "./configs/nextjs";
-import type { ReactOptions } from "./configs/react";
-import type { StylisticConfig } from "./configs/stylistic";
-import type { TestOptions } from "./configs/test";
-import type { UnoCSSOptions } from "./configs/unocss";
-import type { VueOptions } from "./configs/vue";
-import type { AstroOptions } from "./configs/astro";
-import type { YAMLOptions } from "./configs/yaml";
-import type { JSONOptions } from "./configs/jsonc";
-import type { JavaScriptOptions } from "./configs/javascript";
-import type { TypeScriptOptions } from "./configs/typescript";
-import type { TailwindCSSOptions } from "./configs/tailwindcss";
+import type {
+  AstroOptions,
+  JSONOptions,
+  JavaScriptOptions,
+  NextJSOptions,
+  ReactOptions,
+  StylisticConfig,
+  TailwindCSSOptions,
+  TestOptions,
+  TypeScriptOptions,
+  UnoCSSOptions,
+  VueOptions,
+  YAMLOptions,
+} from "./configs";
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
   [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>;
@@ -60,8 +64,10 @@ export type Rules = WrapRuleConfig<
     JsoncRules &
     VueRules &
     UnicornRules &
-    EslintCommentsRules & {
-      "test/no-only-tests": RuleConfig<any[]>
+    EslintCommentsRules &
+    // TODO: TOML rules
+    {
+      "test/no-only-tests": RuleConfig<[]>
     }
   >
 >;

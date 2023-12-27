@@ -18,6 +18,7 @@ import {
   sortPackageJson,
   sortTsconfig,
   stylistic,
+  tailwindcss,
   test,
   typescript,
   unicorn,
@@ -28,7 +29,6 @@ import {
 import { combine, getOverrides, interop, resolveSubOptions } from "./utils";
 import { FLAT_CONFIG_PROPS, VUE_PACKAGES } from "./constants";
 import { formatters } from "./configs/formatters";
-import { tailwindcss } from "./configs/tailwindcss";
 
 export async function luxass(
   options: ConfigOptions & FlatConfigItem = {},

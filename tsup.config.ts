@@ -3,6 +3,7 @@ import { defineConfig } from "tsup";
 export default defineConfig({
   entry: [
     "./src/index.ts",
+    "./src/globs.ts",
     "./src/configs/*.ts",
     "./src/custom-rules/*.ts",
   ],
@@ -15,4 +16,5 @@ export default defineConfig({
   },
   dts: true,
   skipNodeModulesBundle: true,
+  cjsInterop: true,
 });

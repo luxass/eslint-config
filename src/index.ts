@@ -4,6 +4,5 @@ import {
 
 export * from "./configs";
 export * from "./factory";
-export * from "./globs";
 
 export default luxass;
