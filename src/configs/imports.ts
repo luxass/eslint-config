@@ -1,6 +1,7 @@
 import pluginImport from "eslint-plugin-i";
 import pluginAntfu from "eslint-plugin-antfu";
 import type { FlatConfigItem } from "../types";
+import { GLOB_SRC_EXT } from "../globs";
 import type { StylisticConfig } from "./stylistic";
 
 export interface ImportsOptions {
@@ -26,6 +27,7 @@ export async function imports(options: ImportsOptions = {}): Promise<FlatConfigI
       },
       rules: {
         "antfu/import-dedupe": "error",
+        "antfu/no-import-dist": "error",
         "antfu/no-import-node-modules-by-path": "error",
 
         "import/first": "error",
@@ -41,6 +43,14 @@ export async function imports(options: ImportsOptions = {}): Promise<FlatConfigI
               "import/newline-after-import": ["error", { considerComments: true, count: 1 }],
             }
           : {},
+      },
+    },
+    {
+      name: "luxass:imports:bin",
+      files: ["**/bin/**/*", `**/bin.${GLOB_SRC_EXT}`],
+      rules: {
+        "antfu/no-import-dist": "off",
+        "antfu/no-import-node-modules-by-path": "off",
       },
     },
   ];
