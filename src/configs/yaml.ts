@@ -66,6 +66,7 @@ export async function yaml(
         "yaml/block-mapping": "error",
         "yaml/block-sequence": "error",
         "yaml/no-empty-key": "error",
+        "yaml/no-empty-mapping-value": "error",
         "yaml/no-empty-sequence-entry": "error",
         "yaml/no-irregular-whitespace": "error",
         "yaml/plain-scalar": "error",
@@ -92,6 +93,14 @@ export async function yaml(
           : {}),
 
         ...overrides,
+      },
+    },
+    {
+      name: "luxass:yaml:github-actions",
+      files: ["**/.github/workflows/*.{yml,yaml}"],
+      rules: {
+        // GitHub Actions supports empty values to enable features
+        "yaml/no-empty-mapping-value": "off",
       },
     },
   ];
