@@ -17,6 +17,6 @@
     "tests"
   ],
   "exclude": [
-    "tests/*/fixtures"
+    "tests/fixtures/**/*.*"
   ]
 }

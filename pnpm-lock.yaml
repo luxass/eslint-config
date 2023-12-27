@@ -133,6 +133,9 @@ devDependencies:
   '@types/eslint':
     specifier: ^8.56.0
     version: 8.56.0
+  '@types/estree':
+    specifier: ^1.0.5
+    version: 1.0.5
   '@types/node':
     specifier: ^18.17.19
     version: 18.19.3

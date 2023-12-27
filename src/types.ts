@@ -41,6 +41,7 @@ import type {
   YAMLOptions,
 } from "./configs";
 import type { NoOnlyTestsOptions } from "./custom-rules/no-only-tests";
+import type { TOMLOptions } from "./configs/toml";
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
   [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>;
@@ -237,6 +238,13 @@ export interface ConfigOptions {
    * @default true
    */
   yaml?: boolean | YAMLOptions
+
+  /**
+   * Enable TOML support.
+   *
+   * @default true
+   */
+  toml?: boolean | TOMLOptions
 
   /**
    * Additional extensions for components.

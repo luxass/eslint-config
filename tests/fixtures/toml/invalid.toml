@@ -1,0 +1,5 @@
+[section]
+  key = "value"
+  invalidIndent = true
+missingEqualSign "invalidValue"
+invalidArray = [1, 2, 3
