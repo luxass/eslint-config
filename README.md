@@ -11,14 +11,14 @@
 - Based on [Antfu's ESLint Config](https://github.com/antfu/eslint-config)
 - Auto fix for formatting (aimed to be used standalone **without** Prettier)
 - Designed to work with TypeScript, JSX, Vue & Astro out-of-box
-- Lints also for json, yaml, markdown
+- Lints also for json, yaml, toml, markdown
 - Sorted imports, dangling commas
 - Reasonable defaults, best practices, only one-line of config
 - Opinionated, but [very customizable](#customization)
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
 - Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
 - Respects `.gitignore` by default
-- Optional [formatters](#formatters) support for CSS, HTML, TOML, etc.
+- Optional [formatters](#formatters) support for CSS, HTML, etc.
 
 ## 📦 Install
 
@@ -235,7 +235,6 @@ Since flat config requires us to explicitly provide the plugin names (instead of
 | `ts/*`     | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
 | `style/*`  | `@stylistic/*`         | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic)           |
 | `test/*`   | `vitest/*`             | [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest)                    |
-| `test/*`   | `no-only-tests/*`      | [eslint-plugin-no-only-tests](https://github.com/levibuzolic/eslint-plugin-no-only-tests)  |
 
 When you want to override rules, or disable them inline, you need to update to the new prefix:
 
@@ -396,6 +395,25 @@ Running `npx eslint` should prompt you to install the required dependencies, oth
 
 ```bash
 npm i -D @unocss/eslint-plugin
+```
+
+#### TailwindCSS
+
+To enable TailwindCSS support, need to explicitly turn it on:
+
+```js
+// eslint.config.js
+import luxass from "@luxass/eslint-config";
+
+export default luxass({
+  tailwindcss: true,
+});
+```
+
+Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
+
+```bash
+npm i -D eslint-plugin-tailwindcss
 ```
 
 ### Optional Rules
