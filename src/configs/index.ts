@@ -49,3 +49,6 @@ export type { AstroOptions } from "./astro";
 
 export { tailwindcss } from "./tailwindcss";
 export type { TailwindCSSOptions } from "./tailwindcss";
+
+export { formatters } from "./formatters";
+export type { FormattersOptions } from "./formatters";

@@ -5,6 +5,7 @@ import type { Awaitable, ConfigOptions, FlatConfigItem, UserConfigItem } from ".
 import {
   astro,
   comments,
+  formatters,
   ignores,
   imports,
   javascript,
@@ -28,7 +29,6 @@ import {
 } from "./configs";
 import { combine, getOverrides, interop, resolveSubOptions } from "./utils";
 import { FLAT_CONFIG_PROPS, VUE_PACKAGES } from "./constants";
-import { formatters } from "./configs/formatters";
 
 export async function luxass(
   options: ConfigOptions & FlatConfigItem = {},
@@ -36,10 +36,7 @@ export async function luxass(
 ): Promise<UserConfigItem[]> {
   const {
     astro: enableAstro = isPackageExists("astro"),
-    editor = !!(
-      (process.env.VSCODE_PID || process.env.JETBRAINS_IDE)
-      && !process.env.CI
-    ),
+    editor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
     exts = [],
     gitignore: enableGitignore = true,
     nextjs: enableNextJS = false,
