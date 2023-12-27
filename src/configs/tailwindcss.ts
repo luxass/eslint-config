@@ -52,25 +52,25 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Fla
       files,
       rules: {
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/classnames-order.md
-        "tailwindcss/classnames-order": "warn",
+        "tailwind/classnames-order": "warn",
 
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/enforces-negative-arbitrary-values.md
-        "tailwindcss/enforces-negative-arbitrary-values": "warn",
+        "tailwind/enforces-negative-arbitrary-values": "warn",
 
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/enforces-shorthand.md
-        "tailwindcss/enforces-shorthand": "warn",
+        "tailwind/enforces-shorthand": "warn",
 
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/migration-from-tailwind-2.md
-        "tailwindcss/migration-from-tailwind-2": "warn",
+        "tailwind/migration-from-tailwind-2": "warn",
 
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/no-arbitrary-value.md
-        "tailwindcss/no-arbitrary-value": "off",
+        "tailwind/no-arbitrary-value": "off",
 
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/no-contradicting-classname.md
-        "tailwindcss/no-contradicting-classname": "error",
+        "tailwind/no-contradicting-classname": "error",
 
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/no-custom-classname.md
-        "tailwindcss/no-custom-classname": "warn",
+        "tailwind/no-custom-classname": "warn",
 
         ...overrides,
       },

@@ -25,11 +25,10 @@ export interface AstroOptions {
   /**
    * Glob patterns for Astro files.
    *
-   * @default GLOB_ASTRO
-   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   * @default [GLOB_ASTRO]
+   * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts#L27
    */
   files?: string[]
-
 }
 
 export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {

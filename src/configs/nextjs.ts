@@ -15,12 +15,24 @@ export interface NextJSOptions {
    * Override rules.
    */
   overrides?: FlatConfigItem["rules"]
+
+  /**
+   * Glob patterns for Next.js files.
+   *
+   * @default [GLOB_SRC]
+   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   */
+  files?: string[]
 }
 
 export async function nextjs(
   options: NextJSOptions = {},
 ): Promise<FlatConfigItem[]> {
-  const { overrides, rootDir } = options;
+  const {
+    files = [GLOB_SRC],
+    overrides,
+    rootDir,
+  } = options;
 
   await ensure([
     "@next/eslint-plugin-next",
@@ -37,7 +49,7 @@ export async function nextjs(
     },
     {
       name: "luxass:nextjs:rules",
-      files: [GLOB_SRC],
+      files,
       rules: {
         ...pluginNextjs.configs.recommended.rules,
         ...pluginNextjs.configs["core-web-vitals"].rules,

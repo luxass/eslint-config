@@ -2,10 +2,10 @@ import type { RuleListener, RuleModule } from "@typescript-eslint/utils/ts-eslin
 
 import { createRule } from "../utils";
 
-export type Options = [{
+export interface NoOnlyTestsOptions {
   blocks?: string[]
   focus?: string[]
-}];
+};
 
 const DEFAULT_OPTIONS = {
   blocks: ["describe", "it", "test"],
@@ -27,7 +27,7 @@ function getPath(node: any, path: any[] = []) {
   return path;
 }
 
-export const noOnlyTests = createRule<Options, "notPermitted">({
+export const noOnlyTests = createRule<[NoOnlyTestsOptions], "notPermitted">({
   name: "no-only-tests",
   create: (context, [options]) => {
     const {
@@ -98,4 +98,4 @@ export const noOnlyTests = createRule<Options, "notPermitted">({
     type: "layout",
   },
   // i need to have this here, otherwise typechecking fails.
-}) satisfies RuleModule<"notPermitted", Options, RuleListener>;
+}) satisfies RuleModule<"notPermitted", [NoOnlyTestsOptions], RuleListener>;
