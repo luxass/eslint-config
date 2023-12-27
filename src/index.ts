@@ -5,4 +5,6 @@ import {
 export * from "./configs";
 export * from "./factory";
 
+export type { ConfigOptions } from "./types";
+
 export default luxass;

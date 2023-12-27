@@ -29,6 +29,7 @@ import {
 } from "./configs";
 import { combine, getOverrides, interop, resolveSubOptions } from "./utils";
 import { FLAT_CONFIG_PROPS, VUE_PACKAGES } from "./constants";
+import { toml } from "./configs/toml";
 
 export async function luxass(
   options: ConfigOptions & FlatConfigItem = {},
@@ -175,6 +176,13 @@ export async function luxass(
   if (options.yaml ?? true) {
     configs.push(yaml({
       overrides: getOverrides(options, "yaml"),
+      stylistic: stylisticOptions,
+    }));
+  }
+
+  if (options.toml ?? true) {
+    configs.push(toml({
+      overrides: getOverrides(options, "toml"),
       stylistic: stylisticOptions,
     }));
   }

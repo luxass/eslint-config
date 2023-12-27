@@ -7,6 +7,9 @@ export default luxass(
     vue: true,
     typescript: true,
     formatters: true,
+    ignores: [
+      "**/fixtures",
+    ],
   },
   {
     files: ["src/**/*.ts"],

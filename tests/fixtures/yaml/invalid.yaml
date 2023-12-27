@@ -1,0 +1,4 @@
+key: value
+  invalidIndent: true
+missingColon
+- invalidListElement
