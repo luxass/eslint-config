@@ -26,7 +26,7 @@ export interface UnoCSSOptions {
   files?: string[]
 
   /**
-   * Override rules for for test files.
+   * Override rules for for files with unocss classes.
    */
   overrides?: FlatConfigItem["rules"]
 }
