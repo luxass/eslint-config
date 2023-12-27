@@ -36,6 +36,7 @@ import type { YAMLOptions } from "./configs/yaml";
 import type { JSONOptions } from "./configs/jsonc";
 import type { JavaScriptOptions } from "./configs/javascript";
 import type { TypeScriptOptions } from "./configs/typescript";
+import type { TailwindCSSOptions } from "./configs/tailwindcss";
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
   [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>;
@@ -250,6 +251,16 @@ export interface ConfigOptions {
    * @default false
    */
   unocss?: boolean | UnoCSSOptions
+
+  /**
+   * Enable TailwindCSS support.
+   *
+   * Requires installing:
+   * - `eslint-plugin-tailwindcss`
+   *
+   * @default false
+   */
+  tailwindcss?: boolean | TailwindCSSOptions
 
   /**
    * Enable Vue support.
