@@ -1,3 +1,4 @@
+import { isPackageExists } from "local-pkg";
 import { GLOB_JSX, GLOB_TSX } from "../globs";
 import type { FlatConfigItem } from "../types";
 import { ensure, interop } from "../utils";
@@ -57,6 +58,10 @@ export async function react(options: ReactOptions = {}): Promise<FlatConfigItem[
     interop(import("eslint-plugin-react-refresh")),
     ...(a11y ? [interop(import("eslint-plugin-jsx-a11y"))] : []),
   ] as const);
+
+  const isAllowConstantExport = ["vite"].some(
+    (i) => isPackageExists(i),
+  );
 
   return [
     {
@@ -296,15 +301,17 @@ export async function react(options: ReactOptions = {}): Promise<FlatConfigItem[
         "react/prop-types": "error",
         "react/react-in-jsx-scope": "off",
         "react/require-render-return": "error",
+
         // recommended rules react-hooks
         "react-hooks/exhaustive-deps": "warn",
         "react-hooks/rules-of-hooks": "error",
 
         // react refresh
-        "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+        "react-refresh/only-export-components": ["warn", { allowConstantExport: isAllowConstantExport }],
 
         ...typescript
           ? {
+              "react/jsx-no-undef": "off",
               "react/prop-type": "off",
             }
           : {},
