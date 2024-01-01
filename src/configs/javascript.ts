@@ -276,5 +276,12 @@ export async function javascript(
         "no-console": "off",
       },
     },
+    {
+      name: "luxass:playground-overrides",
+      files: [`**/playground.${GLOB_SRC_EXT}`],
+      rules: {
+        "no-console": "off",
+      },
+    },
   ];
 }

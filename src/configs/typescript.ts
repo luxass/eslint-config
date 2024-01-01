@@ -4,7 +4,7 @@ import pluginAntfu from "eslint-plugin-antfu";
 import type {
   FlatConfigItem,
 } from "../types";
-import { GLOB_SRC, GLOB_TS, GLOB_TSX } from "../globs";
+import { GLOB_SRC, GLOB_SRC_EXT, GLOB_TS, GLOB_TSX } from "../globs";
 import { interop, renameRules, toArray } from "../utils";
 
 export interface TypeScriptOptions {
@@ -233,6 +233,13 @@ export async function typescript(
       files: ["**/*.{test,spec}.ts?(x)"],
       rules: {
         "no-unused-expressions": "off",
+      },
+    },
+    {
+      name: "luxass:typescript:playground-overrides",
+      files: [`**/playground.${GLOB_SRC_EXT}`],
+      rules: {
+        "no-console": "off",
       },
     },
     {
