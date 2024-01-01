@@ -114,7 +114,7 @@ export async function luxass(
     }));
   }
 
-  if (enableReact) {
+  if (enableReact || enableNextJS) {
     configs.push(react({
       overrides: getOverrides(options, "react"),
       typescript: !!enableTypeScript,
