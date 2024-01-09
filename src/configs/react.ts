@@ -27,7 +27,7 @@ export interface ReactOptions {
    * Glob patterns for JSX & TSX files.
    *
    * @default [GLOB_JSX, GLOB_TSX]
-   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
   files?: string[]
 }

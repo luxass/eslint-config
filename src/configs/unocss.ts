@@ -21,7 +21,7 @@ export interface UnoCSSOptions {
    * Glob patterns for files that includes unocss classes.
    *
    * @default GLOB_SRC
-   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
   files?: string[]
 
