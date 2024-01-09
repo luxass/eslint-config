@@ -134,7 +134,7 @@
     "eslint-plugin-antfu": "^2.1.1",
     "eslint-plugin-astro": "^0.31.0",
     "eslint-plugin-i": "^2.29.1",
-    "eslint-plugin-jsdoc": "^46.9.1",
+    "eslint-plugin-jsdoc": "^48.0.0",
     "eslint-plugin-jsonc": "^2.11.2",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-markdown": "^3.0.1",
