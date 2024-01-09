@@ -3,9 +3,6 @@
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 
-> [!IMPORTANT]
-> The configuration is not currently finished, it could change at any moment.
-
 ## ✨ Features
 
 - Based on [Antfu's ESLint Config](https://github.com/antfu/eslint-config)
