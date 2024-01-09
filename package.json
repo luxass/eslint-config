@@ -89,7 +89,8 @@
     "eslint-plugin-react": ">=7.33.2",
     "eslint-plugin-react-hooks": ">=4.6.0",
     "eslint-plugin-react-refresh": ">=0.4",
-    "eslint-plugin-tailwindcss": ">=3.13.0"
+    "eslint-plugin-tailwindcss": ">=3.13.0",
+    "eslint-plugin-vuejs-accessibility": ">=2.2.0"
   },
   "peerDependenciesMeta": {
     "@unocss/eslint-plugin": {
@@ -111,6 +112,9 @@
       "optional": true
     },
     "eslint-plugin-tailwindcss": {
+      "optional": true
+    },
+    "eslint-plugin-vuejs-accessibility": {
       "optional": true
     }
   },
@@ -142,7 +146,6 @@
     "eslint-plugin-unused-imports": "^3.0.0",
     "eslint-plugin-vitest": "^0.3.20",
     "eslint-plugin-vue": "^9.19.2",
-    "eslint-plugin-vuejs-accessibility": "^2.2.0",
     "eslint-plugin-yml": "^1.11.0",
     "eslint-processor-vue-blocks": "^0.1.1",
     "globals": "^13.24.0",
@@ -172,6 +175,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-tailwindcss": "^3.13.0",
+    "eslint-plugin-vuejs-accessibility": "^2.2.0",
     "lint-staged": "^15.2.0",
     "simple-git-hooks": "^2.9.0",
     "tsup": "^8.0.1",

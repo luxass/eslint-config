@@ -4,7 +4,7 @@ import type {
   FlatConfigItem,
 } from "../types";
 import { GLOB_VUE } from "../globs";
-import { interop } from "../utils";
+import { ensure, interop } from "../utils";
 import type { StylisticConfig } from "./stylistic";
 
 export interface VueOptions {
@@ -36,9 +36,9 @@ export interface VueOptions {
   sfcBlocks?: boolean | VueBlocksOptions
 
   /**
-   * Enable Vue A11y support.
+   * Enable Vue a11y support.
    *
-   * @default true
+   * @default false
    */
   a11y?: boolean
 
@@ -46,7 +46,7 @@ export interface VueOptions {
    * Glob patterns for Vue files.
    *
    * @default GLOB_VUE
-   * @see https://github.com/luxass/eslint-config/blob/ba9952eeb0737ff96444b1aa814e2a35b3cf2c74/src/globs.ts#L30
+   * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
   files?: string[]
 }
@@ -55,11 +55,15 @@ export async function vue(
   options: VueOptions = {},
 ): Promise<FlatConfigItem[]> {
   const {
-    a11y = true,
+    a11y = false,
     files = [GLOB_VUE],
     overrides = {},
     stylistic = true,
   } = options;
+
+  if (a11y) {
+    await ensure(["eslint-plugin-vuejs-accessibility"]);
+  }
 
   const [
     pluginVue,
@@ -154,7 +158,6 @@ export async function vue(
         "vue/multi-word-component-names": "off",
         "vue/no-dupe-keys": "off",
         "vue/no-empty-pattern": "error",
-        "vue/no-extra-parens": ["error", "functions"],
         "vue/no-irregular-whitespace": "error",
         "vue/no-loss-of-precision": "error",
         "vue/no-restricted-syntax": [
