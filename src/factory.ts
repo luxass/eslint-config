@@ -97,6 +97,7 @@ export async function luxass(
     configs.push(typescript({
       ...resolveSubOptions(options, "typescript"),
       exts,
+      overrides: getOverrides(options, "typescript"),
     }));
   }
 
@@ -125,6 +126,7 @@ export async function luxass(
     configs.push(
       nextjs({
         ...resolveSubOptions(options, "nextjs"),
+        overrides: getOverrides(options, "nextjs"),
       }),
     );
   }
@@ -133,6 +135,7 @@ export async function luxass(
     configs.push(
       vue({
         ...resolveSubOptions(options, "vue"),
+        overrides: getOverrides(options, "vue"),
         stylistic: stylisticOptions,
         typescript: !!enableTypeScript,
       }),
@@ -143,6 +146,7 @@ export async function luxass(
     configs.push(
       astro({
         ...resolveSubOptions(options, "astro"),
+        overrides: getOverrides(options, "astro"),
         typescript: !!enableTypeScript,
       }),
     );
@@ -189,12 +193,10 @@ export async function luxass(
 
   if (options.markdown ?? true) {
     configs.push(
-      markdown(
-        {
-          exts,
-          overrides: getOverrides(options, "markdown"),
-        },
-      ),
+      markdown({
+        exts,
+        overrides: getOverrides(options, "markdown"),
+      }),
     );
   }
 
