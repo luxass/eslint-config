@@ -12,14 +12,14 @@ export interface ReactOptions {
   /**
    * Enable TypeScript support.
    *
-   * @default false
+   * @default true
    */
   typescript?: boolean
 
   /**
    * Enable React A11y support.
    *
-   * @default true
+   * @default false
    */
   a11y?: boolean
 
