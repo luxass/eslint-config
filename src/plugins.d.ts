@@ -63,6 +63,20 @@ declare module "@eslint-community/eslint-plugin-eslint-comments" {
   export default plugin;
 }
 
+declare module "eslint-plugin-solid" {
+  import type { ESLint, Linter } from "eslint";
+
+  const plugin: ESLint.Plugin & {
+    configs: {
+      recommended: ESLint.ConfigData & {
+        rules: Linter.RulesRecord
+      }
+    }
+  };
+
+  export default plugin;
+}
+
 declare module "eslint-plugin-yml" {
   import type { ESLint, Linter } from "eslint";
 
