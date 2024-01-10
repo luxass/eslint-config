@@ -30,6 +30,7 @@ import {
 import { combine, getOverrides, interop, resolveSubOptions } from "./utils";
 import { FLAT_CONFIG_PROPS, VUE_PACKAGES } from "./constants";
 import { toml } from "./configs/toml";
+import { solid } from "./configs/solid";
 
 export async function luxass(
   options: ConfigOptions & FlatConfigItem = {},
@@ -42,6 +43,7 @@ export async function luxass(
     gitignore: enableGitignore = true,
     nextjs: enableNextJS = false,
     react: enableReact = false,
+    solid: enableSolid = false,
     tailwindcss: enableTailwindCSS = false,
     typescript: enableTypeScript = isPackageExists("typescript"),
     unocss: enableUnoCSS = false,
@@ -127,6 +129,22 @@ export async function luxass(
       nextjs({
         ...resolveSubOptions(options, "nextjs"),
         overrides: getOverrides(options, "nextjs"),
+      }),
+    );
+  }
+
+  if (enableSolid) {
+    configs.push(
+      // TODO: Analyze if this way is better for performance
+      // await interop(import("./configs/solid")).then((plugin) => plugin.solid({
+      //   ...resolveSubOptions(options, "solid"),
+      //   overrides: getOverrides(options, "solid"),
+      //   typescript: !!enableTypeScript,
+      // })),
+      solid({
+        ...resolveSubOptions(options, "solid"),
+        overrides: getOverrides(options, "solid"),
+        typescript: !!enableTypeScript,
       }),
     );
   }

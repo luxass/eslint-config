@@ -42,6 +42,7 @@ import type {
 } from "./configs";
 import type { NoOnlyTestsOptions } from "./custom-rules/no-only-tests";
 import type { TOMLOptions } from "./configs/toml";
+import type { SolidOptions } from "./configs/solid";
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
   [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>;
@@ -253,4 +254,14 @@ export interface ConfigOptions {
    * @default []
    */
   exts?: string[]
+
+  /**
+   * Enable Solid support.
+   *
+   * Requires installing:
+   * - `eslint-plugin-solid`
+   *
+   * @default false
+   */
+  solid?: boolean | SolidOptions
 }
