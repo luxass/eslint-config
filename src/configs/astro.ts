@@ -61,9 +61,10 @@ export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {
       name: "luxass:astro:rules",
       files,
       languageOptions: {
-        // @ts-expect-error hmmm
         globals: {
-          ...pluginAstro.configs.base.overrides[0].env,
+          "astro/astro": true,
+          "es2020": true,
+          "node": true,
         },
         parser: parserAstro,
         parserOptions: {
@@ -74,29 +75,75 @@ export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {
           sourceType: "module",
         },
       },
-      // @ts-expect-error hmmm
       rules: {
+        // Disallow conflicting set directives and child contents
+        // https://ota-meshi.github.io/eslint-plugin-astro/rules/no-conflict-set-directives/
+        "astro/no-conflict-set-directives": "error",
+
+        // Disallow using deprecated Astro.canonicalURL
+        // https://ota-meshi.github.io/eslint-plugin-astro/rules/no-deprecated-astro-canonicalurl/
+        "astro/no-deprecated-astro-canonicalurl": "error",
+
+        // Disallow using deprecated Astro.fetchContent()
+        // https://ota-meshi.github.io/eslint-plugin-astro/rules/no-deprecated-astro-fetchcontent/
+        "astro/no-deprecated-astro-fetchcontent": "error",
+
+        // Disallow using deprecated Astro.resolve()
+        // https://ota-meshi.github.io/eslint-plugin-astro/rules/no-deprecated-astro-resolve/
+        "astro/no-deprecated-astro-resolve": "error",
+
+        // Disallow using deprecated getEntryBySlug()
+        // https://ota-meshi.github.io/eslint-plugin-astro/rules/no-deprecated-getentrybyslug/
+        "astro/no-deprecated-getentrybyslug": "error",
+
+        // Disallow unused define:vars={...} in style tag
+        // https://ota-meshi.github.io/eslint-plugin-astro/rules/no-unused-define-vars-in-style/
+        "astro/no-unused-define-vars-in-style": "error",
+
+        // Disallow warnings when compiling
+        // https://ota-meshi.github.io/eslint-plugin-astro/rules/valid-compile/
+        "astro/valid-compile": "error",
+
         "style/jsx-closing-tag-location": "off",
         "style/jsx-indent": "off",
         "style/jsx-one-expression-per-line": "off",
-        ...pluginAstro.configs.all.rules,
-
         "style/multiline-ternary": ["error", "never"],
+
         ...overrides,
       },
     },
     {
-      name: "luxass:astro:rules:scripts",
+      name: "luxass:astro:scripts-js",
       files: [
         "**/*.astro/*.js",
         "*.astro/*.js",
       ],
       languageOptions: {
-        // @ts-expect-error hmmm
         globals: {
-          ...pluginAstro.configs.base.overrides[1].env,
+          browser: true,
+          es2020: true,
         },
         parserOptions: {
+          sourceType: "module",
+        },
+      },
+    },
+    {
+      name: "luxass:astro:scripts-ts",
+      files: [
+        "**/*.astro/*.ts",
+        "*.astro/*.ts",
+      ],
+      languageOptions: {
+        globals: {
+          browser: true,
+          es2020: true,
+        },
+        parser: typescript
+          ? await interop(import("@typescript-eslint/parser")) as any
+          : null,
+        parserOptions: {
+          project: null,
           sourceType: "module",
         },
       },
