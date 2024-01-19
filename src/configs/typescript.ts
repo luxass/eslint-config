@@ -102,7 +102,7 @@ export async function typescript(
     return {
       files,
       ...ignores ? { ignores } : {},
-      name: `antfu:typescript:${typeAware ? "type-aware-parser" : "parser"}`,
+      name: `luxass:typescript:${typeAware ? "type-aware-parser" : "parser"}`,
       languageOptions: {
         parser: parserTs,
         parserOptions: {
@@ -138,20 +138,6 @@ export async function typescript(
     {
       name: "luxass:typescript:rules",
       files,
-      languageOptions: {
-        parser: parserTs,
-        parserOptions: {
-          extraFileExtensions: exts.map((ext) => `.${ext}`),
-          sourceType: "module",
-          ...(tsconfigPath
-            ? {
-                project: tsconfigPath,
-                tsconfigRootDir: process.cwd(),
-              }
-            : {}),
-          ...(parserOptions as any),
-        },
-      },
       rules: {
         ...renameRules(
           pluginTs.configs["eslint-recommended"].overrides![0].rules!,
@@ -241,7 +227,7 @@ export async function typescript(
       },
     },
     {
-      name: "antfu:typescript:rules-type-aware",
+      name: "luxass:typescript:rules-type-aware",
       files: filesTypeAware,
       rules: {
         ...tsconfigPath ? typeAwareRules : {},
