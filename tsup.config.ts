@@ -16,5 +16,6 @@ export default defineConfig({
   },
   dts: true,
   skipNodeModulesBundle: true,
-  cjsInterop: true,
+  bundle: true,
+  // treeshake: true,
 })
