@@ -52,3 +52,9 @@ export type { TailwindCSSOptions } from "./tailwindcss"
 
 export { formatters } from "./formatters"
 export type { FormattersOptions } from "./formatters"
+
+export { toml } from "./toml"
+export type { TOMLOptions } from "./toml"
+
+export { solid } from "./solid"
+export type { SolidOptions } from "./solid"
