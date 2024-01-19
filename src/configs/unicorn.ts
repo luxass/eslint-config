@@ -9,7 +9,6 @@ export function unicorn(): FlatConfigItem[] {
         unicorn: pluginUnicorn,
       },
       rules: {
-
         // Pass error message when throwing errors
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/error-message.md
         "unicorn/error-message": "error",

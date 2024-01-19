@@ -150,7 +150,7 @@ export default luxass({
 
   // `.eslintignore` is no longer supported in Flat config, use `ignores` instead.
   ignores: [
-    "./fixtures"
+    "**/fixtures"
   ]
 });
 ```

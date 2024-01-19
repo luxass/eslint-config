@@ -11,21 +11,21 @@ export interface VueOptions {
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem["rules"]
+  overrides?: FlatConfigItem["rules"];
 
   /**
    * Enable stylistic rules.
    *
    * @default true
    */
-  stylistic?: boolean | StylisticConfig
+  stylistic?: boolean | StylisticConfig;
 
   /**
    * Enable TypeScript support.
    *
    * @default false
    */
-  typescript?: boolean
+  typescript?: boolean;
 
   /**
    * Create virtual files for Vue SFC blocks to enable linting.
@@ -33,14 +33,14 @@ export interface VueOptions {
    * @see https://github.com/antfu/eslint-processor-vue-blocks
    * @default true
    */
-  sfcBlocks?: boolean | VueBlocksOptions
+  sfcBlocks?: boolean | VueBlocksOptions;
 
   /**
    * Enable Vue a11y support.
    *
    * @default false
    */
-  a11y?: boolean
+  a11y?: boolean;
 
   /**
    * Glob patterns for Vue files.
@@ -48,7 +48,7 @@ export interface VueOptions {
    * @default GLOB_VUE
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
-  files?: string[]
+  files?: string[];
 }
 
 export async function vue(
@@ -137,6 +137,8 @@ export async function vue(
         ],
         "vue/component-name-in-template-casing": ["error", "PascalCase"],
         "vue/component-options-name-casing": ["error", "PascalCase"],
+        // this is deprecated
+        "vue/component-tags-order": "off",
         "vue/custom-event-name-casing": ["error", "camelCase"],
         "vue/define-macros-order": [
           "error",
