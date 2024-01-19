@@ -12,7 +12,6 @@ import type {
   ReactRules,
   RenamePrefix,
   RuleConfig,
-
   VitestRules,
   VueRules,
   YmlRules,
@@ -32,7 +31,9 @@ import type {
   JavaScriptOptions,
   NextJSOptions,
   ReactOptions,
+  SolidOptions,
   StylisticConfig,
+  TOMLOptions,
   TailwindCSSOptions,
   TestOptions,
   TypeScriptOptions,
@@ -41,8 +42,6 @@ import type {
   YAMLOptions,
 } from "./configs"
 import type { NoOnlyTestsOptions } from "./custom-rules/no-only-tests"
-import type { TOMLOptions } from "./configs/toml"
-import type { SolidOptions } from "./configs/solid"
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
   [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>;
