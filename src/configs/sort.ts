@@ -1,4 +1,4 @@
-import type { FlatConfigItem } from "../types";
+import type { FlatConfigItem } from "../types"
 
 /**
  * Sort package.json
@@ -87,7 +87,7 @@ export function sortPackageJson(): FlatConfigItem[] {
         ],
       },
     },
-  ];
+  ]
 }
 
 /**
@@ -225,5 +225,5 @@ export function sortTsconfig(): FlatConfigItem[] {
         ],
       },
     },
-  ];
+  ]
 }

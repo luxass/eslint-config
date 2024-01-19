@@ -1,8 +1,8 @@
-import globals from "globals";
-import pluginUnusedImports from "eslint-plugin-unused-imports";
-import pluginAntfu from "eslint-plugin-antfu";
-import type { FlatConfigItem } from "../types";
-import { GLOB_SRC, GLOB_SRC_EXT } from "../globs";
+import globals from "globals"
+import pluginUnusedImports from "eslint-plugin-unused-imports"
+import pluginAntfu from "eslint-plugin-antfu"
+import type { FlatConfigItem } from "../types"
+import { GLOB_SRC, GLOB_SRC_EXT } from "../globs"
 
 export interface JavaScriptOptions {
   /**
@@ -20,7 +20,7 @@ export interface JavaScriptOptions {
 export async function javascript(
   options: JavaScriptOptions = {},
 ): Promise<FlatConfigItem[]> {
-  const { editor = false, overrides = {} } = options;
+  const { editor = false, overrides = {} } = options
 
   return [
     {
@@ -280,5 +280,5 @@ export async function javascript(
         "no-console": "off",
       },
     },
-  ];
+  ]
 }

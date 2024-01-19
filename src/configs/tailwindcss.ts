@@ -1,6 +1,6 @@
-import { GLOB_SRC } from "../globs";
-import type { FlatConfigItem } from "../types";
-import { ensure, interop } from "../utils";
+import { GLOB_SRC } from "../globs"
+import type { FlatConfigItem } from "../types"
+import { ensure, interop } from "../utils"
 
 export interface TailwindCSSOptions {
   /**
@@ -21,17 +21,17 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Fla
   const {
     files = [GLOB_SRC],
     overrides,
-  } = options;
+  } = options
 
   await ensure([
     "eslint-plugin-tailwindcss",
-  ]);
+  ])
 
   const [
     pluginTailwindCSS,
   ] = await Promise.all([
     interop(import("eslint-plugin-tailwindcss")),
-  ] as const);
+  ] as const)
 
   return [
     {
@@ -75,5 +75,5 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Fla
         ...overrides,
       },
     },
-  ];
+  ]
 }

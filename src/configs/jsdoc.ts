@@ -1,6 +1,6 @@
-import type { FlatConfigItem } from "../types";
-import { interop } from "../utils";
-import type { StylisticConfig } from "./stylistic";
+import type { FlatConfigItem } from "../types"
+import { interop } from "../utils"
+import type { StylisticConfig } from "./stylistic"
 
 export interface JSDOCOptions {
   /**
@@ -20,7 +20,7 @@ export async function jsdoc(options: JSDOCOptions = {}): Promise<FlatConfigItem[
   const {
     overrides,
     stylistic = true,
-  } = options;
+  } = options
 
   return [
     {
@@ -55,5 +55,5 @@ export async function jsdoc(options: JSDOCOptions = {}): Promise<FlatConfigItem[
         ...overrides,
       },
     },
-  ];
+  ]
 }

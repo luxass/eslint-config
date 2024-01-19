@@ -1,5 +1,5 @@
-import pluginNode from "eslint-plugin-n";
-import type { FlatConfigItem } from "../types";
+import pluginNode from "eslint-plugin-n"
+import type { FlatConfigItem } from "../types"
 
 export function node(): FlatConfigItem[] {
   return [
@@ -19,5 +19,5 @@ export function node(): FlatConfigItem[] {
         "node/process-exit-as-throw": "error",
       },
     },
-  ];
+  ]
 }

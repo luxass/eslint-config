@@ -1,5 +1,5 @@
-import eslintCommentsPlugin from "@eslint-community/eslint-plugin-eslint-comments";
-import type { FlatConfigItem } from "../types";
+import eslintCommentsPlugin from "@eslint-community/eslint-plugin-eslint-comments"
+import type { FlatConfigItem } from "../types"
 
 export async function comments(): Promise<FlatConfigItem[]> {
   return [
@@ -26,5 +26,5 @@ export async function comments(): Promise<FlatConfigItem[]> {
         "eslint-comments/no-unused-enable": "off",
       },
     },
-  ];
+  ]
 }

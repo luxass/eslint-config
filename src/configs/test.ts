@@ -1,10 +1,10 @@
-import type { FlatConfigItem } from "../types";
-import { GLOB_TESTS } from "../globs";
-import { interop } from "../utils";
+import type { FlatConfigItem } from "../types"
+import { GLOB_TESTS } from "../globs"
+import { interop } from "../utils"
 
 import {
   noOnlyTests,
-} from "../custom-rules/no-only-tests";
+} from "../custom-rules/no-only-tests"
 
 export interface TestOptions {
   /**
@@ -35,13 +35,13 @@ export async function test(
     editor = false,
     files = GLOB_TESTS,
     overrides = {},
-  } = options;
+  } = options
 
   const [
     pluginVitest,
   ] = await Promise.all([
     interop(import("eslint-plugin-vitest")),
-  ] as const);
+  ] as const)
 
   return [
     {
@@ -72,5 +72,5 @@ export async function test(
         ...overrides,
       },
     },
-  ];
+  ]
 }

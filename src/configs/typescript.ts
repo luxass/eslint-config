@@ -1,11 +1,11 @@
-import process from "node:process";
-import type { ParserOptions } from "@typescript-eslint/parser";
-import pluginAntfu from "eslint-plugin-antfu";
+import process from "node:process"
+import type { ParserOptions } from "@typescript-eslint/parser"
+import pluginAntfu from "eslint-plugin-antfu"
 import type {
   FlatConfigItem,
-} from "../types";
-import { GLOB_SRC, GLOB_SRC_EXT, GLOB_TS, GLOB_TSX } from "../globs";
-import { interop, renameRules, toArray } from "../utils";
+} from "../types"
+import { GLOB_SRC, GLOB_SRC_EXT, GLOB_TS, GLOB_TSX } from "../globs"
+import { interop, renameRules, toArray } from "../utils"
 
 export interface TypeScriptOptions {
   /**
@@ -14,18 +14,18 @@ export interface TypeScriptOptions {
    * @example ["vue"]
    * @default []
    */
-  exts?: string[];
+  exts?: string[]
 
   /**
    * Additional parser options for TypeScript.
    */
-  parserOptions?: Partial<ParserOptions>;
+  parserOptions?: Partial<ParserOptions>
 
   /**
    * When this options is provided, type aware rules will be enabled.
    * @see https://typescript-eslint.io/linting/typed-linting/
    */
-  tsconfigPath?: string | string[];
+  tsconfigPath?: string | string[]
 
   /**
    * Glob patterns for TypeScript files.
@@ -33,18 +33,18 @@ export interface TypeScriptOptions {
    * @default GLOB_SRC
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
-  files?: string[];
+  files?: string[]
 
   /**
    * Glob patterns for files that should be type aware.
    * @default ['**\/*.{ts,tsx}']
    */
-  typeAwareFileS?: string[];
+  typeAwareFileS?: string[]
 
   /**
    * Overrides for the config.
    */
-  overrides?: FlatConfigItem["rules"];
+  overrides?: FlatConfigItem["rules"]
 }
 export async function typescript(
   options: TypeScriptOptions = {},
@@ -53,20 +53,20 @@ export async function typescript(
     exts = [],
     overrides = {},
     parserOptions = {},
-  } = options ?? {};
+  } = options ?? {}
 
   const files = options.files ?? [
     GLOB_SRC,
     ...exts.map((ext) => `**/*.${ext}`),
-  ];
+  ]
 
-  const filesTypeAware = options.typeAwareFileS ?? [GLOB_TS, GLOB_TSX];
+  const filesTypeAware = options.typeAwareFileS ?? [GLOB_TS, GLOB_TSX]
 
   const tsconfigPath = options?.tsconfigPath
     ? toArray(options.tsconfigPath)
-    : undefined;
+    : undefined
 
-  const isTypeAware = !!tsconfigPath;
+  const isTypeAware = !!tsconfigPath
 
   const typeAwareRules: FlatConfigItem["rules"] = {
     "dot-notation": "off",
@@ -88,7 +88,7 @@ export async function typescript(
     "ts/restrict-plus-operands": "error",
     "ts/restrict-template-expressions": "error",
     "ts/unbound-method": "error",
-  };
+  }
 
   const [
     pluginTs,
@@ -96,7 +96,7 @@ export async function typescript(
   ] = await Promise.all([
     interop(import("@typescript-eslint/eslint-plugin")),
     interop(import("@typescript-eslint/parser")),
-  ] as const);
+  ] as const)
 
   function makeParser(typeAware: boolean, files: string[], ignores?: string[]): FlatConfigItem {
     return {
@@ -117,7 +117,7 @@ export async function typescript(
           ...parserOptions as any,
         },
       },
-    };
+    }
   }
 
   return [
@@ -280,5 +280,5 @@ export async function typescript(
         "ts/no-var-requires": "off",
       },
     },
-  ];
+  ]
 }

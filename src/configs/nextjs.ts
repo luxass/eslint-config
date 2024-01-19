@@ -1,6 +1,6 @@
-import { GLOB_NEXTJS_OG, GLOB_NEXTJS_ROUTES, GLOB_SRC } from "../globs";
-import type { FlatConfigItem } from "../types";
-import { ensure, interop } from "../utils";
+import { GLOB_NEXTJS_OG, GLOB_NEXTJS_ROUTES, GLOB_SRC } from "../globs"
+import type { FlatConfigItem } from "../types"
+import { ensure, interop } from "../utils"
 
 export interface NextJSOptions {
   /**
@@ -32,13 +32,13 @@ export async function nextjs(
     files = [GLOB_SRC],
     overrides,
     rootDir,
-  } = options;
+  } = options
 
   await ensure([
     "@next/eslint-plugin-next",
-  ]);
+  ])
 
-  const pluginNextjs = await interop(import("@next/eslint-plugin-next"));
+  const pluginNextjs = await interop(import("@next/eslint-plugin-next"))
 
   return [
     {
@@ -107,5 +107,5 @@ export async function nextjs(
         }],
       },
     },
-  ];
+  ]
 }

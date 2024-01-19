@@ -2,7 +2,7 @@
  * Vendor types from Prettier so we don't rely on the dependency.
  */
 
-export type VendoredPrettierOptions = Partial<VendoredPrettierOptionsRequired>;
+export type VendoredPrettierOptions = Partial<VendoredPrettierOptionsRequired>
 
 export interface VendoredPrettierOptionsRequired {
   /**
@@ -122,7 +122,7 @@ export type BuiltInParserName =
   | "scss"
   | "typescript"
   | "vue"
-  | "yaml";
+  | "yaml"
 
 // This utility is here to handle the case where you have an explicit union
 // between string literals and the generic string type. It would normally
@@ -133,4 +133,4 @@ export type BuiltInParserName =
 //   https://github.com/microsoft/TypeScript/issues/29729#issuecomment-700527227
 export type LiteralUnion<T extends U, U = string> =
   | T
-  | (Pick<U, never> & { _?: never | undefined });
+  | (Pick<U, never> & { _?: never | undefined })

@@ -1,5 +1,5 @@
-import pluginUnicorn from "eslint-plugin-unicorn";
-import type { FlatConfigItem } from "../types";
+import pluginUnicorn from "eslint-plugin-unicorn"
+import type { FlatConfigItem } from "../types"
 
 export function unicorn(): FlatConfigItem[] {
   return [
@@ -62,5 +62,5 @@ export function unicorn(): FlatConfigItem[] {
         "unicorn/throw-new-error": "error",
       },
     },
-  ];
+  ]
 }

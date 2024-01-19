@@ -1,7 +1,7 @@
-import process from "node:process";
-import { existsSync } from "node:fs";
-import { isPackageExists } from "local-pkg";
-import type { Awaitable, ConfigOptions, FlatConfigItem, UserConfigItem } from "./types";
+import process from "node:process"
+import { existsSync } from "node:fs"
+import { isPackageExists } from "local-pkg"
+import type { Awaitable, ConfigOptions, FlatConfigItem, UserConfigItem } from "./types"
 import {
   astro,
   comments,
@@ -26,11 +26,11 @@ import {
   unocss,
   vue,
   yaml,
-} from "./configs";
-import { combine, getOverrides, interop, resolveSubOptions } from "./utils";
-import { FLAT_CONFIG_PROPS, VUE_PACKAGES } from "./constants";
-import { toml } from "./configs/toml";
-import { solid } from "./configs/solid";
+} from "./configs"
+import { combine, getOverrides, interop, resolveSubOptions } from "./utils"
+import { FLAT_CONFIG_PROPS, VUE_PACKAGES } from "./constants"
+import { toml } from "./configs/toml"
+import { solid } from "./configs/solid"
 
 export async function luxass(
   options: ConfigOptions & FlatConfigItem = {},
@@ -48,26 +48,26 @@ export async function luxass(
     typescript: enableTypeScript = isPackageExists("typescript"),
     unocss: enableUnoCSS = false,
     vue: enableVue = VUE_PACKAGES.some((i) => isPackageExists(i)),
-  } = options;
+  } = options
 
   const stylisticOptions
     = options.stylistic === false
       ? false
       : typeof options.stylistic === "object"
         ? options.stylistic
-        : {};
+        : {}
   if (stylisticOptions && !("jsx" in stylisticOptions)) {
-    stylisticOptions.jsx = options.jsx ?? true;
+    stylisticOptions.jsx = options.jsx ?? true
   }
 
-  const configs: Awaitable<FlatConfigItem[]>[] = [];
+  const configs: Awaitable<FlatConfigItem[]>[] = []
 
   if (enableGitignore) {
     if (typeof enableGitignore !== "boolean") {
-      configs.push(interop(import("eslint-config-flat-gitignore")).then((plugin) => [plugin(enableGitignore)]));
+      configs.push(interop(import("eslint-config-flat-gitignore")).then((plugin) => [plugin(enableGitignore)]))
     } else {
       if (existsSync(".gitignore")) {
-        configs.push(interop(import("eslint-config-flat-gitignore")).then((plugin) => [plugin()]));
+        configs.push(interop(import("eslint-config-flat-gitignore")).then((plugin) => [plugin()]))
       }
     }
   }
@@ -89,10 +89,10 @@ export async function luxass(
     }),
     unicorn(),
     perfectionist(),
-  );
+  )
 
   if (enableVue) {
-    exts.push("vue");
+    exts.push("vue")
   }
 
   if (enableTypeScript) {
@@ -100,28 +100,28 @@ export async function luxass(
       ...resolveSubOptions(options, "typescript"),
       exts,
       overrides: getOverrides(options, "typescript"),
-    }));
+    }))
   }
 
   if (stylisticOptions) {
     configs.push(stylistic({
       ...stylisticOptions,
       overrides: getOverrides(options, "stylistic"),
-    }));
+    }))
   }
 
   if (options.test ?? true) {
     configs.push(test({
       editor,
       overrides: getOverrides(options, "test"),
-    }));
+    }))
   }
 
   if (enableReact || enableNextJS) {
     configs.push(react({
       overrides: getOverrides(options, "react"),
       typescript: !!enableTypeScript,
-    }));
+    }))
   }
 
   if (enableNextJS) {
@@ -130,7 +130,7 @@ export async function luxass(
         ...resolveSubOptions(options, "nextjs"),
         overrides: getOverrides(options, "nextjs"),
       }),
-    );
+    )
   }
 
   if (enableSolid) {
@@ -146,7 +146,7 @@ export async function luxass(
         overrides: getOverrides(options, "solid"),
         typescript: !!enableTypeScript,
       }),
-    );
+    )
   }
 
   if (enableVue) {
@@ -157,7 +157,7 @@ export async function luxass(
         stylistic: stylisticOptions,
         typescript: !!enableTypeScript,
       }),
-    );
+    )
   }
 
   if (enableAstro) {
@@ -167,21 +167,21 @@ export async function luxass(
         overrides: getOverrides(options, "astro"),
         typescript: !!enableTypeScript,
       }),
-    );
+    )
   }
 
   if (enableUnoCSS) {
     configs.push(unocss({
       ...resolveSubOptions(options, "unocss"),
       overrides: getOverrides(options, "unocss"),
-    }));
+    }))
   }
 
   if (enableTailwindCSS) {
     configs.push(tailwindcss({
       ...resolveSubOptions(options, "tailwindcss"),
       overrides: getOverrides(options, "tailwindcss"),
-    }));
+    }))
   }
 
   if (options.jsonc ?? true) {
@@ -192,21 +192,21 @@ export async function luxass(
       }),
       sortPackageJson(),
       sortTsconfig(),
-    );
+    )
   }
 
   if (options.yaml ?? true) {
     configs.push(yaml({
       overrides: getOverrides(options, "yaml"),
       stylistic: stylisticOptions,
-    }));
+    }))
   }
 
   if (options.toml ?? true) {
     configs.push(toml({
       overrides: getOverrides(options, "toml"),
       stylistic: stylisticOptions,
-    }));
+    }))
   }
 
   if (options.markdown ?? true) {
@@ -215,30 +215,30 @@ export async function luxass(
         exts,
         overrides: getOverrides(options, "markdown"),
       }),
-    );
+    )
   }
 
   if (options.formatters) {
     configs.push(formatters(
       options.formatters,
       typeof stylisticOptions === "boolean" ? {} : stylisticOptions,
-    ));
+    ))
   }
 
   // User can optionally pass a flat config item to the first argument
   // We pick the known keys as ESLint would do schema validation
   const fusedConfig = FLAT_CONFIG_PROPS.reduce((acc, key) => {
     if (key in options) {
-      acc[key] = options[key] as any;
+      acc[key] = options[key] as any
     }
-    return acc;
-  }, {} as FlatConfigItem);
+    return acc
+  }, {} as FlatConfigItem)
 
   if (Object.keys(fusedConfig).length) {
-    configs.push([fusedConfig]);
+    configs.push([fusedConfig])
   }
 
-  const merged = combine(...configs, ...userConfigs);
+  const merged = combine(...configs, ...userConfigs)
 
-  return merged;
+  return merged
 }

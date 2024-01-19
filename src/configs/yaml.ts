@@ -1,7 +1,7 @@
-import type { FlatConfigItem } from "../types";
-import { GLOB_YAML } from "../globs";
-import { interop } from "../utils";
-import type { StylisticConfig } from "./stylistic";
+import type { FlatConfigItem } from "../types"
+import { GLOB_YAML } from "../globs"
+import { interop } from "../utils"
+import type { StylisticConfig } from "./stylistic"
 
 export interface YAMLOptions {
   /**
@@ -32,7 +32,7 @@ export async function yaml(
     files = [GLOB_YAML],
     overrides = {},
     stylistic = true,
-  } = options;
+  } = options
 
   const [
     pluginYaml,
@@ -40,12 +40,12 @@ export async function yaml(
   ] = await Promise.all([
     interop(import("eslint-plugin-yml")),
     interop(import("yaml-eslint-parser")),
-  ] as const);
+  ] as const)
 
   const {
     indent = 2,
     quotes = "double",
-  } = typeof stylistic === "boolean" ? {} : stylistic;
+  } = typeof stylistic === "boolean" ? {} : stylistic
 
   return [
     {
@@ -103,5 +103,5 @@ export async function yaml(
         "yaml/no-empty-mapping-value": "off",
       },
     },
-  ];
+  ]
 }

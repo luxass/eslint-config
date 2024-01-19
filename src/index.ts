@@ -1,10 +1,10 @@
 import {
   luxass,
-} from "./factory";
+} from "./factory"
 
-export * from "./configs";
-export * from "./factory";
+export * from "./configs"
+export * from "./factory"
 
-export type { ConfigOptions } from "./types";
+export type { ConfigOptions } from "./types"
 
-export default luxass;
+export default luxass

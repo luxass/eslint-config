@@ -1,4 +1,4 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from "tsup"
 
 export default defineConfig({
   entry: [
@@ -12,9 +12,9 @@ export default defineConfig({
   outExtension(ctx) {
     return {
       js: ctx.format === "cjs" ? ".cjs" : ".mjs",
-    };
+    }
   },
   dts: true,
   skipNodeModulesBundle: true,
   cjsInterop: true,
-});
+})

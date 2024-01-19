@@ -1,10 +1,10 @@
-import type { FlatConfigItem } from "./types";
+import type { FlatConfigItem } from "./types"
 
-export const VUE_PACKAGES = ["vue", "nuxt", "vitepress", "@slidev/cli"];
+export const VUE_PACKAGES = ["vue", "nuxt", "vitepress", "@slidev/cli"]
 
 export const REACT_REFRESH_PACKAGES = [
   "vite",
-];
+]
 
 export const FLAT_CONFIG_PROPS: (keyof FlatConfigItem)[] = [
   "files",
@@ -15,4 +15,4 @@ export const FLAT_CONFIG_PROPS: (keyof FlatConfigItem)[] = [
   "plugins",
   "rules",
   "settings",
-];
+]

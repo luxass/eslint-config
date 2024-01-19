@@ -29,28 +29,28 @@ With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package
 
 ```js
 // eslint.config.js
-import luxass from "@luxass/eslint-config";
+import luxass from "@luxass/eslint-config"
 
-export default luxass();
+export default luxass()
 ```
 
 With CJS:
 
 ```js
 // eslint.config.js
-const luxass = require("@luxass/eslint-config").default;
+const luxass = require("@luxass/eslint-config").default
 
-module.exports = luxass();
+module.exports = luxass()
 ```
 
 Combined with legacy config:
 
 ```js
 // eslint.config.js
-const luxass = require("@luxass/eslint-config").default;
-const { FlatCompat } = require("@eslint/eslintrc");
+const luxass = require("@luxass/eslint-config").default
+const { FlatCompat } = require("@eslint/eslintrc")
 
-const compat = new FlatCompat();
+const compat = new FlatCompat()
 
 module.exports = luxass(
   {
@@ -66,7 +66,7 @@ module.exports = luxass(
   })
 
   // Other flat configs...
-);
+)
 ```
 
 > Note that `.eslintignore` no longer works in Flat config, see [customization](#customization) for more details.
@@ -129,16 +129,16 @@ Normally you would only need to import the `luxass` preset:
 
 ```js
 // eslint.config.js
-import luxass from "@luxass/eslint-config";
+import luxass from "@luxass/eslint-config"
 
-export default luxass();
+export default luxass()
 ```
 
 you can also configure each `config` individually:
 
 ```js
 // eslint.config.js
-import luxass from "@luxass/eslint-config";
+import luxass from "@luxass/eslint-config"
 
 export default luxass({
   stylistic: true,
@@ -152,14 +152,14 @@ export default luxass({
   ignores: [
     "**/fixtures"
   ]
-});
+})
 ```
 
 The `luxass` function accepts an arbitrary number of `flat configs` overrides:
 
 ```js
 // eslint.config.js
-import luxass from "@luxass/eslint-config";
+import luxass from "@luxass/eslint-config"
 
 export default luxass({
   // configuration points for my config
@@ -167,7 +167,7 @@ export default luxass({
   rules: {}
 }, {
   rules: {}
-});
+})
 ```
 
 <details>
@@ -193,9 +193,9 @@ import {
   unicorn,
   vue,
   yaml,
-} from "@luxass/eslint-config/configs";
+} from "@luxass/eslint-config/configs"
 
-import { combine } from "@luxass/eslint-config";
+import { combine } from "@luxass/eslint-config"
 
 export default combine(
   ignores(),
@@ -211,7 +211,7 @@ export default combine(
   jsonc(),
   yaml(),
   markdown(),
-);
+)
 ```
 
 </details>
@@ -247,7 +247,7 @@ Certain rules would only be enabled in specific files, for example, `ts/*` rules
 
 ```js
 // eslint.config.js
-import luxass from "@luxass/eslint-config";
+import luxass from "@luxass/eslint-config"
 
 export default luxass(
   { vue: true, typescript: true },
@@ -264,14 +264,14 @@ export default luxass(
       "style/semi": ["error", "never"],
     },
   }
-);
+)
 ```
 
 We also provided a `overrides` options to make it easier:
 
 ```js
 // eslint.config.js
-import luxass from "@luxass/eslint-config";
+import luxass from "@luxass/eslint-config"
 
 export default luxass({
   overrides: {
@@ -284,7 +284,7 @@ export default luxass({
     yaml: {},
     // ...
   }
-});
+})
 ```
 
 ### Optional Configs
@@ -300,7 +300,7 @@ Use external formatters to format files that ESLint cannot handle yet (`.css`, `
 
 ```js
 // eslint.config.js
-import luxass from "@luxass/eslint-config";
+import luxass from "@luxass/eslint-config"
 
 export default luxass({
   formatters: {
@@ -326,7 +326,7 @@ export default luxass({
      */
     markdown: "prettier"
   }
-});
+})
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -341,11 +341,11 @@ To enable React support, need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import luxass from "@luxass/eslint-config";
+import luxass from "@luxass/eslint-config"
 
 export default luxass({
   react: true,
-});
+})
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -362,11 +362,11 @@ Next.JS also enables React support.
 
 ```js
 // eslint.config.js
-import luxass from "@luxass/eslint-config";
+import luxass from "@luxass/eslint-config"
 
 export default luxass({
   nextjs: true,
-});
+})
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -381,11 +381,11 @@ To enable UnoCSS support, need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import luxass from "@luxass/eslint-config";
+import luxass from "@luxass/eslint-config"
 
 export default luxass({
   unocss: true,
-});
+})
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -400,11 +400,11 @@ To enable TailwindCSS support, need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import luxass from "@luxass/eslint-config";
+import luxass from "@luxass/eslint-config"
 
 export default luxass({
   tailwindcss: true,
-});
+})
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -431,7 +431,7 @@ const objectWantedToSort = {
   a: 2,
   b: 1,
   c: 3,
-};
+}
 /* eslint perfectionist/sort-objects: "off" */
 ```
 
@@ -441,13 +441,13 @@ You can optionally enable the [type aware rules](https://typescript-eslint.io/li
 
 ```js
 // eslint.config.js
-import luxass from "@luxass/eslint-config";
+import luxass from "@luxass/eslint-config"
 
 export default luxass({
   typescript: {
     tsconfigPath: "tsconfig.json",
   },
-});
+})
 ```
 
 ## Versioning Policy

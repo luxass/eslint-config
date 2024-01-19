@@ -1,6 +1,6 @@
-import { GLOB_ASTRO } from "../globs";
-import type { FlatConfigItem } from "../types";
-import { interop } from "../utils";
+import { GLOB_ASTRO } from "../globs"
+import type { FlatConfigItem } from "../types"
+import { interop } from "../utils"
 
 export interface AstroOptions {
   /**
@@ -37,7 +37,7 @@ export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {
     files = [GLOB_ASTRO],
     overrides = {},
     typescript = true,
-  } = options;
+  } = options
 
   const [
     pluginAstro,
@@ -47,7 +47,7 @@ export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {
     interop(import("eslint-plugin-astro")),
     interop(import("astro-eslint-parser")),
     ...(a11y ? [interop(import("eslint-plugin-jsx-a11y"))] : []),
-  ] as const);
+  ] as const)
 
   return [
     {
@@ -101,5 +101,5 @@ export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {
         },
       },
     },
-  ];
+  ]
 }

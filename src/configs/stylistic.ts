@@ -1,16 +1,16 @@
-import type { StylisticCustomizeOptions } from "@stylistic/eslint-plugin";
-import pluginAntfu from "eslint-plugin-antfu";
-import type { FlatConfigItem } from "../types";
-import { interop } from "../utils";
+import type { StylisticCustomizeOptions } from "@stylistic/eslint-plugin"
+import pluginAntfu from "eslint-plugin-antfu"
+import type { FlatConfigItem } from "../types"
+import { interop } from "../utils"
 
-export type StylisticConfig = Pick<StylisticCustomizeOptions, "jsx" | "indent" | "quotes" | "semi">;
+export type StylisticConfig = Pick<StylisticCustomizeOptions, "jsx" | "indent" | "quotes" | "semi">
 
 export const StylisticConfigDefaults: StylisticConfig = {
   indent: 2,
   jsx: true,
   quotes: "double",
-  semi: true,
-};
+  semi: false,
+}
 
 export interface StylisticOptions {
   /**
@@ -36,9 +36,9 @@ export async function stylistic(options: StylisticOptions = {}): Promise<FlatCon
   } = {
     ...StylisticConfigDefaults,
     ...options,
-  };
+  }
 
-  const pluginStylistic = await interop(import("@stylistic/eslint-plugin"));
+  const pluginStylistic = await interop(import("@stylistic/eslint-plugin"))
 
   const config = pluginStylistic.configs.customize({
     flat: true,
@@ -47,7 +47,7 @@ export async function stylistic(options: StylisticOptions = {}): Promise<FlatCon
     pluginName: "style",
     quotes,
     semi,
-  });
+  })
 
   return [
     {
@@ -69,5 +69,5 @@ export async function stylistic(options: StylisticOptions = {}): Promise<FlatCon
         ...overrides,
       },
     },
-  ];
+  ]
 }

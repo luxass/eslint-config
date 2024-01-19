@@ -1,10 +1,10 @@
-import * as parserPlain from "eslint-parser-plain";
-import { mergeProcessors, processorPassThrough } from "eslint-merge-processors";
+import * as parserPlain from "eslint-parser-plain"
+import { mergeProcessors, processorPassThrough } from "eslint-merge-processors"
 import type {
   FlatConfigItem,
-} from "../types";
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from "../globs";
-import { interop } from "../utils";
+} from "../types"
+import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from "../globs"
+import { interop } from "../utils"
 
 export interface MarkdownOptions {
   /**
@@ -36,9 +36,9 @@ export async function markdown(
     exts = [],
     files = [GLOB_MARKDOWN],
     overrides = {},
-  } = options;
+  } = options
 
-  const markdown = await interop(import("eslint-plugin-markdown"));
+  const markdown = await interop(import("eslint-plugin-markdown"))
 
   return [
     {
@@ -126,5 +126,5 @@ export async function markdown(
         ...overrides,
       },
     },
-  ];
+  ]
 }

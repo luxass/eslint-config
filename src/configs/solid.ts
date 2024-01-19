@@ -1,6 +1,6 @@
-import { GLOB_JSX, GLOB_TSX } from "../globs";
-import type { FlatConfigItem } from "../types";
-import { ensure, interop } from "../utils";
+import { GLOB_JSX, GLOB_TSX } from "../globs"
+import type { FlatConfigItem } from "../types"
+import { ensure, interop } from "../utils"
 
 export interface SolidOptions {
   /**
@@ -37,17 +37,17 @@ export async function solid(options: SolidOptions = {}): Promise<FlatConfigItem[
     files = [GLOB_JSX, GLOB_TSX],
     overrides = {},
     typescript = true,
-  } = options;
+  } = options
 
   await ensure([
     "eslint-plugin-solid",
-  ]);
+  ])
 
   const [
     pluginSolid,
   ] = await Promise.all([
     interop(import("eslint-plugin-solid")),
-  ] as const);
+  ] as const)
 
   return [
     {
@@ -301,5 +301,5 @@ export async function solid(options: SolidOptions = {}): Promise<FlatConfigItem[
         ...overrides,
       },
     },
-  ];
+  ]
 }

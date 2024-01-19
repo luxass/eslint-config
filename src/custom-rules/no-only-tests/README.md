@@ -9,8 +9,8 @@ This ESLint rule disallows the use of `it.only` and `describe.only` in test file
 describe.only("foo", () => {
   it.only("bar", () => {
     // ...
-  });
-});
+  })
+})
 ```
 
 ```js
@@ -18,6 +18,6 @@ describe.only("foo", () => {
 describe("foo", () => {
   it("bar", () => {
     // ...
-  });
-});
+  })
+})
 ```

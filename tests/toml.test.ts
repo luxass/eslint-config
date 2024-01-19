@@ -1,17 +1,17 @@
-import { fileURLToPath } from "node:url";
-import { join } from "node:path";
-import { describe, expect, it } from "vitest";
-import { createEslint } from "./utils/eslint";
-import { getSnapshotPath } from "./utils/snapshot";
+import { fileURLToPath } from "node:url"
+import { join } from "node:path"
+import { describe, expect, it } from "vitest"
+import { createEslint } from "./utils/eslint"
+import { getSnapshotPath } from "./utils/snapshot"
 
 describe("toml", async () => {
   const [linter, fixer] = await createEslint({
     toml: true,
-  });
+  })
 
   const baseUrl = fileURLToPath(
     new URL("./fixtures/toml", import.meta.url),
-  );
+  )
 
   it("should work with toml", async () => {
     const [
@@ -68,14 +68,14 @@ describe("toml", async () => {
     ].forEach((matcher) => {
       expect(lintResults.messages).toEqual(
         expect.arrayContaining([matcher]),
-      );
-    });
+      )
+    })
 
-    const snapshotPath = await getSnapshotPath(baseUrl, "config.linted.toml", fixedResults.output);
+    const snapshotPath = await getSnapshotPath(baseUrl, "config.linted.toml", fixedResults.output)
 
-    expect(fixedResults.messages).toEqual([]);
-    expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
-  });
+    expect(fixedResults.messages).toEqual([])
+    expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath)
+  })
 
   it("should error on parser errors", async () => {
     const [lintResults] = await linter.lintFiles(join(baseUrl, "invalid.toml"));
@@ -89,30 +89,30 @@ describe("toml", async () => {
     ].forEach((matcher) => {
       expect(lintResults.messages).toEqual(
         expect.arrayContaining([matcher]),
-      );
-    });
-  });
+      )
+    })
+  })
 
   it("should not lint toml when disabled", async () => {
     const [linter] = await createEslint({
       toml: false,
-    });
+    })
 
-    const [lintResults] = await linter.lintFiles(join(baseUrl, "config.toml"));
+    const [lintResults] = await linter.lintFiles(join(baseUrl, "config.toml"))
 
     expect(lintResults.messages).toEqual([
       expect.objectContaining({
         fatal: false,
         severity: 1,
       }),
-    ]);
-  });
+    ])
+  })
 
   it("should not format when stylistic is disabled", async () => {
     const [linter, fixer] = await createEslint({
       toml: true,
       stylistic: false,
-    });
+    })
 
     const [
       [lintResults],
@@ -136,7 +136,7 @@ describe("toml", async () => {
     ].forEach((matcher) => {
       expect(lintResults.messages).toEqual(
         expect.arrayContaining([matcher]),
-      );
+      )
     });
 
     [
@@ -175,12 +175,12 @@ describe("toml", async () => {
     ].forEach((matcher) => {
       expect(lintResults.messages).not.toEqual(
         expect.arrayContaining([matcher]),
-      );
-    });
+      )
+    })
 
-    const snapshotPath = await getSnapshotPath(baseUrl, "config-without-stylistic.linted.toml", fixedResults.output);
+    const snapshotPath = await getSnapshotPath(baseUrl, "config-without-stylistic.linted.toml", fixedResults.output)
 
-    expect(fixedResults.messages).toEqual([]);
-    expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
-  });
-});
+    expect(fixedResults.messages).toEqual([])
+    expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath)
+  })
+})

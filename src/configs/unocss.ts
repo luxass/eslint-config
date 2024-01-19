@@ -1,6 +1,6 @@
-import { GLOB_SRC } from "../globs";
-import type { FlatConfigItem } from "../types";
-import { ensure, interop } from "../utils";
+import { GLOB_SRC } from "../globs"
+import type { FlatConfigItem } from "../types"
+import { ensure, interop } from "../utils"
 
 export interface UnoCSSOptions {
   /**
@@ -37,17 +37,17 @@ export async function unocss(options: UnoCSSOptions = {}): Promise<FlatConfigIte
     files = [GLOB_SRC],
     overrides,
     strict = false,
-  } = options;
+  } = options
 
   await ensure([
     "@unocss/eslint-plugin",
-  ]);
+  ])
 
   const [
     pluginUnoCSS,
   ] = await Promise.all([
     interop(import("@unocss/eslint-plugin")),
-  ] as const);
+  ] as const)
 
   return [
     {
@@ -72,5 +72,5 @@ export async function unocss(options: UnoCSSOptions = {}): Promise<FlatConfigIte
         ...overrides,
       },
     },
-  ];
+  ]
 }

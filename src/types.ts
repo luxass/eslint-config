@@ -1,4 +1,4 @@
-import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
+import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore"
 import type {
   EslintCommentsRules,
   EslintRules,
@@ -16,15 +16,15 @@ import type {
   VitestRules,
   VueRules,
   YmlRules,
-} from "@antfu/eslint-define-config";
-import type { RuleOptions as JSDocRules } from "@eslint-types/jsdoc/types";
-import type { RuleOptions as TypeScriptRules } from "@eslint-types/typescript-eslint/types";
-import type { RuleOptions as UnicornRules } from "@eslint-types/unicorn/types";
-import type { Rules as AntfuRules } from "eslint-plugin-antfu";
+} from "@antfu/eslint-define-config"
+import type { RuleOptions as JSDocRules } from "@eslint-types/jsdoc/types"
+import type { RuleOptions as TypeScriptRules } from "@eslint-types/typescript-eslint/types"
+import type { RuleOptions as UnicornRules } from "@eslint-types/unicorn/types"
+import type { Rules as AntfuRules } from "eslint-plugin-antfu"
 import type {
   UnprefixedRuleOptions as StylisticRules,
-} from "@stylistic/eslint-plugin";
-import type { Linter } from "eslint";
+} from "@stylistic/eslint-plugin"
+import type { Linter } from "eslint"
 import type {
   AstroOptions,
   FormattersOptions,
@@ -39,16 +39,16 @@ import type {
   UnoCSSOptions,
   VueOptions,
   YAMLOptions,
-} from "./configs";
-import type { NoOnlyTestsOptions } from "./custom-rules/no-only-tests";
-import type { TOMLOptions } from "./configs/toml";
-import type { SolidOptions } from "./configs/solid";
+} from "./configs"
+import type { NoOnlyTestsOptions } from "./custom-rules/no-only-tests"
+import type { TOMLOptions } from "./configs/toml"
+import type { SolidOptions } from "./configs/solid"
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
   [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>;
-};
+}
 
-export type Awaitable<T> = T | Promise<T>;
+export type Awaitable<T> = T | Promise<T>
 
 export type Rules = WrapRuleConfig<
   MergeIntersection<
@@ -72,7 +72,7 @@ export type Rules = WrapRuleConfig<
       "test/no-only-tests": RuleConfig<[NoOnlyTestsOptions]>
     }
   >
->;
+>
 
 export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, "plugins"> & {
   /**
@@ -87,9 +87,9 @@ export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, "plugins">
    * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
    */
   plugins?: Record<string, any>
-};
+}
 
-export type UserConfigItem = FlatConfigItem | Linter.FlatConfig;
+export type UserConfigItem = FlatConfigItem | Linter.FlatConfig
 
 export interface ConfigOptions {
   /**

@@ -1,8 +1,8 @@
 // @ts-check
-import styleMigrate from "@stylistic/eslint-plugin-migrate";
+import styleMigrate from "@stylistic/eslint-plugin-migrate"
 
 // eslint-disable-next-line antfu/no-import-dist
-import luxass from "./dist/index.mjs";
+import luxass from "./dist/index.mjs"
 
 export default luxass(
   {
@@ -45,4 +45,4 @@ export default luxass(
       "style-migrate/migrate": ["error", { namespaceTo: "style" }],
     },
   },
-);
+)

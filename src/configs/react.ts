@@ -1,7 +1,7 @@
-import { isPackageExists } from "local-pkg";
-import { GLOB_JSX, GLOB_TSX } from "../globs";
-import type { FlatConfigItem } from "../types";
-import { ensure, interop } from "../utils";
+import { isPackageExists } from "local-pkg"
+import { GLOB_JSX, GLOB_TSX } from "../globs"
+import type { FlatConfigItem } from "../types"
+import { ensure, interop } from "../utils"
 
 export interface ReactOptions {
   /**
@@ -38,14 +38,14 @@ export async function react(options: ReactOptions = {}): Promise<FlatConfigItem[
     files = [GLOB_JSX, GLOB_TSX],
     overrides = {},
     typescript = true,
-  } = options;
+  } = options
 
   await ensure([
     "eslint-plugin-react",
     "eslint-plugin-react-hooks",
     "eslint-plugin-react-refresh",
     ...(options.a11y ? ["eslint-plugin-jsx-a11y"] : []),
-  ]);
+  ])
 
   const [
     pluginReact,
@@ -57,11 +57,11 @@ export async function react(options: ReactOptions = {}): Promise<FlatConfigItem[
     interop(import("eslint-plugin-react-hooks")),
     interop(import("eslint-plugin-react-refresh")),
     ...(a11y ? [interop(import("eslint-plugin-jsx-a11y"))] : []),
-  ] as const);
+  ] as const)
 
   const isAllowConstantExport = ["vite"].some(
     (i) => isPackageExists(i),
-  );
+  )
 
   return [
     {
@@ -325,5 +325,5 @@ export async function react(options: ReactOptions = {}): Promise<FlatConfigItem[
         },
       },
     },
-  ];
+  ]
 }
