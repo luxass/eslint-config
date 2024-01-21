@@ -75,6 +75,7 @@ export const GLOB_EXCLUDE = [
   "**/.nuxt",
   "**/.next",
   "**/.vercel",
+  "**/.netlify",
   "**/.changeset",
   "**/.idea",
   "**/.cache",
