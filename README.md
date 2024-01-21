@@ -20,7 +20,7 @@
 ## 📦 Install
 
 ```bash
-pnpm install -D eslint @luxass/eslint-config
+npm install -D eslint @luxass/eslint-config
 ```
 
 ## 🚀 Usage
