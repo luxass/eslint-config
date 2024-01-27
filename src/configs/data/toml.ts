@@ -1,20 +1,20 @@
-import type { FlatConfigItem } from "../types"
-import { GLOB_TOML } from "../globs"
-import { interop } from "../utils"
-import type { StylisticConfig } from "./stylistic"
+import type { FlatConfigItem } from "../../types";
+import { GLOB_TOML } from "../../globs";
+import { interop } from "../../utils";
+import type { StylisticConfig } from "../stylistic";
 
 export interface TOMLOptions {
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem["rules"]
+  overrides?: FlatConfigItem["rules"];
 
   /**
    * Enable stylistic rules.
    *
    * @default true
    */
-  stylistic?: boolean | StylisticConfig
+  stylistic?: boolean | StylisticConfig;
 
   /**
    * Glob patterns for TOML files.
@@ -22,7 +22,7 @@ export interface TOMLOptions {
    * @default [GLOB_TOML]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
-  files?: string[]
+  files?: string[];
 }
 
 export async function toml(
@@ -32,11 +32,11 @@ export async function toml(
     files = [GLOB_TOML],
     overrides = {},
     stylistic = true,
-  } = options
+  } = options;
 
   const {
     indent = 2,
-  } = typeof stylistic === "boolean" ? {} : stylistic
+  } = typeof stylistic === "boolean" ? {} : stylistic;
 
   const [
     pluginToml,
@@ -44,7 +44,7 @@ export async function toml(
   ] = await Promise.all([
     interop(import("eslint-plugin-toml")),
     interop(import("toml-eslint-parser")),
-  ] as const)
+  ] as const);
 
   return [
     {
@@ -91,5 +91,5 @@ export async function toml(
         ...overrides,
       },
     },
-  ]
+  ];
 }

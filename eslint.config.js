@@ -1,8 +1,8 @@
 // @ts-check
-import styleMigrate from "@stylistic/eslint-plugin-migrate"
+import styleMigrate from "@stylistic/eslint-plugin-migrate";
 
 // eslint-disable-next-line antfu/no-import-dist
-import luxass from "./dist/index.mjs"
+import luxass from "./dist/index.mjs";
 
 export default luxass(
   {
@@ -14,30 +14,7 @@ export default luxass(
     ],
   },
   {
-    files: ["src/**/*.ts"],
-    rules: {
-      "perfectionist/sort-objects": [
-        "error",
-        {
-          "type": "natural",
-          "custom-groups": {
-            top: [
-              "name",
-            ],
-          },
-          "groups": [
-            "top",
-            "files",
-            "languageOptions",
-            "rules",
-            "unknown",
-          ],
-        },
-      ],
-    },
-  },
-  {
-    files: ["src/configs/*.ts"],
+    files: ["src/configs/**/*.ts"],
     plugins: {
       "style-migrate": styleMigrate,
     },
@@ -45,4 +22,4 @@ export default luxass(
       "style-migrate/migrate": ["error", { namespaceTo: "style" }],
     },
   },
-)
+);

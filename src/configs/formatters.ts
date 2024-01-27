@@ -1,10 +1,10 @@
-import * as parserPlain from "eslint-parser-plain"
-import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from "../globs"
-import type { VendoredPrettierOptions } from "../vendor/prettier-types"
-import { ensure, interop } from "../utils"
-import type { FlatConfigItem } from "../types"
-import type { StylisticConfig } from "./stylistic"
-import { StylisticConfigDefaults } from "./stylistic"
+import * as parserPlain from "eslint-parser-plain";
+import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from "../globs";
+import type { VendoredPrettierOptions } from "../vendor/prettier-types";
+import { ensure, interop } from "../utils";
+import type { FlatConfigItem } from "../types";
+import type { StylisticConfig } from "./stylistic";
+import { StylisticConfigDefaults } from "./stylistic";
 
 export interface FormattersOptions {
   /**
@@ -12,14 +12,14 @@ export interface FormattersOptions {
    *
    * Currently only support Prettier.
    */
-  css?: "prettier" | boolean
+  css?: "prettier" | boolean;
 
   /**
    * Enable formatting support for HTML.
    *
    * Currently only support Prettier.
    */
-  html?: "prettier" | boolean
+  html?: "prettier" | boolean;
 
   /**
    * Enable formatting support for Markdown.
@@ -28,26 +28,26 @@ export interface FormattersOptions {
    *
    * When set to `true`, it will use Prettier.
    */
-  markdown?: "prettier" | "dprint" | boolean
+  markdown?: "prettier" | "dprint" | boolean;
 
   /**
    * Enable formatting support for GraphQL.
    */
-  graphql?: "prettier" | boolean
+  graphql?: "prettier" | boolean;
 
   /**
    * Custom options for Prettier.
    *
    * By default it's controlled by our own config.
    */
-  prettierOptions?: VendoredPrettierOptions
+  prettierOptions?: VendoredPrettierOptions;
 
   /**
    * Custom options for dprint.
    *
    * By default it's controlled by our own config.
    */
-  dprintOptions?: boolean
+  dprintOptions?: boolean;
 }
 
 export async function formatters(
@@ -56,7 +56,7 @@ export async function formatters(
 ): Promise<FlatConfigItem[]> {
   await ensure([
     "eslint-plugin-format",
-  ])
+  ]);
 
   if (options === true) {
     options = {
@@ -64,7 +64,7 @@ export async function formatters(
       graphql: true,
       html: true,
       markdown: true,
-    }
+    };
   }
 
   const {
@@ -74,7 +74,7 @@ export async function formatters(
   } = {
     ...StylisticConfigDefaults,
     ...stylistic,
-  }
+  };
 
   const prettierOptions: VendoredPrettierOptions = Object.assign(
     {
@@ -86,7 +86,7 @@ export async function formatters(
       useTabs: indent === "tab",
     } satisfies VendoredPrettierOptions,
     options.prettierOptions || {},
-  )
+  );
 
   const dprintOptions = Object.assign(
     {
@@ -95,9 +95,9 @@ export async function formatters(
       useTabs: indent === "tab",
     },
     options.dprintOptions || {},
-  )
+  );
 
-  const pluginFormat = await interop(import("eslint-plugin-format"))
+  const pluginFormat = await interop(import("eslint-plugin-format"));
 
   const configs: FlatConfigItem[] = [
     {
@@ -106,7 +106,7 @@ export async function formatters(
         format: pluginFormat,
       },
     },
-  ]
+  ];
 
   if (options.css) {
     configs.push(
@@ -158,7 +158,7 @@ export async function formatters(
           ],
         },
       },
-    )
+    );
   }
 
   if (options.html) {
@@ -177,13 +177,13 @@ export async function formatters(
           },
         ],
       },
-    })
+    });
   }
 
   if (options.markdown) {
     const formater = options.markdown === true
       ? "prettier"
-      : options.markdown
+      : options.markdown;
 
     configs.push({
       name: "luxass:formatter:markdown",
@@ -207,7 +207,7 @@ export async function formatters(
               },
         ],
       },
-    })
+    });
   }
 
   if (options.graphql) {
@@ -226,8 +226,8 @@ export async function formatters(
           },
         ],
       },
-    })
+    });
   }
 
-  return configs
+  return configs;
 }

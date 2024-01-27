@@ -1,20 +1,20 @@
-import type { FlatConfigItem } from "../types"
-import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from "../globs"
-import { interop } from "../utils"
-import type { StylisticConfig } from "./stylistic"
+import type { FlatConfigItem } from "../../types";
+import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from "../../globs";
+import { interop } from "../../utils";
+import type { StylisticConfig } from "../stylistic";
 
 export interface JSONOptions {
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem["rules"]
+  overrides?: FlatConfigItem["rules"];
 
   /**
    * Enable stylistic rules.
    *
    * @default true
    */
-  stylistic?: boolean | StylisticConfig
+  stylistic?: boolean | StylisticConfig;
 
   /**
    * Glob patterns for JSON files.
@@ -22,7 +22,7 @@ export interface JSONOptions {
    * @default [GLOB_JSON, GLOB_JSON5, GLOB_JSONC]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
-  files?: string[]
+  files?: string[];
 }
 
 export async function jsonc(
@@ -32,7 +32,7 @@ export async function jsonc(
     files = [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
     overrides = {},
     stylistic = true,
-  } = options
+  } = options;
 
   const [
     pluginJsonc,
@@ -40,7 +40,7 @@ export async function jsonc(
   ] = await Promise.all([
     interop(import("eslint-plugin-jsonc")),
     interop(import("jsonc-eslint-parser")),
-  ] as const)
+  ] as const);
 
   return [
     {
@@ -110,5 +110,5 @@ export async function jsonc(
         ...overrides,
       },
     },
-  ]
+  ];
 }

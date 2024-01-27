@@ -1,6 +1,6 @@
-import { GLOB_NEXTJS_OG, GLOB_NEXTJS_ROUTES, GLOB_SRC } from "../globs"
-import type { FlatConfigItem } from "../types"
-import { ensure, interop } from "../utils"
+import { GLOB_NEXTJS_OG, GLOB_NEXTJS_ROUTES, GLOB_SRC } from "../../globs";
+import type { FlatConfigItem } from "../../types";
+import { ensure, interop } from "../../utils";
 
 export interface NextJSOptions {
   /**
@@ -9,12 +9,12 @@ export interface NextJSOptions {
    *
    * @default true
    */
-  rootDir?: boolean | string
+  rootDir?: boolean | string;
 
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem["rules"]
+  overrides?: FlatConfigItem["rules"];
 
   /**
    * Glob patterns for Next.js files.
@@ -22,7 +22,7 @@ export interface NextJSOptions {
    * @default [GLOB_SRC]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
-  files?: string[]
+  files?: string[];
 }
 
 export async function nextjs(
@@ -32,13 +32,13 @@ export async function nextjs(
     files = [GLOB_SRC],
     overrides,
     rootDir,
-  } = options
+  } = options;
 
   await ensure([
     "@next/eslint-plugin-next",
-  ])
+  ]);
 
-  const pluginNextjs = await interop(import("@next/eslint-plugin-next"))
+  const pluginNextjs = await interop(import("@next/eslint-plugin-next"));
 
   return [
     {
@@ -107,5 +107,5 @@ export async function nextjs(
         }],
       },
     },
-  ]
+  ];
 }

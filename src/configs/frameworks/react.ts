@@ -1,26 +1,27 @@
-import { GLOB_JSX, GLOB_TSX } from "../globs"
-import type { FlatConfigItem } from "../types"
-import { ensure, interop } from "../utils"
+import { isPackageExists } from "local-pkg";
+import { GLOB_JSX, GLOB_TSX } from "../../globs";
+import type { FlatConfigItem } from "../../types";
+import { ensure, interop } from "../../utils";
 
-export interface SolidOptions {
+export interface ReactOptions {
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem["rules"]
+  overrides?: FlatConfigItem["rules"];
 
   /**
    * Enable TypeScript support.
    *
    * @default true
    */
-  typescript?: boolean
+  typescript?: boolean;
 
   /**
    * Enable JSX A11y support.
    *
    * @default false
    */
-  a11y?: boolean
+  a11y?: boolean;
 
   /**
    * Glob patterns for JSX & TSX files.
@@ -28,36 +29,50 @@ export interface SolidOptions {
    * @default [GLOB_JSX, GLOB_TSX]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
-  files?: string[]
+  files?: string[];
 }
 
-export async function solid(options: SolidOptions = {}): Promise<FlatConfigItem[]> {
+export async function react(options: ReactOptions = {}): Promise<FlatConfigItem[]> {
   const {
     a11y = false,
     files = [GLOB_JSX, GLOB_TSX],
     overrides = {},
     typescript = true,
-  } = options
+  } = options;
 
   await ensure([
-    "eslint-plugin-solid",
-  ])
+    "eslint-plugin-react",
+    "eslint-plugin-react-hooks",
+    "eslint-plugin-react-refresh",
+    ...(options.a11y ? ["eslint-plugin-jsx-a11y"] : []),
+  ]);
 
   const [
-    pluginSolid,
+    pluginReact,
+    pluginReactHooks,
+    pluginReactRefresh,
+    pluginA11y,
   ] = await Promise.all([
-    interop(import("eslint-plugin-solid")),
-  ] as const)
+    interop(import("eslint-plugin-react")),
+    interop(import("eslint-plugin-react-hooks")),
+    interop(import("eslint-plugin-react-refresh")),
+    ...(a11y ? [interop(import("eslint-plugin-jsx-a11y"))] : []),
+  ] as const);
+
+  const isAllowConstantExport = isPackageExists("vite");
 
   return [
     {
-      name: "luxass:solid:setup",
+      name: "luxass:react:setup",
       plugins: {
-        solid: pluginSolid,
+        "react": pluginReact,
+        "react-hooks": pluginReactHooks,
+        "react-refresh": pluginReactRefresh,
+        ...(a11y ? { "jsx-a11y": pluginA11y } : {}),
       },
     },
     {
-      name: "luxass:solid:rules",
+      name: "luxass:react:rules",
       files,
       languageOptions: {
         parserOptions: {
@@ -65,7 +80,6 @@ export async function solid(options: SolidOptions = {}): Promise<FlatConfigItem[
             jsx: true,
           },
         },
-        sourceType: "module",
       },
       rules: {
         ...(a11y
@@ -260,46 +274,54 @@ export async function solid(options: SolidOptions = {}): Promise<FlatConfigItem[
             }
           : {}),
 
-        // solid recommended rules
-        // reactivity
-        "solid/components-return-once": 1,
-        "solid/event-handlers": 1,
-        // these rules are mostly style suggestions
-        "solid/imports": 1,
-        // identifier usage is important
-        "solid/jsx-no-duplicate-props": 2,
-        "solid/jsx-no-script-url": 2,
-        "solid/jsx-no-undef": 2,
-        "solid/jsx-uses-vars": 2,
-        "solid/no-array-handlers": 0,
-        "solid/no-destructure": 2,
-        // security problems
-        "solid/no-innerhtml": 2,
-        // only necessary for resource-constrained environments
-        "solid/no-proxy-apis": 0,
-        "solid/no-react-deps": 1,
-        "solid/no-react-specific-props": 1,
-        "solid/no-unknown-namespaces": 2,
-        // deprecated
-        "solid/prefer-classlist": 0,
-        "solid/prefer-for": 2,
-        // handled by Solid compiler, opt-in style suggestion
-        "solid/prefer-show": 0,
-        "solid/reactivity": 1,
-        "solid/self-closing-comp": 1,
-        "solid/style-prop": 1,
+        // recommended rules react
+        "react/display-name": "error",
+        "react/jsx-key": "error",
+
+        "react/jsx-no-comment-textnodes": "error",
+
+        "react/jsx-no-duplicate-props": "error",
+        "react/jsx-no-target-blank": "error",
+        "react/jsx-no-undef": "error",
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "react/no-children-prop": "error",
+        "react/no-danger-with-children": "error",
+        "react/no-deprecated": "error",
+        "react/no-direct-mutation-state": "error",
+        "react/no-find-dom-node": "error",
+        "react/no-is-mounted": "error",
+        "react/no-render-return-value": "error",
+        "react/no-string-refs": "error",
+        "react/no-unescaped-entities": "error",
+        "react/no-unknown-property": "error",
+        "react/no-unsafe": "off",
+        "react/prop-types": "error",
+        "react/react-in-jsx-scope": "off",
+        "react/require-render-return": "error",
+
+        // recommended rules react-hooks
+        "react-hooks/exhaustive-deps": "warn",
+        "react-hooks/rules-of-hooks": "error",
+
+        // react refresh
+        "react-refresh/only-export-components": ["warn", { allowConstantExport: isAllowConstantExport }],
 
         ...typescript
           ? {
-              "solid/jsx-no-undef": [2, { typescriptEnabled: true }],
-              // namespaces taken care of by TS
-              "solid/no-unknown-namespaces": 0,
+              "react/jsx-no-undef": "off",
+              "react/prop-type": "off",
             }
           : {},
 
         // overrides
         ...overrides,
       },
+      settings: {
+        react: {
+          version: "detect",
+        },
+      },
     },
-  ]
+  ];
 }

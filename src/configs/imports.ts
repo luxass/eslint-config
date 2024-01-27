@@ -1,8 +1,8 @@
-import pluginImport from "eslint-plugin-i"
-import pluginAntfu from "eslint-plugin-antfu"
-import type { FlatConfigItem } from "../types"
-import { GLOB_SRC_EXT } from "../globs"
-import type { StylisticConfig } from "./stylistic"
+import pluginImport from "eslint-plugin-i";
+import pluginAntfu from "eslint-plugin-antfu";
+import type { FlatConfigItem } from "../types";
+import { GLOB_SRC_EXT } from "../globs";
+import type { StylisticConfig } from "./stylistic";
 
 export interface ImportsOptions {
   /**
@@ -10,13 +10,13 @@ export interface ImportsOptions {
    *
    * @default true
    */
-  stylistic?: boolean | StylisticConfig
+  stylistic?: boolean | StylisticConfig;
 }
 
 export async function imports(options: ImportsOptions = {}): Promise<FlatConfigItem[]> {
   const {
     stylistic = true,
-  } = options
+  } = options;
 
   return [
     {
@@ -53,5 +53,5 @@ export async function imports(options: ImportsOptions = {}): Promise<FlatConfigI
         "antfu/no-import-node-modules-by-path": "off",
       },
     },
-  ]
+  ];
 }

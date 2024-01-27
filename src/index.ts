@@ -1,9 +1,9 @@
 import {
   luxass,
-} from "./factory"
+} from "./factory";
 
-export type { ConfigOptions, UserConfigItem } from "./types"
+export type { ConfigOptions, UserConfigItem } from "./types";
 
-export { luxass }
+export { luxass };
 
-export default luxass
+export default luxass;

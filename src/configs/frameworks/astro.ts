@@ -1,26 +1,26 @@
-import { GLOB_ASTRO } from "../globs"
-import type { FlatConfigItem } from "../types"
-import { interop } from "../utils"
+import { GLOB_ASTRO } from "../../globs";
+import type { FlatConfigItem } from "../../types";
+import { interop } from "../../utils";
 
 export interface AstroOptions {
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem["rules"]
+  overrides?: FlatConfigItem["rules"];
 
   /**
    * Enable TypeScript support.
    *
    * @default true
    */
-  typescript?: boolean
+  typescript?: boolean;
 
   /**
    * Enable React A11y support.
    *
    * @default false
    */
-  a11y?: boolean
+  a11y?: boolean;
 
   /**
    * Glob patterns for Astro files.
@@ -28,7 +28,7 @@ export interface AstroOptions {
    * @default [GLOB_ASTRO]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts#L27
    */
-  files?: string[]
+  files?: string[];
 }
 
 export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {
@@ -37,7 +37,7 @@ export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {
     files = [GLOB_ASTRO],
     overrides = {},
     typescript = true,
-  } = options
+  } = options;
 
   const [
     pluginAstro,
@@ -47,7 +47,7 @@ export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {
     interop(import("eslint-plugin-astro")),
     interop(import("astro-eslint-parser")),
     ...(a11y ? [interop(import("eslint-plugin-jsx-a11y"))] : []),
-  ] as const)
+  ] as const);
 
   return [
     {
@@ -148,5 +148,5 @@ export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {
         },
       },
     },
-  ]
+  ];
 }

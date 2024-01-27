@@ -1,4 +1,4 @@
-import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore"
+import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
 import type {
   EslintCommentsRules,
   EslintRules,
@@ -15,15 +15,15 @@ import type {
   VitestRules,
   VueRules,
   YmlRules,
-} from "@antfu/eslint-define-config"
-import type { RuleOptions as JSDocRules } from "@eslint-types/jsdoc/types"
-import type { RuleOptions as TypeScriptRules } from "@eslint-types/typescript-eslint/types"
-import type { RuleOptions as UnicornRules } from "@eslint-types/unicorn/types"
-import type { Rules as AntfuRules } from "eslint-plugin-antfu"
+} from "@antfu/eslint-define-config";
+import type { RuleOptions as JSDocRules } from "@eslint-types/jsdoc/types";
+import type { RuleOptions as TypeScriptRules } from "@eslint-types/typescript-eslint/types";
+import type { RuleOptions as UnicornRules } from "@eslint-types/unicorn/types";
+import type { Rules as AntfuRules } from "eslint-plugin-antfu";
 import type {
   UnprefixedRuleOptions as StylisticRules,
-} from "@stylistic/eslint-plugin"
-import type { Linter } from "eslint"
+} from "@stylistic/eslint-plugin";
+import type { Linter } from "eslint";
 import type {
   AstroOptions,
   FormattersOptions,
@@ -40,14 +40,14 @@ import type {
   UnoCSSOptions,
   VueOptions,
   YAMLOptions,
-} from "./configs"
-import type { NoOnlyTestsOptions } from "./custom-rules/no-only-tests"
+} from "./configs";
+import type { NoOnlyTestsOptions } from "./custom-rules/no-only-tests";
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
   [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>;
-}
+};
 
-export type Awaitable<T> = T | Promise<T>
+export type Awaitable<T> = T | Promise<T>;
 
 export type Rules = WrapRuleConfig<
   MergeIntersection<
@@ -68,16 +68,16 @@ export type Rules = WrapRuleConfig<
     EslintCommentsRules &
     // TODO: TOML rules
     {
-      "test/no-only-tests": RuleConfig<[NoOnlyTestsOptions]>
+      "test/no-only-tests": RuleConfig<[NoOnlyTestsOptions]>;
     }
   >
->
+>;
 
 export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, "plugins"> & {
   /**
    * Custom name of each config item
    */
-  name?: string
+  name?: string;
 
   // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
   /**
@@ -85,10 +85,10 @@ export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, "plugins">
    *
    * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
    */
-  plugins?: Record<string, any>
-}
+  plugins?: Record<string, any>;
+};
 
-export type UserConfigItem = FlatConfigItem | Linter.FlatConfig
+export type UserConfigItem = FlatConfigItem | Linter.FlatConfig;
 
 export interface ConfigOptions {
   /**
@@ -99,27 +99,27 @@ export interface ConfigOptions {
    * @see https://github.com/antfu/eslint-config-flat-gitignore
    * @default true
    */
-  gitignore?: FlatGitignoreOptions | boolean
+  gitignore?: FlatGitignoreOptions | boolean;
 
   /**
    * Control to disable some rules in editors.
    * @default auto-detect based on the process.env
    */
-  editor?: boolean
+  editor?: boolean;
 
   /**
    * JavaScript options
    *
    * NOTE: Can't be disabled.
    */
-  javascript?: JavaScriptOptions
+  javascript?: JavaScriptOptions;
 
   /**
    * Enable JSONC support.
    *
    * @default true
    */
-  jsonc?: boolean | JSONOptions
+  jsonc?: boolean | JSONOptions;
 
   /**
    * Enable JSX related rules.
@@ -128,7 +128,7 @@ export interface ConfigOptions {
    *
    * @default true
    */
-  jsx?: boolean
+  jsx?: boolean;
 
   /**
    * Enable linting for **code snippets** in Markdown.
@@ -137,7 +137,7 @@ export interface ConfigOptions {
    *
    * @default true
    */
-  markdown?: boolean
+  markdown?: boolean;
 
   /**
    * Enable NextJS support.
@@ -149,7 +149,7 @@ export interface ConfigOptions {
    *
    * Note: By enabling this, the `react` option will be enabled automatically.
    */
-  nextjs?: boolean | NextJSOptions
+  nextjs?: boolean | NextJSOptions;
 
   /**
    * Enable react rules.
@@ -161,7 +161,7 @@ export interface ConfigOptions {
    *
    * @default false
    */
-  react?: boolean | ReactOptions
+  react?: boolean | ReactOptions;
 
   /**
    * Use external formatters to format files.
@@ -173,21 +173,21 @@ export interface ConfigOptions {
    *
    * @default false
    */
-  formatters?: boolean | FormattersOptions
+  formatters?: boolean | FormattersOptions;
 
   /**
    * Enable stylistic rules.
    *
    * @default true
    */
-  stylistic?: boolean | StylisticConfig
+  stylistic?: boolean | StylisticConfig;
 
   /**
    * Enable test support.
    *
    * @default true
    */
-  test?: boolean | TestOptions
+  test?: boolean | TestOptions;
 
   /**
    * Enable TypeScript support.
@@ -196,7 +196,7 @@ export interface ConfigOptions {
    *
    * @default auto-detect based on the dependencies
    */
-  typescript?: boolean | TypeScriptOptions
+  typescript?: boolean | TypeScriptOptions;
 
   /**
    * Enable UnoCSS support.
@@ -206,7 +206,7 @@ export interface ConfigOptions {
    *
    * @default false
    */
-  unocss?: boolean | UnoCSSOptions
+  unocss?: boolean | UnoCSSOptions;
 
   /**
    * Enable TailwindCSS support.
@@ -216,35 +216,35 @@ export interface ConfigOptions {
    *
    * @default false
    */
-  tailwindcss?: boolean | TailwindCSSOptions
+  tailwindcss?: boolean | TailwindCSSOptions;
 
   /**
    * Enable Vue support.
    *
    * @default auto-detect based on the dependencies
    */
-  vue?: boolean | VueOptions
+  vue?: boolean | VueOptions;
 
   /**
    * Enable Astro support.
    *
    * @default auto-detect based on the dependencies
    */
-  astro?: boolean | AstroOptions
+  astro?: boolean | AstroOptions;
 
   /**
    * Enable YAML support.
    *
    * @default true
    */
-  yaml?: boolean | YAMLOptions
+  yaml?: boolean | YAMLOptions;
 
   /**
    * Enable TOML support.
    *
    * @default true
    */
-  toml?: boolean | TOMLOptions
+  toml?: boolean | TOMLOptions;
 
   /**
    * Additional extensions for components.
@@ -252,7 +252,7 @@ export interface ConfigOptions {
    * @example ["vue"]
    * @default []
    */
-  exts?: string[]
+  exts?: string[];
 
   /**
    * Enable Solid support.
@@ -262,5 +262,5 @@ export interface ConfigOptions {
    *
    * @default false
    */
-  solid?: boolean | SolidOptions
+  solid?: boolean | SolidOptions;
 }

@@ -1,8 +1,8 @@
-import eslintApi from "eslint/use-at-your-own-risk"
-import { type ConfigOptions, luxass } from "../../src"
+import eslintApi from "eslint/use-at-your-own-risk";
+import { type ConfigOptions, luxass } from "../../src";
 
 export async function createEslint(options?: ConfigOptions): Promise<[normal: eslintApi.FlatESLint, fixer: eslintApi.FlatESLint]> {
-  const config = await luxass(options)
+  const config = await luxass(options);
   return [
     new eslintApi.FlatESLint({
       baseConfig: config,
@@ -15,5 +15,5 @@ export async function createEslint(options?: ConfigOptions): Promise<[normal: es
       // Don't look up config file
       overrideConfigFile: true,
     }),
-  ]
+  ];
 }

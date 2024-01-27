@@ -1,10 +1,10 @@
-import type { FlatConfigItem } from "../types"
-import { GLOB_TESTS } from "../globs"
-import { interop } from "../utils"
+import type { FlatConfigItem } from "../types";
+import { GLOB_TESTS } from "../globs";
+import { interop } from "../utils";
 
 import {
   noOnlyTests,
-} from "../custom-rules/no-only-tests"
+} from "../custom-rules/no-only-tests";
 
 export interface TestOptions {
   /**
@@ -12,7 +12,7 @@ export interface TestOptions {
    *
    * @default false
    */
-  editor?: boolean
+  editor?: boolean;
 
   /**
    * Glob patterns for test files.
@@ -20,12 +20,12 @@ export interface TestOptions {
    * @default GLOB_TESTS
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
-  files?: string[]
+  files?: string[];
 
   /**
    * Override rules for for test files.
    */
-  overrides?: FlatConfigItem["rules"]
+  overrides?: FlatConfigItem["rules"];
 }
 
 export async function test(
@@ -35,13 +35,13 @@ export async function test(
     editor = false,
     files = GLOB_TESTS,
     overrides = {},
-  } = options
+  } = options;
 
   const [
     pluginVitest,
   ] = await Promise.all([
     interop(import("eslint-plugin-vitest")),
-  ] as const)
+  ] as const);
 
   return [
     {
@@ -72,5 +72,5 @@ export async function test(
         ...overrides,
       },
     },
-  ]
+  ];
 }

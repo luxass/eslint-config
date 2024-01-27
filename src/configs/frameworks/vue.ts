@@ -1,31 +1,31 @@
-import { mergeProcessors } from "eslint-merge-processors"
-import type { Options as VueBlocksOptions } from "eslint-processor-vue-blocks"
+import { mergeProcessors } from "eslint-merge-processors";
+import type { Options as VueBlocksOptions } from "eslint-processor-vue-blocks";
 import type {
   FlatConfigItem,
-} from "../types"
-import { GLOB_VUE } from "../globs"
-import { ensure, interop } from "../utils"
-import type { StylisticConfig } from "./stylistic"
+} from "../../types";
+import { GLOB_VUE } from "../../globs";
+import { ensure, interop } from "../../utils";
+import type { StylisticConfig } from "../stylistic";
 
 export interface VueOptions {
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem["rules"]
+  overrides?: FlatConfigItem["rules"];
 
   /**
    * Enable stylistic rules.
    *
    * @default true
    */
-  stylistic?: boolean | StylisticConfig
+  stylistic?: boolean | StylisticConfig;
 
   /**
    * Enable TypeScript support.
    *
    * @default false
    */
-  typescript?: boolean
+  typescript?: boolean;
 
   /**
    * Create virtual files for Vue SFC blocks to enable linting.
@@ -33,14 +33,14 @@ export interface VueOptions {
    * @see https://github.com/antfu/eslint-processor-vue-blocks
    * @default true
    */
-  sfcBlocks?: boolean | VueBlocksOptions
+  sfcBlocks?: boolean | VueBlocksOptions;
 
   /**
    * Enable Vue a11y support.
    *
    * @default false
    */
-  a11y?: boolean
+  a11y?: boolean;
 
   /**
    * Glob patterns for Vue files.
@@ -48,7 +48,7 @@ export interface VueOptions {
    * @default GLOB_VUE
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
-  files?: string[]
+  files?: string[];
 }
 
 export async function vue(
@@ -59,10 +59,10 @@ export async function vue(
     files = [GLOB_VUE],
     overrides = {},
     stylistic = true,
-  } = options
+  } = options;
 
   if (a11y) {
-    await ensure(["eslint-plugin-vuejs-accessibility"])
+    await ensure(["eslint-plugin-vuejs-accessibility"]);
   }
 
   const [
@@ -75,15 +75,15 @@ export async function vue(
     interop(import("vue-eslint-parser")),
     interop(import("eslint-processor-vue-blocks")),
     ...(a11y ? [interop(import("eslint-plugin-vuejs-accessibility"))] : []),
-  ] as const)
+  ] as const);
 
   const sfcBlocks = options.sfcBlocks === true
     ? {}
-    : options.sfcBlocks ?? {}
+    : options.sfcBlocks ?? {};
 
   const {
     indent = 2,
-  } = typeof stylistic === "boolean" ? {} : stylistic
+  } = typeof stylistic === "boolean" ? {} : stylistic;
 
   return [
     {
@@ -264,5 +264,5 @@ export async function vue(
         ...overrides,
       },
     },
-  ]
+  ];
 }
