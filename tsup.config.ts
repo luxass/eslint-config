@@ -5,7 +5,6 @@ export default defineConfig({
     "./src/index.ts",
     "./src/globs.ts",
     "./src/configs/**/*.ts",
-    "./src/custom-rules/*.ts",
   ],
   format: ["esm", "cjs"],
   clean: true,
