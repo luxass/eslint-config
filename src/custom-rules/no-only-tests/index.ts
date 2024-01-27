@@ -6,6 +6,9 @@ export interface NoOnlyTestsOptions {
   focus?: string[];
 }
 
+export const RULE_NAME = "no-only-tests";
+export type MessageIds = "not-permitted";
+
 const DEFAULT_OPTIONS = {
   blocks: ["describe", "it", "test"],
   focus: ["only"],
@@ -26,8 +29,8 @@ function getPath(node: any, path: any[] = []) {
   return path;
 }
 
-export const noOnlyTests = createRule<[NoOnlyTestsOptions], "notPermitted">({
-  name: "no-only-tests",
+export const noOnlyTests = createRule<[NoOnlyTestsOptions], MessageIds>({
+  name: RULE_NAME,
   create: (context, [options]) => {
     const {
       blocks = DEFAULT_OPTIONS.blocks,
@@ -55,7 +58,7 @@ export const noOnlyTests = createRule<[NoOnlyTestsOptions], "notPermitted">({
         if (found) {
           context.report({
             data: { block: callPath.split(".")[0], focus: node.name },
-            messageId: "notPermitted",
+            messageId: "not-permitted",
             node,
           });
         }
@@ -74,7 +77,7 @@ export const noOnlyTests = createRule<[NoOnlyTestsOptions], "notPermitted">({
       recommended: "recommended",
     },
     messages: {
-      notPermitted: "{{ block }}.{{ focus }} not permitted",
+      "not-permitted": "{{ block }}.{{ focus }} not permitted",
     },
     schema: [
       {
@@ -100,4 +103,4 @@ export const noOnlyTests = createRule<[NoOnlyTestsOptions], "notPermitted">({
     ],
     type: "layout",
   },
-}) satisfies RuleModule<"notPermitted", [NoOnlyTestsOptions], RuleListener>;
+}) satisfies RuleModule<MessageIds, [NoOnlyTestsOptions], RuleListener>;

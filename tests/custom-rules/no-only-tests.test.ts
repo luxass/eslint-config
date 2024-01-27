@@ -1,11 +1,11 @@
 import { RuleTester } from "@typescript-eslint/rule-tester";
-import { noOnlyTests } from "../../src/custom-rules/no-only-tests";
+import { RULE_NAME, noOnlyTests } from "../../src/custom-rules/no-only-tests";
 
 const tester = new RuleTester({
   parser: "@typescript-eslint/parser",
 });
 
-tester.run("no-only-tests", noOnlyTests, {
+tester.run(RULE_NAME, noOnlyTests, {
   valid: [
     "describe(\"Some describe block\", function() {});",
     "it(\"Some assertion\", function() {});",
@@ -30,40 +30,40 @@ tester.run("no-only-tests", noOnlyTests, {
     {
       code: "describe.only(\"Some describe block\", function() {});",
       output: "describe.only(\"Some describe block\", function() {});",
-      errors: [{ messageId: "notPermitted" }],
+      errors: [{ messageId: "not-permitted" }],
     },
     {
       code: "it.only(\"Some assertion\", function() {});",
       output: "it.only(\"Some assertion\", function() {});",
-      errors: [{ messageId: "notPermitted" }],
+      errors: [{ messageId: "not-permitted" }],
     },
     {
       code: "test.only(\"Some test\", function() {});",
       output: "test.only(\"Some test\", function() {});",
-      errors: [{ messageId: "notPermitted" }],
+      errors: [{ messageId: "not-permitted" }],
     },
     {
       options: [{ blocks: ["obscureTestBlock"] }],
       code: "obscureTestBlock.only(\"An obscure testing library test\", function() {});",
       output: "obscureTestBlock.only(\"An obscure testing library test\", function() {});",
-      errors: [{ messageId: "notPermitted" }],
+      errors: [{ messageId: "not-permitted" }],
     },
     {
       options: [{ blocks: ["ava.default"] }],
       code: "ava.default.only(\"Block with dot\", function() {});",
       output: "ava.default.only(\"Block with dot\", function() {});",
-      errors: [{ messageId: "notPermitted" }],
+      errors: [{ messageId: "not-permitted" }],
     },
     {
       code: "it.default.before(console.log).only(\"Some describe block\", function() {});",
       output: "it.default.before(console.log).only(\"Some describe block\", function() {});",
-      errors: [{ messageId: "notPermitted" }],
+      errors: [{ messageId: "not-permitted" }],
     },
     {
       options: [{ focus: ["focus"] }],
       code: "test.focus(\"An alternative focus function\", function() {});",
       output: "test.focus(\"An alternative focus function\", function() {});",
-      errors: [{ messageId: "notPermitted" }],
+      errors: [{ messageId: "not-permitted" }],
     },
   ],
 });

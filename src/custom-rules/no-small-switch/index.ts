@@ -1,8 +1,10 @@
+import type { RuleListener, RuleModule } from "@typescript-eslint/utils/ts-eslint";
 import { createRule } from "../utils";
 
 export const RULE_NAME = "no-small-switch";
+export type MessageIds = "small-switch";
 
-export const noSmallSwitch = createRule<[], "small-switch">({
+export const noSmallSwitch = createRule<[], MessageIds>({
   name: RULE_NAME,
   meta: {
     type: "suggestion",
@@ -35,4 +37,4 @@ export const noSmallSwitch = createRule<[], "small-switch">({
       },
     };
   },
-});
+}) satisfies RuleModule<MessageIds, [], RuleListener>;
