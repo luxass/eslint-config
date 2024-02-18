@@ -19,7 +19,7 @@
 
 ## 📦 Install
 
-```bash
+```bash copy
 npm install -D eslint @luxass/eslint-config
 ```
 
