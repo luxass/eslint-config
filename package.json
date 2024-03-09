@@ -91,7 +91,6 @@
     "eslint-plugin-react": ">=7.33.2",
     "eslint-plugin-react-hooks": ">=4.6.0",
     "eslint-plugin-react-refresh": ">=0.4",
-    "eslint-plugin-solid": ">=0.13.0",
     "eslint-plugin-tailwindcss": ">=3.13.0",
     "prettier-plugin-astro": "^0.13.0"
   },
@@ -124,9 +123,6 @@
       "optional": true
     },
     "eslint-plugin-tailwindcss": {
-      "optional": true
-    },
-    "eslint-plugin-solid": {
       "optional": true
     }
   },
@@ -185,7 +181,6 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
-    "eslint-plugin-solid": "^0.13.1",
     "eslint-plugin-tailwindcss": "^3.14.0",
     "lint-staged": "^15.2.0",
     "prettier-plugin-astro": "^0.13.0",
