@@ -84,16 +84,25 @@
   "peerDependencies": {
     "@next/eslint-plugin-next": ">=14.0.0",
     "@unocss/eslint-plugin": ">=0.50.0",
+    "astro-eslint-parser": "^0.16.3",
     "eslint": ">=8.40.0",
+    "eslint-plugin-astro": "^0.31.4",
     "eslint-plugin-format": ">=0.1.0",
     "eslint-plugin-react": ">=7.33.2",
     "eslint-plugin-react-hooks": ">=4.6.0",
     "eslint-plugin-react-refresh": ">=0.4",
     "eslint-plugin-solid": ">=0.13.0",
-    "eslint-plugin-tailwindcss": ">=3.13.0"
+    "eslint-plugin-tailwindcss": ">=3.13.0",
+    "prettier-plugin-astro": "^0.13.0"
   },
   "peerDependenciesMeta": {
     "@unocss/eslint-plugin": {
+      "optional": true
+    },
+    "astro-eslint-parser": {
+      "optional": true
+    },
+    "eslint-plugin-astro": {
       "optional": true
     },
     "eslint-plugin-format": {
@@ -106,6 +115,9 @@
       "optional": true
     },
     "eslint-plugin-react-refresh": {
+      "optional": true
+    },
+    "prettier-plugin-astro": {
       "optional": true
     },
     "@next/eslint-plugin-next": {
@@ -132,7 +144,6 @@
     "eslint-merge-processors": "^0.1.0",
     "eslint-parser-plain": "^0.1.0",
     "eslint-plugin-antfu": "^2.1.1",
-    "eslint-plugin-astro": "^0.31.3",
     "eslint-plugin-i": "^2.29.1",
     "eslint-plugin-jsdoc": "^48.0.2",
     "eslint-plugin-jsonc": "^2.12.2",
@@ -167,7 +178,9 @@
     "@typescript-eslint/rule-tester": "^6.19.0",
     "@typescript-eslint/utils": "^6.19.0",
     "@unocss/eslint-plugin": "^0.58.3",
+    "astro-eslint-parser": "^0.16.3",
     "eslint": "^8.56.0",
+    "eslint-plugin-astro": "^0.31.4",
     "eslint-plugin-format": "^0.1.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -175,6 +188,7 @@
     "eslint-plugin-solid": "^0.13.1",
     "eslint-plugin-tailwindcss": "^3.14.0",
     "lint-staged": "^15.2.0",
+    "prettier-plugin-astro": "^0.13.0",
     "simple-git-hooks": "^2.9.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3",

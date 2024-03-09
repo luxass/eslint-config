@@ -228,7 +228,7 @@ export interface ConfigOptions {
   /**
    * Enable Astro support.
    *
-   * @default auto-detect based on the dependencies
+   * @default false
    */
   astro?: boolean | AstroOptions;
 
