@@ -4,7 +4,7 @@ import type {
   FlatConfigItem,
 } from "../../types";
 import { GLOB_VUE } from "../../globs";
-import { ensure, interop } from "../../utils";
+import { interop } from "../../utils";
 import type { StylisticConfig } from "../stylistic";
 
 export interface VueOptions {
