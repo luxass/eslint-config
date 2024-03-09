@@ -36,13 +36,6 @@ export interface VueOptions {
   sfcBlocks?: boolean | VueBlocksOptions;
 
   /**
-   * Enable Vue a11y support.
-   *
-   * @default false
-   */
-  a11y?: boolean;
-
-  /**
    * Glob patterns for Vue files.
    *
    * @default GLOB_VUE
@@ -55,26 +48,19 @@ export async function vue(
   options: VueOptions = {},
 ): Promise<FlatConfigItem[]> {
   const {
-    a11y = false,
     files = [GLOB_VUE],
     overrides = {},
     stylistic = true,
   } = options;
 
-  if (a11y) {
-    await ensure(["eslint-plugin-vuejs-accessibility"]);
-  }
-
   const [
     pluginVue,
     parserVue,
     processorVueBlocks,
-    pluginA11y,
   ] = await Promise.all([
     interop(import("eslint-plugin-vue")),
     interop(import("vue-eslint-parser")),
     interop(import("eslint-processor-vue-blocks")),
-    ...(a11y ? [interop(import("eslint-plugin-vuejs-accessibility"))] : []),
   ] as const);
 
   const sfcBlocks = options.sfcBlocks === true
@@ -90,7 +76,6 @@ export async function vue(
       name: "luxass:vue:setup",
       plugins: {
         vue: pluginVue,
-        ...(a11y ? { "vue-a11y": pluginA11y } : {}),
       },
     },
     {
@@ -233,31 +218,6 @@ export async function vue(
               "vue/quote-props": ["error", "consistent-as-needed"],
               "vue/space-in-parens": ["error", "never"],
               "vue/template-curly-spacing": "error",
-            }
-          : {}),
-
-        ...(a11y
-          ? {
-              "vue-a11y/alt-text": "error",
-              "vue-a11y/anchor-has-content": "error",
-              "vue-a11y/aria-props": "error",
-              "vue-a11y/aria-role": "error",
-              "vue-a11y/aria-unsupported-elements": "error",
-              "vue-a11y/click-events-have-key-events": "error",
-              "vue-a11y/form-control-has-label": "error",
-              "vue-a11y/heading-has-content": "error",
-              "vue-a11y/iframe-has-title": "error",
-              "vue-a11y/interactive-supports-focus": "error",
-              "vue-a11y/label-has-for": "error",
-              "vue-a11y/media-has-caption": "error",
-              "vue-a11y/mouse-events-have-key-events": "error",
-              "vue-a11y/no-access-key": "error",
-              "vue-a11y/no-autofocus": "error",
-              "vue-a11y/no-distracting-elements": "error",
-              "vue-a11y/no-redundant-roles": "error",
-              "vue-a11y/no-static-element-interactions": "error",
-              "vue-a11y/role-has-required-aria-props": "error",
-              "vue-a11y/tabindex-no-positive": "error",
             }
           : {}),
 
