@@ -21,8 +21,8 @@ dependencies:
     specifier: ^6.18.1
     version: 6.18.1
   '@eslint-types/unicorn':
-    specifier: ^50.0.1
-    version: 50.0.1
+    specifier: ^51.0.0
+    version: 51.0.1
   '@stylistic/eslint-plugin':
     specifier: ^1.5.4
     version: 1.5.4(eslint@8.56.0)(typescript@5.3.3)
@@ -535,8 +535,8 @@ packages:
     resolution: {integrity: sha512-sROyc1rWhtvSdszkR3VAv2fioXIyKNFFRbIgoiije2FA+iNn4FEDhP2+kvbq8wPda2adcrNhSZyWSEFsef+lbg==}
     dev: false
 
-  /@eslint-types/unicorn@50.0.1:
-    resolution: {integrity: sha512-nuJuipTNcg9f+oxZ+3QZw4tuDLmir4RJOPfM/oujgToiy1s+tePDZhwg5jUGc3q8OzTtPbVpsFSYX7QApjO3EA==}
+  /@eslint-types/unicorn@51.0.1:
+    resolution: {integrity: sha512-RuuEK+dBISEikf7a8lrWOrDCUYv09sZfqLoG/kozH+5UqEvot1xMmGHXomGkTyB68rzjgJe0N4uESVyL62obJw==}
     dev: false
 
   /@eslint/eslintrc@2.1.4:
