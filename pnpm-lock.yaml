@@ -18,8 +18,8 @@ dependencies:
     specifier: ^48.0.2
     version: 48.0.2
   '@eslint-types/typescript-eslint':
-    specifier: ^6.18.1
-    version: 6.18.1
+    specifier: ^7.0.0
+    version: 7.0.2
   '@eslint-types/unicorn':
     specifier: ^50.0.1
     version: 50.0.1
@@ -531,8 +531,8 @@ packages:
     resolution: {integrity: sha512-USXSxmm/4LzM/kpBfFbW7trzK6R1bfuaM8t79ykMmODUonYdck2VJW8T4irlnXV3ZMwmHZr8nDHWMTagatwCVQ==}
     dev: false
 
-  /@eslint-types/typescript-eslint@6.18.1:
-    resolution: {integrity: sha512-sROyc1rWhtvSdszkR3VAv2fioXIyKNFFRbIgoiije2FA+iNn4FEDhP2+kvbq8wPda2adcrNhSZyWSEFsef+lbg==}
+  /@eslint-types/typescript-eslint@7.0.2:
+    resolution: {integrity: sha512-2F67MVKhkJ2rSwoYvNJzJULqZwR5rNYI/eWoIrKDQ14lMzfqzbpzCBvnHrivBYWTN+Az7MVX00TzDTrjOc+YNA==}
     dev: false
 
   /@eslint-types/unicorn@50.0.1:
