@@ -1,5 +1,6 @@
 import * as parserPlain from "eslint-parser-plain";
-import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from "../globs";
+import { isPackageExists } from "local-pkg";
+import { GLOB_ASTRO, GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from "../globs";
 import type { VendoredPrettierOptions } from "../vendor/prettier-types";
 import { ensure, interop } from "../utils";
 import type { FlatConfigItem } from "../types";
@@ -31,6 +32,13 @@ export interface FormattersOptions {
   markdown?: "prettier" | "dprint" | boolean;
 
   /**
+   * Enable formatting support for Astro.
+   *
+   * Currently only support Prettier.
+   */
+  astro?: "prettier" | boolean;
+
+  /**
    * Enable formatting support for GraphQL.
    */
   graphql?: "prettier" | boolean;
@@ -54,18 +62,20 @@ export async function formatters(
   options: FormattersOptions | true = {},
   stylistic: StylisticConfig = {},
 ): Promise<FlatConfigItem[]> {
-  await ensure([
-    "eslint-plugin-format",
-  ]);
-
   if (options === true) {
     options = {
+      astro: isPackageExists("astro"),
       css: true,
       graphql: true,
       html: true,
       markdown: true,
     };
   }
+
+  await ensure([
+    "eslint-plugin-format",
+    options.astro ? "prettier-plugin-astro" : undefined,
+  ]);
 
   const {
     indent,
@@ -205,6 +215,28 @@ export async function formatters(
                 ...dprintOptions,
                 language: "markdown",
               },
+        ],
+      },
+    });
+  }
+
+  if (options.astro) {
+    configs.push({
+      name: "luxass:formatter:astro",
+      files: [GLOB_ASTRO],
+      languageOptions: {
+        parser: parserPlain,
+      },
+      rules: {
+        "format/prettier": [
+          "error",
+          {
+            ...prettierOptions,
+            parser: "astro",
+            plugins: [
+              "prettier-plugin-astro",
+            ],
+          },
         ],
       },
     });

@@ -31,30 +31,27 @@ export async function interop<T>(m: Awaitable<T>): Promise<T extends { default: 
   return (resolved as any).default || resolved;
 }
 
-export async function ensure(packages: string[]) {
+export async function ensure(packages: (string | undefined)[]) {
   if (process.env.CI || process.stdout.isTTY === false) {
     return;
   };
 
-  const nonExistingPackages = packages.filter((i) => !isPackageExists(i));
+  const nonExistingPackages = packages.filter((i) => i && !isPackageExists(i)) as string[];
   if (nonExistingPackages.length === 0) {
     return;
-  };
+  }
 
   const { default: prompts } = await import("prompts");
   const { result } = await prompts([
     {
-      name: "result",
       message: `${nonExistingPackages.length === 1 ? "Package is" : "Packages are"} required for this config: ${nonExistingPackages.join(", ")}. Do you want to install them?`,
+      name: "result",
       type: "confirm",
     },
   ]);
   if (result) {
-    await import("@antfu/install-pkg")
-      .then((i) => i.installPackage(nonExistingPackages, {
-        dev: true,
-      }));
-  };
+    await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
+  }
 }
 
 export type ResolvedOptions<T> = T extends boolean

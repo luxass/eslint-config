@@ -1,6 +1,6 @@
 import { GLOB_ASTRO } from "../../globs";
 import type { FlatConfigItem } from "../../types";
-import { interop } from "../../utils";
+import { ensure, interop } from "../../utils";
 import type { StylisticConfig } from "../stylistic";
 
 export interface AstroOptions {
@@ -15,13 +15,6 @@ export interface AstroOptions {
    * @default true
    */
   typescript?: boolean;
-
-  /**
-   * Enable React A11y support.
-   *
-   * @default false
-   */
-  a11y?: boolean;
 
   /**
    * Glob patterns for Astro files.
@@ -41,23 +34,25 @@ export interface AstroOptions {
 
 export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {
   const {
-    a11y = false,
     files = [GLOB_ASTRO],
     overrides = {},
     typescript = true,
     stylistic = true,
   } = options;
 
+  await ensure([
+    "eslint-plugin-astro",
+    "astro-eslint-parser",
+  ]);
+
   const [
     pluginAstro,
     parserAstro,
     parserTs,
-    pluginA11y,
   ] = await Promise.all([
     interop(import("eslint-plugin-astro")),
     interop(import("astro-eslint-parser")),
     interop(import("@typescript-eslint/parser")),
-    ...(a11y ? [interop(import("eslint-plugin-jsx-a11y"))] : []),
   ] as const);
 
   return [
@@ -65,7 +60,6 @@ export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {
       name: "luxass:astro:setup",
       plugins: {
         astro: pluginAstro,
-        ...(a11y ? { "jsx-a11y": pluginA11y } : {}),
       },
     },
     {
