@@ -23,49 +23,12 @@
   ],
   "exports": {
     ".": {
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
-    },
-    "./globs": {
-      "import": {
-        "types": "./dist/globs.d.ts",
-        "default": "./dist/globs.mjs"
-      },
-      "require": {
-        "types": "./dist/globs.d.cts",
-        "default": "./dist/globs.cjs"
-      }
-    },
-    "./configs": {
-      "import": {
-        "types": "./dist/configs/index.d.ts",
-        "default": "./dist/configs/index.mjs"
-      },
-      "require": {
-        "types": "./dist/configs/index.d.cts",
-        "default": "./dist/configs/index.cjs"
-      }
-    },
-    "./configs/*": {
-      "import": {
-        "types": "./dist/configs/*.d.ts",
-        "default": "./dist/configs/*.mjs"
-      },
-      "require": {
-        "types": "./dist/configs/*.d.cts",
-        "default": "./dist/configs/*.cjs"
-      }
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -74,7 +37,7 @@
     "node": ">=18.18.0"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup --format esm,cjs --clean --dts",
     "dev": "tsup --watch",
     "lint": "eslint . --report-unused-disable-directives",
     "test": "vitest --run",
@@ -172,7 +135,6 @@
     "@types/node": "^18.17.19",
     "@types/prompts": "^2.4.9",
     "@typescript-eslint/rule-tester": "^7.1.1",
-    "@typescript-eslint/utils": "^7.1.1",
     "@unocss/eslint-plugin": "^0.58.5",
     "astro-eslint-parser": "^0.16.3",
     "eslint": "^8.57.0",

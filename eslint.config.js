@@ -2,7 +2,7 @@
 import styleMigrate from "@stylistic/eslint-plugin-migrate";
 
 // eslint-disable-next-line antfu/no-import-dist
-import luxass from "./dist/index.mjs";
+import luxass from "./dist/index.js";
 
 export default luxass(
   {

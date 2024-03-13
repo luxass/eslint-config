@@ -2,8 +2,9 @@ import {
   luxass,
 } from "./factory";
 
-export type { ConfigOptions, UserConfigItem } from "./types";
+export * from "./configs";
+export * from "./globs";
+export * from "./utils";
+export * from "./types";
 
 export { luxass };
-
-export default luxass;

@@ -41,6 +41,13 @@ const FLAT_CONFIG_PROPS: (keyof FlatConfigItem)[] = [
   "settings",
 ];
 
+const VuePackages = [
+  "vue",
+  "nuxt",
+  "vitepress",
+  "@slidev/cli",
+];
+
 export async function luxass(
   options: ConfigOptions & FlatConfigItem = {},
   ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
@@ -55,7 +62,7 @@ export async function luxass(
     tailwindcss: enableTailwindCSS = false,
     typescript: enableTypeScript = isPackageExists("typescript"),
     unocss: enableUnoCSS = false,
-    vue: enableVue = false,
+    vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
   } = options;
 
   const stylisticOptions

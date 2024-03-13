@@ -40,7 +40,6 @@ import type {
   VueOptions,
   YAMLOptions,
 } from "./configs";
-import type { NoOnlyTestsOptions } from "./custom-rules/no-only-tests";
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
   [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>;
@@ -64,11 +63,7 @@ export type Rules = WrapRuleConfig<
     JsoncRules &
     VueRules &
     UnicornRules &
-    EslintCommentsRules &
-    // TODO: TOML rules
-    {
-      "test/no-only-tests": RuleConfig<[NoOnlyTestsOptions]>;
-    }
+    EslintCommentsRules
   >
 >;
 

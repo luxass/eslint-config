@@ -178,6 +178,7 @@ We don't recommend using this style in general usages, as there are shared optio
 ```js
 // eslint.config.js
 import {
+  combine,
   comments,
   ignores,
   imports,
@@ -192,10 +193,8 @@ import {
   typescript,
   unicorn,
   vue,
-  yaml,
-} from "@luxass/eslint-config/configs";
-
-import { combine } from "@luxass/eslint-config";
+  yaml
+} from "@luxass/eslint-config";
 
 export default combine(
   ignores(),
