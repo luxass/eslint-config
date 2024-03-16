@@ -105,6 +105,10 @@ export async function nextjs(
         'react/no-unknown-property': ['error', {
           ignore: ['tw'],
         }],
+        'react-refresh/only-export-components': [
+          'warn',
+          { allowConstantExport: true },
+        ],
       },
     },
   ]
