@@ -1,11 +1,11 @@
-import * as parserPlain from "eslint-parser-plain";
-import { isPackageExists } from "local-pkg";
-import { GLOB_ASTRO, GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from "../globs";
-import type { VendoredPrettierOptions } from "../vendor/prettier-types";
-import { ensure, interop } from "../utils";
-import type { FlatConfigItem } from "../types";
-import type { StylisticConfig } from "./stylistic";
-import { StylisticConfigDefaults } from "./stylistic";
+import * as parserPlain from 'eslint-parser-plain'
+import { isPackageExists } from 'local-pkg'
+import { GLOB_ASTRO, GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
+import type { VendoredPrettierOptions } from '../vendor/prettier-types'
+import { ensure, interop } from '../utils'
+import type { FlatConfigItem } from '../types'
+import type { StylisticConfig } from './stylistic'
+import { StylisticConfigDefaults } from './stylistic'
 
 export interface FormattersOptions {
   /**
@@ -13,14 +13,14 @@ export interface FormattersOptions {
    *
    * Currently only support Prettier.
    */
-  css?: "prettier" | boolean;
+  css?: 'prettier' | boolean
 
   /**
    * Enable formatting support for HTML.
    *
    * Currently only support Prettier.
    */
-  html?: "prettier" | boolean;
+  html?: 'prettier' | boolean
 
   /**
    * Enable formatting support for Markdown.
@@ -29,33 +29,33 @@ export interface FormattersOptions {
    *
    * When set to `true`, it will use Prettier.
    */
-  markdown?: "prettier" | "dprint" | boolean;
+  markdown?: 'prettier' | 'dprint' | boolean
 
   /**
    * Enable formatting support for Astro.
    *
    * Currently only support Prettier.
    */
-  astro?: "prettier" | boolean;
+  astro?: 'prettier' | boolean
 
   /**
    * Enable formatting support for GraphQL.
    */
-  graphql?: "prettier" | boolean;
+  graphql?: 'prettier' | boolean
 
   /**
    * Custom options for Prettier.
    *
    * By default it's controlled by our own config.
    */
-  prettierOptions?: VendoredPrettierOptions;
+  prettierOptions?: VendoredPrettierOptions
 
   /**
    * Custom options for dprint.
    *
    * By default it's controlled by our own config.
    */
-  dprintOptions?: boolean;
+  dprintOptions?: boolean
 }
 
 export async function formatters(
@@ -64,18 +64,18 @@ export async function formatters(
 ): Promise<FlatConfigItem[]> {
   if (options === true) {
     options = {
-      astro: isPackageExists("astro"),
+      astro: isPackageExists('astro'),
       css: true,
       graphql: true,
       html: true,
       markdown: true,
-    };
+    }
   }
 
   await ensure([
-    "eslint-plugin-format",
-    options.astro ? "prettier-plugin-astro" : undefined,
-  ]);
+    'eslint-plugin-format',
+    options.astro ? 'prettier-plugin-astro' : undefined,
+  ])
 
   const {
     indent,
@@ -84,182 +84,182 @@ export async function formatters(
   } = {
     ...StylisticConfigDefaults,
     ...stylistic,
-  };
+  }
 
   const prettierOptions: VendoredPrettierOptions = Object.assign(
     {
-      endOfLine: "auto",
+      endOfLine: 'auto',
       semi,
-      singleQuote: quotes === "single",
-      tabWidth: typeof indent === "number" ? indent : 2,
-      trailingComma: "all",
-      useTabs: indent === "tab",
+      singleQuote: quotes === 'single',
+      tabWidth: typeof indent === 'number' ? indent : 2,
+      trailingComma: 'all',
+      useTabs: indent === 'tab',
     } satisfies VendoredPrettierOptions,
     options.prettierOptions || {},
-  );
+  )
 
   const dprintOptions = Object.assign(
     {
-      indentWidth: typeof indent === "number" ? indent : 2,
-      quoteStyle: quotes === "single" ? "preferSingle" : "preferDouble",
-      useTabs: indent === "tab",
+      indentWidth: typeof indent === 'number' ? indent : 2,
+      quoteStyle: quotes === 'single' ? 'preferSingle' : 'preferDouble',
+      useTabs: indent === 'tab',
     },
     options.dprintOptions || {},
-  );
+  )
 
-  const pluginFormat = await interop(import("eslint-plugin-format"));
+  const pluginFormat = await interop(import('eslint-plugin-format'))
 
   const configs: FlatConfigItem[] = [
     {
-      name: "luxass:formatters:setup",
+      name: 'luxass:formatters:setup',
       plugins: {
         format: pluginFormat,
       },
     },
-  ];
+  ]
 
   if (options.css) {
     configs.push(
       {
-        name: "luxass:formatter:css",
+        name: 'luxass:formatter:css',
         files: [GLOB_CSS, GLOB_POSTCSS],
         languageOptions: {
           parser: parserPlain,
         },
         rules: {
-          "format/prettier": [
-            "error",
+          'format/prettier': [
+            'error',
             {
               ...prettierOptions,
-              parser: "css",
+              parser: 'css',
             },
           ],
         },
       },
       {
-        name: "luxass:formatter:scss",
+        name: 'luxass:formatter:scss',
         files: [GLOB_SCSS],
         languageOptions: {
           parser: parserPlain,
         },
         rules: {
-          "format/prettier": [
-            "error",
+          'format/prettier': [
+            'error',
             {
               ...prettierOptions,
-              parser: "scss",
+              parser: 'scss',
             },
           ],
         },
       },
       {
-        name: "luxass:formatter:less",
+        name: 'luxass:formatter:less',
         files: [GLOB_LESS],
         languageOptions: {
           parser: parserPlain,
         },
         rules: {
-          "format/prettier": [
-            "error",
+          'format/prettier': [
+            'error',
             {
               ...prettierOptions,
-              parser: "less",
+              parser: 'less',
             },
           ],
         },
       },
-    );
+    )
   }
 
   if (options.html) {
     configs.push({
-      name: "luxass:formatter:html",
-      files: ["**/*.html"],
+      name: 'luxass:formatter:html',
+      files: ['**/*.html'],
       languageOptions: {
         parser: parserPlain,
       },
       rules: {
-        "format/prettier": [
-          "error",
+        'format/prettier': [
+          'error',
           {
             ...prettierOptions,
-            parser: "html",
+            parser: 'html',
           },
         ],
       },
-    });
+    })
   }
 
   if (options.markdown) {
     const formater = options.markdown === true
-      ? "prettier"
-      : options.markdown;
+      ? 'prettier'
+      : options.markdown
 
     configs.push({
-      name: "luxass:formatter:markdown",
+      name: 'luxass:formatter:markdown',
       files: [GLOB_MARKDOWN],
       languageOptions: {
         parser: parserPlain,
       },
       rules: {
         [`format/${formater}`]: [
-          "error",
-          formater === "prettier"
+          'error',
+          formater === 'prettier'
             ? {
                 printWidth: 120,
                 ...prettierOptions,
-                embeddedLanguageFormatting: "off",
-                parser: "markdown",
+                embeddedLanguageFormatting: 'off',
+                parser: 'markdown',
               }
             : {
                 ...dprintOptions,
-                language: "markdown",
+                language: 'markdown',
               },
         ],
       },
-    });
+    })
   }
 
   if (options.astro) {
     configs.push({
-      name: "luxass:formatter:astro",
+      name: 'luxass:formatter:astro',
       files: [GLOB_ASTRO],
       languageOptions: {
         parser: parserPlain,
       },
       rules: {
-        "format/prettier": [
-          "error",
+        'format/prettier': [
+          'error',
           {
             ...prettierOptions,
-            parser: "astro",
+            parser: 'astro',
             plugins: [
-              "prettier-plugin-astro",
+              'prettier-plugin-astro',
             ],
           },
         ],
       },
-    });
+    })
   }
 
   if (options.graphql) {
     configs.push({
-      name: "luxass:formatter:graphql",
-      files: ["**/*.graphql"],
+      name: 'luxass:formatter:graphql',
+      files: ['**/*.graphql'],
       languageOptions: {
         parser: parserPlain,
       },
       rules: {
-        "format/prettier": [
-          "error",
+        'format/prettier': [
+          'error',
           {
             ...prettierOptions,
-            parser: "graphql",
+            parser: 'graphql',
           },
         ],
       },
-    });
+    })
   }
 
-  return configs;
+  return configs
 }

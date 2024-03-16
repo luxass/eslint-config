@@ -1,10 +1,10 @@
 import {
   luxass,
-} from "./factory";
+} from './factory'
 
-export * from "./configs";
-export * from "./globs";
-export * from "./utils";
-export * from "./types";
+export * from './configs'
+export * from './globs'
+export * from './utils'
+export * from './types'
 
-export { luxass };
+export { luxass }

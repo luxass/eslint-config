@@ -1,7 +1,7 @@
-import { afterAll } from "vitest";
-import { RuleTester } from "@typescript-eslint/rule-tester";
+import { afterAll } from 'vitest'
+import { RuleTester } from '@typescript-eslint/rule-tester'
 
-RuleTester.afterAll = afterAll;
+RuleTester.afterAll = afterAll
 
 // If you are not using vitest with globals: true (https://vitest.dev/config/#globals):
 // RuleTester.it = it;

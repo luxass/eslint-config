@@ -1,6 +1,6 @@
-import type { FlatConfigItem } from "../types";
-import { GLOB_TESTS } from "../globs";
-import { interop } from "../utils";
+import type { FlatConfigItem } from '../types'
+import { GLOB_TESTS } from '../globs'
+import { interop } from '../utils'
 
 export interface TestOptions {
   /**
@@ -8,7 +8,7 @@ export interface TestOptions {
    *
    * @default false
    */
-  editor?: boolean;
+  editor?: boolean
 
   /**
    * Glob patterns for test files.
@@ -16,12 +16,12 @@ export interface TestOptions {
    * @default GLOB_TESTS
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
-  files?: string[];
+  files?: string[]
 
   /**
    * Override rules for for test files.
    */
-  overrides?: FlatConfigItem["rules"];
+  overrides?: FlatConfigItem['rules']
 }
 
 export async function test(
@@ -31,17 +31,17 @@ export async function test(
     editor = false,
     files = GLOB_TESTS,
     overrides = {},
-  } = options;
+  } = options
 
   const [
     pluginVitest,
   ] = await Promise.all([
-    interop(import("eslint-plugin-vitest")),
-  ] as const);
+    interop(import('eslint-plugin-vitest')),
+  ] as const)
 
   return [
     {
-      name: "luxass:test:setup",
+      name: 'luxass:test:setup',
       plugins: {
         test: {
           ...pluginVitest,
@@ -52,20 +52,20 @@ export async function test(
       },
     },
     {
-      name: "luxass:test:rules",
+      name: 'luxass:test:rules',
       files,
       rules: {
-        "test/consistent-test-it": [
-          "error",
-          { fn: "it", withinDescribe: "it" },
+        'test/consistent-test-it': [
+          'error',
+          { fn: 'it', withinDescribe: 'it' },
         ],
-        "test/no-identical-title": "error",
-        "test/no-focused-tests": editor ? "off" : "error",
-        "test/prefer-hooks-in-order": "error",
+        'test/no-identical-title': 'error',
+        'test/no-focused-tests': editor ? 'off' : 'error',
+        'test/prefer-hooks-in-order': 'error',
 
-        "test/prefer-lowercase-title": "error",
+        'test/prefer-lowercase-title': 'error',
         ...overrides,
       },
     },
-  ];
+  ]
 }

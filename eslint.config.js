@@ -1,8 +1,8 @@
 // @ts-check
-import styleMigrate from "@stylistic/eslint-plugin-migrate";
+import styleMigrate from '@stylistic/eslint-plugin-migrate'
 
 // eslint-disable-next-line antfu/no-import-dist
-import { luxass } from "./dist/index.js";
+import { luxass } from './dist/index.js'
 
 export default luxass(
   {
@@ -10,16 +10,16 @@ export default luxass(
     typescript: true,
     formatters: true,
     ignores: [
-      "**/fixtures",
+      '**/fixtures',
     ],
   },
   {
-    files: ["src/configs/**/*.ts"],
+    files: ['src/configs/**/*.ts'],
     plugins: {
-      "style-migrate": styleMigrate,
+      'style-migrate': styleMigrate,
     },
     rules: {
-      "style-migrate/migrate": ["error", { namespaceTo: "style" }],
+      'style-migrate/migrate': ['error', { namespaceTo: 'style' }],
     },
   },
-);
+)

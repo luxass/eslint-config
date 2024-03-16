@@ -1,6 +1,6 @@
-import type { FlatConfigItem } from "../../types";
-import { interop } from "../../utils";
-import type { StylisticConfig } from "../stylistic";
+import type { FlatConfigItem } from '../../types'
+import { interop } from '../../utils'
+import type { StylisticConfig } from '../stylistic'
 
 export interface JSDOCOptions {
   /**
@@ -8,52 +8,52 @@ export interface JSDOCOptions {
    *
    * @default true
    */
-  stylistic?: boolean | StylisticConfig;
+  stylistic?: boolean | StylisticConfig
 
   /**
    * Overrides for the config.
    */
-  overrides?: FlatConfigItem["rules"];
+  overrides?: FlatConfigItem['rules']
 }
 
 export async function jsdoc(options: JSDOCOptions = {}): Promise<FlatConfigItem[]> {
   const {
     overrides,
     stylistic = true,
-  } = options;
+  } = options
 
   return [
     {
-      name: "luxass:jsdoc",
+      name: 'luxass:jsdoc',
       plugins: {
-        jsdoc: await interop(import("eslint-plugin-jsdoc")),
+        jsdoc: await interop(import('eslint-plugin-jsdoc')),
       },
       rules: {
-        "jsdoc/check-access": "warn",
-        "jsdoc/check-param-names": "warn",
-        "jsdoc/check-property-names": "warn",
-        "jsdoc/check-types": "warn",
-        "jsdoc/empty-tags": "warn",
-        "jsdoc/implements-on-classes": "warn",
-        "jsdoc/no-defaults": "warn",
-        "jsdoc/no-multi-asterisks": "warn",
-        "jsdoc/require-param-name": "warn",
-        "jsdoc/require-property": "warn",
-        "jsdoc/require-property-description": "warn",
-        "jsdoc/require-property-name": "warn",
-        "jsdoc/require-returns-check": "warn",
-        "jsdoc/require-returns-description": "warn",
-        "jsdoc/require-yields-check": "warn",
+        'jsdoc/check-access': 'warn',
+        'jsdoc/check-param-names': 'warn',
+        'jsdoc/check-property-names': 'warn',
+        'jsdoc/check-types': 'warn',
+        'jsdoc/empty-tags': 'warn',
+        'jsdoc/implements-on-classes': 'warn',
+        'jsdoc/no-defaults': 'warn',
+        'jsdoc/no-multi-asterisks': 'warn',
+        'jsdoc/require-param-name': 'warn',
+        'jsdoc/require-property': 'warn',
+        'jsdoc/require-property-description': 'warn',
+        'jsdoc/require-property-name': 'warn',
+        'jsdoc/require-returns-check': 'warn',
+        'jsdoc/require-returns-description': 'warn',
+        'jsdoc/require-yields-check': 'warn',
 
         ...(stylistic
           ? {
-              "jsdoc/check-alignment": "warn",
-              "jsdoc/multiline-blocks": "warn",
+              'jsdoc/check-alignment': 'warn',
+              'jsdoc/multiline-blocks': 'warn',
             }
           : {}),
 
         ...overrides,
       },
     },
-  ];
+  ]
 }
