@@ -1,4 +1,4 @@
-import pluginImport from 'eslint-plugin-i'
+import pluginImport from 'eslint-plugin-import-x'
 import pluginAntfu from 'eslint-plugin-antfu'
 import type { FlatConfigItem } from '../types'
 import { GLOB_SRC_EXT } from '../globs'
