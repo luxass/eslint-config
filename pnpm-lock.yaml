@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  eslint-parser-plain@0.1.0:
+    hash: 2wwjuy7bj3rwnupmtdrepccgsy
+    path: patches/eslint-parser-plain@0.1.0.patch
+
 dependencies:
   '@antfu/eslint-define-config':
     specifier: ^1.23.0-2
@@ -43,7 +48,7 @@ dependencies:
     version: 0.1.0(eslint@8.57.0)
   eslint-parser-plain:
     specifier: ^0.1.0
-    version: 0.1.0
+    version: 0.1.0(patch_hash=2wwjuy7bj3rwnupmtdrepccgsy)
   eslint-plugin-antfu:
     specifier: ^2.1.2
     version: 2.1.2(eslint@8.57.0)
@@ -2046,8 +2051,9 @@ packages:
       eslint: 8.57.0
     dev: false
 
-  /eslint-parser-plain@0.1.0:
+  /eslint-parser-plain@0.1.0(patch_hash=2wwjuy7bj3rwnupmtdrepccgsy):
     resolution: {integrity: sha512-oOeA6FWU0UJT/Rxc3XF5Cq0nbIZbylm7j8+plqq0CZoE6m4u32OXJrR+9iy4srGMmF6v6pmgvP1zPxSRIGh3sg==}
+    patched: true
 
   /eslint-plugin-antfu@2.1.2(eslint@8.57.0):
     resolution: {integrity: sha512-s7ZTOM3uq0iqpp6gF0UEotnvup7f2PHBUftCytLZX0+6C9j9KadKZQh6bVVngAyFgsmeD9+gcBopOYLClb2oDg==}
@@ -2098,7 +2104,7 @@ packages:
       '@dprint/toml': 0.5.4
       eslint: 8.57.0
       eslint-formatting-reporter: 0.0.0(eslint@8.57.0)
-      eslint-parser-plain: 0.1.0
+      eslint-parser-plain: 0.1.0(patch_hash=2wwjuy7bj3rwnupmtdrepccgsy)
       prettier: 3.2.5
       synckit: 0.8.8
     dev: true
