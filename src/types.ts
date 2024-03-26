@@ -31,6 +31,7 @@ import type {
   JavaScriptOptions,
   NextJSOptions,
   ReactOptions,
+  SolidOptions,
   StylisticConfig,
   TOMLOptions,
   TailwindCSSOptions,
@@ -247,4 +248,14 @@ export interface ConfigOptions {
    * @default []
    */
   exts?: string[]
+
+  /**
+   * Enable Solid support.
+   *
+   * Requires installing:
+   * - `eslint-plugin-solid`
+   *
+   * @default false
+   */
+  solid?: boolean | SolidOptions
 }
