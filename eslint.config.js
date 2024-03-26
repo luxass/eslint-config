@@ -1,8 +1,13 @@
 // @ts-check
 import styleMigrate from '@stylistic/eslint-plugin-migrate'
+import JITI from 'jiti'
 
-// eslint-disable-next-line antfu/no-import-dist
-import { luxass } from './dist/index.js'
+const jiti = JITI(import.meta.url)
+
+/**
+ * @type {import('./src').default}
+ */
+const luxass = jiti('./src').default
 
 export default luxass(
   {
