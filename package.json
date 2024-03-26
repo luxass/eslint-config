@@ -34,7 +34,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=18.18.0"
+    "node": ">=20"
   },
   "scripts": {
     "build": "tsup --format esm,cjs --clean --dts",
