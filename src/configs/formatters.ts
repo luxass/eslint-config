@@ -1,6 +1,6 @@
 import * as parserPlain from 'eslint-parser-plain'
 import { isPackageExists } from 'local-pkg'
-import { GLOB_ASTRO, GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
+import { GLOB_ASTRO, GLOB_CSS, GLOB_GRAPHQL, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
 import type { VendoredPrettierOptions } from '../vendor/prettier-types'
 import { ensure, interop } from '../utils'
 import type { FlatConfigItem } from '../types'
@@ -245,7 +245,7 @@ export async function formatters(
   if (options.graphql) {
     configs.push({
       name: 'luxass:formatter:graphql',
-      files: ['**/*.graphql'],
+      files: [GLOB_GRAPHQL],
       languageOptions: {
         parser: parserPlain,
       },
