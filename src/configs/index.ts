@@ -54,3 +54,6 @@ export type { FormattersOptions } from './formatters'
 
 export { toml } from './data/toml'
 export type { TOMLOptions } from './data/toml'
+
+export { solid } from './solid'
+export type { SolidOptions } from './solid'

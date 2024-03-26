@@ -15,6 +15,7 @@ import {
   nextjs,
   node,
   react,
+  solid,
   sortPackageJson,
   sortTsconfig,
   stylistic,
@@ -60,6 +61,7 @@ export async function luxass(
     nextjs: enableNextJS = false,
     react: enableReact = false,
     tailwindcss: enableTailwindCSS = false,
+    solid: enableSolid = false,
     typescript: enableTypeScript = isPackageExists('typescript'),
     unocss: enableUnoCSS = false,
     vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
@@ -143,6 +145,16 @@ export async function luxass(
       nextjs({
         ...resolveSubOptions(options, 'nextjs'),
         overrides: getOverrides(options, 'nextjs'),
+      }),
+    )
+  }
+
+  if (enableSolid) {
+    configs.push(
+      solid({
+        ...resolveSubOptions(options, 'solid'),
+        overrides: getOverrides(options, 'solid'),
+        typescript: !!enableTypeScript,
       }),
     )
   }
