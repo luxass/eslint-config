@@ -1,7 +1,7 @@
-import type { FlatConfigItem } from '../../types'
-import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../../globs'
-import { interop } from '../../utils'
-import type { StylisticConfig } from '../stylistic'
+import type { FlatConfigItem } from '../types'
+import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs'
+import { interop } from '../utils'
+import type { StylisticConfig } from './stylistic'
 
 export interface JSONOptions {
   /**

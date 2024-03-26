@@ -1,6 +1,6 @@
-import { GLOB_SRC } from '../../globs'
-import type { FlatConfigItem } from '../../types'
-import { ensure, interop } from '../../utils'
+import { GLOB_SRC } from '../globs'
+import type { FlatConfigItem } from '../types'
+import { ensure, interop } from '../utils'
 
 export interface TailwindCSSOptions {
   /**

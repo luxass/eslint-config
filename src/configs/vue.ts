@@ -2,10 +2,10 @@ import { mergeProcessors } from 'eslint-merge-processors'
 import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks'
 import type {
   FlatConfigItem,
-} from '../../types'
-import { GLOB_VUE } from '../../globs'
-import { interop } from '../../utils'
-import type { StylisticConfig } from '../stylistic'
+} from '../types'
+import { GLOB_VUE } from '../globs'
+import { interop } from '../utils'
+import type { StylisticConfig } from './stylistic'
 
 export interface VueOptions {
   /**

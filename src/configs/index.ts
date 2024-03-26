@@ -10,14 +10,14 @@ export type { ImportsOptions } from './imports'
 export { javascript } from './javascript'
 export type { JavaScriptOptions } from './javascript'
 
-export { jsdoc } from './docs/jsdoc'
-export type { JSDOCOptions } from './docs/jsdoc'
+export { jsdoc } from './jsdoc'
+export type { JSDOCOptions } from './jsdoc'
 
-export { jsonc } from './data/json'
-export type { JSONOptions } from './data/json'
+export { jsonc } from './json'
+export type { JSONOptions } from './json'
 
-export { markdown } from './docs/markdown'
-export type { MarkdownOptions } from './docs/markdown'
+export { markdown } from './markdown'
+export type { MarkdownOptions } from './markdown'
 
 export { stylistic } from './stylistic'
 export type { StylisticConfig, StylisticOptions } from './stylistic'
@@ -25,35 +25,35 @@ export type { StylisticConfig, StylisticOptions } from './stylistic'
 export { typescript } from './typescript'
 export type { TypeScriptOptions } from './typescript'
 
-export { vue } from './frameworks/vue'
-export type { VueOptions } from './frameworks/vue'
+export { vue } from './vue'
+export type { VueOptions } from './vue'
 
-export { yaml } from './data/yaml'
-export type { YAMLOptions } from './data/yaml'
+export { yaml } from './yaml'
+export type { YAMLOptions } from './yaml'
 
 export { test } from './test'
 export type { TestOptions } from './test'
 
-export { unocss } from './css/unocss'
-export type { UnoCSSOptions } from './css/unocss'
+export { unocss } from './unocss'
+export type { UnoCSSOptions } from './unocss'
 
-export { nextjs } from './frameworks/nextjs'
-export type { NextJSOptions } from './frameworks/nextjs'
+export { nextjs } from './nextjs'
+export type { NextJSOptions } from './nextjs'
 
-export { react } from './frameworks/react'
-export type { ReactOptions } from './frameworks/react'
+export { react } from './react'
+export type { ReactOptions } from './react'
 
-export { astro } from './frameworks/astro'
-export type { AstroOptions } from './frameworks/astro'
+export { astro } from './astro'
+export type { AstroOptions } from './astro'
 
-export { tailwindcss } from './css/tailwindcss'
-export type { TailwindCSSOptions } from './css/tailwindcss'
+export { tailwindcss } from './tailwindcss'
+export type { TailwindCSSOptions } from './tailwindcss'
 
 export { formatters } from './formatters'
 export type { FormattersOptions } from './formatters'
 
-export { toml } from './data/toml'
-export type { TOMLOptions } from './data/toml'
+export { toml } from './toml'
+export type { TOMLOptions } from './toml'
 
 export { solid } from './solid'
 export type { SolidOptions } from './solid'

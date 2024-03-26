@@ -1,6 +1,6 @@
-import { GLOB_NEXTJS_OG, GLOB_NEXTJS_ROUTES, GLOB_SRC } from '../../globs'
-import type { FlatConfigItem } from '../../types'
-import { ensure, interop } from '../../utils'
+import { GLOB_NEXTJS_OG, GLOB_NEXTJS_ROUTES, GLOB_SRC } from '../globs'
+import type { FlatConfigItem } from '../types'
+import { ensure, interop } from '../utils'
 
 export interface NextJSOptions {
   /**

@@ -1,7 +1,7 @@
-import type { FlatConfigItem } from '../../types'
-import { GLOB_TOML } from '../../globs'
-import { interop } from '../../utils'
-import type { StylisticConfig } from '../stylistic'
+import type { FlatConfigItem } from '../types'
+import { GLOB_TOML } from '../globs'
+import { interop } from '../utils'
+import type { StylisticConfig } from './stylistic'
 
 export interface TOMLOptions {
   /**

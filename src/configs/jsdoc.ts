@@ -1,6 +1,6 @@
-import type { FlatConfigItem } from '../../types'
-import { interop } from '../../utils'
-import type { StylisticConfig } from '../stylistic'
+import type { FlatConfigItem } from '../types'
+import { interop } from '../utils'
+import type { StylisticConfig } from './stylistic'
 
 export interface JSDOCOptions {
   /**
