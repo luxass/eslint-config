@@ -1,10 +1,9 @@
-import * as parserPlain from 'eslint-parser-plain'
 import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors'
 import type {
   TypedFlatConfigItem,
 } from '../types'
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from '../globs'
-import { interop } from '../utils'
+import { interop, parserPlain } from '../utils'
 
 export interface MarkdownOptions {
   /**
