@@ -1,7 +1,7 @@
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { GLOB_EXCLUDE } from '../globs'
 
-export function ignores(): FlatConfigItem[] {
+export function ignores(): TypedFlatConfigItem[] {
   return [
     {
       ignores: GLOB_EXCLUDE,

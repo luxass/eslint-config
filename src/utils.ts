@@ -1,11 +1,32 @@
 import process from 'node:process'
 import { isPackageExists } from 'local-pkg'
-import type { Awaitable, ConfigOptions, UserConfigItem } from './types'
+import type { Awaitable, ConfigOptions, TypedFlatConfigItem } from './types'
+
+export const parserPlain = {
+  meta: {
+    name: 'parser-plain',
+  },
+  parseForESLint: (code: string) => ({
+    ast: {
+      body: [],
+      comments: [],
+      loc: { end: code.length, start: 0 },
+      range: [0, code.length],
+      tokens: [],
+      type: 'Program',
+    },
+    scopeManager: null,
+    services: { isPlain: true },
+    visitorKeys: {
+      Program: [],
+    },
+  }),
+}
 
 /**
  * Combine array and non-array configs into a single array.
  */
-export async function combine(...configs: Awaitable<UserConfigItem | UserConfigItem[]>[]): Promise<UserConfigItem[]> {
+export async function combine(...configs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]): Promise<TypedFlatConfigItem[]> {
   const resolved = await Promise.all(configs)
   return resolved.flat()
 }

@@ -1,6 +1,6 @@
 import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin'
 import pluginAntfu from 'eslint-plugin-antfu'
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { interop } from '../utils'
 
 export type StylisticConfig = Pick<StylisticCustomizeOptions, 'jsx' | 'indent' | 'quotes' | 'semi'>
@@ -23,10 +23,10 @@ export interface StylisticOptions {
   /**
    * Overrides for the config.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 }
 
-export async function stylistic(options: StylisticOptions = {}): Promise<FlatConfigItem[]> {
+export async function stylistic(options: StylisticOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
     indent,
     jsx,

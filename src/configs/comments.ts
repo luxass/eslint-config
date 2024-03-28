@@ -1,7 +1,7 @@
 import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments'
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 
-export async function comments(): Promise<FlatConfigItem[]> {
+export async function comments(): Promise<TypedFlatConfigItem[]> {
   return [
     {
       name: 'luxass:eslint-comments',

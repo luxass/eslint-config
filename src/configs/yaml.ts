@@ -1,4 +1,4 @@
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { GLOB_YAML } from '../globs'
 import { interop } from '../utils'
 import type { StylisticConfig } from './stylistic'
@@ -7,7 +7,7 @@ export interface YAMLOptions {
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 
   /**
    * Enable stylistic rules.
@@ -27,7 +27,7 @@ export interface YAMLOptions {
 
 export async function yaml(
   options: YAMLOptions = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_YAML],
     overrides = {},

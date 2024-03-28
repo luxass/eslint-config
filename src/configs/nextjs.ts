@@ -1,5 +1,5 @@
 import { GLOB_NEXTJS_OG, GLOB_NEXTJS_ROUTES, GLOB_SRC } from '../globs'
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { ensure, interop } from '../utils'
 
 export interface NextJSOptions {
@@ -14,7 +14,7 @@ export interface NextJSOptions {
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 
   /**
    * Glob patterns for Next.js files.
@@ -27,7 +27,7 @@ export interface NextJSOptions {
 
 export async function nextjs(
   options: NextJSOptions = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_SRC],
     overrides,

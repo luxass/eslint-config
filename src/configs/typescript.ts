@@ -2,7 +2,7 @@ import process from 'node:process'
 import type { ParserOptions } from '@typescript-eslint/parser'
 import pluginAntfu from 'eslint-plugin-antfu'
 import type {
-  FlatConfigItem,
+  TypedFlatConfigItem,
 } from '../types'
 import { GLOB_SRC, GLOB_SRC_EXT, GLOB_TS, GLOB_TSX } from '../globs'
 import { interop, renameRules, toArray } from '../utils'
@@ -44,11 +44,11 @@ export interface TypeScriptOptions {
   /**
    * Overrides for the config.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 }
 export async function typescript(
   options: TypeScriptOptions = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const {
     exts = [],
     overrides = {},
@@ -68,7 +68,7 @@ export async function typescript(
 
   const isTypeAware = !!tsconfigPath
 
-  const typeAwareRules: FlatConfigItem['rules'] = {
+  const typeAwareRules: TypedFlatConfigItem['rules'] = {
     'dot-notation': 'off',
     'no-implied-eval': 'off',
     'no-throw-literal': 'off',
@@ -98,7 +98,7 @@ export async function typescript(
     interop(import('@typescript-eslint/parser')),
   ] as const)
 
-  function makeParser(typeAware: boolean, files: string[], ignores?: string[]): FlatConfigItem {
+  function makeParser(typeAware: boolean, files: string[], ignores?: string[]): TypedFlatConfigItem {
     return {
       files,
       ...ignores ? { ignores } : {},
@@ -149,7 +149,6 @@ export async function typescript(
           '@typescript-eslint/',
           'ts/',
         ),
-
         'no-dupe-class-members': 'off',
         'no-invalid-this': 'off',
         'no-loss-of-precision': 'off',

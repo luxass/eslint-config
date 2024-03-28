@@ -1,6 +1,6 @@
 import pluginImport from 'eslint-plugin-import-x'
 import pluginAntfu from 'eslint-plugin-antfu'
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { GLOB_SRC_EXT } from '../globs'
 import type { StylisticConfig } from './stylistic'
 
@@ -13,7 +13,7 @@ export interface ImportsOptions {
   stylistic?: boolean | StylisticConfig
 }
 
-export async function imports(options: ImportsOptions = {}): Promise<FlatConfigItem[]> {
+export async function imports(options: ImportsOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
     stylistic = true,
   } = options

@@ -1,7 +1,7 @@
 import globals from 'globals'
 import pluginUnusedImports from 'eslint-plugin-unused-imports'
 import pluginAntfu from 'eslint-plugin-antfu'
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
 
 export interface JavaScriptOptions {
@@ -14,12 +14,12 @@ export interface JavaScriptOptions {
   /**
    * Overrides for the config.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 }
 
 export async function javascript(
   options: JavaScriptOptions = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const { editor = false, overrides = {} } = options
 
   return [

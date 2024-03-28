@@ -1,4 +1,4 @@
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { GLOB_TOML } from '../globs'
 import { interop } from '../utils'
 import type { StylisticConfig } from './stylistic'
@@ -7,7 +7,7 @@ export interface TOMLOptions {
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 
   /**
    * Enable stylistic rules.
@@ -27,7 +27,7 @@ export interface TOMLOptions {
 
 export async function toml(
   options: TOMLOptions = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_TOML],
     overrides = {},
