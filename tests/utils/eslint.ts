@@ -1,5 +1,5 @@
 import eslintApi from 'eslint/use-at-your-own-risk'
-import { type ConfigOptions, luxass } from '../../src'
+import luxass, { type ConfigOptions } from '../../src'
 
 export async function createEslint(options?: ConfigOptions): Promise<[normal: eslintApi.FlatESLint, fixer: eslintApi.FlatESLint]> {
   const config = await luxass(options)

@@ -29,7 +29,7 @@ With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import luxass from '@luxass/eslint-config'
 
 export default luxass()
 ```
@@ -38,7 +38,7 @@ With CJS:
 
 ```js
 // eslint.config.js
-const { luxass } = require('@luxass/eslint-config')
+const luxass = require('@luxass/eslint-config')
 
 module.exports = luxass()
 ```
@@ -47,7 +47,7 @@ Combined with legacy config:
 
 ```js
 // eslint.config.js
-const { luxass } = require('@luxass/eslint-config')
+const luxass = require('@luxass/eslint-config')
 const { FlatCompat } = require('@eslint/eslintrc')
 
 const compat = new FlatCompat()
@@ -129,7 +129,7 @@ Normally you would only need to import the `luxass` preset:
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import luxass from '@luxass/eslint-config'
 
 export default luxass()
 ```
@@ -138,7 +138,7 @@ you can also configure each `config` individually:
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import luxass from '@luxass/eslint-config'
 
 export default luxass({
   stylistic: true,
@@ -159,7 +159,7 @@ The `luxass` function accepts an arbitrary number of `flat configs` overrides:
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import luxass from '@luxass/eslint-config'
 
 export default luxass({
   // configuration points for my config
@@ -246,7 +246,7 @@ Certain rules would only be enabled in specific files, for example, `ts/*` rules
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import luxass from '@luxass/eslint-config'
 
 export default luxass(
   { vue: true, typescript: true },
@@ -270,7 +270,7 @@ We also provided a `overrides` options to make it easier:
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import luxass from '@luxass/eslint-config'
 
 export default luxass({
   overrides: {
@@ -299,7 +299,7 @@ Use external formatters to format files that ESLint cannot handle yet (`.css`, `
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import luxass from '@luxass/eslint-config'
 
 export default luxass({
   formatters: {
@@ -340,7 +340,7 @@ To enable React support, need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import luxass from '@luxass/eslint-config'
 
 export default luxass({
   react: true,
@@ -361,7 +361,7 @@ Next.JS also enables React support.
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import luxass from '@luxass/eslint-config'
 
 export default luxass({
   nextjs: true,
@@ -380,7 +380,7 @@ To enable UnoCSS support, need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import luxass from '@luxass/eslint-config'
 
 export default luxass({
   unocss: true,
@@ -399,7 +399,7 @@ To enable TailwindCSS support, need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import luxass from '@luxass/eslint-config'
 
 export default luxass({
   tailwindcss: true,
@@ -422,7 +422,7 @@ You can optionally enable the [type aware rules](https://typescript-eslint.io/li
 
 ```js
 // eslint.config.js
-import { luxass } from '@luxass/eslint-config'
+import luxass from '@luxass/eslint-config'
 
 export default luxass({
   typescript: {
