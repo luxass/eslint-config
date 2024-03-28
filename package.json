@@ -37,7 +37,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "nr typegen && tsup --format esm,cjs --clean --dts",
+    "build": "pnpm typegen && tsup --format esm,cjs --clean --dts",
     "dev": "tsup --watch",
     "test": "vitest --run",
     "typegen": "pnpx tsx ./scripts/typegen.ts",
