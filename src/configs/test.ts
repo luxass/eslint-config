@@ -1,4 +1,4 @@
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { GLOB_TESTS } from '../globs'
 import { interop } from '../utils'
 
@@ -21,12 +21,12 @@ export interface TestOptions {
   /**
    * Override rules for for test files.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 }
 
 export async function test(
   options: TestOptions = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const {
     editor = false,
     files = GLOB_TESTS,

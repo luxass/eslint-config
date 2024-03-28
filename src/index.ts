@@ -8,4 +8,3 @@ export * from './utils'
 export * from './types'
 
 export default luxass
-export { luxass }

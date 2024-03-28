@@ -1,29 +1,6 @@
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
-import type {
-  EslintCommentsRules,
-  EslintRules,
-  FlatESLintConfigItem,
-  ImportRules,
-  JsoncRules,
-  MergeIntersection,
-  NRules,
-  Prefix,
-  ReactHooksRules,
-  ReactRules,
-  RenamePrefix,
-  RuleConfig,
-  VitestRules,
-  VueRules,
-  YmlRules,
-} from '@antfu/eslint-define-config'
-import type { RuleOptions as JSDocRules } from '@eslint-types/jsdoc/types'
-import type { RuleOptions as TypeScriptRules } from '@eslint-types/typescript-eslint/types'
-import type { RuleOptions as UnicornRules } from '@eslint-types/unicorn/types'
-import type { Rules as AntfuRules } from 'eslint-plugin-antfu'
-import type {
-  UnprefixedRuleOptions as StylisticRules,
-} from '@stylistic/eslint-plugin'
 import type { Linter } from 'eslint'
+import type { RuleOptions } from './typegen'
 import type {
   AstroOptions,
   FormattersOptions,
@@ -42,33 +19,11 @@ import type {
   YAMLOptions,
 } from './configs'
 
-export type WrapRuleConfig<T extends { [key: string]: any }> = {
-  [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>;
-}
-
 export type Awaitable<T> = T | Promise<T>
 
-export type Rules = WrapRuleConfig<
-  MergeIntersection<
-    RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &
-    RenamePrefix<VitestRules, 'vitest/', 'test/'> &
-    RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
-    RenamePrefix<NRules, 'n/', 'node/'> &
-    Prefix<StylisticRules, 'style/'> &
-    Prefix<AntfuRules, 'antfu/'> &
-    ReactHooksRules &
-    ReactRules &
-    JSDocRules &
-    ImportRules &
-    EslintRules &
-    JsoncRules &
-    VueRules &
-    UnicornRules &
-    EslintCommentsRules
-  >
->
+export type Rules = RuleOptions
 
-export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
+export type TypedFlatConfigItem = Omit<Linter.FlatConfig, 'plugins'> & {
   /**
    * Custom name of each config item
    */
@@ -81,9 +36,14 @@ export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'>
    * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
    */
   plugins?: Record<string, any>
+
+  /**
+   * An object containing a name-value mapping of rules to use.
+   */
+  rules?: Linter.RulesRecord & Rules
 }
 
-export type UserConfigItem = FlatConfigItem | Linter.FlatConfig
+export type UserConfigItem = TypedFlatConfigItem | Linter.FlatConfig
 
 export interface ConfigOptions {
   /**
@@ -223,6 +183,12 @@ export interface ConfigOptions {
   /**
    * Enable Astro support.
    *
+   * Requires installing:
+   * - `eslint-plugin-astro`
+   *
+   * Requires installing for formatting .astro:
+   * - `prettier-plugin-astro`
+   *
    * @default false
    */
   astro?: boolean | AstroOptions
@@ -258,4 +224,11 @@ export interface ConfigOptions {
    * @default false
    */
   solid?: boolean | SolidOptions
+
+  /**
+   * Automatically rename plugins in the config.
+   *
+   * @default true
+   */
+  autoRenamePlugins?: boolean
 }

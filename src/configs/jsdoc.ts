@@ -1,4 +1,4 @@
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { interop } from '../utils'
 import type { StylisticConfig } from './stylistic'
 
@@ -13,10 +13,10 @@ export interface JSDOCOptions {
   /**
    * Overrides for the config.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 }
 
-export async function jsdoc(options: JSDOCOptions = {}): Promise<FlatConfigItem[]> {
+export async function jsdoc(options: JSDOCOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
     overrides,
     stylistic = true,

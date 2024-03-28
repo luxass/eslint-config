@@ -3,7 +3,7 @@ import { isPackageExists } from 'local-pkg'
 import { GLOB_ASTRO, GLOB_CSS, GLOB_GRAPHQL, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
 import type { VendoredPrettierOptions } from '../vendor/prettier-types'
 import { ensure, interop } from '../utils'
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import type { StylisticConfig } from './stylistic'
 import { StylisticConfigDefaults } from './stylistic'
 
@@ -61,7 +61,7 @@ export interface FormattersOptions {
 export async function formatters(
   options: FormattersOptions | true = {},
   stylistic: StylisticConfig = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   if (options === true) {
     options = {
       astro: isPackageExists('astro'),
@@ -109,7 +109,7 @@ export async function formatters(
 
   const pluginFormat = await interop(import('eslint-plugin-format'))
 
-  const configs: FlatConfigItem[] = [
+  const configs: TypedFlatConfigItem[] = [
     {
       name: 'luxass:formatters:setup',
       plugins: {

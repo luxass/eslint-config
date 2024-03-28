@@ -1,12 +1,12 @@
 import { GLOB_JSX, GLOB_TSX } from '../globs'
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { ensure, interop } from '../utils'
 
 export interface SolidOptions {
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 
   /**
    * Enable TypeScript support.
@@ -24,7 +24,7 @@ export interface SolidOptions {
   files?: string[]
 }
 
-export async function solid(options: SolidOptions = {}): Promise<FlatConfigItem[]> {
+export async function solid(options: SolidOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
     overrides = {},
     typescript = true,

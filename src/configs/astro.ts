@@ -1,5 +1,5 @@
 import { GLOB_ASTRO } from '../globs'
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { ensure, interop } from '../utils'
 import type { StylisticConfig } from './stylistic'
 
@@ -7,7 +7,7 @@ export interface AstroOptions {
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 
   /**
    * Enable TypeScript support.
@@ -32,7 +32,7 @@ export interface AstroOptions {
   stylistic?: boolean | StylisticConfig
 }
 
-export async function astro(options: AstroOptions): Promise<FlatConfigItem[]> {
+export async function astro(options: AstroOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_ASTRO],
     overrides = {},

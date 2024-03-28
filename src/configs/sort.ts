@@ -1,11 +1,11 @@
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 
 /**
  * Sort package.json
  *
  * Requires `jsonc` config
  */
-export function sortPackageJson(): FlatConfigItem[] {
+export function sortPackageJson(): TypedFlatConfigItem[] {
   return [
     {
       name: 'luxass:sort-package-json',
@@ -111,7 +111,7 @@ export function sortPackageJson(): FlatConfigItem[] {
  *
  * Requires `jsonc` config
  */
-export function sortTsconfig(): FlatConfigItem[] {
+export function sortTsconfig(): TypedFlatConfigItem[] {
   return [
     {
       name: 'luxass:sort-tsconfig',

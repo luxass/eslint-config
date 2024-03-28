@@ -1,5 +1,5 @@
 import { GLOB_SRC } from '../globs'
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { ensure, interop } from '../utils'
 
 export interface TailwindCSSOptions {
@@ -14,10 +14,10 @@ export interface TailwindCSSOptions {
   /**
    * Override rules for for files with tailwind classes.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 }
 
-export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<FlatConfigItem[]> {
+export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_SRC],
     overrides,

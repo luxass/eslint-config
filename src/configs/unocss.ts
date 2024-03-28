@@ -1,5 +1,5 @@
 import { GLOB_SRC } from '../globs'
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { ensure, interop } from '../utils'
 
 export interface UnoCSSOptions {
@@ -28,10 +28,10 @@ export interface UnoCSSOptions {
   /**
    * Override rules for for files with unocss classes.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 }
 
-export async function unocss(options: UnoCSSOptions = {}): Promise<FlatConfigItem[]> {
+export async function unocss(options: UnoCSSOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
     attributify = true,
     files = [GLOB_SRC],

@@ -1,7 +1,7 @@
 import pluginNode from 'eslint-plugin-n'
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 
-export function node(): FlatConfigItem[] {
+export function node(): TypedFlatConfigItem[] {
   return [
     {
       name: 'luxass:node',

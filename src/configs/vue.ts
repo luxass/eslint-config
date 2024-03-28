@@ -1,7 +1,7 @@
 import { mergeProcessors } from 'eslint-merge-processors'
 import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks'
 import type {
-  FlatConfigItem,
+  TypedFlatConfigItem,
 } from '../types'
 import { GLOB_VUE } from '../globs'
 import { interop } from '../utils'
@@ -11,7 +11,7 @@ export interface VueOptions {
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 
   /**
    * Enable stylistic rules.
@@ -46,7 +46,7 @@ export interface VueOptions {
 
 export async function vue(
   options: VueOptions = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_VUE],
     overrides = {},

@@ -1,7 +1,7 @@
 import pluginUnicorn from 'eslint-plugin-unicorn'
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 
-export function unicorn(): FlatConfigItem[] {
+export function unicorn(): TypedFlatConfigItem[] {
   return [
     {
       name: 'luxass:unicorn',

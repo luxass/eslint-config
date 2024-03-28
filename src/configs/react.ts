@@ -1,13 +1,13 @@
 import { isPackageExists } from 'local-pkg'
 import { GLOB_JSX, GLOB_TSX } from '../globs'
-import type { FlatConfigItem } from '../types'
+import type { TypedFlatConfigItem } from '../types'
 import { ensure, interop } from '../utils'
 
 export interface ReactOptions {
   /**
    * Override rules.
    */
-  overrides?: FlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem['rules']
 
   /**
    * Enable TypeScript support.
@@ -32,7 +32,7 @@ export interface ReactOptions {
   files?: string[]
 }
 
-export async function react(options: ReactOptions = {}): Promise<FlatConfigItem[]> {
+export async function react(options: ReactOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
     a11y = false,
     files = [GLOB_JSX, GLOB_TSX],
