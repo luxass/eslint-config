@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises'
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core'
+import { builtinRules } from 'eslint/use-at-your-own-risk'
 import {
   astro,
   comments,
@@ -29,6 +30,13 @@ import {
 import { combine } from '../src/utils'
 
 const configs = await combine(
+  {
+    plugins: {
+      '': {
+        rules: Object.fromEntries(builtinRules.entries()),
+      },
+    },
+  },
   astro(),
   comments(),
   formatters(),
