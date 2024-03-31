@@ -1,7 +1,7 @@
 import process from 'node:process'
 import { existsSync } from 'node:fs'
 import { isPackageExists } from 'local-pkg'
-import { FlatConfigPipeline } from 'eslint-flat-config-utils'
+import { FlatConfigComposer } from 'eslint-flat-config-utils'
 import type { Linter } from 'eslint'
 import type {
   Awaitable,
@@ -76,8 +76,8 @@ export const defaultPluginRenaming = {
  */
 export function luxass(
   options: ConfigOptions & TypedFlatConfigItem = {},
-  ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigPipeline<any> | Linter.FlatConfig[]>[]
-): FlatConfigPipeline<TypedFlatConfigItem> {
+  ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any> | Linter.FlatConfig[]>[]
+): FlatConfigComposer<TypedFlatConfigItem> {
   const {
     astro: enableAstro = false,
     autoRenamePlugins = true,
@@ -275,7 +275,7 @@ export function luxass(
     configs.push([fusedConfig])
   }
 
-  let pipeline = new FlatConfigPipeline<TypedFlatConfigItem>()
+  let pipeline = new FlatConfigComposer<TypedFlatConfigItem>()
 
   pipeline = pipeline
     .append(
