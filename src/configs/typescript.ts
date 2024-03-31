@@ -235,7 +235,7 @@ export async function typescript(
       },
     },
     {
-      name: 'luxass:typescript:dts-overrides',
+      name: 'luxass:typescript:disables:dts',
       files: ['**/*.d.ts'],
       rules: {
         'eslint-comments/no-unlimited-disable': 'off',
@@ -245,21 +245,21 @@ export async function typescript(
       },
     },
     {
-      name: 'luxass:typescript:tests-overrides',
+      name: 'luxass:typescript:disables:tests',
       files: ['**/*.{test,spec}.ts?(x)'],
       rules: {
         'no-unused-expressions': 'off',
       },
     },
     {
-      name: 'luxass:typescript:playground-overrides',
+      name: 'luxass:typescript:disables:playground',
       files: [`**/playground.${GLOB_SRC_EXT}`],
       rules: {
         'no-console': 'off',
       },
     },
     {
-      name: 'luxass:typescript:javascript-overrides',
+      name: 'luxass:typescript:disables:javascript',
       files: ['**/*.js', '**/*.cjs'],
       rules: {
         'ts/no-require-imports': 'off',

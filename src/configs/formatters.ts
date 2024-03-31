@@ -110,7 +110,7 @@ export async function formatters(
 
   const configs: TypedFlatConfigItem[] = [
     {
-      name: 'luxass:formatters:setup',
+      name: 'luxass:formatter:setup',
       plugins: {
         format: pluginFormat,
       },

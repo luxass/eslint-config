@@ -266,15 +266,12 @@ export async function javascript(
       },
     },
     {
-      name: 'luxass:scripts-overrides',
-      files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
-      rules: {
-        'no-console': 'off',
-      },
-    },
-    {
-      name: 'luxass:playground-overrides',
-      files: [`**/playground.${GLOB_SRC_EXT}`],
+      name: 'luxass:disables:cli',
+      files: [
+        `scripts/${GLOB_SRC}`,
+        `cli.${GLOB_SRC_EXT}`,
+        `**/playground.${GLOB_SRC_EXT}`,
+      ],
       rules: {
         'no-console': 'off',
       },
