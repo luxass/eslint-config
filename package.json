@@ -38,7 +38,9 @@
   },
   "scripts": {
     "build": "pnpm typegen && tsup --format esm,cjs --clean --dts",
-    "dev": "tsup --watch",
+    "stub": "tsup --format esm",
+    "dev": "tsup --format esm,cjs --watch & npx @eslint/config-inspector",
+    "build:inspector": "pnpm build && npx @eslint/config-inspector build",
     "test": "vitest --run",
     "typegen": "pnpx tsx ./scripts/typegen.ts",
     "test:watch": "vitest",
@@ -129,6 +131,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-plugin-prettier": "^5.0.1-1",
+    "@eslint/config-inspector": "^0.4.1",
     "@next/eslint-plugin-next": "^14.1.4",
     "@stylistic/eslint-plugin-migrate": "^1.7.0",
     "@types/eslint": "^8.56.6",
