@@ -47,7 +47,7 @@ export async function markdown(
       },
     },
     {
-      name: 'luxass/markdown:processor',
+      name: 'luxass/markdown/processor',
       files,
       ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
       // `eslint-plugin-markdown` only creates virtual files for code blocks,
