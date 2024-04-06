@@ -44,7 +44,7 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Typ
         },
       },
       plugins: {
-        tailwind: pluginTailwindCSS,
+        tailwindcss: pluginTailwindCSS,
       },
     },
     {
@@ -52,25 +52,25 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Typ
       files,
       rules: {
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/classnames-order.md
-        'tailwind/classnames-order': 'warn',
+        'tailwindcss/classnames-order': 'warn',
 
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/enforces-negative-arbitrary-values.md
-        'tailwind/enforces-negative-arbitrary-values': 'warn',
+        'tailwindcss/enforces-negative-arbitrary-values': 'warn',
 
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/enforces-shorthand.md
-        'tailwind/enforces-shorthand': 'warn',
+        'tailwindcss/enforces-shorthand': 'warn',
 
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/migration-from-tailwind-2.md
-        'tailwind/migration-from-tailwind-2': 'warn',
+        'tailwindcss/migration-from-tailwind-2': 'warn',
 
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/no-arbitrary-value.md
-        'tailwind/no-arbitrary-value': 'off',
+        'tailwindcss/no-arbitrary-value': 'off',
 
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/no-contradicting-classname.md
-        'tailwind/no-contradicting-classname': 'error',
+        'tailwindcss/no-contradicting-classname': 'error',
 
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/no-custom-classname.md
-        'tailwind/no-custom-classname': 'warn',
+        'tailwindcss/no-custom-classname': 'warn',
 
         ...overrides,
       },
