@@ -52,13 +52,13 @@ export async function unocss(options: UnoCSSOptions = {}): Promise<TypedFlatConf
   return [
     {
       name: 'luxass/unocss/setup',
-      files,
       plugins: {
         unocss: pluginUnoCSS,
       },
     },
     {
       name: 'luxass/unocss/rules',
+      files,
       rules: {
         'unocss/order': 'warn',
         ...(attributify
