@@ -94,7 +94,6 @@ export async function nextjs(
       files: GLOB_NEXTJS_ROUTES,
       rules: {
         'import/prefer-default-export': 'error',
-        'react-refresh/only-export-components': 'off',
       },
     },
     {
@@ -105,10 +104,6 @@ export async function nextjs(
         'react/no-unknown-property': ['error', {
           ignore: ['tw'],
         }],
-        'react-refresh/only-export-components': [
-          'warn',
-          { allowConstantExport: true },
-        ],
       },
     },
   ]

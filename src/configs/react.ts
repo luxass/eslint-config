@@ -24,6 +24,16 @@ export interface ReactOptions {
   a11y?: boolean
 
   /**
+   * Enable React Refresh support.
+   *
+   * NOTE:
+   * If you are using NextJS, you should disable this option.
+   *
+   * @default true
+   */
+  refresh?: boolean
+
+  /**
    * Glob patterns for JSX & TSX files.
    *
    * @default [GLOB_JSX, GLOB_TSX]
@@ -37,14 +47,15 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
     a11y = false,
     files = [GLOB_JSX, GLOB_TSX],
     overrides = {},
+    refresh = true,
     typescript = true,
   } = options
 
   await ensure([
     'eslint-plugin-react',
     'eslint-plugin-react-hooks',
-    'eslint-plugin-react-refresh',
-    ...(options.a11y ? ['eslint-plugin-jsx-a11y'] : []),
+    ...(refresh ? ['eslint-plugin-react-refresh'] : []),
+    ...(a11y ? ['eslint-plugin-jsx-a11y'] : []),
   ])
 
   const [
@@ -55,7 +66,7 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
   ] = await Promise.all([
     interop(import('eslint-plugin-react')),
     interop(import('eslint-plugin-react-hooks')),
-    interop(import('eslint-plugin-react-refresh')),
+    ...(refresh ? [interop(import('eslint-plugin-react-refresh'))] : []),
     ...(a11y ? [interop(import('eslint-plugin-jsx-a11y'))] : []),
   ] as const)
 
@@ -67,7 +78,8 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
       plugins: {
         'react': pluginReact,
         'react-hooks': pluginReactHooks,
-        'react-refresh': pluginReactRefresh,
+
+        ...(refresh ? { 'react-refresh': pluginReactRefresh } : {}),
         ...(a11y ? { 'jsx-a11y': pluginA11y } : {}),
       },
     },
@@ -305,7 +317,11 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
         'react-hooks/rules-of-hooks': 'error',
 
         // react refresh
-        'react-refresh/only-export-components': ['warn', { allowConstantExport: isAllowConstantExport }],
+        ...(refresh
+          ? {
+              'react-refresh/only-export-components': ['warn', { allowConstantExport: isAllowConstantExport }],
+            }
+          : {}),
 
         ...typescript
           ? {
