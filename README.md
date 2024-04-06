@@ -5,9 +5,9 @@
 
 ## ✨ Features
 
-- Based on [Antfu's ESLint Config](https://github.com/antfu/eslint-config)
+- Based on [Antfu's ESLint Config](https://github.com/antfu/eslint-config) with some modifications
 - Auto fix for formatting (aimed to be used standalone **without** Prettier)
-- Designed to work with TypeScript, JSX, Vue & Astro out-of-box
+- Designed to work with TypeScript, JSX, Vue out-of-box
 - Lints also for json, yaml, toml, markdown
 - Sorted imports, dangling commas
 - Reasonable defaults, best practices, only one-line of config
@@ -15,44 +15,39 @@
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
 - Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
 - Respects `.gitignore` by default
+- Optional [React](#react), [Svelte](#svelte), [UnoCSS](#unocss), [Astro](#astro) support
 - Optional [formatters](#formatters) support for CSS, HTML, etc.
 
-## 📦 Install
+## Usage
 
-```bash copy
+```bash
 npm install -D eslint @luxass/eslint-config
 ```
 
-## 🚀 Usage
-
-With [`"type": "module"`](https://nodejs.org/api/packages.html#type) in `package.json` (recommended):
+And create a `eslint.config.mjs` in your project root:
 
 ```js
-// eslint.config.js
+// eslint.config.mjs
 import luxass from '@luxass/eslint-config'
 
 export default luxass()
 ```
 
-With CJS:
-
-```js
-// eslint.config.js
-const luxass = require('@luxass/eslint-config')
-
-module.exports = luxass()
-```
-
+<details>
+<summary>
 Combined with legacy config:
+</summary>
+
+If you still use some configs from the legacy eslintrc format, you can use the [`@eslint/eslintrc`](https://www.npmjs.com/package/@eslint/eslintrc) package to convert them to the flat config.
 
 ```js
-// eslint.config.js
-const luxass = require('@luxass/eslint-config')
-const { FlatCompat } = require('@eslint/eslintrc')
+// eslint.config.mjs
+import luxass from '@luxass/eslint-config'
+import { FlatCompat } from '@eslint/eslintrc'
 
 const compat = new FlatCompat()
 
-module.exports = luxass(
+export default luxass(
   {
     ignores: [],
   },
@@ -71,7 +66,22 @@ module.exports = luxass(
 
 > Note that `.eslintignore` no longer works in Flat config, see [customization](#customization) for more details.
 
-## Setup for Visual Studio Code
+</details>
+
+### Add script for package.json
+
+For example:
+
+```json
+{
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  }
+}
+```
+
+## Setup for Visual Studio Code (with auto-fix)
 
 Install [ESLint extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and add the following to your `.vscode/settings.json`:
 
@@ -118,14 +128,17 @@ Install [ESLint extension](https://marketplace.visualstudio.com/items?itemName=d
     "markdown",
     "json",
     "jsonc",
-    "yaml"
+    "yaml",
+    "toml",
+    "gql",
+    "graphql"
   ]
 }
 ```
 
 ## Customization
 
-Normally you would only need to import the `luxass` preset:
+Normally you would only need to import the config and export it:
 
 ```js
 // eslint.config.js
@@ -134,46 +147,67 @@ import luxass from '@luxass/eslint-config'
 export default luxass()
 ```
 
-you can also configure each `config` individually:
+And that's it! Or you can configure each integration individually, for example:
 
 ```js
 // eslint.config.js
 import luxass from '@luxass/eslint-config'
 
 export default luxass({
-  stylistic: true,
+  // Enable stylistic formatting rules
+  // stylistic: true,
+
+  // Or customize the stylistic rules
+  stylistic: {
+    indent: 2, // 4, or 'tab'
+    quotes: 'single', // or 'double'
+  },
+
+  // TypeScript and Vue are auto-detected, you can also explicitly enable them:
   typescript: true,
   vue: true,
-  react: false,
-  astro: true,
-  unocss: true,
 
-  // `.eslintignore` is no longer supported in Flat config, use `ignores` instead.
+  // Disable jsonc and yaml support
+  jsonc: false,
+  yaml: false,
+
+  // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
   ignores: [
-    '**/fixtures'
+    '**/fixtures',
+    // ...globs
   ]
 })
 ```
 
-The `luxass` function accepts an arbitrary number of `flat configs` overrides:
+The `luxass` factory function also accepts any number of arbitrary custom config overrides:
 
 ```js
 // eslint.config.js
 import luxass from '@luxass/eslint-config'
 
-export default luxass({
-  // configuration points for my config
-}, {
-  rules: {}
-}, {
-  rules: {}
-})
+export default luxass(
+  {
+    // Configures for antfu's config
+  },
+
+  // From the second arguments they are ESLint Flat Configs
+  // you can have multiple configs
+  {
+    files: ['**/*.ts'],
+    rules: {},
+  },
+  {
+    rules: {},
+  },
+)
 ```
+
+Going more advanced, you can also import fine-grained configs and compose them as you wish:
 
 <details>
 <summary>Advanced Example</summary>
 
-We don't recommend using this style in general usages, as there are shared options between configs and might need extra care to make them consistent.
+We wouldn't recommend using this style in general unless you know exactly what they are doing, as there are shared options between configs and might need extra care to make them consistent.
 
 ```js
 // eslint.config.js
@@ -240,6 +274,17 @@ When you want to override rules, or disable them inline, you need to update to t
 type foo = { bar: 2 }
 ```
 
+> [!NOTE]
+> About plugin renaming - it is actually rather a dangrous move that might leading to potential naming collisions, pointed out [here](https://github.com/eslint/eslint/discussions/17766) and [here](https://github.com/prettier/eslint-config-prettier#eslintconfigjs-flat-config-plugin-caveat). As this config also very **personal** and **opinionated**, I ambitiously position this config as the only **"top-level"** config per project, that might pivots the taste of how rules are named.
+>
+> This config cares more about the user-facings DX, and try to ease out the implementation details. For example, users could keep using the semantic `import/order` without ever knowing the underlying plugin has migrated twice to `eslint-plugin-i` and then to `eslint-plugin-import-x`. User are also not forced to migrate to the implicit `i/order` halfway only because we swapped the implementation to a fork.
+>
+> That said, it's probably still not a good idea. You might not want to doing this if you are maintaining your own eslint config.
+>
+> Feel free to open issues if you want to combine this config with some other config presets but faced naming collisions. I am happy to figure out a way to make them work. But at this moment I have no plan to revert the renaming.
+
+Since v4.3.0, this preset will automatically rename the plugins also for your custom configs. You can use the original prefix to override the rules directly.
+
 ### Rules Overrides
 
 Certain rules would only be enabled in specific files, for example, `ts/*` rules would only be enabled in `.ts` files and `vue/*` rules would only be enabled in `.vue` files. If you want to override the rules, you need to specify the file extension:
@@ -249,7 +294,10 @@ Certain rules would only be enabled in specific files, for example, `ts/*` rules
 import luxass from '@luxass/eslint-config'
 
 export default luxass(
-  { vue: true, typescript: true },
+  {
+    vue: true,
+    typescript: true
+  },
   {
     // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
     files: ['**/*.vue'],
@@ -266,24 +314,58 @@ export default luxass(
 )
 ```
 
-We also provided a `overrides` options to make it easier:
+We also provided a `overrides` options in each integration to make it easier:
 
 ```js
 // eslint.config.js
 import luxass from '@luxass/eslint-config'
 
 export default luxass({
-  overrides: {
-    vue: {
+  vue: {
+    overrides: {
       'vue/operator-linebreak': ['error', 'before'],
     },
-    typescript: {
+  },
+  typescript: {
+    overrides: {
       'ts/consistent-type-definitions': ['error', 'interface'],
     },
-    yaml: {},
-    // ...
-  }
+  },
+  yaml: {
+    overrides: {
+      // ...
+    },
+  },
 })
+```
+
+### Pipeline
+
+Since v4.3.0, the factory function `luxass()` returns a [pipeline object from `eslint-flat-config-utils`](https://github.com/antfu/eslint-flat-config-utils#pipe) where you can chain the methods to compose the config even more flexibly.
+
+```js
+// eslint.config.js
+import luxass from '@luxass/eslint-config'
+
+export default luxass()
+  .prepend(
+    // some configs before the main config
+  )
+  // overrides any named configs
+  .override(
+    'luxass/imports',
+    {
+      rules: {
+        'import/order': ['error', { 'newlines-between': 'always' }],
+      }
+    }
+  )
+  // rename plugin prefixes
+  .renamePlugins({
+    'old-prefix': 'new-prefix',
+    // ...
+  })
+// ...
 ```
 
 ### Optional Configs
@@ -291,9 +373,6 @@ export default luxass({
 We provide some optional configs for specific use cases, that we don't include their dependencies by default.
 
 #### Formatters
-
-> [!WARNING]
-> Experimental feature, changes might not follow semver.
 
 Use external formatters to format files that ESLint cannot handle yet (`.css`, `.html`, etc). Powered by [`eslint-plugin-format`](https://github.com/antfu/eslint-plugin-format).
 
@@ -314,11 +393,6 @@ export default luxass({
      */
     html: true,
     /**
-     * Format TOML files
-     * Currently only supports dprint
-     */
-    toml: 'dprint',
-    /**
      * Format Markdown files
      * Supports Prettier and dprint
      * By default uses Prettier
@@ -336,7 +410,7 @@ npm i -D eslint-plugin-format
 
 #### React
 
-To enable React support, need to explicitly turn it on:
+To enable React support, you need to explicitly turn it on:
 
 ```js
 // eslint.config.js
@@ -371,12 +445,31 @@ export default luxass({
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
 
 ```bash
-npm i -D eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh @next/eslint-plugin-next
+npm i -D eslint-plugin-react eslint-plugin-react-hooks @next/eslint-plugin-next
+```
+
+#### Astro
+
+To enable astro support, you need to explicitly turn it on:
+
+```js
+// eslint.config.js
+import luxass from '@luxass/eslint-config'
+
+export default luxass({
+  astro: true,
+})
+```
+
+Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
+
+```bash
+npm i -D eslint-plugin-astro
 ```
 
 #### UnoCSS
 
-To enable UnoCSS support, need to explicitly turn it on:
+To enable UnoCSS support, you need to explicitly turn it on:
 
 ```js
 // eslint.config.js
@@ -429,6 +522,55 @@ export default luxass({
     tsconfigPath: 'tsconfig.json',
   },
 })
+```
+
+### Editor Specific Disables
+
+Some rules are disabled when inside ESLint IDE integrations, namely [`unused-imports/no-unused-imports`](https://www.npmjs.com/package/eslint-plugin-unused-imports) [`test/no-focused-tests`](https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-focused-tests.md)
+
+This is to prevent unused imports from getting removed by the IDE during refactoring to get a better developer experience. Those rules will be applied when you run ESLint in the terminal or [Lint Staged](#lint-staged). If you don't want this behavior, you can disable them:
+
+```js
+// eslint.config.js
+import luxass from '@luxass/eslint-config'
+
+export default luxass({
+  editor: false
+})
+```
+
+### Lint Staged
+
+If you want to apply lint and auto-fix before every commit, you can add the following to your `package.json`:
+
+```json
+{
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
+  }
+}
+```
+
+and then
+
+```bash
+npm i -D lint-staged simple-git-hooks
+
+// to active the hooks
+npx simple-git-hooks
+```
+
+## View what rules are enabled
+
+[Antfu](https://github.com/antfu) built a visual tool to help you view what rules are enabled in your project and apply them to what files, [@eslint/config-inspector](https://github.com/eslint/config-inspector)
+
+Go to your project root that contains `eslint.config.js` and run:
+
+```bash
+npx @eslint/config-inspector
 ```
 
 ## Versioning Policy
