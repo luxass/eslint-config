@@ -1,11 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "pnpm run build:inspector",
-  "outputDirectory": ".eslint-config-inspector",
-  "redirects": [
-    {
-      "source": "/:path*",
-      "destination": "/index.html"
-    }
-  ]
+  "outputDirectory": ".eslint-config-inspector"
 }
