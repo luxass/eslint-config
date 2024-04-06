@@ -48,13 +48,13 @@ export async function toml(
 
   return [
     {
-      name: 'luxass:toml:setup',
+      name: 'luxass/toml/setup',
       plugins: {
         toml: pluginToml,
       },
     },
     {
-      name: 'luxass:toml:rules',
+      name: 'luxass/toml/rules',
       files,
       languageOptions: {
         parser: parserToml,

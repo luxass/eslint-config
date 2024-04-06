@@ -35,7 +35,7 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Typ
 
   return [
     {
-      name: 'luxass:tailwindcss:setup',
+      name: 'luxass/tailwindcss/setup',
       languageOptions: {
         parserOptions: {
           ecmaFeatures: {
@@ -48,7 +48,7 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Typ
       },
     },
     {
-      name: 'luxass:tailwindcss:rules',
+      name: 'luxass/tailwindcss/rules',
       files,
       rules: {
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/classnames-order.md

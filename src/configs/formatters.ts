@@ -110,7 +110,7 @@ export async function formatters(
 
   const configs: TypedFlatConfigItem[] = [
     {
-      name: 'luxass:formatter:setup',
+      name: 'luxass/formatter/setup',
       plugins: {
         format: pluginFormat,
       },
@@ -120,7 +120,7 @@ export async function formatters(
   if (options.css) {
     configs.push(
       {
-        name: 'luxass:formatter:css',
+        name: 'luxass/formatter/css',
         files: [GLOB_CSS, GLOB_POSTCSS],
         languageOptions: {
           parser: parserPlain,
@@ -136,7 +136,7 @@ export async function formatters(
         },
       },
       {
-        name: 'luxass:formatter:scss',
+        name: 'luxass/formatter/scss',
         files: [GLOB_SCSS],
         languageOptions: {
           parser: parserPlain,
@@ -152,7 +152,7 @@ export async function formatters(
         },
       },
       {
-        name: 'luxass:formatter:less',
+        name: 'luxass/formatter/less',
         files: [GLOB_LESS],
         languageOptions: {
           parser: parserPlain,
@@ -172,7 +172,7 @@ export async function formatters(
 
   if (options.html) {
     configs.push({
-      name: 'luxass:formatter:html',
+      name: 'luxass/formatter/html',
       files: ['**/*.html'],
       languageOptions: {
         parser: parserPlain,
@@ -195,7 +195,7 @@ export async function formatters(
       : options.markdown
 
     configs.push({
-      name: 'luxass:formatter:markdown',
+      name: 'luxass/formatter/markdown',
       files: [GLOB_MARKDOWN],
       languageOptions: {
         parser: parserPlain,
@@ -221,7 +221,7 @@ export async function formatters(
 
   if (options.astro) {
     configs.push({
-      name: 'luxass:formatter:astro',
+      name: 'luxass/formatter/astro',
       files: [GLOB_ASTRO],
       languageOptions: {
         parser: parserPlain,
@@ -243,7 +243,7 @@ export async function formatters(
 
   if (options.graphql) {
     configs.push({
-      name: 'luxass:formatter:graphql',
+      name: 'luxass/formatter/graphql',
       files: [GLOB_GRAPHQL],
       languageOptions: {
         parser: parserPlain,

@@ -44,13 +44,13 @@ export async function jsonc(
 
   return [
     {
-      name: 'luxass:jsonc:setup',
+      name: 'luxass/jsonc/setup',
       plugins: {
         jsonc: pluginJsonc as any,
       },
     },
     {
-      name: 'luxass:jsonc:rules',
+      name: 'luxass/jsonc/rules',
       files,
       languageOptions: {
         parser: parserJsonc,

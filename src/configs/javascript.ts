@@ -24,7 +24,7 @@ export async function javascript(
 
   return [
     {
-      name: 'luxass:javascript',
+      name: 'luxass/javascript',
       languageOptions: {
         ecmaVersion: 2022,
         globals: {
@@ -266,7 +266,7 @@ export async function javascript(
       },
     },
     {
-      name: 'luxass:disables:cli',
+      name: 'luxass/disables/cli',
       files: [
         `scripts/${GLOB_SRC}`,
         `cli.${GLOB_SRC_EXT}`,

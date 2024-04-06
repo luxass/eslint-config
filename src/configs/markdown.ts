@@ -41,13 +41,13 @@ export async function markdown(
 
   return [
     {
-      name: 'luxass:markdown:setup',
+      name: 'luxass/markdown/setup',
       plugins: {
         markdown,
       },
     },
     {
-      name: 'luxass:markdown:processor',
+      name: 'luxass/markdown:processor',
       files,
       ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
       // `eslint-plugin-markdown` only creates virtual files for code blocks,
@@ -59,14 +59,14 @@ export async function markdown(
       ]),
     },
     {
-      name: 'luxass:markdown:parser',
+      name: 'luxass/markdown/parser',
       files,
       languageOptions: {
         parser: parserPlain,
       },
     },
     {
-      name: 'luxass:markdown:disables',
+      name: 'luxass/markdown/disables',
       files: [
         GLOB_MARKDOWN_CODE,
         ...exts.map((ext) => `${GLOB_MARKDOWN}/**/*.${ext}`),

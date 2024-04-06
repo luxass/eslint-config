@@ -102,7 +102,7 @@ export async function typescript(
     return {
       files,
       ...ignores ? { ignores } : {},
-      name: `luxass:typescript:${typeAware ? 'type-aware-parser' : 'parser'}`,
+      name: `luxass/typescript/${typeAware ? 'type-aware-parser' : 'parser'}`,
       languageOptions: {
         parser: parserTs,
         parserOptions: {
@@ -123,7 +123,7 @@ export async function typescript(
   return [
     {
       // Install the plugins without globs, so they can be configured separately.
-      name: 'luxass:typescript:setup',
+      name: 'luxass/typescript/setup',
       plugins: {
         antfu: pluginAntfu,
         ts: pluginTs as any,
@@ -136,7 +136,7 @@ export async function typescript(
         ]
       : [makeParser(false, files)],
     {
-      name: 'luxass:typescript:rules',
+      name: 'luxass/typescript/rules',
       files,
       rules: {
         ...renameRules(
@@ -227,7 +227,7 @@ export async function typescript(
       },
     },
     {
-      name: 'luxass:typescript:rules-type-aware',
+      name: 'luxass/typescript/rules-type-aware',
       files: filesTypeAware,
       rules: {
         ...tsconfigPath ? typeAwareRules : {},
@@ -235,7 +235,7 @@ export async function typescript(
       },
     },
     {
-      name: 'luxass:typescript:disables:dts',
+      name: 'luxass/typescript/disables/dts',
       files: ['**/*.d.ts'],
       rules: {
         'eslint-comments/no-unlimited-disable': 'off',
@@ -245,21 +245,21 @@ export async function typescript(
       },
     },
     {
-      name: 'luxass:typescript:disables:tests',
+      name: 'luxass/typescript/disables/tests',
       files: ['**/*.{test,spec}.ts?(x)'],
       rules: {
         'no-unused-expressions': 'off',
       },
     },
     {
-      name: 'luxass:typescript:disables:playground',
+      name: 'luxass/typescript/disables/playground',
       files: [`**/playground.${GLOB_SRC_EXT}`],
       rules: {
         'no-console': 'off',
       },
     },
     {
-      name: 'luxass:typescript:disables:javascript',
+      name: 'luxass/typescript/disables/javascript',
       files: ['**/*.js', '**/*.cjs'],
       rules: {
         'ts/no-require-imports': 'off',

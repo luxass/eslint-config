@@ -63,7 +63,7 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
 
   return [
     {
-      name: 'luxass:react:setup',
+      name: 'luxass/react/setup',
       plugins: {
         'react': pluginReact,
         'react-hooks': pluginReactHooks,
@@ -72,7 +72,7 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
       },
     },
     {
-      name: 'luxass:react:rules',
+      name: 'luxass/react/rules',
       files,
       languageOptions: {
         parserOptions: {

@@ -4,7 +4,7 @@ import type { TypedFlatConfigItem } from '../types'
 export function unicorn(): TypedFlatConfigItem[] {
   return [
     {
-      name: 'luxass:unicorn',
+      name: 'luxass/unicorn',
       plugins: {
         unicorn: pluginUnicorn,
       },

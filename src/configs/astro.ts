@@ -57,13 +57,13 @@ export async function astro(options: AstroOptions = {}): Promise<TypedFlatConfig
 
   return [
     {
-      name: 'luxass:astro:setup',
+      name: 'luxass/astro/setup',
       plugins: {
         astro: pluginAstro,
       },
     },
     {
-      name: 'luxass:astro:rules',
+      name: 'luxass/astro/rules',
       files,
       languageOptions: {
         parser: parserAstro,
@@ -98,7 +98,7 @@ export async function astro(options: AstroOptions = {}): Promise<TypedFlatConfig
       },
     },
     {
-      name: 'luxass:astro:scripts-js',
+      name: 'luxass/astro/scripts-js',
       files: [
         '**/*.astro/*.js',
         '*.astro/*.js',
@@ -114,7 +114,7 @@ export async function astro(options: AstroOptions = {}): Promise<TypedFlatConfig
       },
     },
     {
-      name: 'luxass:astro:scripts-ts',
+      name: 'luxass/astro/scripts-ts',
       files: [
         '**/*.astro/*.ts',
         '*.astro/*.ts',

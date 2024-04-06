@@ -51,7 +51,7 @@ export async function stylistic(options: StylisticOptions = {}): Promise<TypedFl
 
   return [
     {
-      name: 'luxass:stylistic',
+      name: 'luxass/stylistic',
       plugins: {
         antfu: pluginAntfu,
         style: pluginStylistic,

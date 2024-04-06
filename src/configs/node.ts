@@ -4,7 +4,7 @@ import type { TypedFlatConfigItem } from '../types'
 export function node(): TypedFlatConfigItem[] {
   return [
     {
-      name: 'luxass:node',
+      name: 'luxass/node',
       plugins: {
         node: pluginNode,
       },

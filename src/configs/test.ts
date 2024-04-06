@@ -41,7 +41,7 @@ export async function test(
 
   return [
     {
-      name: 'luxass:test:setup',
+      name: 'luxass/test/setup',
       plugins: {
         test: {
           ...pluginVitest,
@@ -52,7 +52,7 @@ export async function test(
       },
     },
     {
-      name: 'luxass:test:rules',
+      name: 'luxass/test/rules',
       files,
       rules: {
         'test/consistent-test-it': [

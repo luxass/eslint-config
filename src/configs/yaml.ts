@@ -49,13 +49,13 @@ export async function yaml(
 
   return [
     {
-      name: 'luxass:yaml:setup',
+      name: 'luxass/yaml/setup',
       plugins: {
         yaml: pluginYaml,
       },
     },
     {
-      name: 'luxass:yaml:rules',
+      name: 'luxass/yaml/rules',
       files,
       languageOptions: {
         parser: parserYaml,
@@ -96,7 +96,7 @@ export async function yaml(
       },
     },
     {
-      name: 'luxass:yaml:github-actions',
+      name: 'luxass/yaml/github-actions',
       files: ['**/.github/workflows/*.{yml,yaml}'],
       rules: {
         // GitHub Actions supports empty values to enable features

@@ -73,7 +73,7 @@ export async function vue(
 
   return [
     {
-      name: 'luxass:vue:setup',
+      name: 'luxass/vue/setup',
       // This allows Vue plugin to work with auto imports
       // https://github.com/vuejs/eslint-plugin-vue/pull/2422
       languageOptions: {
@@ -99,7 +99,7 @@ export async function vue(
       },
     },
     {
-      name: 'luxass:vue:rules',
+      name: 'luxass/vue/rules',
       files,
       languageOptions: {
         parser: parserVue,

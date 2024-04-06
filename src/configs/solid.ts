@@ -43,13 +43,13 @@ export async function solid(options: SolidOptions = {}): Promise<TypedFlatConfig
 
   return [
     {
-      name: 'luxass:solid:setup',
+      name: 'luxass/solid/setup',
       plugins: {
         solid: pluginSolid,
       },
     },
     {
-      name: 'luxass:solid:rules',
+      name: 'luxass/solid/rules',
       files,
       languageOptions: {
         parserOptions: {

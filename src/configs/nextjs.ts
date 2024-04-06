@@ -42,13 +42,13 @@ export async function nextjs(
 
   return [
     {
-      name: 'luxass:nextjs:setup',
+      name: 'luxass/nextjs/setup',
       plugins: {
         '@next/next': pluginNextjs,
       },
     },
     {
-      name: 'luxass:nextjs:rules',
+      name: 'luxass/nextjs/rules',
       files,
       rules: {
         ...pluginNextjs.configs.recommended.rules,
@@ -90,7 +90,7 @@ export async function nextjs(
       },
     },
     {
-      name: 'luxass:nextjs:default-export-override',
+      name: 'luxass/nextjs/default-export-override',
       files: GLOB_NEXTJS_ROUTES,
       rules: {
         'import/prefer-default-export': 'error',
@@ -98,7 +98,7 @@ export async function nextjs(
       },
     },
     {
-      name: 'luxass:nextjs:og-override',
+      name: 'luxass/nextjs/og-override',
       files: GLOB_NEXTJS_OG,
       rules: {
         '@next/next/no-img-element': 'off',

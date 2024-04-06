@@ -20,7 +20,7 @@ export async function imports(options: ImportsOptions = {}): Promise<TypedFlatCo
 
   return [
     {
-      name: 'luxass:imports',
+      name: 'luxass/imports',
       plugins: {
         antfu: pluginAntfu,
         import: pluginImport,
@@ -46,7 +46,7 @@ export async function imports(options: ImportsOptions = {}): Promise<TypedFlatCo
       },
     },
     {
-      name: 'luxass:disables:imports-bin',
+      name: 'luxass/disables/imports-bin',
       files: ['**/bin/**/*', `**/bin.${GLOB_SRC_EXT}`],
       rules: {
         'antfu/no-import-dist': 'off',
