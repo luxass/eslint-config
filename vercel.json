@@ -4,7 +4,7 @@
   "outputDirectory": ".eslint-config-inspector",
   "redirects": [
     {
-      "source": "/*",
+      "source": "/:path*",
       "destination": "/index.html"
     }
   ]
