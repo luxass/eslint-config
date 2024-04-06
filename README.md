@@ -187,7 +187,7 @@ import luxass from '@luxass/eslint-config'
 
 export default luxass(
   {
-    // Configures for antfu's config
+    // Configures for luxass's config
   },
 
   // From the second arguments they are ESLint Flat Configs
