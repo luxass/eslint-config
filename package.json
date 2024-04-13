@@ -120,7 +120,7 @@
     "eslint-plugin-jsonc": "^2.15.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-markdown": "^4.0.1",
-    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-n": "^17.0.0",
     "eslint-plugin-sort-keys": "^2.3.5",
     "eslint-plugin-toml": "^0.11.0",
     "eslint-plugin-unicorn": "^52.0.0",
