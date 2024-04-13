@@ -6,9 +6,6 @@ import { getSnapshotPath } from './utils/snapshot'
 
 const [linter, fixer] = await createEslint({
   test: true,
-
-  // disable in editor detection to prevent flaky tests
-  editor: false,
 })
 
 const baseUrl = fileURLToPath(
@@ -41,7 +38,7 @@ it('should work with test', async () => {
     )
   })
 
-  const snapshotPath = await getSnapshotPath(baseUrl, 'index-linted.test.ts', fixedResults.output)
+  const [snapshotPath] = await getSnapshotPath(baseUrl, 'index-linted.test.ts', fixedResults.output)
 
   expect(fixedResults.messages).toEqual([])
   expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath)
@@ -95,13 +92,13 @@ it('should not format when stylistic is disabled', async () => {
     }),
   )
 
-  const snapshotPath = await getSnapshotPath(baseUrl, 'index-linted-no-stylistic.test.ts', fixedResults.output)
+  const [snapshotPath] = await getSnapshotPath(baseUrl, 'index-linted-no-stylistic.test.ts', fixedResults.output)
 
   expect(fixedResults.messages).toEqual([])
   expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath)
 })
 
-describe.only('disallow focused tests', () => {
+describe('disallow focused tests', () => {
   it('should allow focused tests when inside editor', async () => {
     const [linter, fixer] = await createEslint({
       test: true,
@@ -128,9 +125,9 @@ describe.only('disallow focused tests', () => {
       )
     })
 
-    const snapshotPath = await getSnapshotPath(baseUrl, 'focused-editor-linted.test.ts', fixedResults.output)
+    const [snapshotPath] = await getSnapshotPath(baseUrl, 'focused-editor-linted.test.ts', fixedResults.output)
 
-    // expect(fixedResults.messages).toEqual([])
+    expect(fixedResults.messages).toEqual([])
     expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath)
   })
 
@@ -160,7 +157,7 @@ describe.only('disallow focused tests', () => {
       )
     })
 
-    const snapshotPath = await getSnapshotPath(baseUrl, 'focused-ci-linted.test.ts', fixedResults.output)
+    const [snapshotPath] = await getSnapshotPath(baseUrl, 'focused-ci-linted.test.ts', fixedResults.output)
 
     // this should be uncommented when this issue is fixed upstream
     // https://github.com/veritem/eslint-plugin-vitest/pull/424
