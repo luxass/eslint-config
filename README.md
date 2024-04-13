@@ -5,7 +5,7 @@
 
 ## ✨ Features
 
-- Based on [Antfu's ESLint Config](https://github.com/antfu/eslint-config) with some modifications
+- Based on [antfu's ESLint Config](https://github.com/antfu/eslint-config) with some modifications
 - Auto fix for formatting (aimed to be used standalone **without** Prettier)
 - Designed to work with TypeScript, JSX, Vue out-of-box
 - Lints also for json, yaml, toml, markdown
@@ -15,7 +15,7 @@
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
 - Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
 - Respects `.gitignore` by default
-- Optional [React](#react), [Svelte](#svelte), [UnoCSS](#unocss), [Astro](#astro) support
+- Optional [React](#react), [Svelte](#svelte), [Solid](#solid), [UnoCSS](#unocss), [Astro](#astro) support
 - Optional [formatters](#formatters) support for CSS, HTML, etc.
 
 ## Usage
@@ -38,7 +38,7 @@ export default luxass()
 Combined with legacy config:
 </summary>
 
-If you still use some configs from the legacy ESLintRC format, you can use the [`@eslint/eslintrc`](https://www.npmjs.com/package/@eslint/eslintrc) package to convert them to the flat config.
+If you still use some configs from the legacy ESLint RC format, you can use the [`@eslint/eslintrc`](https://www.npmjs.com/package/@eslint/eslintrc) package to convert them to the flat config.
 
 ```js
 // eslint.config.mjs
@@ -275,7 +275,7 @@ type foo = { bar: 2 }
 ```
 
 > [!NOTE]
-> About plugin renaming - it is actually rather a dangrous move that might lead to potential naming collisions, pointed out [here](https://github.com/eslint/eslint/discussions/17766) and [here](https://github.com/prettier/eslint-config-prettier#eslintconfigjs-flat-config-plugin-caveat). As this config also very **personal** and **opinionated**, I ambitiously position this config as the only **"top-level"** config per project, that might pivot the taste of how rules are named.
+> About plugin renaming - it is actually rather a dangerous move that might lead to potential naming collisions, pointed out [here](https://github.com/eslint/eslint/discussions/17766) and [here](https://github.com/prettier/eslint-config-prettier#eslintconfigjs-flat-config-plugin-caveat). As this config also very **personal** and **opinionated**, I ambitiously position this config as the only **"top-level"** config per project, that might pivot the taste of how rules are named.
 >
 > This config cares more about the user-facings DX, and try to ease out the implementation details. For example, users could keep using the semantic `import/order` without ever knowing the underlying plugin has migrated twice to `eslint-plugin-i` and then to `eslint-plugin-import-x`. User are also not forced to migrate to the implicit `i/order` halfway only because we swapped the implementation to a fork.
 >
@@ -450,7 +450,7 @@ npm i -D eslint-plugin-react eslint-plugin-react-hooks @next/eslint-plugin-next
 
 #### Astro
 
-To enable astro support, you need to explicitly turn it on:
+To enable Astro support, you need to explicitly turn it on:
 
 ```js
 // eslint.config.js
@@ -565,7 +565,7 @@ npx simple-git-hooks
 
 ## View what rules are enabled
 
-[Antfu](https://github.com/antfu) built a visual tool to help you view what rules are enabled in your project and apply them to what files, [@eslint/config-inspector](https://github.com/eslint/config-inspector)
+[antfu](https://github.com/antfu) built a visual tool to help you view what rules are enabled in your project and apply them to what files, [@eslint/config-inspector](https://github.com/eslint/config-inspector)
 
 Go to your project root that contains `eslint.config.js` and run:
 
