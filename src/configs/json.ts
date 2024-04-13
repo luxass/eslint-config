@@ -19,7 +19,7 @@ export interface JSONOptions {
   /**
    * Glob patterns for JSON files.
    *
-   * @default [GLOB_JSON, GLOB_JSON5, GLOB_JSONC]
+   * @default [GLOB_JSON,GLOB_JSON5,GLOB_JSONC]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
   files?: string[]

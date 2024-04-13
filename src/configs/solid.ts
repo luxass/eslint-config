@@ -24,7 +24,7 @@ export interface SolidOptions {
   /**
    * Glob patterns for JSX & TSX files.
    *
-   * @default [GLOB_JSX, GLOB_TSX]
+   * @default [GLOB_JSX,GLOB_TSX]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
   files?: string[]

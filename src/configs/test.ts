@@ -13,7 +13,7 @@ export interface TestOptions {
   /**
    * Glob patterns for test files.
    *
-   * @default GLOB_TESTS
+   * @default [GLOB_TESTS]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
   files?: string[]

@@ -19,7 +19,7 @@ export interface YAMLOptions {
   /**
    * Glob patterns for YAML files.
    *
-   * @default GLOB_YAML
+   * @default [GLOB_YAML]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
   files?: string[]

@@ -30,14 +30,14 @@ export interface TypeScriptOptions {
   /**
    * Glob patterns for TypeScript files.
    *
-   * @default GLOB_SRC
+   * @default [GLOB_SRC]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
   files?: string[]
 
   /**
    * Glob patterns for files that should be type aware.
-   * @default ['**\/*.{ts,tsx}']
+   * @default  [GLOB_SRC]
    */
   typeAwareFileS?: string[]
 
