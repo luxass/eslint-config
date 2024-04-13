@@ -339,9 +339,9 @@ export default luxass({
 })
 ```
 
-### Pipeline
+### Config Composer
 
-Since v4.3.0, the factory function `luxass()` returns a [pipeline object from `eslint-flat-config-utils`](https://github.com/antfu/eslint-flat-config-utils#pipe) where you can chain the methods to compose the config even more flexibly.
+Since v4.3.0, the factory function `luxass()` returns a [`FlatConfigComposer` object from `eslint-flat-config-utils`](https://github.com/antfu/eslint-flat-config-utils#composer) where you can chain the methods to compose the config even more flexibly.
 
 ```js
 // eslint.config.js

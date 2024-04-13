@@ -277,18 +277,18 @@ export function luxass(
     configs.push([fusedConfig])
   }
 
-  let pipeline = new FlatConfigComposer<TypedFlatConfigItem>()
+  let composer = new FlatConfigComposer<TypedFlatConfigItem>()
 
-  pipeline = pipeline
+  composer = composer
     .append(
       ...configs,
       ...userConfigs as any,
     )
 
   if (autoRenamePlugins) {
-    pipeline = pipeline
+    composer = composer
       .renamePlugins(defaultPluginRenaming)
   }
 
-  return pipeline
+  return composer
 }
