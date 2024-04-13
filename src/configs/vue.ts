@@ -38,7 +38,7 @@ export interface VueOptions {
   /**
    * Glob patterns for Vue files.
    *
-   * @default GLOB_VUE
+   * @default [GLOB_VUE]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
   files?: string[]
