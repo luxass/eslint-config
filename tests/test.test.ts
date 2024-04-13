@@ -161,7 +161,7 @@ describe('disallow focused tests', () => {
 
     // this should be uncommented when this issue is fixed upstream
     // https://github.com/veritem/eslint-plugin-vitest/pull/424
-    // expect(fixedResults.messages).toEqual([])
+    expect(fixedResults.messages).toEqual([])
     expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath)
   })
 })
