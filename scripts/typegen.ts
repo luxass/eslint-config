@@ -18,6 +18,7 @@ import {
   sortPackageJson,
   sortTsconfig,
   stylistic,
+  svelte,
   tailwindcss,
   test,
   toml,
@@ -61,6 +62,7 @@ const configs = await combine(
   unocss(),
   vue(),
   yaml(),
+  svelte(),
 )
 
 const dts = await flatConfigsToRulesDTS(configs, {

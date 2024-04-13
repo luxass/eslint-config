@@ -3,7 +3,8 @@ export { unicorn } from './unicorn'
 export { ignores } from './ignores'
 export { node } from './node'
 export { sortPackageJson, sortTsconfig } from './sort'
-
+export { svelte } from './svelte'
+export type { SvelteOptions } from './svelte'
 export { imports } from './imports'
 export type { ImportsOptions } from './imports'
 
