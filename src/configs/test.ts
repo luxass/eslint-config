@@ -24,6 +24,9 @@ export interface TestOptions {
   overrides?: TypedFlatConfigItem['rules']
 }
 
+// Hold the reference so we don't redeclare the plugin on each call
+let _pluginTest: any
+
 export async function test(
   options: TestOptions = {},
 ): Promise<TypedFlatConfigItem[]> {
@@ -39,16 +42,13 @@ export async function test(
     interop(import('eslint-plugin-vitest')),
   ] as const)
 
+  _pluginTest = _pluginTest || pluginVitest
+
   return [
     {
       name: 'luxass/test/setup',
       plugins: {
-        test: {
-          ...pluginVitest,
-          rules: {
-            ...pluginVitest.rules,
-          },
-        },
+        test: _pluginTest,
       },
     },
     {
