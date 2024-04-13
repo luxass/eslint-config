@@ -4,7 +4,7 @@ export default defineConfig({
   test: {
     globals: true,
     setupFiles: [
-      './tests/setup.ts',
+      './tests/__setup/setup.ts',
     ],
     exclude: [
       './tests/fixtures/**/*',
