@@ -25,6 +25,7 @@ import {
   sortPackageJson,
   sortTsconfig,
   stylistic,
+  svelte,
   tailwindcss,
   test,
   toml,
@@ -87,6 +88,7 @@ export function luxass(
     nextjs: enableNextJS = false,
     react: enableReact = false,
     tailwindcss: enableTailwindCSS = false,
+    svelte: enableSvelte = false,
     solid: enableSolid = false,
     typescript: enableTypeScript = isPackageExists('typescript'),
     unocss: enableUnoCSS = false,
@@ -183,6 +185,17 @@ export function luxass(
       solid({
         ...resolveSubOptions(options, 'solid'),
         overrides: getOverrides(options, 'solid'),
+        typescript: !!enableTypeScript,
+      }),
+    )
+  }
+
+  if (enableSvelte) {
+    configs.push(
+      svelte({
+        ...resolveSubOptions(options, 'svelte'),
+        overrides: getOverrides(options, 'svelte'),
+        stylistic: stylisticOptions,
         typescript: !!enableTypeScript,
       }),
     )

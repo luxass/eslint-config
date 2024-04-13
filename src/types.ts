@@ -10,6 +10,7 @@ import type {
   ReactOptions,
   SolidOptions,
   StylisticConfig,
+  SvelteOptions,
   TOMLOptions,
   TailwindCSSOptions,
   TestOptions,
@@ -224,6 +225,16 @@ export interface ConfigOptions {
    * @default false
    */
   solid?: boolean | SolidOptions
+
+  /**
+   * Enable Svelte support.
+   *
+   * Requires installing:
+   * - `eslint-plugin-svelte`
+   *
+   * @default false
+   */
+  svelte?: boolean | SvelteOptions
 
   /**
    * Automatically rename plugins in the config.
