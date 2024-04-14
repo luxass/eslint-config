@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url'
 import { join } from 'node:path'
 import { createEslint } from './utils/eslint'
+import { getSnapshotPath } from './utils/snapshot'
 
 const [linter, fixer] = await createEslint({
   svelte: true,
@@ -24,4 +25,9 @@ it('should be able to lint svelte when enabled', async () => {
 
   // eslint-disable-next-line no-console
   console.log(fixedResults.messages)
+
+  const [snapshotPath] = await getSnapshotPath(baseUrl, 'index.linted.svelte', fixedResults.output)
+
+  expect(fixedResults.messages).toEqual([])
+  expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath)
 })

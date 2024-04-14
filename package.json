@@ -155,7 +155,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "eslint-plugin-solid": "^0.13.2",
-    "eslint-plugin-svelte": "2.37.0",
+    "eslint-plugin-svelte": "^2.37.0",
     "eslint-plugin-tailwindcss": "^3.15.1",
     "eslint-typegen": "^0.2.2",
     "jiti": "^1.21.0",
