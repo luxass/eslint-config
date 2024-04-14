@@ -12,8 +12,14 @@ const luxass = jiti('./src').default
 export default luxass(
   {
     vue: true,
+    react: true,
+    solid: true,
+    svelte: true,
+    astro: true,
     typescript: true,
     formatters: true,
+  },
+  {
     ignores: [
       '**/fixtures',
     ],
