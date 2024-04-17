@@ -42,7 +42,6 @@ export async function svelte(
 
   const {
     indent = 2,
-    quotes = 'single',
   } = typeof stylistic === 'boolean' ? {} : stylistic
 
   await ensure([
@@ -117,11 +116,12 @@ export async function svelte(
 
         ...stylistic
           ? {
+              // 'style/quotes': ['error', 'double'],
               'style/indent': 'off', // superseded by svelte/indent
               'style/no-trailing-spaces': 'off', // superseded by svelte/no-trailing-spaces
               'svelte/derived-has-same-inputs-outputs': 'error',
               'svelte/html-closing-bracket-spacing': 'error',
-              'svelte/html-quotes': ['error', { prefer: quotes }],
+              'svelte/html-quotes': ['error', { prefer: 'double' }],
               'svelte/indent': ['error', { alignAttributesVertically: true, indent }],
               'svelte/mustache-spacing': 'error',
               'svelte/no-spaces-around-equal-signs-in-attribute': 'error',

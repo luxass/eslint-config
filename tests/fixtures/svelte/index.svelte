@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { spring } from 'svelte/motion'
+  import { spring } from "svelte/motion";
 
   let count = 0;
 
-  const displayed_count = spring()
+  const displayed_count = spring();
 
-  $: displayed_count.set(count)
+  $: displayed_count.set(count);
   $: offset = modulo($displayed_count, 1);
 
   function modulo(n: number, m: number) {
@@ -33,7 +33,6 @@
     </svg>
   </button>
 </div>
-
 
 <style>
   .counter {
