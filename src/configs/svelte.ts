@@ -85,7 +85,7 @@ export async function svelte(
           caughtErrors: 'none',
           ignoreRestSiblings: true,
           vars: 'all',
-          varsIgnorePattern: '^\\$\\$Props$',
+          varsIgnorePattern: '^(\\$\\$Props$|\\$\\$Events$|\\$\\$Slots$)',
         }],
 
         'svelte/comment-directive': 'error',
@@ -112,7 +112,7 @@ export async function svelte(
 
         'unused-imports/no-unused-vars': [
           'error',
-          { args: 'after-used', argsIgnorePattern: '^_', vars: 'all', varsIgnorePattern: '^(_|\\$\\$Props$)' },
+          { args: 'after-used', argsIgnorePattern: '^_', vars: 'all', varsIgnorePattern: '^(_|\\$\\$Props$|\\$\\$Events$|\\$\\$Slots$)' },
         ],
 
         ...stylistic
