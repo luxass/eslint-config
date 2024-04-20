@@ -1,6 +1,6 @@
 import { GLOB_NEXTJS_OG, GLOB_NEXTJS_ROUTES, GLOB_SRC } from '../globs'
 import type { TypedFlatConfigItem } from '../types'
-import { ensure, interop } from '../utils'
+import { ensure, interop, renameRules } from '../utils'
 
 export interface NextJSOptions {
   /**
@@ -44,34 +44,42 @@ export async function nextjs(
     {
       name: 'luxass/nextjs/setup',
       plugins: {
-        '@next/next': pluginNextjs,
+        nextjs: pluginNextjs,
       },
     },
     {
       name: 'luxass/nextjs/rules',
       files,
       rules: {
-        ...pluginNextjs.configs.recommended.rules,
-        ...pluginNextjs.configs['core-web-vitals'].rules,
-        '@next/next/google-font-display': ['error'],
-        '@next/next/google-font-preconnect': ['error'],
-        '@next/next/inline-script-id': ['error'],
-        '@next/next/next-script-for-ga': ['warn'],
-        '@next/next/no-assign-module-variable': ['error'],
-        '@next/next/no-css-tags': ['warn'],
-        '@next/next/no-document-import-in-page': ['error'],
-        '@next/next/no-duplicate-head': ['error'],
-        '@next/next/no-head-element': ['warn'],
-        '@next/next/no-head-import-in-document': ['error'],
-        '@next/next/no-html-link-for-pages': ['off'],
-        '@next/next/no-img-element': ['warn'],
-        '@next/next/no-page-custom-font': ['warn'],
-        '@next/next/no-script-component-in-head': ['error'],
-        '@next/next/no-styled-jsx-in-document': ['warn'],
-        '@next/next/no-sync-scripts': ['warn'],
-        '@next/next/no-title-in-document-head': ['warn'],
-        '@next/next/no-typos': ['warn'],
-        '@next/next/no-unwanted-polyfillio': ['warn'],
+        ...renameRules(
+          pluginNextjs.configs.recommended.rules,
+          '@next/next/',
+          'nextjs/',
+        ),
+        ...renameRules(
+          pluginNextjs.configs['core-web-vitals'].rules,
+          '@next/next/',
+          'nextjs/',
+        ),
+        'nextjs/google-font-display': ['error'],
+        'nextjs/google-font-preconnect': ['error'],
+        'nextjs/inline-script-id': ['error'],
+        'nextjs/next-script-for-ga': ['warn'],
+        'nextjs/no-assign-module-variable': ['error'],
+        'nextjs/no-css-tags': ['warn'],
+        'nextjs/no-document-import-in-page': ['error'],
+        'nextjs/no-duplicate-head': ['error'],
+        'nextjs/no-head-element': ['warn'],
+        'nextjs/no-head-import-in-document': ['error'],
+        'nextjs/no-html-link-for-pages': ['off'],
+        'nextjs/no-img-element': ['warn'],
+        'nextjs/no-page-custom-font': ['warn'],
+        'nextjs/no-script-component-in-head': ['error'],
+        'nextjs/no-styled-jsx-in-document': ['warn'],
+        'nextjs/no-sync-scripts': ['warn'],
+        'nextjs/no-title-in-document-head': ['warn'],
+        'nextjs/no-typos': ['warn'],
+        'nextjs/no-unwanted-polyfillio': ['warn'],
 
         // This rule creates errors with webpack parsing on edge runtime
         'unicorn/prefer-node-protocol': ['off'],
@@ -98,7 +106,7 @@ export async function nextjs(
       name: 'luxass/nextjs/og-override',
       files: GLOB_NEXTJS_OG,
       rules: {
-        '@next/next/no-img-element': 'off',
+        'nextjs/no-img-element': 'off',
         'react/no-unknown-property': ['error', {
           ignore: ['tw'],
         }],

@@ -64,6 +64,11 @@ export const defaultPluginRenaming = {
   'n': 'node',
   'vitest': 'test',
   'yml': 'yaml',
+  '@eslint-react': 'react',
+  '@eslint-react/dom': 'react-dom',
+  '@eslint-react/hooks-extra': 'react-hooks-extra',
+  '@eslint-react/naming-convention': 'react-naming-convention',
+  '@next/next': 'nextjs',
 }
 
 /**
@@ -167,6 +172,7 @@ export function luxass(
     configs.push(react({
       ...resolveSubOptions(options, 'react'),
       overrides: getOverrides(options, 'react'),
+      tsconfigPath: getOverrides(options, 'typescript').tsconfigPath,
     }))
   }
 
