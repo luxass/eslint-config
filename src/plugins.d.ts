@@ -1,4 +1,3 @@
-declare module 'eslint-plugin-jsx-a11y';
 declare module 'eslint-plugin-markdown';
 declare module 'eslint-plugin-react-hooks';
 declare module 'eslint-plugin-jsdoc';
