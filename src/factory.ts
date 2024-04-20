@@ -5,6 +5,7 @@ import { FlatConfigComposer } from 'eslint-flat-config-utils'
 import type { Linter } from 'eslint'
 import type {
   Awaitable,
+  ConfigNames,
   ConfigOptions,
   TypedFlatConfigItem,
 } from './types'
@@ -77,8 +78,8 @@ export const defaultPluginRenaming = {
  */
 export function luxass(
   options: ConfigOptions & TypedFlatConfigItem = {},
-  ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any> | Linter.FlatConfig[]>[]
-): FlatConfigComposer<TypedFlatConfigItem> {
+  ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, ConfigNames> | Linter.FlatConfig[]>[]
+): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
   const {
     astro: enableAstro = false,
     autoRenamePlugins = true,
@@ -288,7 +289,7 @@ export function luxass(
     configs.push([fusedConfig])
   }
 
-  let composer = new FlatConfigComposer<TypedFlatConfigItem>()
+  let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>()
 
   composer = composer
     .append(
