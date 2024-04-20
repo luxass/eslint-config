@@ -257,14 +257,19 @@ Check out the [configs](https://github.com/luxass/eslint-config/blob/main/src/co
 
 Since flat config requires us to explicitly provide the plugin names (instead of mandatory convention from NPM package name), we renamed some plugins to make overall scope more consistent and easier to write.
 
-| New Prefix | Original Prefix        | Source Plugin                                                                              |
-| ---------- | ---------------------- | ------------------------------------------------------------------------------------------ |
-| `import/*` | `import-x/*`           | [eslint-plugin-import-x](https://github.com/un-es/eslint-plugin-import-x)                  |
-| `node/*`   | `n/*`                  | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n)                     |
-| `yaml/*`   | `yml/*`                | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)                        |
-| `ts/*`     | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
-| `style/*`  | `@stylistic/*`         | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic)           |
-| `test/*`   | `vitest/*`             | [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest)                    |
+| New Prefix                  | Original Prefix                     | Source Plugin                                                                                                                                    |
+| --------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `import/*`                  | `import-x/*`                        | [eslint-plugin-import-x](https://github.com/un-es/eslint-plugin-import-x)                                                                        |
+| `node/*`                    | `n/*`                               | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n)                                                                           |
+| `yaml/*`                    | `yml/*`                             | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)                                                                              |
+| `ts/*`                      | `@typescript-eslint/*`              | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint)                                                       |
+| `style/*`                   | `@stylistic/*`                      | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic)                                                                 |
+| `test/*`                    | `vitest/*`                          | [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest)                                                                          |
+| `react/*`                   | `@eslint-react/*`                   | [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest)                                                                          |
+| `react-dom/*`               | `@eslint-react/dom/*`               | [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom)                             |
+| `react-hooks-extra/*`       | `@eslint-react/hooks-extra/*`       | [eslint-plugin-react-hooks-extra](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-hooks-extra)             |
+| `react-naming-convention/*` | `@eslint-react/naming-convention/*` | [eslint-plugin-react-naming-convention](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-naming-convention) |
+| `nextjs`                    | `@next/next`                        | [eslint-plugin-react-refresh](https://github.com/vercel/next.js/tree/canary/packages/eslint-plugin-next)                                         |
 
 When you want to override rules, or disable them inline, you need to update to the new prefix:
 
@@ -424,7 +429,7 @@ export default luxass({
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
 
 ```bash
-npm i -D eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh
+npm i -D @eslint-react/eslint-plugin eslint-plugin-react-hooks eslint-plugin-react-refresh
 ```
 
 #### Next.JS

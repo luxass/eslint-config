@@ -5,6 +5,7 @@ import { FlatConfigComposer } from 'eslint-flat-config-utils'
 import type { Linter } from 'eslint'
 import type {
   Awaitable,
+  ConfigNames,
   ConfigOptions,
   TypedFlatConfigItem,
 } from './types'
@@ -63,6 +64,11 @@ export const defaultPluginRenaming = {
   'n': 'node',
   'vitest': 'test',
   'yml': 'yaml',
+  '@eslint-react': 'react',
+  '@eslint-react/dom': 'react-dom',
+  '@eslint-react/hooks-extra': 'react-hooks-extra',
+  '@eslint-react/naming-convention': 'react-naming-convention',
+  '@next/next': 'nextjs',
 }
 
 /**
@@ -77,8 +83,8 @@ export const defaultPluginRenaming = {
  */
 export function luxass(
   options: ConfigOptions & TypedFlatConfigItem = {},
-  ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any> | Linter.FlatConfig[]>[]
-): FlatConfigComposer<TypedFlatConfigItem> {
+  ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, ConfigNames> | Linter.FlatConfig[]>[]
+): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
   const {
     astro: enableAstro = false,
     autoRenamePlugins = true,
@@ -166,8 +172,7 @@ export function luxass(
     configs.push(react({
       ...resolveSubOptions(options, 'react'),
       overrides: getOverrides(options, 'react'),
-      typescript: !!enableTypeScript,
-      refresh: !enableNextJS,
+      tsconfigPath: getOverrides(options, 'typescript').tsconfigPath,
     }))
   }
 
@@ -290,7 +295,7 @@ export function luxass(
     configs.push([fusedConfig])
   }
 
-  let composer = new FlatConfigComposer<TypedFlatConfigItem>()
+  let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>()
 
   composer = composer
     .append(
