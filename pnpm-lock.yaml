@@ -99,7 +99,7 @@ dependencies:
 devDependencies:
   '@antfu/eslint-plugin-prettier':
     specifier: ^5.0.1-1
-    version: 5.0.1-1(@types/eslint@8.56.7)(eslint@9.0.0)(prettier@3.2.5)
+    version: 5.0.1-1(@types/eslint@8.56.10)(eslint@9.0.0)(prettier@3.2.5)
   '@eslint-react/eslint-plugin':
     specifier: ^1.5.8
     version: 1.5.8(@typescript-eslint/parser@7.6.0)(eslint@9.0.0)(typescript@5.4.5)
@@ -113,8 +113,8 @@ devDependencies:
     specifier: ^1.7.0
     version: 1.7.0(eslint@9.0.0)(typescript@5.4.5)
   '@types/eslint':
-    specifier: 8.56.7
-    version: 8.56.7
+    specifier: ^8.56.10
+    version: 8.56.10
   '@types/estree':
     specifier: ^1.0.5
     version: 1.0.5
@@ -130,6 +130,9 @@ devDependencies:
   astro-eslint-parser:
     specifier: ^0.17.0
     version: 0.17.0(typescript@5.4.5)
+  bundle-require:
+    specifier: ^4.0.2
+    version: 4.0.2(esbuild@0.20.2)
   eslint:
     specifier: ^9.0.0
     version: 9.0.0
@@ -157,9 +160,6 @@ devDependencies:
   eslint-typegen:
     specifier: ^0.2.2
     version: 0.2.2(eslint@9.0.0)
-  jiti:
-    specifier: ^1.21.0
-    version: 1.21.0
   lint-staged:
     specifier: ^15.2.2
     version: 15.2.2
@@ -204,7 +204,7 @@ packages:
       '@jridgewell/trace-mapping': 0.3.25
     dev: true
 
-  /@antfu/eslint-plugin-prettier@5.0.1-1(@types/eslint@8.56.7)(eslint@9.0.0)(prettier@3.2.5):
+  /@antfu/eslint-plugin-prettier@5.0.1-1(@types/eslint@8.56.10)(eslint@9.0.0)(prettier@3.2.5):
     resolution: {integrity: sha512-Bmmb7SXmdrsPT/hPProT6UvPV0vvojq0kTA5KsKbFbFnMazrjYOT9rHffpSLHWlM6uCzF6OfolI0Cay5T+I6fg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -218,7 +218,7 @@ packages:
       eslint-config-prettier:
         optional: true
     dependencies:
-      '@types/eslint': 8.56.7
+      '@types/eslint': 8.56.10
       eslint: 9.0.0
       prettier: 3.2.5
       prettier-linter-helpers: 1.0.0
@@ -1157,7 +1157,7 @@ packages:
     peerDependencies:
       eslint: '>=8.40.0'
     dependencies:
-      '@types/eslint': 8.56.7
+      '@types/eslint': 8.56.10
       acorn: 8.11.3
       escape-string-regexp: 4.0.0
       eslint: 9.0.0
@@ -1172,7 +1172,7 @@ packages:
       eslint: '>=8.40.0'
     dependencies:
       '@stylistic/eslint-plugin-js': 1.7.0(eslint@9.0.0)
-      '@types/eslint': 8.56.7
+      '@types/eslint': 8.56.10
       eslint: 9.0.0
       estraverse: 5.3.0
       picomatch: 4.0.2
@@ -1195,7 +1195,7 @@ packages:
     peerDependencies:
       eslint: '*'
     dependencies:
-      '@types/eslint': 8.56.7
+      '@types/eslint': 8.56.10
       '@typescript-eslint/utils': 6.21.0(eslint@9.0.0)(typescript@5.4.5)
       eslint: 9.0.0
     transitivePeerDependencies:
@@ -1210,7 +1210,7 @@ packages:
       eslint: '>=8.40.0'
     dependencies:
       '@stylistic/eslint-plugin-js': 1.7.0(eslint@9.0.0)
-      '@types/eslint': 8.56.7
+      '@types/eslint': 8.56.10
       '@typescript-eslint/utils': 6.21.0(eslint@9.0.0)(typescript@5.4.5)
       eslint: 9.0.0
     transitivePeerDependencies:
@@ -1228,15 +1228,15 @@ packages:
       '@stylistic/eslint-plugin-jsx': 1.7.0(eslint@9.0.0)
       '@stylistic/eslint-plugin-plus': 1.7.0(eslint@9.0.0)(typescript@5.4.5)
       '@stylistic/eslint-plugin-ts': 1.7.0(eslint@9.0.0)(typescript@5.4.5)
-      '@types/eslint': 8.56.7
+      '@types/eslint': 8.56.10
       eslint: 9.0.0
     transitivePeerDependencies:
       - supports-color
       - typescript
     dev: false
 
-  /@types/eslint@8.56.7:
-    resolution: {integrity: sha512-SjDvI/x3zsZnOkYZ3lCt9lOZWZLB2jIlNKz+LBgCtDurK0JZcwucxYHn1w2BJkD34dgX9Tjnak0txtq4WTggEA==}
+  /@types/eslint@8.56.10:
+    resolution: {integrity: sha512-Shavhk87gCtY2fhXDctcfS3e6FdxWkCx1iUZ9eEUbh7rTqlZT0/IzOkCOVt0fCjcFuZ9FPYfuezTBImfHCDBGQ==}
     dependencies:
       '@types/estree': 1.0.5
       '@types/json-schema': 7.0.15
@@ -2250,7 +2250,7 @@ packages:
   /eslint-flat-config-utils@0.2.2:
     resolution: {integrity: sha512-iWjXCsGBuyqlGhmam4V9IXlxpDfnc7l0VC1YzncROF2PYIPSRpejugrIp2bXPT5mutKF3zq69Vbt7J9su9E/Lw==}
     dependencies:
-      '@types/eslint': 8.56.7
+      '@types/eslint': 8.56.10
       pathe: 1.1.2
     dev: false
 
@@ -2761,7 +2761,7 @@ packages:
     peerDependencies:
       eslint: ^8.45.0 || ^9.0.0
     dependencies:
-      '@types/eslint': 8.56.7
+      '@types/eslint': 8.56.10
       eslint: 9.0.0
       json-schema-to-typescript-lite: 14.0.0
       ohash: 1.1.3

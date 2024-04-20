@@ -166,8 +166,6 @@ export function luxass(
     configs.push(react({
       ...resolveSubOptions(options, 'react'),
       overrides: getOverrides(options, 'react'),
-      typescript: !!enableTypeScript,
-      refresh: !enableNextJS,
     }))
   }
 

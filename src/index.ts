@@ -7,4 +7,6 @@ export * from './globs'
 export * from './utils'
 export * from './types'
 
+export { luxass }
+
 export default luxass
