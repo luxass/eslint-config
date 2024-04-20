@@ -28,6 +28,12 @@ export interface ReactOptions {
 const ReactRefreshAllowConstantExportPackages = [
   'vite',
 ]
+const RemixPackages = [
+  '@remix-run/node',
+  '@remix-run/react',
+  '@remix-run/serve',
+  '@remix-run/dev',
+]
 
 export async function react(options: ReactOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
@@ -61,6 +67,9 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
   const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
     (i) => isPackageExists(i),
   )
+
+  const isUsingRemix = RemixPackages.some((i) => isPackageExists(i))
+  const isUsingNext = isPackageExists('next')
 
   const plugins = pluginReact.configs.all.plugins
 
@@ -110,7 +119,27 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
         // react refresh
         'react-refresh/only-export-components': [
           'warn',
-          { allowConstantExport: isAllowConstantExport },
+          {
+            allowConstantExport: isAllowConstantExport,
+            allowExportNames: isUsingNext
+              ? [
+                  'config',
+                  'generateStaticParams',
+                  'metadata',
+                  'generateMetadata',
+                  'viewport',
+                  'generateViewport',
+                ]
+              : isUsingRemix
+                ? [
+                    'meta',
+                    'links',
+                    'headers',
+                    'loader',
+                    'action',
+                  ]
+                : undefined,
+          },
         ],
 
         // recommended rules from @eslint-react
