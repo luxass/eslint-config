@@ -107,9 +107,6 @@ export async function nextjs(
       files: GLOB_NEXTJS_OG,
       rules: {
         'nextjs/no-img-element': 'off',
-        'react/no-unknown-property': ['error', {
-          ignore: ['tw'],
-        }],
       },
     },
   ]
