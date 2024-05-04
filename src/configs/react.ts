@@ -121,16 +121,18 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
           'warn',
           {
             allowConstantExport: isAllowConstantExport,
-            allowExportNames: isUsingNext
-              ? [
-                  'config',
-                  'generateStaticParams',
-                  'metadata',
-                  'generateMetadata',
-                  'viewport',
-                  'generateViewport',
-                ]
-              : isUsingRemix
+            allowExportNames: [
+              ...(isUsingNext
+                ? [
+                    'config',
+                    'generateStaticParams',
+                    'metadata',
+                    'generateMetadata',
+                    'viewport',
+                    'generateViewport',
+                  ]
+                : []),
+              ...(isUsingRemix
                 ? [
                     'meta',
                     'links',
@@ -138,7 +140,8 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
                     'loader',
                     'action',
                   ]
-                : undefined,
+                : []),
+            ],
           },
         ],
 
