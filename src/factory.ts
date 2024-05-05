@@ -19,7 +19,6 @@ import {
   jsdoc,
   jsonc,
   markdown,
-  nextjs,
   node,
   react,
   solid,
@@ -68,7 +67,6 @@ export const defaultPluginRenaming = {
   '@eslint-react/dom': 'react-dom',
   '@eslint-react/hooks-extra': 'react-hooks-extra',
   '@eslint-react/naming-convention': 'react-naming-convention',
-  '@next/next': 'nextjs',
 }
 
 /**
@@ -91,7 +89,6 @@ export function luxass(
     editor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
     exts = [],
     gitignore: enableGitignore = true,
-    nextjs: enableNextJS = false,
     react: enableReact = false,
     tailwindcss: enableTailwindCSS = false,
     svelte: enableSvelte = false,
@@ -168,23 +165,13 @@ export function luxass(
     }))
   }
 
-  if (enableReact || enableNextJS) {
+  if (enableReact) {
     configs.push(react({
       ...resolveSubOptions(options, 'react'),
       overrides: getOverrides(options, 'react'),
       tsconfigPath: getOverrides(options, 'typescript').tsconfigPath,
     }))
   }
-
-  if (enableNextJS) {
-    configs.push(
-      nextjs({
-        ...resolveSubOptions(options, 'nextjs'),
-        overrides: getOverrides(options, 'nextjs'),
-      }),
-    )
-  }
-
   if (enableSolid) {
     configs.push(
       solid({

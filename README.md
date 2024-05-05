@@ -269,7 +269,6 @@ Since flat config requires us to explicitly provide the plugin names (instead of
 | `react-dom/*`               | `@eslint-react/dom/*`               | [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom)                             |
 | `react-hooks-extra/*`       | `@eslint-react/hooks-extra/*`       | [eslint-plugin-react-hooks-extra](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-hooks-extra)             |
 | `react-naming-convention/*` | `@eslint-react/naming-convention/*` | [eslint-plugin-react-naming-convention](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-naming-convention) |
-| `nextjs`                    | `@next/next`                        | [eslint-plugin-react-refresh](https://github.com/vercel/next.js/tree/canary/packages/eslint-plugin-next)                                         |
 
 When you want to override rules, or disable them inline, you need to update to the new prefix:
 
@@ -430,27 +429,6 @@ Running `npx eslint` should prompt you to install the required dependencies, oth
 
 ```bash
 npm i -D @eslint-react/eslint-plugin eslint-plugin-react-hooks eslint-plugin-react-refresh
-```
-
-#### Next.JS
-
-To enable Next.JS support, need to explicitly turn it on:
-
-Next.JS also enables React support.
-
-```js
-// eslint.config.js
-import luxass from '@luxass/eslint-config'
-
-export default luxass({
-  nextjs: true,
-})
-```
-
-Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
-
-```bash
-npm i -D eslint-plugin-react eslint-plugin-react-hooks @next/eslint-plugin-next
 ```
 
 #### Astro

@@ -6,7 +6,6 @@ import type {
   FormattersOptions,
   JSONOptions,
   JavaScriptOptions,
-  NextJSOptions,
   ReactOptions,
   SolidOptions,
   StylisticConfig,
@@ -86,18 +85,6 @@ export interface ConfigOptions {
    * @default true
    */
   markdown?: boolean
-
-  /**
-   * Enable NextJS support.
-   *
-   * Requires installing:
-   * - `@next/eslint-plugin-next`
-   *
-   * @default false
-   *
-   * Note: By enabling this, the `react` option will be enabled automatically.
-   */
-  nextjs?: boolean | NextJSOptions
 
   /**
    * Enable react rules.

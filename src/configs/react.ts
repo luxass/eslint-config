@@ -125,6 +125,7 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
               ...(isUsingNext
                 ? [
                     'config',
+                    'runtime',
                     'generateStaticParams',
                     'metadata',
                     'generateMetadata',

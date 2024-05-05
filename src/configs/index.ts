@@ -38,9 +38,6 @@ export type { TestOptions } from './test'
 export { unocss } from './unocss'
 export type { UnoCSSOptions } from './unocss'
 
-export { nextjs } from './nextjs'
-export type { NextJSOptions } from './nextjs'
-
 export { react } from './react'
 export type { ReactOptions } from './react'
 
