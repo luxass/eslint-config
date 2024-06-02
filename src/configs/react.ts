@@ -1,5 +1,5 @@
 import { isPackageExists } from 'local-pkg'
-import { GLOB_TS, GLOB_TSX } from '../globs'
+import { GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX } from '../globs'
 import type { TypedFlatConfigItem } from '../types'
 import { ensure, interop, toArray } from '../utils'
 
@@ -18,7 +18,7 @@ export interface ReactOptions {
   /**
    * Glob patterns for JSX & TSX files.
    *
-   * @default [GLOB_JSX,GLOB_TSX]
+   * @default [GLOB_JS,GLOB_JSX,GLOB_TS,GLOB_TSX]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
   files?: string[]
@@ -37,7 +37,7 @@ const RemixPackages = [
 
 export async function react(options: ReactOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
-    files = [GLOB_TS, GLOB_TSX],
+    files = [GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX],
     overrides = {},
   } = options
 
