@@ -131,7 +131,10 @@ Install [ESLint extension](https://marketplace.visualstudio.com/items?itemName=d
     "yaml",
     "toml",
     "gql",
-    "graphql"
+    "graphql",
+    "astro",
+    "css",
+    "postcss"
   ]
 }
 ```
