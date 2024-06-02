@@ -55,3 +55,6 @@ export type { TOMLOptions } from './toml'
 
 export { solid } from './solid'
 export type { SolidOptions } from './solid'
+
+export { regexp } from './regexp'
+export type { RegExpOptions } from './regexp'

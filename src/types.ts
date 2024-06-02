@@ -7,6 +7,7 @@ import type {
   JSONOptions,
   JavaScriptOptions,
   ReactOptions,
+  RegExpOptions,
   SolidOptions,
   StylisticConfig,
   SvelteOptions,
@@ -221,4 +222,12 @@ export interface ConfigOptions {
    * @default true
    */
   autoRenamePlugins?: boolean
+
+  /**
+   * Enable regexp rules.
+   *
+   * @see https://ota-meshi.github.io/eslint-plugin-regexp/
+   * @default true
+   */
+  regexp?: boolean | RegExpOptions
 }

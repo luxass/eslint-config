@@ -21,6 +21,7 @@ import {
   markdown,
   node,
   react,
+  regexp,
   solid,
   sortPackageJson,
   sortTsconfig,
@@ -95,6 +96,7 @@ export function luxass(
     solid: enableSolid = false,
     typescript: enableTypeScript = isPackageExists('typescript'),
     unocss: enableUnoCSS = false,
+    regexp: enableRegexp = true,
     vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
   } = options
 
@@ -155,6 +157,13 @@ export function luxass(
     configs.push(stylistic({
       ...stylisticOptions,
       overrides: getOverrides(options, 'stylistic'),
+    }))
+  }
+
+  if (enableRegexp) {
+    configs.push(regexp({
+      ...resolveSubOptions(options, 'regexp'),
+      overrides: getOverrides(options, 'regexp'),
     }))
   }
 
