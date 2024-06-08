@@ -203,7 +203,6 @@ export function luxass(
       astro({
         ...resolveSubOptions(options, 'astro'),
         overrides: getOverrides(options, 'astro'),
-        typescript: !!enableTypeScript,
       }),
     )
   }

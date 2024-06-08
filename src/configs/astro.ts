@@ -10,13 +10,6 @@ export interface AstroOptions {
   overrides?: TypedFlatConfigItem['rules']
 
   /**
-   * Enable TypeScript support.
-   *
-   * @default true
-   */
-  typescript?: boolean
-
-  /**
    * Glob patterns for Astro files.
    *
    * @default [GLOB_ASTRO]
@@ -36,7 +29,6 @@ export async function astro(options: AstroOptions = {}): Promise<TypedFlatConfig
   const {
     files = [GLOB_ASTRO],
     overrides = {},
-    typescript = true,
     stylistic = true,
   } = options
 
@@ -66,71 +58,38 @@ export async function astro(options: AstroOptions = {}): Promise<TypedFlatConfig
       name: 'luxass/astro/rules',
       files,
       languageOptions: {
+        globals: pluginAstro.environments.astro.globals,
         parser: parserAstro,
         parserOptions: {
           extraFileExtensions: ['.astro'],
-          parser: typescript
-            ? parserTs as any
-            : null,
-          sourceType: 'module',
+          parser: parserTs,
         },
+        sourceType: 'module',
       },
+      processor: 'astro/client-side-ts',
       rules: {
-        // Disallow conflicting set directives and child contents
-        // https://ota-meshi.github.io/eslint-plugin-astro/rules/no-conflict-set-directives/
+        'astro/missing-client-only-directive-value': 'error',
         'astro/no-conflict-set-directives': 'error',
-
-        // Disallow use of `set:html` directive
-        // https://ota-meshi.github.io/eslint-plugin-astro/rules/no-set-html-directive/
+        'astro/no-deprecated-astro-canonicalurl': 'error',
+        'astro/no-deprecated-astro-fetchcontent': 'error',
+        'astro/no-deprecated-astro-resolve': 'error',
+        'astro/no-deprecated-getentrybyslug': 'error',
         'astro/no-set-html-directive': 'off',
+        'astro/no-unused-define-vars-in-style': 'error',
+        'astro/semi': 'off',
+        'astro/valid-compile': 'error',
 
         ...(stylistic
           ? {
               'style/indent': 'off',
-              'style/jsx-indent': 'off',
               'style/jsx-closing-tag-location': 'off',
+              'style/jsx-indent': 'off',
               'style/jsx-one-expression-per-line': 'off',
               'style/no-multiple-empty-lines': 'off',
             }
           : {}),
 
         ...overrides,
-      },
-    },
-    {
-      name: 'luxass/astro/scripts-js',
-      files: [
-        '**/*.astro/*.js',
-        '*.astro/*.js',
-      ],
-      languageOptions: {
-        globals: {
-          browser: true,
-          es2020: true,
-        },
-        parserOptions: {
-          sourceType: 'module',
-        },
-      },
-    },
-    {
-      name: 'luxass/astro/scripts-ts',
-      files: [
-        '**/*.astro/*.ts',
-        '*.astro/*.ts',
-      ],
-      languageOptions: {
-        globals: {
-          browser: true,
-          es2020: true,
-        },
-        parser: typescript
-          ? parserTs as any
-          : null,
-        parserOptions: {
-          project: null,
-          sourceType: 'module',
-        },
       },
     },
   ]
