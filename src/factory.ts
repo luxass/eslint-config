@@ -18,6 +18,7 @@ import {
   javascript,
   jsdoc,
   jsonc,
+  jsx,
   markdown,
   node,
   react,
@@ -143,6 +144,10 @@ export function luxass(
 
   if (enableVue) {
     exts.push('vue')
+  }
+
+  if (enableJsx) {
+    configs.push(jsx())
   }
 
   if (enableTypeScript) {
