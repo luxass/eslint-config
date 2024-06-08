@@ -8,9 +8,7 @@ import type {
   JavaScriptOptions,
   ReactOptions,
   RegExpOptions,
-  SolidOptions,
   StylisticConfig,
-  SvelteOptions,
   TOMLOptions,
   TailwindCSSOptions,
   TestOptions,
@@ -195,26 +193,6 @@ export interface ConfigOptions {
    * @default []
    */
   exts?: string[]
-
-  /**
-   * Enable Solid support.
-   *
-   * Requires installing:
-   * - `eslint-plugin-solid`
-   *
-   * @default false
-   */
-  solid?: boolean | SolidOptions
-
-  /**
-   * Enable Svelte support.
-   *
-   * Requires installing:
-   * - `eslint-plugin-svelte`
-   *
-   * @default false
-   */
-  svelte?: boolean | SvelteOptions
 
   /**
    * Automatically rename plugins in the config.

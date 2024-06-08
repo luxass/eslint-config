@@ -13,11 +13,9 @@ import {
   markdown,
   node,
   react,
-  solid,
   sortPackageJson,
   sortTsconfig,
   stylistic,
-  svelte,
   tailwindcss,
   test,
   toml,
@@ -51,7 +49,6 @@ const configs = await combine(
   stylistic(),
   tailwindcss(),
   sortTsconfig(),
-  solid(),
   ignores(),
   test(),
   toml(),
@@ -60,7 +57,6 @@ const configs = await combine(
   unocss(),
   vue(),
   yaml(),
-  svelte(),
 )
 
 const configNames = configs.map((i) => i.name).filter(Boolean) as string[]

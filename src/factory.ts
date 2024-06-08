@@ -22,11 +22,9 @@ import {
   node,
   react,
   regexp,
-  solid,
   sortPackageJson,
   sortTsconfig,
   stylistic,
-  svelte,
   tailwindcss,
   test,
   toml,
@@ -87,16 +85,15 @@ export function luxass(
   const {
     astro: enableAstro = false,
     autoRenamePlugins = true,
-    editor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
     exts = [],
     gitignore: enableGitignore = true,
+    editor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
+    jsx: enableJsx = true,
     react: enableReact = false,
-    tailwindcss: enableTailwindCSS = false,
-    svelte: enableSvelte = false,
-    solid: enableSolid = false,
+    regexp: enableRegexp = true,
     typescript: enableTypeScript = isPackageExists('typescript'),
     unocss: enableUnoCSS = false,
-    regexp: enableRegexp = true,
+    tailwindcss: enableTailwindCSS = false,
     vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
   } = options
 
@@ -108,7 +105,7 @@ export function luxass(
         : {}
 
   if (stylisticOptions && !('jsx' in stylisticOptions)) {
-    stylisticOptions.jsx = options.jsx ?? true
+    stylisticOptions.jsx = enableJsx
   }
 
   const configs: Awaitable<TypedFlatConfigItem[]>[] = []
@@ -122,6 +119,9 @@ export function luxass(
       }
     }
   }
+
+  const typescriptOptions = resolveSubOptions(options, 'typescript')
+  const tsconfigPath = 'tsconfigPath' in typescriptOptions ? typescriptOptions.tsconfigPath : undefined
 
   // Base configs
   configs.push(
@@ -147,7 +147,7 @@ export function luxass(
 
   if (enableTypeScript) {
     configs.push(typescript({
-      ...resolveSubOptions(options, 'typescript'),
+      ...typescriptOptions,
       exts,
       overrides: getOverrides(options, 'typescript'),
     }))
@@ -178,28 +178,8 @@ export function luxass(
     configs.push(react({
       ...resolveSubOptions(options, 'react'),
       overrides: getOverrides(options, 'react'),
-      tsconfigPath: getOverrides(options, 'typescript').tsconfigPath,
+      tsconfigPath,
     }))
-  }
-  if (enableSolid) {
-    configs.push(
-      solid({
-        ...resolveSubOptions(options, 'solid'),
-        overrides: getOverrides(options, 'solid'),
-        typescript: !!enableTypeScript,
-      }),
-    )
-  }
-
-  if (enableSvelte) {
-    configs.push(
-      svelte({
-        ...resolveSubOptions(options, 'svelte'),
-        overrides: getOverrides(options, 'svelte'),
-        stylistic: stylisticOptions,
-        typescript: !!enableTypeScript,
-      }),
-    )
   }
 
   if (enableVue) {
