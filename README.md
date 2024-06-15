@@ -15,7 +15,7 @@
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new), compose easily!
 - Using [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
 - Respects `.gitignore` by default
-- Optional [React](#react), [Svelte](#svelte), [Solid](#solid), [UnoCSS](#unocss), [Astro](#astro) support
+- Optional [React](#react), [UnoCSS](#unocss), [Astro](#astro) support
 - Optional [formatters](#formatters) support for CSS, HTML, etc.
 
 ## Usage
@@ -28,9 +28,9 @@ And create a `eslint.config.mjs` in your project root:
 
 ```js
 // eslint.config.mjs
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
-export default luxass()
+export default luxass();
 ```
 
 <details>
@@ -42,10 +42,10 @@ If you still use some configs from the legacy ESLint RC format, you can use the 
 
 ```js
 // eslint.config.mjs
-import luxass from '@luxass/eslint-config'
-import { FlatCompat } from '@eslint/eslintrc'
+import luxass from "@luxass/eslint-config";
+import { FlatCompat } from "@eslint/eslintrc";
 
-const compat = new FlatCompat()
+const compat = new FlatCompat();
 
 export default luxass(
   {
@@ -55,13 +55,13 @@ export default luxass(
   // Legacy config
   ...compat.config({
     extends: [
-      'eslint:recommended',
+      "eslint:recommended",
       // Other extends...
     ],
   })
 
   // Other flat configs...
-)
+);
 ```
 
 > Note that `.eslintignore` no longer works in Flat config, see [customization](#customization) for more details.
@@ -145,16 +145,16 @@ Normally you would only need to import the config and export it:
 
 ```js
 // eslint.config.js
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
-export default luxass()
+export default luxass();
 ```
 
 And that's it! Or you can configure each integration individually, for example:
 
 ```js
 // eslint.config.js
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
 export default luxass({
   // Enable stylistic formatting rules
@@ -163,7 +163,7 @@ export default luxass({
   // Or customize the stylistic rules
   stylistic: {
     indent: 2, // 4, or 'tab'
-    quotes: 'single', // or 'double'
+    quotes: "single", // or 'double'
   },
 
   // TypeScript and Vue are auto-detected, you can also explicitly enable them:
@@ -176,17 +176,17 @@ export default luxass({
 
   // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
   ignores: [
-    '**/fixtures',
+    "**/fixtures",
     // ...globs
   ]
-})
+});
 ```
 
 The `luxass` factory function also accepts any number of arbitrary custom config overrides:
 
 ```js
 // eslint.config.js
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
 export default luxass(
   {
@@ -196,13 +196,13 @@ export default luxass(
   // From the second arguments they are ESLint Flat Configs
   // you can have multiple configs
   {
-    files: ['**/*.ts'],
+    files: ["**/*.ts"],
     rules: {},
   },
   {
     rules: {},
   },
-)
+);
 ```
 
 Going more advanced, you can also import fine-grained configs and compose them as you wish:
@@ -231,7 +231,7 @@ import {
   unicorn,
   vue,
   yaml
-} from '@luxass/eslint-config'
+} from "@luxass/eslint-config";
 
 export default combine(
   ignores(),
@@ -247,7 +247,7 @@ export default combine(
   jsonc(),
   yaml(),
   markdown(),
-)
+);
 ```
 
 </details>
@@ -298,7 +298,7 @@ Certain rules would only be enabled in specific files, for example, `ts/*` rules
 
 ```js
 // eslint.config.js
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
 export default luxass(
   {
@@ -307,35 +307,35 @@ export default luxass(
   },
   {
     // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
-    files: ['**/*.vue'],
+    files: ["**/*.vue"],
     rules: {
-      'vue/operator-linebreak': ['error', 'before'],
+      "vue/operator-linebreak": ["error", "before"],
     },
   },
   {
     // Without `files`, they are general rules for all files
     rules: {
-      'style/semi': ['error', 'never'],
+      "style/semi": ["error", "never"],
     },
   }
-)
+);
 ```
 
 We also provided a `overrides` options in each integration to make it easier:
 
 ```js
 // eslint.config.js
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
 export default luxass({
   vue: {
     overrides: {
-      'vue/operator-linebreak': ['error', 'before'],
+      "vue/operator-linebreak": ["error", "before"],
     },
   },
   typescript: {
     overrides: {
-      'ts/consistent-type-definitions': ['error', 'interface'],
+      "ts/consistent-type-definitions": ["error", "interface"],
     },
   },
   yaml: {
@@ -343,7 +343,7 @@ export default luxass({
       // ...
     },
   },
-})
+});
 ```
 
 ### Config Composer
@@ -352,7 +352,7 @@ Since v4.3.0, the factory function `luxass()` returns a [`FlatConfigComposer` ob
 
 ```js
 // eslint.config.js
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
 export default luxass()
   .prepend(
@@ -360,18 +360,18 @@ export default luxass()
   )
   // overrides any named configs
   .override(
-    'luxass/imports',
+    "luxass/imports",
     {
       rules: {
-        'import/order': ['error', { 'newlines-between': 'always' }],
+        "import/order": ["error", { "newlines-between": "always" }],
       }
     }
   )
   // rename plugin prefixes
   .renamePlugins({
-    'old-prefix': 'new-prefix',
+    "old-prefix": "new-prefix",
     // ...
-  })
+  });
 // ...
 ```
 
@@ -385,7 +385,7 @@ Use external formatters to format files that ESLint cannot handle yet (`.css`, `
 
 ```js
 // eslint.config.js
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
 export default luxass({
   formatters: {
@@ -404,9 +404,9 @@ export default luxass({
      * Supports Prettier and dprint
      * By default uses Prettier
      */
-    markdown: 'prettier'
+    markdown: "prettier"
   }
-})
+});
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -421,11 +421,11 @@ To enable React support, you need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
 export default luxass({
   react: true,
-})
+});
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -440,11 +440,11 @@ To enable Astro support, you need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
 export default luxass({
   astro: true,
-})
+});
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -459,11 +459,11 @@ To enable UnoCSS support, you need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
 export default luxass({
   unocss: true,
-})
+});
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -478,11 +478,11 @@ To enable TailwindCSS support, need to explicitly turn it on:
 
 ```js
 // eslint.config.js
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
 export default luxass({
   tailwindcss: true,
-})
+});
 ```
 
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
@@ -501,13 +501,13 @@ You can optionally enable the [type aware rules](https://typescript-eslint.io/li
 
 ```js
 // eslint.config.js
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
 export default luxass({
   typescript: {
-    tsconfigPath: 'tsconfig.json',
+    tsconfigPath: "tsconfig.json",
   },
-})
+});
 ```
 
 ### Editor Specific Disables
@@ -518,11 +518,11 @@ This is to prevent unused imports from getting removed by the IDE during refacto
 
 ```js
 // eslint.config.js
-import luxass from '@luxass/eslint-config'
+import luxass from "@luxass/eslint-config";
 
 export default luxass({
   editor: false
-})
+});
 ```
 
 ### Lint Staged
