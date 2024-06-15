@@ -1,11 +1,11 @@
-import process from 'node:process'
-import type { ParserOptions } from '@typescript-eslint/parser'
-import pluginAntfu from 'eslint-plugin-antfu'
+import process from "node:process";
+import type { ParserOptions } from "@typescript-eslint/parser";
+import pluginAntfu from "eslint-plugin-antfu";
 import type {
   TypedFlatConfigItem,
-} from '../types'
-import { GLOB_SRC, GLOB_SRC_EXT, GLOB_TS, GLOB_TSX } from '../globs'
-import { interop, renameRules, toArray } from '../utils'
+} from "../types";
+import { GLOB_SRC, GLOB_SRC_EXT, GLOB_TS, GLOB_TSX } from "../globs";
+import { interop, renameRules, toArray } from "../utils";
 
 export interface TypeScriptOptions {
   /**
@@ -14,18 +14,18 @@ export interface TypeScriptOptions {
    * @example ["vue"]
    * @default []
    */
-  exts?: string[]
+  exts?: string[];
 
   /**
    * Additional parser options for TypeScript.
    */
-  parserOptions?: Partial<ParserOptions>
+  parserOptions?: Partial<ParserOptions>;
 
   /**
    * When this options is provided, type aware rules will be enabled.
    * @see https://typescript-eslint.io/linting/typed-linting/
    */
-  tsconfigPath?: string | string[]
+  tsconfigPath?: string | string[];
 
   /**
    * Glob patterns for TypeScript files.
@@ -33,18 +33,18 @@ export interface TypeScriptOptions {
    * @default [GLOB_SRC]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
-  files?: string[]
+  files?: string[];
 
   /**
    * Glob patterns for files that should be type aware.
    * @default  [GLOB_SRC]
    */
-  typeAwareFileS?: string[]
+  typeAwareFileS?: string[];
 
   /**
    * Overrides for the config.
    */
-  overrides?: TypedFlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem["rules"];
 }
 export async function typescript(
   options: TypeScriptOptions = {},
@@ -53,61 +53,61 @@ export async function typescript(
     exts = [],
     overrides = {},
     parserOptions = {},
-  } = options ?? {}
+  } = options ?? {};
 
   const files = options.files ?? [
     GLOB_SRC,
     ...exts.map((ext) => `**/*.${ext}`),
-  ]
+  ];
 
-  const filesTypeAware = options.typeAwareFileS ?? [GLOB_TS, GLOB_TSX]
+  const filesTypeAware = options.typeAwareFileS ?? [GLOB_TS, GLOB_TSX];
 
   const tsconfigPath = options?.tsconfigPath
     ? toArray(options.tsconfigPath)
-    : undefined
+    : undefined;
 
-  const isTypeAware = !!tsconfigPath
+  const isTypeAware = !!tsconfigPath;
 
-  const typeAwareRules: TypedFlatConfigItem['rules'] = {
-    'dot-notation': 'off',
-    'no-implied-eval': 'off',
-    'no-throw-literal': 'off',
-    'ts/await-thenable': 'error',
-    'ts/dot-notation': ['error', { allowKeywords: true }],
-    'ts/no-floating-promises': 'error',
-    'ts/no-for-in-array': 'error',
-    'ts/no-implied-eval': 'error',
-    'ts/no-misused-promises': 'error',
-    'ts/no-throw-literal': 'error',
-    'ts/no-unnecessary-type-assertion': 'error',
-    'ts/no-unsafe-argument': 'error',
-    'ts/no-unsafe-assignment': 'error',
-    'ts/no-unsafe-call': 'error',
-    'ts/no-unsafe-member-access': 'error',
-    'ts/no-unsafe-return': 'error',
-    'ts/restrict-plus-operands': 'error',
-    'ts/restrict-template-expressions': 'error',
-    'ts/unbound-method': 'error',
-  }
+  const typeAwareRules: TypedFlatConfigItem["rules"] = {
+    "dot-notation": "off",
+    "no-implied-eval": "off",
+    "no-throw-literal": "off",
+    "ts/await-thenable": "error",
+    "ts/dot-notation": ["error", { allowKeywords: true }],
+    "ts/no-floating-promises": "error",
+    "ts/no-for-in-array": "error",
+    "ts/no-implied-eval": "error",
+    "ts/no-misused-promises": "error",
+    "ts/no-throw-literal": "error",
+    "ts/no-unnecessary-type-assertion": "error",
+    "ts/no-unsafe-argument": "error",
+    "ts/no-unsafe-assignment": "error",
+    "ts/no-unsafe-call": "error",
+    "ts/no-unsafe-member-access": "error",
+    "ts/no-unsafe-return": "error",
+    "ts/restrict-plus-operands": "error",
+    "ts/restrict-template-expressions": "error",
+    "ts/unbound-method": "error",
+  };
 
   const [
     pluginTs,
     parserTs,
   ] = await Promise.all([
-    interop(import('@typescript-eslint/eslint-plugin')),
-    interop(import('@typescript-eslint/parser')),
-  ] as const)
+    interop(import("@typescript-eslint/eslint-plugin")),
+    interop(import("@typescript-eslint/parser")),
+  ] as const);
 
   function makeParser(typeAware: boolean, files: string[], ignores?: string[]): TypedFlatConfigItem {
     return {
       files,
       ...ignores ? { ignores } : {},
-      name: `luxass/typescript/${typeAware ? 'type-aware-parser' : 'parser'}`,
+      name: `luxass/typescript/${typeAware ? "type-aware-parser" : "parser"}`,
       languageOptions: {
         parser: parserTs,
         parserOptions: {
           extraFileExtensions: exts.map((ext) => `.${ext}`),
-          sourceType: 'module',
+          sourceType: "module",
           ...typeAware
             ? {
                 project: tsconfigPath,
@@ -117,13 +117,13 @@ export async function typescript(
           ...parserOptions as any,
         },
       },
-    }
+    };
   }
 
   return [
     {
       // Install the plugins without globs, so they can be configured separately.
-      name: 'luxass/typescript/setup',
+      name: "luxass/typescript/setup",
       plugins: {
         antfu: pluginAntfu,
         ts: pluginTs as any,
@@ -136,98 +136,98 @@ export async function typescript(
         ]
       : [makeParser(false, files)],
     {
-      name: 'luxass/typescript/rules',
+      name: "luxass/typescript/rules",
       files,
       rules: {
         ...renameRules(
-          pluginTs.configs['eslint-recommended'].overrides![0].rules!,
-          '@typescript-eslint/',
-          'ts/',
+          pluginTs.configs["eslint-recommended"].overrides![0].rules!,
+          "@typescript-eslint/",
+          "ts/",
         ),
         ...renameRules(
           pluginTs.configs.strict.rules!,
-          '@typescript-eslint/',
-          'ts/',
+          "@typescript-eslint/",
+          "ts/",
         ),
-        'no-dupe-class-members': 'off',
-        'no-invalid-this': 'off',
-        'no-loss-of-precision': 'off',
-        'no-redeclare': 'off',
-        'no-use-before-define': 'off',
-        'no-useless-constructor': 'off',
-        'ts/ban-ts-comment': [
-          'error',
-          { 'ts-ignore': 'allow-with-description' },
+        "no-dupe-class-members": "off",
+        "no-invalid-this": "off",
+        "no-loss-of-precision": "off",
+        "no-redeclare": "off",
+        "no-use-before-define": "off",
+        "no-useless-constructor": "off",
+        "ts/ban-ts-comment": [
+          "error",
+          { "ts-ignore": "allow-with-description" },
         ],
-        'ts/ban-types': ['error', {
+        "ts/ban-types": ["error", {
           extendDefaults: false,
           types: {
             BigInt: {
-              fixWith: 'bigint',
-              message: 'Use `bigint` instead.',
+              fixWith: "bigint",
+              message: "Use `bigint` instead.",
             },
             Boolean: {
-              fixWith: 'boolean',
-              message: 'Use `boolean` instead.',
+              fixWith: "boolean",
+              message: "Use `boolean` instead.",
             },
             Function:
-              'Use a specific function type instead, like `() => void`.',
+              "Use a specific function type instead, like `() => void`.",
             Number: {
-              fixWith: 'number',
-              message: 'Use `number` instead.',
+              fixWith: "number",
+              message: "Use `number` instead.",
             },
             Object: {
-              fixWith: 'Record<string, unknown>',
+              fixWith: "Record<string, unknown>",
               message:
-                'The `Object` type is mostly the same as `unknown`. You probably want `Record<string, unknown>` instead. See https://github.com/typescript-eslint/typescript-eslint/pull/848',
+                "The `Object` type is mostly the same as `unknown`. You probably want `Record<string, unknown>` instead. See https://github.com/typescript-eslint/typescript-eslint/pull/848",
             },
             String: {
-              fixWith: 'string',
-              message: 'Use `string` instead.',
+              fixWith: "string",
+              message: "Use `string` instead.",
             },
             Symbol: {
-              fixWith: 'symbol',
-              message: 'Use `symbol` instead.',
+              fixWith: "symbol",
+              message: "Use `symbol` instead.",
             },
             object: {
-              fixWith: 'Record<string, unknown>',
+              fixWith: "Record<string, unknown>",
               message:
-                'The `object` type is hard to use. Use `Record<string, unknown>` instead. See: https://github.com/typescript-eslint/typescript-eslint/pull/848',
+                "The `object` type is hard to use. Use `Record<string, unknown>` instead. See: https://github.com/typescript-eslint/typescript-eslint/pull/848",
             },
           },
         }],
-        'ts/consistent-type-definitions': ['error', 'interface'],
-        'ts/consistent-type-imports': [
-          'error',
-          { disallowTypeAnnotations: false, prefer: 'type-imports' },
+        "ts/consistent-type-definitions": ["error", "interface"],
+        "ts/consistent-type-imports": [
+          "error",
+          { disallowTypeAnnotations: false, prefer: "type-imports" },
         ],
-        'ts/method-signature-style': ['error', 'property'], // https://www.totaltypescript.com/method-shorthand-syntax-considered-harmful
-        'ts/no-dupe-class-members': 'error',
-        'ts/no-dynamic-delete': 'off',
-        'ts/no-explicit-any': 'off',
-        'ts/no-extraneous-class': 'off',
-        'ts/no-import-type-side-effects': 'error',
-        'ts/no-invalid-this': 'error',
-        'ts/no-invalid-void-type': 'off',
-        'ts/no-loss-of-precision': 'error',
-        'ts/no-non-null-assertion': 'off',
-        'ts/no-redeclare': 'error',
-        'ts/no-require-imports': 'error',
-        'ts/no-unused-vars': 'off',
-        'ts/no-use-before-define': [
-          'error',
+        "ts/method-signature-style": ["error", "property"], // https://www.totaltypescript.com/method-shorthand-syntax-considered-harmful
+        "ts/no-dupe-class-members": "error",
+        "ts/no-dynamic-delete": "off",
+        "ts/no-explicit-any": "off",
+        "ts/no-extraneous-class": "off",
+        "ts/no-import-type-side-effects": "error",
+        "ts/no-invalid-this": "error",
+        "ts/no-invalid-void-type": "off",
+        "ts/no-loss-of-precision": "error",
+        "ts/no-non-null-assertion": "off",
+        "ts/no-redeclare": "error",
+        "ts/no-require-imports": "error",
+        "ts/no-unused-vars": "off",
+        "ts/no-use-before-define": [
+          "error",
           { classes: false, functions: false, variables: true },
         ],
-        'ts/no-useless-constructor': 'off',
-        'ts/prefer-ts-expect-error': 'error',
-        'ts/triple-slash-reference': 'off',
-        'ts/unified-signatures': 'off',
+        "ts/no-useless-constructor": "off",
+        "ts/prefer-ts-expect-error": "error",
+        "ts/triple-slash-reference": "off",
+        "ts/unified-signatures": "off",
 
         ...overrides,
       },
     },
     {
-      name: 'luxass/typescript/rules-type-aware',
+      name: "luxass/typescript/rules-type-aware",
       files: filesTypeAware,
       rules: {
         ...tsconfigPath ? typeAwareRules : {},
@@ -235,36 +235,36 @@ export async function typescript(
       },
     },
     {
-      name: 'luxass/typescript/disables/dts',
-      files: ['**/*.d.ts'],
+      name: "luxass/typescript/disables/dts",
+      files: ["**/*.d.ts"],
       rules: {
-        'eslint-comments/no-unlimited-disable': 'off',
-        'import/no-duplicates': 'off',
-        'no-restricted-syntax': 'off',
-        'unused-imports/no-unused-vars': 'off',
+        "eslint-comments/no-unlimited-disable": "off",
+        "import/no-duplicates": "off",
+        "no-restricted-syntax": "off",
+        "unused-imports/no-unused-vars": "off",
       },
     },
     {
-      name: 'luxass/typescript/disables/tests',
-      files: ['**/*.{test,spec}.ts?(x)'],
+      name: "luxass/typescript/disables/tests",
+      files: ["**/*.{test,spec}.ts?(x)"],
       rules: {
-        'no-unused-expressions': 'off',
+        "no-unused-expressions": "off",
       },
     },
     {
-      name: 'luxass/typescript/disables/playground',
+      name: "luxass/typescript/disables/playground",
       files: [`**/playground.${GLOB_SRC_EXT}`],
       rules: {
-        'no-console': 'off',
+        "no-console": "off",
       },
     },
     {
-      name: 'luxass/typescript/disables/javascript',
-      files: ['**/*.js', '**/*.cjs'],
+      name: "luxass/typescript/disables/javascript",
+      files: ["**/*.js", "**/*.cjs"],
       rules: {
-        'ts/no-require-imports': 'off',
-        'ts/no-var-requires': 'off',
+        "ts/no-require-imports": "off",
+        "ts/no-var-requires": "off",
       },
     },
-  ]
+  ];
 }

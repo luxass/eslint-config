@@ -1,6 +1,6 @@
-import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
-import type { Linter } from 'eslint'
-import type { ConfigNames, RuleOptions } from './typegen'
+import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
+import type { Linter } from "eslint";
+import type { ConfigNames, RuleOptions } from "./typegen";
 import type {
   AstroOptions,
   FormattersOptions,
@@ -16,25 +16,25 @@ import type {
   UnoCSSOptions,
   VueOptions,
   YAMLOptions,
-} from './configs'
+} from "./configs";
 
-export type Awaitable<T> = T | Promise<T>
+export type Awaitable<T> = T | Promise<T>;
 
-export type Rules = RuleOptions
+export type Rules = RuleOptions;
 
-export type { ConfigNames }
+export type { ConfigNames };
 
-export type TypedFlatConfigItem = Omit<Linter.FlatConfig<Linter.RulesRecord & Rules>, 'plugins'> & {
+export type TypedFlatConfigItem = Omit<Linter.FlatConfig<Linter.RulesRecord & Rules>, "plugins"> & {
   // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
   /**
    * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
    *
    * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
    */
-  plugins?: Record<string, any>
-}
+  plugins?: Record<string, any>;
+};
 
-export type UserConfigItem = TypedFlatConfigItem | Linter.FlatConfig
+export type UserConfigItem = TypedFlatConfigItem | Linter.FlatConfig;
 
 export interface ConfigOptions {
   /**
@@ -45,27 +45,27 @@ export interface ConfigOptions {
    * @see https://github.com/antfu/eslint-config-flat-gitignore
    * @default true
    */
-  gitignore?: FlatGitignoreOptions | boolean
+  gitignore?: FlatGitignoreOptions | boolean;
 
   /**
    * Control to disable some rules in editors.
    * @default auto-detect based on the process.env
    */
-  editor?: boolean
+  editor?: boolean;
 
   /**
    * JavaScript options
    *
    * NOTE: Can't be disabled.
    */
-  javascript?: JavaScriptOptions
+  javascript?: JavaScriptOptions;
 
   /**
    * Enable JSONC support.
    *
    * @default true
    */
-  jsonc?: boolean | JSONOptions
+  jsonc?: boolean | JSONOptions;
 
   /**
    * Enable JSX related rules.
@@ -74,7 +74,7 @@ export interface ConfigOptions {
    *
    * @default true
    */
-  jsx?: boolean
+  jsx?: boolean;
 
   /**
    * Enable linting for **code snippets** in Markdown.
@@ -83,7 +83,7 @@ export interface ConfigOptions {
    *
    * @default true
    */
-  markdown?: boolean
+  markdown?: boolean;
 
   /**
    * Enable react rules.
@@ -95,7 +95,7 @@ export interface ConfigOptions {
    *
    * @default false
    */
-  react?: boolean | ReactOptions
+  react?: boolean | ReactOptions;
 
   /**
    * Use external formatters to format files.
@@ -107,21 +107,21 @@ export interface ConfigOptions {
    *
    * @default false
    */
-  formatters?: boolean | FormattersOptions
+  formatters?: boolean | FormattersOptions;
 
   /**
    * Enable stylistic rules.
    *
    * @default true
    */
-  stylistic?: boolean | StylisticConfig
+  stylistic?: boolean | StylisticConfig;
 
   /**
    * Enable test support.
    *
    * @default true
    */
-  test?: boolean | TestOptions
+  test?: boolean | TestOptions;
 
   /**
    * Enable TypeScript support.
@@ -130,7 +130,7 @@ export interface ConfigOptions {
    *
    * @default auto-detect based on the dependencies
    */
-  typescript?: boolean | TypeScriptOptions
+  typescript?: boolean | TypeScriptOptions;
 
   /**
    * Enable UnoCSS support.
@@ -140,7 +140,7 @@ export interface ConfigOptions {
    *
    * @default false
    */
-  unocss?: boolean | UnoCSSOptions
+  unocss?: boolean | UnoCSSOptions;
 
   /**
    * Enable TailwindCSS support.
@@ -150,14 +150,14 @@ export interface ConfigOptions {
    *
    * @default false
    */
-  tailwindcss?: boolean | TailwindCSSOptions
+  tailwindcss?: boolean | TailwindCSSOptions;
 
   /**
    * Enable Vue support.
    *
    * @default auto-detect based on the dependencies
    */
-  vue?: boolean | VueOptions
+  vue?: boolean | VueOptions;
 
   /**
    * Enable Astro support.
@@ -170,21 +170,21 @@ export interface ConfigOptions {
    *
    * @default false
    */
-  astro?: boolean | AstroOptions
+  astro?: boolean | AstroOptions;
 
   /**
    * Enable YAML support.
    *
    * @default true
    */
-  yaml?: boolean | YAMLOptions
+  yaml?: boolean | YAMLOptions;
 
   /**
    * Enable TOML support.
    *
    * @default true
    */
-  toml?: boolean | TOMLOptions
+  toml?: boolean | TOMLOptions;
 
   /**
    * Additional extensions for components.
@@ -192,14 +192,14 @@ export interface ConfigOptions {
    * @example ["vue"]
    * @default []
    */
-  exts?: string[]
+  exts?: string[];
 
   /**
    * Automatically rename plugins in the config.
    *
    * @default true
    */
-  autoRenamePlugins?: boolean
+  autoRenamePlugins?: boolean;
 
   /**
    * Enable regexp rules.
@@ -207,5 +207,5 @@ export interface ConfigOptions {
    * @see https://ota-meshi.github.io/eslint-plugin-regexp/
    * @default true
    */
-  regexp?: boolean | RegExpOptions
+  regexp?: boolean | RegExpOptions;
 }

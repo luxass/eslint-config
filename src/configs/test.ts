@@ -1,6 +1,6 @@
-import type { TypedFlatConfigItem } from '../types'
-import { GLOB_TESTS } from '../globs'
-import { interop } from '../utils'
+import type { TypedFlatConfigItem } from "../types";
+import { GLOB_TESTS } from "../globs";
+import { interop } from "../utils";
 
 export interface TestOptions {
   /**
@@ -8,7 +8,7 @@ export interface TestOptions {
    *
    * @default false
    */
-  editor?: boolean
+  editor?: boolean;
 
   /**
    * Glob patterns for test files.
@@ -16,16 +16,16 @@ export interface TestOptions {
    * @default [GLOB_TESTS]
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
-  files?: string[]
+  files?: string[];
 
   /**
    * Override rules for for test files.
    */
-  overrides?: TypedFlatConfigItem['rules']
+  overrides?: TypedFlatConfigItem["rules"];
 }
 
 // Hold the reference so we don't redeclare the plugin on each call
-let _pluginTest: any
+let _pluginTest: any;
 
 export async function test(
   options: TestOptions = {},
@@ -34,41 +34,41 @@ export async function test(
     editor = false,
     files = GLOB_TESTS,
     overrides = {},
-  } = options
+  } = options;
 
   const [
     pluginVitest,
   ] = await Promise.all([
-    interop(import('eslint-plugin-vitest')),
-  ] as const)
+    interop(import("eslint-plugin-vitest")),
+  ] as const);
 
-  _pluginTest = _pluginTest || pluginVitest
+  _pluginTest = _pluginTest || pluginVitest;
 
   return [
     {
-      name: 'luxass/test/setup',
+      name: "luxass/test/setup",
       plugins: {
         test: _pluginTest,
       },
     },
     {
-      name: 'luxass/test/rules',
+      name: "luxass/test/rules",
       files,
       rules: {
-        'node/prefer-global/process': 'off',
+        "node/prefer-global/process": "off",
 
-        'test/consistent-test-it': [
-          'error',
-          { fn: 'it', withinDescribe: 'it' },
+        "test/consistent-test-it": [
+          "error",
+          { fn: "it", withinDescribe: "it" },
         ],
-        'test/no-identical-title': 'error',
-        'test/no-import-node-test': 'error',
-        'test/no-focused-tests': editor ? 'off' : 'error',
-        'test/prefer-hooks-in-order': 'error',
-        'test/prefer-lowercase-title': 'error',
+        "test/no-identical-title": "error",
+        "test/no-import-node-test": "error",
+        "test/no-focused-tests": editor ? "off" : "error",
+        "test/prefer-hooks-in-order": "error",
+        "test/prefer-lowercase-title": "error",
 
         ...overrides,
       },
     },
-  ]
+  ];
 }
