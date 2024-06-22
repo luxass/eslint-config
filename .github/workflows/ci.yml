@@ -1,34 +1,30 @@
 name: CI
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
+
   pull_request:
-    types:
-      - opened
-      - synchronize
+    branches:
+      - main
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18, 20]
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
 
-      - name: Setup node
+      - name: Set node
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: lts/*
 
-      - name: Install dependencies
-        run: pnpm install
+      - name: Install
+        run: pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm build
@@ -38,3 +34,32 @@ jobs:
 
       - name: Typecheck
         run: pnpm typecheck
+
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node: [lts/*]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set node ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Test
+        run: pnpm test
