@@ -19,6 +19,5 @@ apple.type = "fruit"
 orange.type = "fruit"
 apple.skin = "thin"
 orange.skin = "thick"
-
 apple.color = "red"
 orange.color = "orange"
