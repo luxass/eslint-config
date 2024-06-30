@@ -34,7 +34,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=20"
+    "node": ">=18"
   },
   "scripts": {
     "build": "pnpm typegen && tsup --format esm,cjs --clean --dts",
