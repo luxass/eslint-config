@@ -70,4 +70,4 @@ jobs:
 
       - name: Test on Windows
         if: matrix.os == 'windows-latest'
-        run: pnpm test toml
+        run: pnpm test toml -- --reporter=verbose
