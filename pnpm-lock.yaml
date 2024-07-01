@@ -90,8 +90,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       toml-eslint-parser:
-        specifier: ^0.9.3
-        version: 0.9.3
+        specifier: ^0.10.0
+        version: 0.10.0
       vue-eslint-parser:
         specifier: ^9.4.3
         version: 9.4.3(eslint-ts-patch@9.2.0-6)
@@ -2751,10 +2751,6 @@ packages:
 
   toml-eslint-parser@0.10.0:
     resolution: {integrity: sha512-khrZo4buq4qVmsGzS5yQjKe/WsFvV8fGfOjDQN0q4iy9FjRfPWRgTFrU8u1R2iu/SfWLhY9WnCi4Jhdrcbtg+g==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-
-  toml-eslint-parser@0.9.3:
-    resolution: {integrity: sha512-moYoCvkNUAPCxSW9jmHmRElhm4tVJpHL8ItC/+uYD0EpPSFXbck7yREz9tNdJVTSpHVod8+HoipcpbQ0oE6gsw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
   tr46@1.0.1:
@@ -5723,10 +5719,6 @@ snapshots:
       is-number: 7.0.0
 
   toml-eslint-parser@0.10.0:
-    dependencies:
-      eslint-visitor-keys: 3.4.3
-
-  toml-eslint-parser@0.9.3:
     dependencies:
       eslint-visitor-keys: 3.4.3
 
