@@ -79,7 +79,7 @@ importers:
         version: 0.1.2(@vue/compiler-sfc@3.4.27)(eslint-ts-patch@9.2.0-6)
       globals:
         specifier: ^15.4.0
-        version: 15.4.0
+        version: 15.6.0
       jsonc-eslint-parser:
         specifier: ^2.4.0
         version: 2.4.0
@@ -1888,8 +1888,8 @@ packages:
     resolution: {integrity: sha512-oahGvuMGQlPw/ivIYBjVSrWAfWLBeku5tpPE2fOPLi+WHffIWbuh2tCjhyQhTBPMf5E9jDEH4FOmTYgYwbKwtQ==}
     engines: {node: '>=18'}
 
-  globals@15.4.0:
-    resolution: {integrity: sha512-unnwvMZpv0eDUyjNyh9DH/yxUaRYrEjW/qK4QcdrHg3oO11igUQrCSgODHEqxlKg8v2CD2Sd7UkqqEBoz5U7TQ==}
+  globals@15.6.0:
+    resolution: {integrity: sha512-UzcJi88Hw//CurUIRa9Jxb0vgOCcuD/MNjwmXp633cyaRKkCWACkoqHCtfZv43b1kqXGg/fpOa8bwgacCeXsVg==}
     engines: {node: '>=18'}
 
   globby@11.1.0:
@@ -4385,7 +4385,7 @@ snapshots:
       astro-eslint-parser: 1.0.2(typescript@5.4.5)
       eslint: eslint-ts-patch@9.2.0-6
       eslint-compat-utils: 0.5.0(eslint-ts-patch@9.2.0-6)
-      globals: 15.4.0
+      globals: 15.6.0
       postcss: 8.4.38
       postcss-selector-parser: 6.1.0
     transitivePeerDependencies:
@@ -4467,7 +4467,7 @@ snapshots:
       eslint: eslint-ts-patch@9.2.0-6
       eslint-plugin-es-x: 7.7.0(eslint-ts-patch@9.2.0-6)
       get-tsconfig: 4.7.5
-      globals: 15.4.0
+      globals: 15.6.0
       ignore: 5.3.1
       minimatch: 9.0.5
       semver: 7.6.2
@@ -4880,7 +4880,7 @@ snapshots:
 
   globals@14.0.0: {}
 
-  globals@15.4.0: {}
+  globals@15.6.0: {}
 
   globby@11.1.0:
     dependencies:
