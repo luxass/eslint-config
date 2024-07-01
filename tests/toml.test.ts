@@ -74,7 +74,6 @@ describe("toml", async () => {
     const snapshotPath = await getSnapshotPath(baseUrl, "config.linted.toml", fixedResults.output);
 
     expect(fixedResults.messages).toEqual([]);
-    console.error(JSON.stringify(fixedResults.output));
     expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
   });
 
