@@ -169,7 +169,7 @@ importers:
         specifier: ^1.6.0
         version: 1.6.0(@types/node@20.14.9)
       vue:
-        specifier: ^3.4.30
+        specifier: ^3.4.31
         version: 3.4.31(typescript@5.5.2)
 
 packages:
