@@ -1,3 +1,3 @@
-import { it } from 'vitest'
+import { it } from "vitest";
 
-it('invalid', () => {})
+it("invalid", () => {});

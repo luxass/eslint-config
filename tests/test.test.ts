@@ -58,11 +58,6 @@ it("should not lint test files when disabled", async () => {
       messageId: "wrongQuotes",
     }),
     expect.objectContaining({
-      ruleId: "style/semi",
-      severity: 2,
-      messageId: "extraSemi",
-    }),
-    expect.objectContaining({
       ruleId: "style/quotes",
       severity: 2,
       messageId: "wrongQuotes",

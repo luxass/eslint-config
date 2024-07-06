@@ -1,5 +1,5 @@
-import { describe, it } from 'vitest'
+import { describe, it } from "vitest";
 
-it('it - only', () => {})
-it('test - only', () => {})
-describe('describe - only', () => {})
+it("it - only", () => {});
+it("test - only", () => {});
+describe("describe - only", () => {});
