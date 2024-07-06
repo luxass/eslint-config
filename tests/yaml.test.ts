@@ -45,7 +45,7 @@ describe("yaml", async () => {
       );
     });
 
-    const snapshotPath = await getSnapshotPath(baseUrl, "config.linted.yaml", fixedResults.output);
+    const [snapshotPath] = await getSnapshotPath(baseUrl, "config.linted.yaml", fixedResults.output);
 
     expect(fixedResults.messages).toEqual([]);
     expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
@@ -108,7 +108,7 @@ describe("yaml", async () => {
       );
     });
 
-    const snapshotPath = await getSnapshotPath(baseUrl, "config-without-stylistic.linted.yaml", fixedResults.output);
+    const [snapshotPath] = await getSnapshotPath(baseUrl, "config-without-stylistic.linted.yaml", fixedResults.output);
 
     expect(fixedResults.messages).toEqual([]);
     expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);

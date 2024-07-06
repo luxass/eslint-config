@@ -71,7 +71,7 @@ describe("toml", async () => {
       );
     });
 
-    const snapshotPath = await getSnapshotPath(baseUrl, "config.linted.toml", fixedResults.output);
+    const [snapshotPath] = await getSnapshotPath(baseUrl, "config.linted.toml", fixedResults.output);
 
     expect(fixedResults.messages).toEqual([]);
     expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
@@ -178,7 +178,7 @@ describe("toml", async () => {
       );
     });
 
-    const snapshotPath = await getSnapshotPath(baseUrl, "config-without-stylistic.linted.toml", fixedResults.output);
+    const [snapshotPath] = await getSnapshotPath(baseUrl, "config-without-stylistic.linted.toml", fixedResults.output);
 
     expect(fixedResults.messages).toEqual([]);
     expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
