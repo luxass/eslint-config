@@ -1,6 +1,6 @@
 <script setup>
 // Define reactive data and props
-import { ref } from "vue"
+import { ref } from "vue";
 
 const greeting = ref(`Hello, Vue 3!${1}`)
 const counter = ref(0)
