@@ -1,5 +1,10 @@
+// @ts-check
+import { tsImport } from "tsx/esm/api";
+
 import styleMigrate from "@stylistic/eslint-plugin-migrate";
-import { luxass } from "./src";
+
+/** @type {typeof import('./src/index.ts')} */
+const { luxass } = await tsImport("./src/index.ts", import.meta.url);
 
 export default luxass(
   {
