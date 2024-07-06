@@ -1,6 +1,6 @@
 pluginDir: ./plugins
 
-tt: "aa aaa :: "
+tt: 'aa aaa :: '
 
 server:
   port: 8080
