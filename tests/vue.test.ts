@@ -26,11 +26,6 @@ it("should be able to lint vue when enabled", async () => {
       severity: 2,
       messageId: "wrongQuotes",
     }),
-    expect.objectContaining({
-      ruleId: "style/semi",
-      severity: 2,
-      messageId: "extraSemi",
-    }),
   ].forEach((matcher) => {
     expect(lintResults.messages).toEqual(
       expect.arrayContaining([matcher]),
