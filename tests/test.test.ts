@@ -4,7 +4,7 @@ import { expect, it } from "vitest";
 import { createEslint } from "./utils/eslint";
 import { getSnapshotPath } from "./utils/snapshot";
 
-describe("test", async () => {
+describe("test config", async () => {
   const [linter, fixer] = await createEslint({
     test: true,
   });

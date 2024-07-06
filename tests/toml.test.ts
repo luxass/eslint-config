@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { createEslint } from "./utils/eslint";
 import { getSnapshotPath } from "./utils/snapshot";
 
-describe("toml", async () => {
+describe("toml config", async () => {
   const [linter, fixer] = await createEslint({
     toml: true,
   });
