@@ -130,7 +130,6 @@
     "@typescript-eslint/rule-tester": "^7.14.1",
     "@unocss/eslint-plugin": "^0.61.0",
     "astro-eslint-parser": "^1.0.2",
-    "bundle-require": "^4.0.2",
     "eslint": "npm:eslint-ts-patch@9.2.0-6",
     "eslint-plugin-astro": "^1.2.2",
     "eslint-plugin-format": "^0.1.2",
