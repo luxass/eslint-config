@@ -1,28 +1,26 @@
-import styleMigrate from '@stylistic/eslint-plugin-migrate'
-import { luxass } from './src'
+import styleMigrate from "@stylistic/eslint-plugin-migrate";
+import { luxass } from "./src";
 
 export default luxass(
   {
     vue: true,
     react: true,
-    solid: true,
-    svelte: true,
     astro: true,
     typescript: true,
     formatters: true,
   },
   {
     ignores: [
-      '**/fixtures',
+      "**/fixtures",
     ],
   },
   {
-    files: ['src/configs/*.ts'],
+    files: ["src/configs/*.ts"],
     plugins: {
-      'style-migrate': styleMigrate,
+      "style-migrate": styleMigrate,
     },
     rules: {
-      'style-migrate/migrate': ['error', { namespaceTo: 'style' }],
+      "style-migrate/migrate": ["error", { namespaceTo: "style" }],
     },
   },
-)
+);

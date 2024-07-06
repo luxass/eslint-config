@@ -1,66 +1,66 @@
-import pluginUnicorn from 'eslint-plugin-unicorn'
-import type { TypedFlatConfigItem } from '../types'
+import pluginUnicorn from "eslint-plugin-unicorn";
+import type { TypedFlatConfigItem } from "../types";
 
 export function unicorn(): TypedFlatConfigItem[] {
   return [
     {
-      name: 'luxass/unicorn',
+      name: "luxass/unicorn",
       plugins: {
         unicorn: pluginUnicorn,
       },
       rules: {
         // Pass error message when throwing errors
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/error-message.md
-        'unicorn/error-message': 'error',
+        "unicorn/error-message": "error",
 
         // Uppercase regex escapes
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/escape-case.md
-        'unicorn/escape-case': 'error',
+        "unicorn/escape-case": "error",
 
         // Array.isArray instead of instanceof
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-instanceof-array.md
-        'unicorn/no-instanceof-array': 'error',
+        "unicorn/no-instanceof-array": "error",
 
         // Ban `new Array` as `Array` constructor's params are ambiguous
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-new-array.md
-        'unicorn/no-new-array': 'error',
+        "unicorn/no-new-array": "error",
 
         // Prevent deprecated `new Buffer()`
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-new-buffer.md
-        'unicorn/no-new-buffer': 'error',
+        "unicorn/no-new-buffer": "error",
 
         // Lowercase number formatting for octal, hex, binary (0x1'error' instead of 0X1'error')
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/number-literal-case.md
-        'unicorn/number-literal-case': 'error',
+        "unicorn/number-literal-case": "error",
 
         // textContent instead of innerText
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-dom-node-text-content.md
-        'unicorn/prefer-dom-node-text-content': 'error',
+        "unicorn/prefer-dom-node-text-content": "error",
 
         // includes over indexOf when checking for existence
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-includes.md
-        'unicorn/prefer-includes': 'error',
+        "unicorn/prefer-includes": "error",
 
         // Prefer using the node: protocol
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-node-protocol.md
-        'unicorn/prefer-node-protocol': 'error',
+        "unicorn/prefer-node-protocol": "error",
 
         // Prefer using number properties like `Number.isNaN` rather than `isNaN`
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-number-properties.md
-        'unicorn/prefer-number-properties': 'error',
+        "unicorn/prefer-number-properties": "error",
 
         // String methods startsWith/endsWith instead of more complicated stuff
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-string-starts-ends-with.md
-        'unicorn/prefer-string-starts-ends-with': 'error',
+        "unicorn/prefer-string-starts-ends-with": "error",
 
         // Enforce throwing type error when throwing error while checking typeof
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-type-error.md
-        'unicorn/prefer-type-error': 'error',
+        "unicorn/prefer-type-error": "error",
 
         // Use new when throwing error
         // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/throw-new-error.md
-        'unicorn/throw-new-error': 'error',
+        "unicorn/throw-new-error": "error",
       },
     },
-  ]
+  ];
 }
