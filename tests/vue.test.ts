@@ -1,75 +1,75 @@
-import { fileURLToPath } from 'node:url'
-import { join } from 'node:path'
-import { createEslint } from './utils/eslint'
-import { getSnapshotPath } from './utils/snapshot'
+import { fileURLToPath } from "node:url";
+import { join } from "node:path";
+import { createEslint } from "./utils/eslint";
+import { getSnapshotPath } from "./utils/snapshot";
 
 const [linter, fixer] = await createEslint({
   vue: true,
-})
+});
 
 const baseUrl = fileURLToPath(
-  new URL('./fixtures/vue', import.meta.url),
-)
+  new URL("./fixtures/vue", import.meta.url),
+);
 
-it('should be able to lint vue when enabled', async () => {
+it("should be able to lint vue when enabled", async () => {
   const [
     [lintResults],
     [fixedResults],
   ] = await Promise.all([
-    linter.lintFiles(join(baseUrl, 'index-ts.vue')),
-    fixer.lintFiles(join(baseUrl, 'index-ts.vue')),
+    linter.lintFiles(join(baseUrl, "index-ts.vue")),
+    fixer.lintFiles(join(baseUrl, "index-ts.vue")),
   ]);
 
   [
     expect.objectContaining({
-      ruleId: 'style/quotes',
+      ruleId: "style/quotes",
       severity: 2,
-      messageId: 'wrongQuotes',
+      messageId: "wrongQuotes",
     }),
     expect.objectContaining({
-      ruleId: 'style/semi',
+      ruleId: "style/semi",
       severity: 2,
-      messageId: 'extraSemi',
+      messageId: "extraSemi",
     }),
   ].forEach((matcher) => {
     expect(lintResults.messages).toEqual(
       expect.arrayContaining([matcher]),
-    )
-  })
+    );
+  });
 
-  const [snapshotPath] = await getSnapshotPath(baseUrl, 'index-ts.linted.vue', fixedResults.output)
+  const [snapshotPath] = await getSnapshotPath(baseUrl, "index-ts.linted.vue", fixedResults.output);
 
-  expect(fixedResults.messages).toEqual([])
-  expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath)
-})
+  expect(fixedResults.messages).toEqual([]);
+  expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+});
 
-it('ignore vue files when disabled', async () => {
+it("ignore vue files when disabled", async () => {
   const [linter, fixer] = await createEslint({
     vue: false,
-  })
+  });
 
   const [
     [lintResults],
     [fixedResults],
   ] = await Promise.all([
-    linter.lintFiles(join(baseUrl, 'index-js.vue')),
-    fixer.lintFiles(join(baseUrl, 'index-js.vue')),
-  ])
+    linter.lintFiles(join(baseUrl, "index-js.vue")),
+    fixer.lintFiles(join(baseUrl, "index-js.vue")),
+  ]);
 
   expect(lintResults.messages).toEqual([
     expect.objectContaining({
       fatal: false,
       severity: 1,
     }),
-  ])
+  ]);
 
   expect(fixedResults.messages).toEqual([
     expect.objectContaining({
       fatal: false,
       severity: 1,
     }),
-  ])
+  ]);
 
-  const [snapshotPath, snapshotContent] = await getSnapshotPath(baseUrl, 'index-disabled.linted.vue', fixedResults.output)
-  expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath)
-})
+  const [snapshotPath, snapshotContent] = await getSnapshotPath(baseUrl, "index-disabled.linted.vue", fixedResults.output);
+  expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+});
