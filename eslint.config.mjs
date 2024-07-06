@@ -1,10 +1,12 @@
 // @ts-check
-import { tsImport } from "tsx/esm/api";
 
 import styleMigrate from "@stylistic/eslint-plugin-migrate";
+import JITI from "jiti";
+
+const jiti = JITI(import.meta.url);
 
 /** @type {typeof import('./src/index.ts')} */
-const { luxass } = await tsImport("./src/index.ts", import.meta.url);
+const { luxass } = jiti("./src/index.ts");
 
 export default luxass(
   {

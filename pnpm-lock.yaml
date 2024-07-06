@@ -147,6 +147,9 @@ importers:
       eslint-typegen:
         specifier: ^0.2.4
         version: 0.2.4(eslint@9.6.0)
+      jiti:
+        specifier: ^1.21.6
+        version: 1.21.6
       lint-staged:
         specifier: ^15.2.7
         version: 15.2.7
@@ -159,9 +162,6 @@ importers:
       tsup:
         specifier: ^8.1.0
         version: 8.1.0(postcss@8.4.39)(typescript@5.5.3)
-      tsx:
-        specifier: ^4.16.0
-        version: 4.16.2
       typescript:
         specifier: ^5.5.2
         version: 5.5.3
@@ -2426,11 +2426,6 @@ packages:
         optional: true
       typescript:
         optional: true
-
-  tsx@4.16.2:
-    resolution: {integrity: sha512-C1uWweJDgdtX2x600HjaFaucXTilT7tgUZHbOE4+ypskZ1OP8CRCSDkCxG6Vya9EwaFIVagWwpaVAn5wzypaqQ==}
-    engines: {node: '>=18.0.0'}
-    hasBin: true
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -5094,13 +5089,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - ts-node
-
-  tsx@4.16.2:
-    dependencies:
-      esbuild: 0.21.5
-      get-tsconfig: 4.7.5
-    optionalDependencies:
-      fsevents: 2.3.3
 
   type-check@0.4.0:
     dependencies:
