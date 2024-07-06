@@ -1,0 +1,15 @@
+{
+  "pluginDir": "./plugins",
+  "tt": "aa aaa :: ",
+  "server": {
+    "port": 8080,
+    "host": 51.1
+  },
+  "web": {
+    "enabled": true
+  },
+  "logging": {
+    "type": "stdout",
+    "level": "info"
+  }
+}

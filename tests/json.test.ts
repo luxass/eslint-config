@@ -13,39 +13,43 @@ describe("json config", async () => {
     new URL("./fixtures/json", import.meta.url),
   );
 
-  it("should work with json", async () => {
-    const [
-      [lintResults],
-      [fixedResults],
-    ] = await Promise.all([
-      linter.lintFiles(join(baseUrl, "config.json")),
-      fixer.lintFiles(join(baseUrl, "config.json")),
-    ]);
+  for (const file of ["config.json", "config.json5", "config.jsonc"]) {
+    it(`should work with \"${file}$\"`, async () => {
+      const [
+        [lintResults],
+        [fixedResults],
+      ] = await Promise.all([
+        linter.lintFiles(join(baseUrl, file)),
+        fixer.lintFiles(join(baseUrl, file)),
+      ]);
 
-    [
-      expect.objectContaining({
-        ruleId: "jsonc/indent",
-        severity: 2,
-        messageId: "wrongIndentation",
-      }),
-      expect.objectContaining(
-        {
-          ruleId: "jsonc/key-spacing",
+      [
+        expect.objectContaining({
+          ruleId: "jsonc/indent",
           severity: 2,
-          messageId: "extraValue",
-        },
-      ),
-    ].forEach((matcher) => {
-      expect(lintResults.messages).toEqual(
-        expect.arrayContaining([matcher]),
-      );
+          messageId: "wrongIndentation",
+        }),
+        expect.objectContaining(
+          {
+            ruleId: "jsonc/key-spacing",
+            severity: 2,
+            messageId: "extraValue",
+          },
+        ),
+      ].forEach((matcher) => {
+        expect(lintResults.messages).toEqual(
+          expect.arrayContaining([matcher]),
+        );
+      });
+
+      const fileExt = file.split(".").pop();
+
+      const [snapshotPath] = await getSnapshotPath(baseUrl, `config.linted.${fileExt}`, fixedResults.output);
+
+      expect(fixedResults.messages).toEqual([]);
+      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
     });
-
-    const [snapshotPath] = await getSnapshotPath(baseUrl, "config.linted.json", fixedResults.output);
-
-    expect(fixedResults.messages).toEqual([]);
-    expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
-  });
+  }
 
   it("should error on parser errors", async () => {
     const [lintResults] = await linter.lintFiles(join(baseUrl, "invalid.json"));
