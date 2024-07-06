@@ -126,9 +126,6 @@ importers:
       astro-eslint-parser:
         specifier: ^1.0.2
         version: 1.0.2(typescript@5.5.2)
-      bundle-require:
-        specifier: ^4.0.2
-        version: 4.2.1(esbuild@0.21.5)
       eslint:
         specifier: npm:eslint-ts-patch@9.2.0-6
         version: eslint-ts-patch@9.2.0-6
