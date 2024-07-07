@@ -235,9 +235,6 @@ describe("json config", async () => {
         }),
       ]);
 
-      // await writeFile("./before.json", JSON.stringify(lintResults.messages, null, 2));
-      // await writeFile("./after.json", JSON.stringify(fixedResults.messages, null, 2));
-
       expect(fixedResults.messages).toEqual([
         expect.objectContaining({
           ruleId: "jsonc/sort-keys",
