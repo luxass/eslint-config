@@ -19,7 +19,7 @@ export default luxass(
   },
   {
     ignores: [
-      // "**/fixtures",
+      "**/fixtures",
     ],
   },
   {
