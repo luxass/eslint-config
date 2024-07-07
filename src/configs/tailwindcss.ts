@@ -12,6 +12,11 @@ export interface TailwindCSSOptions {
   files?: string[];
 
   /**
+   * Path to the tailwindcss config file.
+   */
+  configPath?: string;
+
+  /**
    * Override rules for for files with tailwind classes.
    */
   overrides?: TypedFlatConfigItem["rules"];
@@ -21,6 +26,7 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Typ
   const {
     files = [GLOB_SRC],
     overrides,
+    configPath,
   } = options;
 
   await ensure([
@@ -35,7 +41,7 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Typ
 
   return [
     {
-      name: "luxass/tailwindcss/setup",
+      name: "luxass/tailwindcss",
       languageOptions: {
         parserOptions: {
           ecmaFeatures: {
@@ -43,12 +49,18 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Typ
           },
         },
       },
+      settings: {
+        ...(configPath != null
+          ? {
+              tailwindcss: {
+                config: configPath,
+              },
+            }
+          : {}),
+      },
       plugins: {
         tailwindcss: pluginTailwindCSS,
       },
-    },
-    {
-      name: "luxass/tailwindcss/rules",
       files,
       rules: {
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/classnames-order.md
