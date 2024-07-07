@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { createEslint } from "./utils/eslint";
 import { getSnapshotPath } from "./utils/snapshot";
 
-describe("toml", async () => {
+describe("toml config", async () => {
   const [linter, fixer] = await createEslint({
     toml: true,
   });
@@ -71,7 +71,7 @@ describe("toml", async () => {
       );
     });
 
-    const snapshotPath = await getSnapshotPath(baseUrl, "config.linted.toml", fixedResults.output);
+    const [snapshotPath] = await getSnapshotPath(baseUrl, "config.linted.toml", fixedResults.output);
 
     expect(fixedResults.messages).toEqual([]);
     expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
@@ -178,7 +178,7 @@ describe("toml", async () => {
       );
     });
 
-    const snapshotPath = await getSnapshotPath(baseUrl, "config-without-stylistic.linted.toml", fixedResults.output);
+    const [snapshotPath] = await getSnapshotPath(baseUrl, "config-without-stylistic.linted.toml", fixedResults.output);
 
     expect(fixedResults.messages).toEqual([]);
     expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);

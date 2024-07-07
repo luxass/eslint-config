@@ -1,17 +1,20 @@
 import { existsSync } from "node:fs";
 import { mkdir, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 
-export async function getSnapshotPath(base: string, path: string, snapshotContent?: string): Promise<string> {
-  if (!existsSync(join(base, ".linted"))) {
-    await mkdir(join(base, ".linted"));
+export async function getSnapshotPath(base: string, path: string, snapshotContent?: string): Promise<[path: string, content: string]> {
+  const snapshotPath = join(base, ".linted", path);
+  const directoryPath = dirname(snapshotPath);
+
+  if (!existsSync(directoryPath)) {
+    await mkdir(directoryPath, { recursive: true });
   }
 
-  const snapshotPath = join(base, ".linted", path);
+  const content = snapshotContent ?? "// unchanged";
 
   if (!existsSync(snapshotPath)) {
-    await writeFile(snapshotPath, snapshotContent ?? "// no content");
+    await writeFile(snapshotPath, snapshotContent ?? "// unchanged");
   }
 
-  return snapshotPath;
+  return [snapshotPath, content];
 }

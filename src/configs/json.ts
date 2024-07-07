@@ -34,6 +34,10 @@ export async function jsonc(
     stylistic = true,
   } = options;
 
+  const {
+    indent = 2,
+  } = typeof stylistic === "boolean" ? {} : stylistic;
+
   const [
     pluginJsonc,
     parserJsonc,
@@ -88,7 +92,7 @@ export async function jsonc(
               "jsonc/array-bracket-spacing": ["error", "never"],
               "jsonc/comma-dangle": ["error", "never"],
               "jsonc/comma-style": ["error", "last"],
-              "jsonc/indent": ["error", 2],
+              "jsonc/indent": ["error", indent],
               "jsonc/key-spacing": [
                 "error",
                 { afterColon: true, beforeColon: false },

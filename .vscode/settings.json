@@ -1,7 +1,4 @@
 {
-  // will ensure that eslint can use the experimental flat config
-  "eslint.experimental.useFlatConfig": true,
-
   // disable the default formatter
   "prettier.enable": false,
   "editor.formatOnSave": false,

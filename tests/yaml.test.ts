@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { createEslint } from "./utils/eslint";
 import { getSnapshotPath } from "./utils/snapshot";
 
-describe("yaml", async () => {
+describe("yaml config", async () => {
   const [linter, fixer] = await createEslint({
     typescript: true,
     yaml: true,
@@ -45,7 +45,7 @@ describe("yaml", async () => {
       );
     });
 
-    const snapshotPath = await getSnapshotPath(baseUrl, "config.linted.yaml", fixedResults.output);
+    const [snapshotPath] = await getSnapshotPath(baseUrl, "config.linted.yaml", fixedResults.output);
 
     expect(fixedResults.messages).toEqual([]);
     expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
@@ -108,7 +108,7 @@ describe("yaml", async () => {
       );
     });
 
-    const snapshotPath = await getSnapshotPath(baseUrl, "config-without-stylistic.linted.yaml", fixedResults.output);
+    const [snapshotPath] = await getSnapshotPath(baseUrl, "config-without-stylistic.linted.yaml", fixedResults.output);
 
     expect(fixedResults.messages).toEqual([]);
     expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);

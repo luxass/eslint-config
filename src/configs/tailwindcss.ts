@@ -1,16 +1,7 @@
-import { GLOB_SRC } from "../globs";
 import type { TypedFlatConfigItem } from "../types";
 import { ensure, interop } from "../utils";
 
 export interface TailwindCSSOptions {
-  /**
-   * Glob patterns for files that includes tailwind classes.
-   *
-   * @default [GLOB_SRC]
-   * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
-   */
-  files?: string[];
-
   /**
    * Path to the tailwindcss config file.
    */
@@ -24,7 +15,6 @@ export interface TailwindCSSOptions {
 
 export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
-    files = [GLOB_SRC],
     overrides,
     configPath,
   } = options;
@@ -61,7 +51,6 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Typ
       plugins: {
         tailwindcss: pluginTailwindCSS,
       },
-      files,
       rules: {
         // https://github.com/francoismassart/eslint-plugin-tailwindcss/blob/master/docs/rules/classnames-order.md
         "tailwindcss/classnames-order": "warn",
