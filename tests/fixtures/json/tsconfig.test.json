@@ -1,0 +1,45 @@
+{
+  "exclude": [],
+  "compilerOptions": {
+    "strict": true,
+    "moduleResolution": "node",
+    "allowJs": true,
+    "target": "es2020",
+    "noEmit": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "declaration": true,
+    "declarationMap": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "incremental": true,
+    "composite": true,
+    "jsx": "react",
+    "lib": ["es2020", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["node", "jest"],
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "extends": "./tsconfig.base.json",
+  "references": [
+    { "path": "./tsconfig.node.json" }
+  ],
+  "files": ["global.d.ts"]
+}
