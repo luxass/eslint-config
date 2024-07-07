@@ -1,10 +1,11 @@
 // This file is for testing
 
-import { defineConfig, presetUno } from "unocss";
+import { defineConfig, presetUno, presetAttributify } from "unocss";
 
 export default defineConfig({
   presets: [
     presetUno(),
+    presetAttributify()
   ],
   blocklist: [
     "border",
