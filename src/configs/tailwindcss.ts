@@ -1,4 +1,3 @@
-import { GLOB_SRC } from "../globs";
 import type { TypedFlatConfigItem } from "../types";
 import { ensure, interop } from "../utils";
 
