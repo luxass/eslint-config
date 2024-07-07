@@ -17,6 +17,11 @@ export interface UnoCSSOptions {
   attributify?: boolean;
 
   /**
+   * Path to the unocss config file.
+   */
+  configPath?: string;
+
+  /**
    * Override rules for for files with unocss classes.
    */
   overrides?: TypedFlatConfigItem["rules"];
@@ -27,6 +32,7 @@ export async function unocss(options: UnoCSSOptions = {}): Promise<TypedFlatConf
     attributify = true,
     overrides,
     strict = false,
+    configPath,
   } = options;
 
   await ensure([
@@ -44,6 +50,15 @@ export async function unocss(options: UnoCSSOptions = {}): Promise<TypedFlatConf
       name: "luxass/unocss",
       plugins: {
         unocss: pluginUnoCSS,
+      },
+      settings: {
+        ...(configPath != null
+          ? {
+              unocss: {
+                configPath,
+              },
+            }
+          : {}),
       },
       rules: {
         "unocss/order": "warn",
