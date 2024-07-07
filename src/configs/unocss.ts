@@ -1,4 +1,3 @@
-import { GLOB_SRC } from "../globs";
 import type { TypedFlatConfigItem } from "../types";
 import { ensure, interop } from "../utils";
 
@@ -18,14 +17,6 @@ export interface UnoCSSOptions {
   attributify?: boolean;
 
   /**
-   * Glob patterns for files that includes unocss classes.
-   *
-   * @default [GLOB_SRC]
-   * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
-   */
-  files?: string[];
-
-  /**
    * Override rules for for files with unocss classes.
    */
   overrides?: TypedFlatConfigItem["rules"];
@@ -34,7 +25,6 @@ export interface UnoCSSOptions {
 export async function unocss(options: UnoCSSOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
     attributify = true,
-    files = [GLOB_SRC],
     overrides,
     strict = false,
   } = options;
@@ -51,14 +41,10 @@ export async function unocss(options: UnoCSSOptions = {}): Promise<TypedFlatConf
 
   return [
     {
-      name: "luxass/unocss/setup",
+      name: "luxass/unocss",
       plugins: {
         unocss: pluginUnoCSS,
       },
-    },
-    {
-      name: "luxass/unocss/rules",
-      files,
       rules: {
         "unocss/order": "warn",
         ...(attributify
