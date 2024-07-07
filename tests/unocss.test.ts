@@ -71,17 +71,24 @@ describe("unocss config", async () => {
         [lintResults],
         [fixedResults],
       ] = await Promise.all([
-        linter.lintFiles(join(baseUrl, "invalid-order.vue")),
-        fixer.lintFiles(join(baseUrl, "invalid-order.vue")),
+        linter.lintFiles(join(baseUrl, "blocklist.vue")),
+        fixer.lintFiles(join(baseUrl, "blocklist.vue")),
       ]);
 
       [
         expect.objectContaining({
-          ruleId: "unocss/order",
-          severity: 1,
-          messageId: "invalid-order",
-          message: "UnoCSS utilities are not ordered",
+          ruleId: "unocss/blocklist",
+          severity: 2,
+          message: "\"border\" is in blocklist",
           nodeType: "VLiteral",
+          messageId: "in-blocklist",
+        }),
+        expect.objectContaining({
+          ruleId: "unocss/blocklist",
+          severity: 2,
+          message: "\"bg-red-500\" is in blocklist: Use bg-red-600 instead",
+          nodeType: "VLiteral",
+          messageId: "in-blocklist",
         }),
       ].forEach((matcher) => {
         expect(lintResults.messages).toEqual(
@@ -89,10 +96,25 @@ describe("unocss config", async () => {
         );
       });
 
-      const [snapshotPath] = await getSnapshotPath(baseUrl, "invalid-order.linted.vue", fixedResults.output);
+      const [snapshotPath, snapshotContent] = await getSnapshotPath(baseUrl, "blocklist.linted.vue", fixedResults.output);
 
-      expect(fixedResults.messages).toEqual([]);
-      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+      expect(fixedResults.messages).toEqual([
+        expect.objectContaining({
+          ruleId: "unocss/blocklist",
+          severity: 2,
+          message: "\"border\" is in blocklist",
+          nodeType: "VLiteral",
+          messageId: "in-blocklist",
+        }),
+        expect.objectContaining({
+          ruleId: "unocss/blocklist",
+          severity: 2,
+          message: "\"bg-red-500\" is in blocklist: Use bg-red-600 instead",
+          nodeType: "VLiteral",
+          messageId: "in-blocklist",
+        }),
+      ]);
+      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
 
     it("should not use unocss plugin when disabled", async () => {
@@ -101,7 +123,7 @@ describe("unocss config", async () => {
         unocss: false,
       });
 
-      const [lintResults] = await linter.lintFiles(join(baseUrl, "invalid-order.vue"));
+      const [lintResults] = await linter.lintFiles(join(baseUrl, "blocklist.vue"));
       expect(lintResults.messages).toEqual([]);
     });
   });
