@@ -15,10 +15,11 @@ export default luxass(
     astro: true,
     typescript: true,
     formatters: true,
+    unocss: true,
   },
   {
     ignores: [
-      "**/fixtures",
+      // "**/fixtures",
     ],
   },
   {
