@@ -115,7 +115,7 @@ importers:
         specifier: ^1.0.5
         version: 1.0.5
       '@types/node':
-        specifier: ^20.14.9
+        specifier: ^20.14.10
         version: 20.14.10
       '@typescript-eslint/rule-tester':
         specifier: ^7.15.0
@@ -177,15 +177,6 @@ importers:
       vue:
         specifier: ^3.4.31
         version: 3.4.31(typescript@5.5.3)
-
-  tests:
-    dependencies:
-      '@unocss/preset-attributify':
-        specifier: ^0.61.3
-        version: 0.61.3
-      unocss:
-        specifier: ^0.61.3
-        version: 0.61.3(postcss@8.4.39)(rollup@4.18.0)(vite@5.3.3(@types/node@20.14.10))
 
 packages:
 
