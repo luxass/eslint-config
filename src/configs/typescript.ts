@@ -156,13 +156,16 @@ export async function typescript(
         ),
         "no-dupe-class-members": "off",
         "no-invalid-this": "off",
-        "no-loss-of-precision": "off",
+        "no-loss-of-precision": "error",
         "no-redeclare": "off",
         "no-use-before-define": "off",
         "no-useless-constructor": "off",
         "ts/ban-ts-comment": [
           "error",
-          { "ts-ignore": "allow-with-description" },
+          {
+            "ts-ignore": "allow-with-description",
+            "ts-expect-error": "allow-with-description",
+          },
         ],
         "ts/consistent-type-definitions": ["error", "interface"],
         "ts/consistent-type-imports": [
@@ -178,7 +181,6 @@ export async function typescript(
         "ts/no-import-type-side-effects": "error",
         "ts/no-invalid-this": "error",
         "ts/no-invalid-void-type": "off",
-        "ts/no-loss-of-precision": "error",
         "ts/no-non-null-assertion": "off",
         "ts/no-redeclare": "error",
         "ts/no-require-imports": "error",
@@ -189,7 +191,6 @@ export async function typescript(
         ],
         "ts/no-useless-constructor": "off",
         "ts/no-wrapper-object-types": "error",
-        "ts/prefer-ts-expect-error": "error",
         "ts/triple-slash-reference": "off",
         "ts/unified-signatures": "off",
 
