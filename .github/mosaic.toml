@@ -1,0 +1,20 @@
+# this file is used to generate a list of projects that
+# should be showcases on my website.
+
+# read more here: https://mosaic.luxass.dev
+# schema can be found here: https://mosaic.luxass.dev/json-schema.json
+
+[project]
+name = "eslint-config"
+priority = 10
+version = true
+
+[npm]
+enabled = true
+downloads = true
+
+[readme]
+enabled = true
+
+[website]
+enabled = true
