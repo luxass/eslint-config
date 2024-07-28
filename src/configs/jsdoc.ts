@@ -24,7 +24,7 @@ export async function jsdoc(options: JSDOCOptions = {}): Promise<TypedFlatConfig
 
   return [
     {
-      name: "luxass/jsdoc",
+      name: "luxass/jsdoc/rules",
       plugins: {
         jsdoc: await interop(import("eslint-plugin-jsdoc")),
       },
