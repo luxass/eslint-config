@@ -88,9 +88,6 @@ Install [ESLint extension](https://marketplace.visualstudio.com/items?itemName=d
 ```jsonc
 // .vscode/settings.json
 {
-  // will ensure that eslint can use the experimental flat config
-  "eslint.experimental.useFlatConfig": true,
-
   // disable the default formatter
   "prettier.enable": false,
   "editor.formatOnSave": false,
@@ -103,15 +100,16 @@ Install [ESLint extension](https://marketplace.visualstudio.com/items?itemName=d
 
   // silent the stylistic rules in you IDE, but still auto fix them
   "eslint.rules.customizations": [
-    { "rule": "style/*", "severity": "off" },
-    { "rule": "*-indent", "severity": "off" },
-    { "rule": "*-spacing", "severity": "off" },
-    { "rule": "*-spaces", "severity": "off" },
-    { "rule": "*-order", "severity": "off" },
-    { "rule": "*-dangle", "severity": "off" },
-    { "rule": "*-newline", "severity": "off" },
-    { "rule": "*quotes", "severity": "off" },
-    { "rule": "*semi", "severity": "off" }
+    { "rule": "style/*", "severity": "off", "fixable": true },
+    { "rule": "format/*", "severity": "off", "fixable": true },
+    { "rule": "*-indent", "severity": "off", "fixable": true },
+    { "rule": "*-spacing", "severity": "off", "fixable": true },
+    { "rule": "*-spaces", "severity": "off", "fixable": true },
+    { "rule": "*-order", "severity": "off", "fixable": true },
+    { "rule": "*-dangle", "severity": "off", "fixable": true },
+    { "rule": "*-newline", "severity": "off", "fixable": true },
+    { "rule": "*quotes", "severity": "off", "fixable": true },
+    { "rule": "*semi", "severity": "off", "fixable": true }
   ],
 
   // The following is optional.
@@ -134,6 +132,9 @@ Install [ESLint extension](https://marketplace.visualstudio.com/items?itemName=d
     "graphql",
     "astro",
     "css",
+    "less",
+    "scss",
+    "pcss",
     "postcss"
   ]
 }
