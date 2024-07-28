@@ -1,5 +1,7 @@
 import globals from "globals";
-import pluginUnusedImports from "eslint-plugin-unused-imports";
+// import pluginUnusedImports from "eslint-plugin-unused-imports";
+// eslint-disable-next-line import/no-named-default
+import { default as pluginUnusedImports } from "eslint-plugin-unused-imports";
 import pluginAntfu from "eslint-plugin-antfu";
 import type { TypedFlatConfigItem } from "../types";
 import { GLOB_SRC, GLOB_SRC_EXT } from "../globs";
