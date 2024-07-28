@@ -39,14 +39,14 @@ export async function combine(...configs: Awaitable<TypedFlatConfigItem | TypedF
  *
  * @example
  * ```ts
- * import { renameRules } from '@luxass/eslint-config'
+ * import { renameRules } from "@luxass/eslint-config";
  *
  * export default [{
  *   rules: renameRules(
  *     {
- *       '@typescript-eslint/indent': 'error'
+ *       "@typescript-eslint/indent": "error"
  *     },
- *     { '@typescript-eslint': 'ts' }
+ *     { "@typescript-eslint": "ts" }
  *   )
  * }]
  * ```
@@ -73,12 +73,12 @@ export function renameRules(
  *
  * @example
  * ```ts
- * import { renamePluginInConfigs } from '@antfu/eslint-config'
- * import someConfigs from './some-configs'
+ * import { renamePluginInConfigs } from "@luxass/eslint-config";
+ * import someConfigs from "./some-configs";
  *
  * export default renamePluginInConfigs(someConfigs, {
- *   '@typescript-eslint': 'ts',
- *   'import-x': 'import',
+ *   "@typescript-eslint": "ts",
+ *   "import-x": "import",
  * })
  * ```
  */
@@ -106,15 +106,60 @@ export function renamePluginInConfigs(
   });
 }
 
+/**
+ * Convert a value to an array.
+ * If the value is an array, return it as is.
+ * Otherwise, return the value as the only element in an array.
+ *
+ * @param {T | T[]} value - Value to convert to an array.
+ * @returns {T[]} - The value as an array.
+ *
+ * @example
+ * ```ts
+ * import { toArray } from "@luxass/eslint-config";
+ *
+ * toArray("foo") // ["foo"]
+ * toArray(["foo"]) // ["foo"]
+ * ```
+ */
 export function toArray<T>(value: T | T[]): T[] {
   return Array.isArray(value) ? value : [value];
 }
 
+/**
+ * Import a module and return the default export.
+ * If the module does not have a default export, return the module itself.
+ *
+ * @param {Promise<T>} m - Module to import.
+ * @returns {Promise<T extends { default: infer U } ? U : T>} - The default export or the module itself.
+ * @template T
+ *
+ * @example
+ * ```ts
+ * import { interop } from "@luxass/eslint-config";
+ *
+ * const module = await interop(import("module"));
+ * ```
+ */
 export async function interop<T>(m: Awaitable<T>): Promise<T extends { default: infer U } ? U : T> {
   const resolved = await m;
   return (resolved as any).default || resolved;
 }
 
+/**
+ * Ensure that packages are installed.
+ * If the packages are not installed, prompt the user to install them.
+ *
+ * @param {string[]} packages - Packages to ensure are installed.
+ * @returns {Promise<void>} - A promise that resolves when the packages are installed.
+ *
+ * @example
+ * ```ts
+ * import { ensure } from "@luxass/eslint-config";
+ *
+ * await ensure(["eslint-plugin-jsdoc"]);
+ * ```
+ */
 export async function ensure(packages: (string | undefined)[]): Promise<void> {
   if (process.env.CI || process.stdout.isTTY === false) {
     return;
@@ -139,6 +184,27 @@ export type ResolvedOptions<T> = T extends boolean
   ? never
   : NonNullable<T>;
 
+/**
+ * Resolve sub-options from a config options object.
+ *
+ * @param {ConfigOptions} options - The config options object.
+ * @template K - The key of the sub-options to resolve.
+ * @param {K} key - The key of the sub-options to resolve.
+ * @returns {ResolvedOptions<ConfigOptions[K]>} - The resolved sub-options.
+ *
+ * @example
+ * ```ts
+ * import { resolveSubOptions } from "@luxass/eslint-config";
+ *
+ * const options = {
+ *   foo: {
+ *     bar: true,
+ *   },
+ * };
+ *
+ * const subOptions = resolveSubOptions(options, "foo");
+ * ```
+ */
 export function resolveSubOptions<K extends keyof ConfigOptions>(
   options: ConfigOptions,
   key: K,
@@ -148,6 +214,28 @@ export function resolveSubOptions<K extends keyof ConfigOptions>(
     : options[key] || {};
 }
 
+/**
+ * Get overrides from a config options object.
+ * @param {ConfigOptions} options The config options object.
+ * @template K The key of the sub-options to resolve.
+ * @param {K} key The key of the sub-options to resolve.
+ * @returns {Partial<Linter.RulesRecord & RuleOptions>} The overrides.
+ *
+ * @example
+ * ```ts
+ * import { getOverrides } from "@luxass/eslint-config";
+ *
+ * const options = {
+ *   overrides: {
+ *     rules: {
+ *       "no-console": "off",
+ *     },
+ *   },
+ * };
+ *
+ * const overrides = getOverrides(options, "overrides");
+ * ```
+ */
 export function getOverrides<K extends keyof ConfigOptions>(
   options: ConfigOptions,
   key: K,
