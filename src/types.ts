@@ -34,9 +34,18 @@ export type TypedFlatConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>
   plugins?: Record<string, any>;
 };
 
-export type UserConfigItem = TypedFlatConfigItem | Linter.FlatConfig;
+export type UserConfigItem = TypedFlatConfigItem | Linter.Config;
+
+export type ProjectType = "app" | "lib";
 
 export interface ConfigOptions {
+  /**
+   * Type of the project. `lib` will enable more strict rules for libraries.
+   *
+   * @default "app"
+   */
+  type?: ProjectType;
+
   /**
    * Enable gitignore support.
    *
