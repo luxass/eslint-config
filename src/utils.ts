@@ -1,6 +1,8 @@
 import process from "node:process";
 import { isPackageExists } from "local-pkg";
+import type { Linter } from "eslint";
 import type { Awaitable, ConfigOptions, TypedFlatConfigItem } from "./types";
+import type { RuleOptions } from "./typegen";
 
 export const parserPlain = {
   meta: {
@@ -31,16 +33,77 @@ export async function combine(...configs: Awaitable<TypedFlatConfigItem | TypedF
   return resolved.flat();
 }
 
-export function renameRules(rules: Record<string, any>, from: string, to: string) {
+/**
+ * Rename plugin prefixes in a rule object.
+ * Accepts a map of prefixes to rename.
+ *
+ * @example
+ * ```ts
+ * import { renameRules } from '@luxass/eslint-config'
+ *
+ * export default [{
+ *   rules: renameRules(
+ *     {
+ *       '@typescript-eslint/indent': 'error'
+ *     },
+ *     { '@typescript-eslint': 'ts' }
+ *   )
+ * }]
+ * ```
+ */
+export function renameRules(
+  rules: Record<string, any>,
+  map: Record<string, string>,
+): Record<string, any> {
   return Object.fromEntries(
     Object.entries(rules)
       .map(([key, value]) => {
-        if (key.startsWith(from)) {
-          return [to + key.slice(from.length), value];
+        for (const [from, to] of Object.entries(map)) {
+          if (key.startsWith(`${from}/`)) {
+            return [to + key.slice(from.length), value];
+          }
         }
         return [key, value];
       }),
   );
+}
+
+/**
+ * Rename plugin names a flat configs array
+ *
+ * @example
+ * ```ts
+ * import { renamePluginInConfigs } from '@antfu/eslint-config'
+ * import someConfigs from './some-configs'
+ *
+ * export default renamePluginInConfigs(someConfigs, {
+ *   '@typescript-eslint': 'ts',
+ *   'import-x': 'import',
+ * })
+ * ```
+ */
+export function renamePluginInConfigs(
+  configs: TypedFlatConfigItem[],
+  map: Record<string, string>,
+): TypedFlatConfigItem[] {
+  return configs.map((i) => {
+    const clone = { ...i };
+    if (clone.rules) {
+      clone.rules = renameRules(clone.rules, map);
+    }
+    if (clone.plugins) {
+      clone.plugins = Object.fromEntries(
+        Object.entries(clone.plugins)
+          .map(([key, value]) => {
+            if (key in map) {
+              return [map[key], value];
+            }
+            return [key, value];
+          }),
+      );
+    }
+    return clone;
+  });
 }
 
 export function toArray<T>(value: T | T[]): T[] {
@@ -52,7 +115,7 @@ export async function interop<T>(m: Awaitable<T>): Promise<T extends { default: 
   return (resolved as any).default || resolved;
 }
 
-export async function ensure(packages: (string | undefined)[]) {
+export async function ensure(packages: (string | undefined)[]): Promise<void> {
   if (process.env.CI || process.stdout.isTTY === false) {
     return;
   };
@@ -88,7 +151,7 @@ export function resolveSubOptions<K extends keyof ConfigOptions>(
 export function getOverrides<K extends keyof ConfigOptions>(
   options: ConfigOptions,
   key: K,
-) {
+): Partial<Linter.RulesRecord & RuleOptions> {
   const sub = resolveSubOptions(options, key);
   return {
     ..."overrides" in sub
