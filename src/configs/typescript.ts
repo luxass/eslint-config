@@ -5,8 +5,8 @@ import type {
   ProjectType,
   TypedFlatConfigItem,
 } from "../types";
-import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_SRC, GLOB_SRC_EXT, GLOB_TS, GLOB_TSX } from "../globs";
-import { interop, renameRules, toArray } from "../utils";
+import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from "../globs";
+import { interop, renameRules } from "../utils";
 
 export interface TypeScriptOptions {
   /**
