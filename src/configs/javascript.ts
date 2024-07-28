@@ -20,11 +20,14 @@ export interface JavaScriptOptions {
 export async function javascript(
   options: JavaScriptOptions = {},
 ): Promise<TypedFlatConfigItem[]> {
-  const { editor = false, overrides = {} } = options;
+  const {
+    editor = false,
+    overrides = {},
+  } = options;
 
   return [
     {
-      name: "luxass/javascript",
+      name: "luxass/javascript/setup",
       languageOptions: {
         ecmaVersion: 2022,
         globals: {
@@ -47,6 +50,9 @@ export async function javascript(
       linterOptions: {
         reportUnusedDisableDirectives: true,
       },
+    },
+    {
+      name: "luxass/javascript/rules",
       plugins: {
         "antfu": pluginAntfu,
         "unused-imports": pluginUnusedImports,
