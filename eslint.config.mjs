@@ -16,6 +16,7 @@ export default luxass(
     typescript: true,
     formatters: true,
     unocss: true,
+    type: "lib",
   },
   {
     ignores: [
