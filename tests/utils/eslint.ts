@@ -5,7 +5,7 @@ import luxass, { type Awaitable, type ConfigNames, type ConfigOptions, type Type
 
 export async function createEslint(
   options: ConfigOptions & TypedFlatConfigItem = {},
-  ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, ConfigNames> | Linter.FlatConfig[]>[]
+  ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, ConfigNames> | Linter.Config[]>[]
 ): Promise<[normal: eslintApi.FlatESLint, fixer: eslintApi.FlatESLint]> {
   // disable editor detection to prevent flaky tests,
   // but only if not explicitly set

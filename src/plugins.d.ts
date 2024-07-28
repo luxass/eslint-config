@@ -88,7 +88,7 @@ declare module "eslint/use-at-your-own-risk" {
     globInputPaths?: boolean;
     ignore?: boolean;
     ignorePatterns?: string[];
-    overrideConfig?: Linter.FlatConfig[];
+    overrideConfig?: Linter.Config[];
     overrideConfigFile?: boolean | string;
     plugins?: Record<string, Plugin>;
     reportUnusedDisableDirectives?: "error" | "warn" | "off";
