@@ -96,6 +96,7 @@ export function luxass(
     unocss: enableUnoCSS = false,
     tailwindcss: enableTailwindCSS = false,
     vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
+    type: projectType = "app",
   } = options;
 
   const stylisticOptions
@@ -155,6 +156,7 @@ export function luxass(
       ...typescriptOptions,
       exts,
       overrides: getOverrides(options, "typescript"),
+      type: projectType,
     }));
   }
 
