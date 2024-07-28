@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/luxass/eslint-config.git"
+    "url": "git+https://github.com/luxass/eslint-config.git"
   },
   "keywords": [
     "eslint",
