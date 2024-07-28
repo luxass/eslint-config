@@ -2,9 +2,10 @@ import process from "node:process";
 import type { ParserOptions } from "@typescript-eslint/parser";
 import pluginAntfu from "eslint-plugin-antfu";
 import type {
+  ProjectType,
   TypedFlatConfigItem,
 } from "../types";
-import { GLOB_SRC, GLOB_SRC_EXT, GLOB_TS, GLOB_TSX } from "../globs";
+import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_SRC, GLOB_SRC_EXT, GLOB_TS, GLOB_TSX } from "../globs";
 import { interop, renameRules, toArray } from "../utils";
 
 export interface TypeScriptOptions {
@@ -37,15 +38,29 @@ export interface TypeScriptOptions {
 
   /**
    * Glob patterns for files that should be type aware.
-   * @default  [GLOB_SRC]
+   * @default ['**\/*.{ts,tsx}']
    */
-  typeAwareFileS?: string[];
+  filesTypeAware?: string[];
+
+  /**
+   * Glob patterns for files that should not be type aware.
+   * @default ['**\/*.md\/**', '**\/*.astro/*.ts']
+   */
+  ignoresTypeAware?: string[];
 
   /**
    * Overrides for the config.
    */
   overrides?: TypedFlatConfigItem["rules"];
+
+  /**
+   * Type of the project. `lib` will enable more strict rules for libraries.
+   *
+   * @default "app"
+   */
+  type?: ProjectType;
 }
+
 export async function typescript(
   options: TypeScriptOptions = {},
 ): Promise<TypedFlatConfigItem[]> {
@@ -53,19 +68,24 @@ export async function typescript(
     exts = [],
     overrides = {},
     parserOptions = {},
+    type = "app",
   } = options ?? {};
 
   const files = options.files ?? [
-    GLOB_SRC,
+    GLOB_TS,
+    GLOB_TSX,
     ...exts.map((ext) => `**/*.${ext}`),
   ];
 
-  const filesTypeAware = options.typeAwareFileS ?? [GLOB_TS, GLOB_TSX];
+  const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
+  const ignoresTypeAware = options.ignoresTypeAware ?? [
+    `${GLOB_MARKDOWN}/**`,
+    GLOB_ASTRO_TS,
+  ];
 
   const tsconfigPath = options?.tsconfigPath
-    ? toArray(options.tsconfigPath)
+    ? options.tsconfigPath
     : undefined;
-
   const isTypeAware = !!tsconfigPath;
 
   const typeAwareRules: TypedFlatConfigItem["rules"] = {
@@ -136,7 +156,7 @@ export async function typescript(
     },
     ...isTypeAware
       ? [
-          makeParser(true, filesTypeAware),
+          makeParser(true, filesTypeAware, ignoresTypeAware),
           makeParser(false, files, filesTypeAware),
         ]
       : [makeParser(false, files)],
@@ -194,20 +214,31 @@ export async function typescript(
         "ts/triple-slash-reference": "off",
         "ts/unified-signatures": "off",
 
+        ...(type === "lib"
+          ? {
+              "ts/explicit-function-return-type": ["error", {
+                allowExpressions: true,
+                allowHigherOrderFunctions: true,
+                allowIIFEs: true,
+              }],
+            }
+          : {}
+        ),
+
         ...overrides,
       },
     },
-    {
-      name: "luxass/typescript/rules-type-aware",
-      files: filesTypeAware,
-      rules: {
-        ...tsconfigPath ? typeAwareRules : {},
-        ...overrides,
-      },
-    },
+    ...(isTypeAware
+      ? [{
+          files: filesTypeAware,
+          ignores: ignoresTypeAware,
+          name: "luxass/typescript/rules-type-aware",
+          rules: typeAwareRules,
+        }]
+      : []),
     {
       name: "luxass/typescript/disables/dts",
-      files: ["**/*.d.ts"],
+      files: ["**/*.d.?([cm])ts"],
       rules: {
         "eslint-comments/no-unlimited-disable": "off",
         "import/no-duplicates": "off",
@@ -216,21 +247,14 @@ export async function typescript(
       },
     },
     {
-      name: "luxass/typescript/disables/tests",
       files: ["**/*.{test,spec}.ts?(x)"],
+      name: "luxass/typescript/disables/test",
       rules: {
         "no-unused-expressions": "off",
       },
     },
     {
-      name: "luxass/typescript/disables/playground",
-      files: [`**/playground.${GLOB_SRC_EXT}`],
-      rules: {
-        "no-console": "off",
-      },
-    },
-    {
-      name: "luxass/typescript/disables/javascript",
+      name: "luxass/typescript/disables/cjs",
       files: ["**/*.js", "**/*.cjs"],
       rules: {
         "ts/no-require-imports": "off",
