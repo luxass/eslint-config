@@ -93,6 +93,7 @@ export async function formatters(
       tabWidth: typeof indent === "number" ? indent : 2,
       trailingComma: "all",
       useTabs: indent === "tab",
+      printWidth: 120,
     } satisfies VendoredPrettierOptions,
     options.prettierOptions || {},
   );
@@ -205,7 +206,6 @@ export async function formatters(
           "error",
           formater === "prettier"
             ? {
-                printWidth: 120,
                 ...prettierOptions,
                 embeddedLanguageFormatting: "off",
                 parser: "markdown",
