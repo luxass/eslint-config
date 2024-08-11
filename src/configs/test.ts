@@ -39,7 +39,7 @@ export async function test(
   const [
     pluginVitest,
   ] = await Promise.all([
-    interop(import("eslint-plugin-vitest")),
+    interop(import("@vitest/eslint-plugin")),
   ] as const);
 
   _pluginTest = _pluginTest || pluginVitest;

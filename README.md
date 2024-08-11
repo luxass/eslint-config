@@ -268,8 +268,8 @@ Since flat config requires us to explicitly provide the plugin names (instead of
 | `yaml/*`                    | `yml/*`                             | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)                                                                              |
 | `ts/*`                      | `@typescript-eslint/*`              | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint)                                                       |
 | `style/*`                   | `@stylistic/*`                      | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic)                                                                 |
-| `test/*`                    | `vitest/*`                          | [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest)                                                                          |
-| `react/*`                   | `@eslint-react/*`                   | [eslint-plugin-vitest](https://github.com/veritem/eslint-plugin-vitest)                                                                          |
+| `test/*`                    | `vitest/*`                          | [@vitest/eslint-plugin](https://github.com/vitest-dev/eslint-plugin-vitest)                                                                      |
+| `react/*`                   | `@eslint-react/*`                   | [@eslint-react/eslint-plugin ](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin)                                  |
 | `react-dom/*`               | `@eslint-react/dom/*`               | [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom)                             |
 | `react-hooks-extra/*`       | `@eslint-react/hooks-extra/*`       | [eslint-plugin-react-hooks-extra](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-hooks-extra)             |
 | `react-naming-convention/*` | `@eslint-react/naming-convention/*` | [eslint-plugin-react-naming-convention](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-naming-convention) |
@@ -513,7 +513,7 @@ export default luxass({
 
 ### Editor Specific Disables
 
-Some rules are disabled when inside ESLint IDE integrations, namely [`unused-imports/no-unused-imports`](https://www.npmjs.com/package/eslint-plugin-unused-imports) [`test/no-focused-tests`](https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-focused-tests.md)
+Some rules are disabled when inside ESLint IDE integrations, namely [`unused-imports/no-unused-imports`](https://www.npmjs.com/package/eslint-plugin-unused-imports) [`test/no-focused-tests`](https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-focused-tests.md)
 
 This is to prevent unused imports from getting removed by the IDE during refactoring to get a better developer experience. Those rules will be applied when you run ESLint in the terminal or [Lint Staged](#lint-staged). If you don't want this behavior, you can disable them:
 
