@@ -63,7 +63,7 @@ export async function test(
         ],
         "test/no-identical-title": "error",
         "test/no-import-node-test": "error",
-        "test/no-focused-tests": editor ? "off" : "error",
+        "test/no-focused-tests": editor ? "off" : ["error", { fixable: true }],
         "test/prefer-hooks-in-order": "error",
         "test/prefer-lowercase-title": "error",
 
