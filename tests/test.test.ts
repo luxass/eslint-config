@@ -98,7 +98,7 @@ describe("test config", async () => {
     it("should allow focused tests when inside editor", async () => {
       const [linter, fixer] = await createEslint({
         test: true,
-        editor: true,
+        isInEditor: true,
       });
 
       const [
