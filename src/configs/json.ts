@@ -1,6 +1,6 @@
-import type { TypedFlatConfigItem } from "../types";
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from "../globs";
 import { interop } from "../utils";
+import type { TypedFlatConfigItem } from "../types";
 import type { StylisticConfig } from "./stylistic";
 
 export interface JSONOptions {

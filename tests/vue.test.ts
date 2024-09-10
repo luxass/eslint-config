@@ -1,5 +1,5 @@
-import { fileURLToPath } from "node:url";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { createEslint } from "./utils/eslint";
 import { getSnapshotPath } from "./utils/snapshot";
 

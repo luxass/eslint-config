@@ -42,8 +42,8 @@ If you still use some configs from the legacy ESLint RC format, you can use the 
 
 ```js
 // eslint.config.mjs
-import luxass from "@luxass/eslint-config";
 import { FlatCompat } from "@eslint/eslintrc";
+import luxass from "@luxass/eslint-config";
 
 const compat = new FlatCompat();
 

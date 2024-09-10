@@ -1,15 +1,15 @@
-import globals from "globals";
-import pluginUnusedImports from "eslint-plugin-unused-imports";
 import pluginAntfu from "eslint-plugin-antfu";
-import type { TypedFlatConfigItem } from "../types";
+import pluginUnusedImports from "eslint-plugin-unused-imports";
+import globals from "globals";
 import { GLOB_SRC, GLOB_SRC_EXT } from "../globs";
+import type { TypedFlatConfigItem } from "../types";
 
 export interface JavaScriptOptions {
   /**
    * Whether the config is for an editor.
    * @default false
    */
-  editor?: boolean;
+  isInEditor?: boolean;
 
   /**
    * Overrides for the config.
@@ -21,7 +21,7 @@ export async function javascript(
   options: JavaScriptOptions = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
-    editor = false,
+    isInEditor = false,
     overrides = {},
   } = options;
 
@@ -249,7 +249,7 @@ export async function javascript(
 
         "symbol-description": "error",
         "unicode-bom": ["error", "never"],
-        "unused-imports/no-unused-imports": editor ? "off" : "error",
+        "unused-imports/no-unused-imports": isInEditor ? "off" : "error",
 
         "unused-imports/no-unused-vars": [
           "error",

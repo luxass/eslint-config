@@ -1,6 +1,6 @@
-import type { TypedFlatConfigItem } from "../types";
 import { GLOB_YAML } from "../globs";
 import { interop } from "../utils";
+import type { TypedFlatConfigItem } from "../types";
 import type { StylisticConfig } from "./stylistic";
 
 export interface YAMLOptions {
@@ -93,14 +93,6 @@ export async function yaml(
           : {}),
 
         ...overrides,
-      },
-    },
-    {
-      name: "luxass/yaml/github-actions",
-      files: ["**/.github/workflows/*.{yml,yaml}"],
-      rules: {
-        // GitHub Actions supports empty values to enable features
-        "yaml/no-empty-mapping-value": "off",
       },
     },
   ];

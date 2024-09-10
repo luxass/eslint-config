@@ -1,10 +1,9 @@
-import { isPackageExists } from "local-pkg";
 import { GLOB_ASTRO, GLOB_CSS, GLOB_GRAPHQL, GLOB_HTML, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from "../globs";
-import type { VendoredPrettierOptions } from "../vendor/prettier-types";
-import { ensure, interop, parserPlain } from "../utils";
-import type { TypedFlatConfigItem } from "../types";
-import type { StylisticConfig } from "./stylistic";
+import { ensure, interop, isPackageInScope, parserPlain } from "../utils";
 import { StylisticConfigDefaults } from "./stylistic";
+import type { TypedFlatConfigItem } from "../types";
+import type { VendoredPrettierOptions } from "../vendor/prettier-types";
+import type { StylisticConfig } from "./stylistic";
 
 export interface FormattersOptions {
   /**
@@ -63,7 +62,7 @@ export async function formatters(
 ): Promise<TypedFlatConfigItem[]> {
   if (options === true) {
     options = {
-      astro: isPackageExists("astro"),
+      astro: isPackageInScope("astro"),
       css: true,
       graphql: true,
       html: true,
@@ -88,12 +87,12 @@ export async function formatters(
   const prettierOptions: VendoredPrettierOptions = Object.assign(
     {
       endOfLine: "auto",
+      printWidth: 120,
       semi,
       singleQuote: quotes === "single",
       tabWidth: typeof indent === "number" ? indent : 2,
       trailingComma: "all",
       useTabs: indent === "tab",
-      printWidth: 120,
     } satisfies VendoredPrettierOptions,
     options.prettierOptions || {},
   );

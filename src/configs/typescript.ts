@@ -1,12 +1,12 @@
 import process from "node:process";
-import type { ParserOptions } from "@typescript-eslint/parser";
 import pluginAntfu from "eslint-plugin-antfu";
+import type { ParserOptions } from "@typescript-eslint/parser";
+import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from "../globs";
+import { interop, renameRules } from "../utils";
 import type {
   ProjectType,
   TypedFlatConfigItem,
 } from "../types";
-import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from "../globs";
-import { interop, renameRules } from "../utils";
 
 export interface TypeScriptOptions {
   /**
@@ -238,30 +238,5 @@ export async function typescript(
           rules: typeAwareRules,
         }]
       : []),
-    {
-      name: "luxass/typescript/disables/dts",
-      files: ["**/*.d.?([cm])ts"],
-      rules: {
-        "eslint-comments/no-unlimited-disable": "off",
-        "import/no-duplicates": "off",
-        "no-restricted-syntax": "off",
-        "unused-imports/no-unused-vars": "off",
-      },
-    },
-    {
-      files: ["**/*.{test,spec}.ts?(x)"],
-      name: "luxass/typescript/disables/test",
-      rules: {
-        "no-unused-expressions": "off",
-      },
-    },
-    {
-      name: "luxass/typescript/disables/cjs",
-      files: ["**/*.js", "**/*.cjs"],
-      rules: {
-        "ts/no-require-imports": "off",
-        "ts/no-var-requires": "off",
-      },
-    },
   ];
 }

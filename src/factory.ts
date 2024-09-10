@@ -1,17 +1,10 @@
-import process from "node:process";
-import { existsSync } from "node:fs";
-import { isPackageExists } from "local-pkg";
 import { FlatConfigComposer } from "eslint-flat-config-utils";
+import { isPackageExists } from "local-pkg";
 import type { Linter } from "eslint";
-import type {
-  Awaitable,
-  ConfigNames,
-  ConfigOptions,
-  TypedFlatConfigItem,
-} from "./types";
 import {
   astro,
   comments,
+  disables,
   formatters,
   ignores,
   imports,
@@ -35,7 +28,14 @@ import {
   vue,
   yaml,
 } from "./configs";
-import { getOverrides, interop, resolveSubOptions } from "./utils";
+import { perfectionist } from "./configs/perfectionist";
+import { getOverrides, interop, isInEditorEnv, resolveSubOptions } from "./utils";
+import type {
+  Awaitable,
+  ConfigNames,
+  ConfigOptions,
+  TypedFlatConfigItem,
+} from "./types";
 
 const FLAT_CONFIG_PROPS: (keyof TypedFlatConfigItem)[] = [
   "name",
@@ -88,16 +88,25 @@ export function luxass(
     autoRenamePlugins = true,
     exts = [],
     gitignore: enableGitignore = true,
-    editor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
     jsx: enableJsx = true,
     react: enableReact = false,
     regexp: enableRegexp = true,
     typescript: enableTypeScript = isPackageExists("typescript"),
+    unicorn: enableUnicorn = true,
     unocss: enableUnoCSS = false,
     tailwindcss: enableTailwindCSS = false,
     vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
     type: projectType = "app",
   } = options;
+
+  let isInEditor = options.isInEditor;
+  if (isInEditor == null) {
+    isInEditor = isInEditorEnv();
+    if (isInEditor) {
+      // eslint-disable-next-line no-console
+      console.log("[@luxass/eslint-config] Detected running in editor, some rules are disabled.");
+    }
+  }
 
   const stylisticOptions
     = options.stylistic === false
@@ -114,11 +123,15 @@ export function luxass(
 
   if (enableGitignore) {
     if (typeof enableGitignore !== "boolean") {
-      configs.push(interop(import("eslint-config-flat-gitignore")).then((plugin) => [plugin(enableGitignore)]));
+      configs.push(interop(import("eslint-config-flat-gitignore")).then((r) => [r({
+        name: "luxass/gitignore",
+        ...enableGitignore,
+      })]));
     } else {
-      if (existsSync(".gitignore")) {
-        configs.push(interop(import("eslint-config-flat-gitignore")).then((plugin) => [plugin()]));
-      }
+      configs.push(interop(import("eslint-config-flat-gitignore")).then((r) => [r({
+        name: "luxass/gitignore",
+        strict: false,
+      })]));
     }
   }
 
@@ -129,7 +142,7 @@ export function luxass(
   configs.push(
     ignores(),
     javascript({
-      editor,
+      isInEditor,
       overrides: getOverrides(options, "javascript"),
     }),
     comments(),
@@ -140,8 +153,13 @@ export function luxass(
     imports({
       stylistic: stylisticOptions,
     }),
-    unicorn(),
+
+    perfectionist(),
   );
+
+  if (enableUnicorn) {
+    configs.push(unicorn(enableUnicorn === true ? {} : enableUnicorn));
+  }
 
   if (enableVue) {
     exts.push("vue");
@@ -176,7 +194,7 @@ export function luxass(
 
   if (options.test ?? true) {
     configs.push(test({
-      editor,
+      isInEditor,
       overrides: getOverrides(options, "test"),
     }));
   }
@@ -262,6 +280,14 @@ export function luxass(
       options.formatters,
       typeof stylisticOptions === "boolean" ? {} : stylisticOptions,
     ));
+  }
+
+  configs.push(
+    disables(),
+  );
+
+  if ("files" in options) {
+    throw new Error("[@luxass/eslint-config] The first argument should not contain the \"files\" property as the options are supposed to be global. Place it in the second or later config instead.");
   }
 
   // User can optionally pass a flat config item to the first argument

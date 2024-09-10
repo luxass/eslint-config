@@ -1,6 +1,6 @@
+import eslintApi from "eslint/use-at-your-own-risk";
 import type { Linter } from "eslint";
 import type { FlatConfigComposer } from "eslint-flat-config-utils";
-import eslintApi from "eslint/use-at-your-own-risk";
 import luxass, { type Awaitable, type ConfigNames, type ConfigOptions, type TypedFlatConfigItem } from "../../src";
 
 export async function createEslint(

@@ -1,7 +1,6 @@
-import pluginImport from "eslint-plugin-import-x";
 import pluginAntfu from "eslint-plugin-antfu";
+import pluginImport from "eslint-plugin-import-x";
 import type { TypedFlatConfigItem } from "../types";
-import { GLOB_SRC_EXT } from "../globs";
 import type { StylisticConfig } from "./stylistic";
 
 export interface ImportsOptions {
@@ -36,21 +35,12 @@ export async function imports(options: ImportsOptions = {}): Promise<TypedFlatCo
         "import/no-named-default": "error",
         "import/no-self-import": "error",
         "import/no-webpack-loader-syntax": "error",
-        "import/order": "error",
 
         ...stylistic
           ? {
               "import/newline-after-import": ["error", { count: 1 }],
             }
           : {},
-      },
-    },
-    {
-      name: "luxass/disables/imports-bin",
-      files: ["**/bin/**/*", `**/bin.${GLOB_SRC_EXT}`],
-      rules: {
-        "antfu/no-import-dist": "off",
-        "antfu/no-import-node-modules-by-path": "off",
       },
     },
   ];

@@ -1,6 +1,6 @@
-import type { TypedFlatConfigItem } from "../types";
 import { GLOB_TESTS } from "../globs";
 import { interop } from "../utils";
+import type { TypedFlatConfigItem } from "../types";
 
 export interface TestOptions {
   /**
@@ -8,7 +8,7 @@ export interface TestOptions {
    *
    * @default false
    */
-  editor?: boolean;
+  isInEditor?: boolean;
 
   /**
    * Glob patterns for test files.
@@ -31,7 +31,7 @@ export async function test(
   options: TestOptions = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
-    editor = false,
+    isInEditor = false,
     files = GLOB_TESTS,
     overrides = {},
   } = options;
@@ -63,7 +63,7 @@ export async function test(
         ],
         "test/no-identical-title": "error",
         "test/no-import-node-test": "error",
-        "test/no-focused-tests": editor ? "off" : ["error", { fixable: true }],
+        "test/no-focused-tests": isInEditor ? "off" : ["error", { fixable: true }],
         "test/prefer-hooks-in-order": "error",
         "test/prefer-lowercase-title": "error",
 

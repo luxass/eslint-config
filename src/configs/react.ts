@@ -1,7 +1,7 @@
 import { isPackageExists } from "local-pkg";
 import { GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX } from "../globs";
-import type { TypedFlatConfigItem } from "../types";
 import { ensure, interop, toArray } from "../utils";
+import type { TypedFlatConfigItem } from "../types";
 
 export interface ReactOptions {
   /**

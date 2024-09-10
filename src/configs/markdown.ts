@@ -1,9 +1,9 @@
 import { mergeProcessors, processorPassThrough } from "eslint-merge-processors";
+import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from "../globs";
+import { interop, parserPlain } from "../utils";
 import type {
   TypedFlatConfigItem,
 } from "../types";
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from "../globs";
-import { interop, parserPlain } from "../utils";
 
 export interface MarkdownOptions {
   /**
@@ -37,7 +37,7 @@ export async function markdown(
     overrides = {},
   } = options;
 
-  const markdown = await interop(import("eslint-plugin-markdown"));
+  const markdown = await interop(import("@eslint/markdown"));
 
   return [
     {
@@ -54,7 +54,7 @@ export async function markdown(
       // but not the markdown file itself. We use `eslint-merge-processors` to
       // add a pass-through processor for the markdown file itself.
       processor: mergeProcessors([
-        markdown.processors.markdown,
+        markdown.processors!.markdown,
         processorPassThrough,
       ]),
     },

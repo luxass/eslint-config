@@ -1,6 +1,6 @@
 import { GLOB_ASTRO } from "../globs";
-import type { TypedFlatConfigItem } from "../types";
 import { ensure, interop } from "../utils";
+import type { TypedFlatConfigItem } from "../types";
 import type { StylisticConfig } from "./stylistic";
 
 export interface AstroOptions {

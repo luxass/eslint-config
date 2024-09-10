@@ -1,6 +1,5 @@
-import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
 import type { Linter } from "eslint";
-import type { ConfigNames, RuleOptions } from "./typegen";
+import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
 import type {
   AstroOptions,
   FormattersOptions,
@@ -13,10 +12,12 @@ import type {
   TailwindCSSOptions,
   TestOptions,
   TypeScriptOptions,
+  UnicornOptions,
   UnoCSSOptions,
   VueOptions,
   YAMLOptions,
 } from "./configs";
+import type { ConfigNames, RuleOptions } from "./typegen";
 
 export type Awaitable<T> = T | Promise<T>;
 
@@ -57,10 +58,17 @@ export interface ConfigOptions {
   gitignore?: FlatGitignoreOptions | boolean;
 
   /**
+   * Options for eslint-plugin-unicorn.
+   *
+   * @default true
+   */
+  unicorn?: boolean | UnicornOptions;
+
+  /**
    * Control to disable some rules in editors.
    * @default auto-detect based on the process.env
    */
-  editor?: boolean;
+  isInEditor?: boolean;
 
   /**
    * JavaScript options

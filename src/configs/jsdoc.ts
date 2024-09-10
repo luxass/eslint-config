@@ -1,5 +1,5 @@
-import type { TypedFlatConfigItem } from "../types";
 import { interop } from "../utils";
+import type { TypedFlatConfigItem } from "../types";
 import type { StylisticConfig } from "./stylistic";
 
 export interface JSDOCOptions {

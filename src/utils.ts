@@ -1,8 +1,12 @@
 import process from "node:process";
+import { fileURLToPath } from "node:url";
 import { isPackageExists } from "local-pkg";
 import type { Linter } from "eslint";
-import type { Awaitable, ConfigOptions, TypedFlatConfigItem } from "./types";
 import type { RuleOptions } from "./typegen";
+import type { Awaitable, ConfigOptions, TypedFlatConfigItem } from "./types";
+
+const scopeUrl = fileURLToPath(new URL(".", import.meta.url));
+const isCwdInScope = isPackageExists("@luxass/eslint-config");
 
 export const parserPlain = {
   meta: {
@@ -161,11 +165,11 @@ export async function interop<T>(m: Awaitable<T>): Promise<T extends { default: 
  * ```
  */
 export async function ensure(packages: (string | undefined)[]): Promise<void> {
-  if (process.env.CI || process.stdout.isTTY === false) {
+  if (process.env.CI || process.stdout.isTTY === false || isCwdInScope === false) {
     return;
   };
 
-  const nonExistingPackages = packages.filter((i) => i && !isPackageExists(i)) as string[];
+  const nonExistingPackages = packages.filter((i) => i && !isPackageInScope(i)) as string[];
   if (nonExistingPackages.length === 0) {
     return;
   }
@@ -246,4 +250,32 @@ export function getOverrides<K extends keyof ConfigOptions>(
       ? sub.overrides
       : {} as any,
   };
+}
+
+export function isPackageInScope(name: string): boolean {
+  return isPackageExists(name, { paths: [scopeUrl] });
+}
+
+export function isInEditorEnv(): boolean {
+  if (process.env.CI) {
+    return false;
+  }
+  if (isInGitHooksOrLintStaged()) {
+    return false;
+  }
+  return !!(false
+    || process.env.VSCODE_PID
+    || process.env.VSCODE_CWD
+    || process.env.JETBRAINS_IDE
+    || process.env.VIM
+    || process.env.NVIM
+  );
+}
+
+export function isInGitHooksOrLintStaged(): boolean {
+  return !!(false
+    || process.env.GIT_PARAMS
+    || process.env.VSCODE_GIT_COMMAND
+    || process.env.npm_lifecycle_script?.startsWith("lint-staged")
+  );
 }

@@ -1,12 +1,8 @@
 // @ts-check
 
 import styleMigrate from "@stylistic/eslint-plugin-migrate";
-import JITI from "jiti";
 
-const jiti = JITI(import.meta.url);
-
-/** @type {typeof import('./src/index.ts')} */
-const { luxass } = jiti("./src/index.ts");
+import { luxass } from "./src";
 
 export default luxass(
   {
