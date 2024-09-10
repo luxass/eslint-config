@@ -14,6 +14,7 @@ import {
   jsx,
   markdown,
   node,
+  perfectionist,
   react,
   regexp,
   sortPackageJson,
@@ -28,7 +29,6 @@ import {
   vue,
   yaml,
 } from "./configs";
-import { perfectionist } from "./configs/perfectionist";
 import { getOverrides, interop, isInEditorEnv, resolveSubOptions } from "./utils";
 import type {
   Awaitable,

@@ -10,6 +10,7 @@ export { jsonc, type JSONOptions } from "./json";
 export { jsx } from "./jsx";
 export { markdown, type MarkdownOptions } from "./markdown";
 export { node } from "./node";
+export { perfectionist } from "./perfectionist";
 export { react, type ReactOptions } from "./react";
 export { regexp, type RegExpOptions } from "./regexp";
 export { sortPackageJson, sortTsconfig } from "./sort";

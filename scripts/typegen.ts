@@ -4,6 +4,7 @@ import { flatConfigsToRulesDTS } from "eslint-typegen/core";
 import {
   astro,
   comments,
+  disables,
   formatters,
   ignores,
   imports,
@@ -12,6 +13,7 @@ import {
   jsonc,
   markdown,
   node,
+  perfectionist,
   react,
   sortPackageJson,
   sortTsconfig,
@@ -46,6 +48,7 @@ const configs = await combine(
   node(),
   react(),
   sortPackageJson(),
+  perfectionist(),
   stylistic(),
   tailwindcss(),
   sortTsconfig(),
@@ -57,6 +60,7 @@ const configs = await combine(
   unocss(),
   vue(),
   yaml(),
+  disables(),
 );
 
 const configNames = configs.map((i) => i.name).filter(Boolean) as string[];

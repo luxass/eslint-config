@@ -9,8 +9,8 @@ export async function createEslint(
 ): Promise<[normal: eslintApi.FlatESLint, fixer: eslintApi.FlatESLint]> {
   // disable editor detection to prevent flaky tests,
   // but only if not explicitly set
-  if (options && !("editor" in options)) {
-    options.editor = false;
+  if (options && !("isInEditor" in options)) {
+    options.isInEditor = false;
   }
 
   const config = await luxass(options, ...userConfigs);
