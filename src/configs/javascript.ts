@@ -1,8 +1,8 @@
+import type { TypedFlatConfigItem } from "../types";
 import pluginAntfu from "eslint-plugin-antfu";
 import pluginUnusedImports from "eslint-plugin-unused-imports";
 import globals from "globals";
 import { GLOB_SRC, GLOB_SRC_EXT } from "../globs";
-import type { TypedFlatConfigItem } from "../types";
 
 export interface JavaScriptOptions {
   /**

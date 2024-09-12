@@ -1,11 +1,11 @@
-import { mergeProcessors } from "eslint-merge-processors";
 import type { Options as VueBlocksOptions } from "eslint-processor-vue-blocks";
-import { GLOB_VUE } from "../globs";
-import { interop } from "../utils";
 import type {
   TypedFlatConfigItem,
 } from "../types";
 import type { StylisticConfig } from "./stylistic";
+import { mergeProcessors } from "eslint-merge-processors";
+import { GLOB_VUE } from "../globs";
+import { interop } from "../utils";
 
 export interface VueOptions {
   /**

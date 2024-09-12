@@ -1,7 +1,7 @@
-import pluginAntfu from "eslint-plugin-antfu";
-import pluginImport from "eslint-plugin-import-x";
 import type { TypedFlatConfigItem } from "../types";
 import type { StylisticConfig } from "./stylistic";
+import pluginAntfu from "eslint-plugin-antfu";
+import pluginImport from "eslint-plugin-import-x";
 
 export interface ImportsOptions {
   /**

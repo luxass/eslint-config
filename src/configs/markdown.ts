@@ -1,9 +1,9 @@
-import { mergeProcessors, processorPassThrough } from "eslint-merge-processors";
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from "../globs";
-import { interop, parserPlain } from "../utils";
 import type {
   TypedFlatConfigItem,
 } from "../types";
+import { mergeProcessors, processorPassThrough } from "eslint-merge-processors";
+import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from "../globs";
+import { interop, parserPlain } from "../utils";
 
 export interface MarkdownOptions {
   /**

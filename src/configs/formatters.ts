@@ -1,9 +1,9 @@
-import { GLOB_ASTRO, GLOB_CSS, GLOB_GRAPHQL, GLOB_HTML, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from "../globs";
-import { ensure, interop, isPackageInScope, parserPlain } from "../utils";
-import { StylisticConfigDefaults } from "./stylistic";
 import type { TypedFlatConfigItem } from "../types";
 import type { VendoredPrettierOptions } from "../vendor/prettier-types";
 import type { StylisticConfig } from "./stylistic";
+import { GLOB_ASTRO, GLOB_CSS, GLOB_GRAPHQL, GLOB_HTML, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from "../globs";
+import { ensure, interop, isPackageInScope, parserPlain } from "../utils";
+import { StylisticConfigDefaults } from "./stylistic";
 
 export interface FormattersOptions {
   /**

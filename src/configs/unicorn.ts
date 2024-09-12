@@ -1,5 +1,5 @@
-import pluginUnicorn from "eslint-plugin-unicorn";
 import type { TypedFlatConfigItem } from "../types";
+import pluginUnicorn from "eslint-plugin-unicorn";
 
 export interface UnicornOptions {
   /**

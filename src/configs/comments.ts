@@ -1,5 +1,5 @@
-import eslintCommentsPlugin from "@eslint-community/eslint-plugin-eslint-comments";
 import type { TypedFlatConfigItem } from "../types";
+import eslintCommentsPlugin from "@eslint-community/eslint-plugin-eslint-comments";
 
 export async function comments(): Promise<TypedFlatConfigItem[]> {
   return [

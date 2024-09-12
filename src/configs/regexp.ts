@@ -1,5 +1,5 @@
-import { configs } from "eslint-plugin-regexp";
 import type { TypedFlatConfigItem } from "../types";
+import { configs } from "eslint-plugin-regexp";
 
 export interface RegExpOptions {
   /**

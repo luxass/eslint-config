@@ -1,12 +1,12 @@
-import process from "node:process";
-import pluginAntfu from "eslint-plugin-antfu";
 import type { ParserOptions } from "@typescript-eslint/parser";
-import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from "../globs";
-import { interop, renameRules } from "../utils";
 import type {
   ProjectType,
   TypedFlatConfigItem,
 } from "../types";
+import process from "node:process";
+import pluginAntfu from "eslint-plugin-antfu";
+import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from "../globs";
+import { interop, renameRules } from "../utils";
 
 export interface TypeScriptOptions {
   /**

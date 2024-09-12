@@ -1,7 +1,7 @@
-import pluginAntfu from "eslint-plugin-antfu";
 import type { StylisticCustomizeOptions } from "@stylistic/eslint-plugin";
-import { interop } from "../utils";
 import type { TypedFlatConfigItem } from "../types";
+import pluginAntfu from "eslint-plugin-antfu";
+import { interop } from "../utils";
 
 export type StylisticConfig = Pick<StylisticCustomizeOptions, "jsx" | "indent" | "quotes" | "semi">;
 

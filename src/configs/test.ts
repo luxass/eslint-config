@@ -1,6 +1,6 @@
+import type { TypedFlatConfigItem } from "../types";
 import { GLOB_TESTS } from "../globs";
 import { interop } from "../utils";
-import type { TypedFlatConfigItem } from "../types";
 
 export interface TestOptions {
   /**

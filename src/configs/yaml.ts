@@ -1,7 +1,7 @@
-import { GLOB_YAML } from "../globs";
-import { interop } from "../utils";
 import type { TypedFlatConfigItem } from "../types";
 import type { StylisticConfig } from "./stylistic";
+import { GLOB_YAML } from "../globs";
+import { interop } from "../utils";
 
 export interface YAMLOptions {
   /**

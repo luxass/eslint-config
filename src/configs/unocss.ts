@@ -1,5 +1,5 @@
-import { ensure, interop } from "../utils";
 import type { TypedFlatConfigItem } from "../types";
+import { ensure, interop } from "../utils";
 
 export interface UnoCSSOptions {
   /**

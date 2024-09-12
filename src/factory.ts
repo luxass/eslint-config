@@ -1,6 +1,12 @@
+import type { Linter } from "eslint";
+import type {
+  Awaitable,
+  ConfigNames,
+  ConfigOptions,
+  TypedFlatConfigItem,
+} from "./types";
 import { FlatConfigComposer } from "eslint-flat-config-utils";
 import { isPackageExists } from "local-pkg";
-import type { Linter } from "eslint";
 import {
   astro,
   comments,
@@ -30,12 +36,6 @@ import {
   yaml,
 } from "./configs";
 import { getOverrides, interop, isInEditorEnv, resolveSubOptions } from "./utils";
-import type {
-  Awaitable,
-  ConfigNames,
-  ConfigOptions,
-  TypedFlatConfigItem,
-} from "./types";
 
 const FLAT_CONFIG_PROPS: (keyof TypedFlatConfigItem)[] = [
   "name",
