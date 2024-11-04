@@ -138,7 +138,7 @@
     "eslint-plugin-react-refresh": "^0.4.11",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "eslint-typegen": "^0.3.2",
-    "jiti": "^1.21.6",
+    "jiti": "^2.0.0",
     "prettier-plugin-astro": "^0.14.1",
     "tailwindcss": "^3.4.10",
     "tsup": "^8.2.4",
