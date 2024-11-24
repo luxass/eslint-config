@@ -18,9 +18,8 @@ export async function comments(): Promise<TypedFlatConfigItem[]> {
         // https://github.com/eslint-community/eslint-plugin-eslint-comments/blob/main/docs/rules/no-unlimited-disable.md
         "eslint-comments/no-unlimited-disable": "error",
 
-        // Deprecated in favor of official reportUnusedDisableDirectives
-        // https://github.com/eslint-community/eslint-plugin-eslint-comments/issues/133
-        "eslint-comments/no-unused-enable": "off",
+        // https://github.com/eslint-community/eslint-plugin-eslint-comments/blob/main/docs/rules/no-unused-enable.md
+        "eslint-comments/no-unused-enable": "error",
       },
     },
   ];
