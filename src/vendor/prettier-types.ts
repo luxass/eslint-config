@@ -4,6 +4,11 @@
 
 export type VendoredPrettierOptions = Partial<VendoredPrettierOptionsRequired>;
 
+export type VendoredPrettierRuleOptions = VendoredPrettierOptions & {
+  parser?: BuiltInParserName | ExternalParserName;
+  [k: string]: unknown | undefined;
+};
+
 export interface VendoredPrettierOptionsRequired {
   /**
    * Specify the line length that the printer will wrap on.
@@ -123,6 +128,8 @@ export type BuiltInParserName =
   | "typescript"
   | "vue"
   | "yaml";
+
+export type ExternalParserName = "astro";
 
 // This utility is here to handle the case where you have an explicit union
 // between string literals and the generic string type. It would normally

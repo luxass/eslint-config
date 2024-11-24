@@ -1,5 +1,5 @@
 import type { TypedFlatConfigItem } from "../types";
-import type { VendoredPrettierOptions } from "../vendor/prettier-types";
+import type { VendoredPrettierOptions, VendoredPrettierRuleOptions } from "../vendor/prettier-types";
 import type { StylisticConfig } from "./stylistic";
 import { GLOB_ASTRO, GLOB_CSS, GLOB_GRAPHQL, GLOB_HTML, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from "../globs";
 import { ensure, interop, isPackageInScope, parserPlain } from "../utils";
@@ -54,6 +54,20 @@ export interface FormattersOptions {
    * By default it's controlled by our own config.
    */
   dprintOptions?: boolean;
+}
+
+function mergePrettierOptions(
+  options: VendoredPrettierOptions,
+  overrides: VendoredPrettierRuleOptions = {},
+): VendoredPrettierRuleOptions {
+  return {
+    ...options,
+    ...overrides,
+    plugins: [
+      ...(overrides.plugins || []),
+      ...(options.plugins || []),
+    ],
+  };
 }
 
 export async function formatters(
@@ -128,10 +142,9 @@ export async function formatters(
         rules: {
           "format/prettier": [
             "error",
-            {
-              ...prettierOptions,
+            mergePrettierOptions(prettierOptions, {
               parser: "css",
-            },
+            }),
           ],
         },
       },
@@ -144,10 +157,9 @@ export async function formatters(
         rules: {
           "format/prettier": [
             "error",
-            {
-              ...prettierOptions,
+            mergePrettierOptions(prettierOptions, {
               parser: "scss",
-            },
+            }),
           ],
         },
       },
@@ -160,10 +172,9 @@ export async function formatters(
         rules: {
           "format/prettier": [
             "error",
-            {
-              ...prettierOptions,
+            mergePrettierOptions(prettierOptions, {
               parser: "less",
-            },
+            }),
           ],
         },
       },
@@ -180,10 +191,9 @@ export async function formatters(
       rules: {
         "format/prettier": [
           "error",
-          {
-            ...prettierOptions,
+          mergePrettierOptions(prettierOptions, {
             parser: "html",
-          },
+          }),
         ],
       },
     });
@@ -204,11 +214,10 @@ export async function formatters(
         [`format/${formater}`]: [
           "error",
           formater === "prettier"
-            ? {
-                ...prettierOptions,
-                embeddedLanguageFormatting: "off",
-                parser: "markdown",
-              }
+            ? mergePrettierOptions(prettierOptions, {
+              embeddedLanguageFormatting: "off",
+              parser: "markdown",
+            })
             : {
                 ...dprintOptions,
                 language: "markdown",
@@ -228,13 +237,12 @@ export async function formatters(
       rules: {
         "format/prettier": [
           "error",
-          {
-            ...prettierOptions,
+          mergePrettierOptions(prettierOptions, {
             parser: "astro",
             plugins: [
               "prettier-plugin-astro",
             ],
-          },
+          }),
         ],
       },
     });
@@ -250,10 +258,9 @@ export async function formatters(
       rules: {
         "format/prettier": [
           "error",
-          {
-            ...prettierOptions,
+          mergePrettierOptions(prettierOptions, {
             parser: "graphql",
-          },
+          }),
         ],
       },
     });
