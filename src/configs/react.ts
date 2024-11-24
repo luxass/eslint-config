@@ -1,7 +1,7 @@
 import type { TypedFlatConfigItem } from "../types";
 import { isPackageExists } from "local-pkg";
 import { GLOB_ASTRO_TS, GLOB_JS, GLOB_JSX, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from "../globs";
-import { ensure, interop, toArray } from "../utils";
+import { ensure, interop } from "../utils";
 
 export interface ReactOptions {
   /**

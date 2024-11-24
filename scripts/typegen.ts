@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
-import { builtinRules } from "eslint/use-at-your-own-risk";
 import { flatConfigsToRulesDTS } from "eslint-typegen/core";
+import { builtinRules } from "eslint/use-at-your-own-risk";
 import {
   astro,
   comments,
