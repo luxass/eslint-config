@@ -55,7 +55,6 @@ export async function test(
       name: "luxass/test/rules",
       files,
       rules: {
-        "node/prefer-global/process": "off",
 
         "test/consistent-test-it": [
           "error",
@@ -67,7 +66,13 @@ export async function test(
         "test/prefer-hooks-in-order": "error",
         "test/prefer-lowercase-title": "error",
 
-        "ts/explicit-function-return-type": "off",
+        // Disables
+        ...{
+          "antfu/no-top-level-await": "off",
+          "no-unused-expressions": "off",
+          "node/prefer-global/process": "off",
+          "ts/explicit-function-return-type": "off",
+        },
 
         ...overrides,
       },
