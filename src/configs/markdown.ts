@@ -79,6 +79,8 @@ export async function markdown(
         },
       },
       rules: {
+        "antfu/no-top-level-await": "off",
+
         "import/newline-after-import": "off",
 
         "no-alert": "off",
@@ -96,6 +98,7 @@ export async function markdown(
 
         "style/eol-last": "off",
         "ts/consistent-type-imports": "off",
+        "ts/explicit-function-return-type": "off",
         "ts/no-namespace": "off",
         "ts/no-redeclare": "off",
         "ts/no-require-imports": "off",
