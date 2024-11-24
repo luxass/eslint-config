@@ -1,6 +1,6 @@
 import type { TypedFlatConfigItem } from "../types";
 import { isPackageExists } from "local-pkg";
-import { GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX } from "../globs";
+import { GLOB_ASTRO_TS, GLOB_JS, GLOB_JSX, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from "../globs";
 import { ensure, interop, toArray } from "../utils";
 
 export interface ReactOptions {
@@ -22,12 +22,25 @@ export interface ReactOptions {
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
   files?: string[];
+
+  /**
+   * Glob patterns for files that should be type aware.
+   * @default ['**\/*.{ts,tsx}']
+   */
+  filesTypeAware?: string[];
+
+  /**
+   * Glob patterns for files that should not be type aware.
+   * @default ['**\/*.md\/**', '**\/*.astro/*.ts']
+   */
+  ignoresTypeAware?: string[];
 }
 
 // react refresh
 const ReactRefreshAllowConstantExportPackages = [
   "vite",
 ];
+
 const RemixPackages = [
   "@remix-run/node",
   "@remix-run/react",
@@ -35,10 +48,20 @@ const RemixPackages = [
   "@remix-run/dev",
 ];
 
+const NextJsPackages = [
+  "next",
+];
+
 export async function react(options: ReactOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX],
     overrides = {},
+    filesTypeAware = [GLOB_TS, GLOB_TSX],
+    ignoresTypeAware = [
+      `${GLOB_MARKDOWN}/**`,
+      GLOB_ASTRO_TS,
+    ],
+    tsconfigPath,
   } = options;
 
   await ensure([
@@ -47,29 +70,25 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
     "eslint-plugin-react-refresh",
   ]);
 
-  const tsconfigPath = options?.tsconfigPath
-    ? toArray(options.tsconfigPath)
-    : undefined;
   const isTypeAware = !!tsconfigPath;
+
+  const typeAwareRules: TypedFlatConfigItem["rules"] = {
+    "react/no-leaked-conditional-rendering": "warn",
+  };
 
   const [
     pluginReact,
     pluginReactHooks,
     pluginReactRefresh,
-    parserTs,
   ] = await Promise.all([
     interop(import("@eslint-react/eslint-plugin")),
     interop(import("eslint-plugin-react-hooks")),
     interop(import("eslint-plugin-react-refresh")),
-    interop(import("@typescript-eslint/parser")),
   ] as const);
 
-  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
-    (i) => isPackageExists(i),
-  );
-
+  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some((i) => isPackageExists(i));
   const isUsingRemix = RemixPackages.some((i) => isPackageExists(i));
-  const isUsingNext = isPackageExists("next");
+  const isUsingNext = NextJsPackages.some((i) => isPackageExists(i));
 
   const plugins = pluginReact.configs.all.plugins;
 
@@ -89,12 +108,10 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
       name: "luxass/react/rules",
       files,
       languageOptions: {
-        parser: parserTs,
         parserOptions: {
           ecmaFeatures: {
             jsx: true,
           },
-          ...isTypeAware ? { project: tsconfigPath } : {},
         },
         sourceType: "module",
       },
@@ -124,6 +141,13 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
             allowExportNames: [
               ...(isUsingNext
                 ? [
+                    "dynamic",
+                    "dynamicParams",
+                    "revalidate",
+                    "fetchCache",
+                    "runtime",
+                    "preferredRegion",
+                    "maxDuration",
                     "config",
                     "runtime",
                     "generateStaticParams",
@@ -184,15 +208,19 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
         "react/prefer-shorthand-boolean": "warn",
         "react/prefer-shorthand-fragment": "warn",
 
-        ...(isTypeAware
-          ? {
-              "react/no-leaked-conditional-rendering": "warn",
-            }
-          : {}),
-
         // overrides
         ...overrides,
       },
     },
+    ...isTypeAware
+      ? [{
+          files: filesTypeAware,
+          ignores: ignoresTypeAware,
+          name: "antfu/react/type-aware-rules",
+          rules: {
+            ...typeAwareRules,
+          },
+        }]
+      : [],
   ];
 }
