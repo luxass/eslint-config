@@ -5,17 +5,19 @@ import { GLOB_SRC, GLOB_SRC_EXT } from "../globs";
 export async function disables(): Promise<TypedFlatConfigItem[]> {
   return [
     {
-      files: [`scripts/${GLOB_SRC}`],
+      files: [`**/scripts/${GLOB_SRC}`],
       name: "luxass/disables/scripts",
       rules: {
+        "antfu/no-top-level-await": "off",
         "no-console": "off",
         "ts/explicit-function-return-type": "off",
       },
     },
     {
-      files: [`cli/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
+      files: [`**/cli/${GLOB_SRC}`, `**/cli.${GLOB_SRC_EXT}`],
       name: "luxass/disables/cli",
       rules: {
+        "antfu/no-top-level-await": "off",
         "no-console": "off",
       },
     },
@@ -38,13 +40,6 @@ export async function disables(): Promise<TypedFlatConfigItem[]> {
       },
     },
     {
-      files: ["**/*.{test,spec}.([tj])s?(x)"],
-      name: "luxass/disables/test",
-      rules: {
-        "no-unused-expressions": "off",
-      },
-    },
-    {
       files: ["**/*.js", "**/*.cjs"],
       name: "luxass/disables/cjs",
       rules: {
@@ -57,6 +52,15 @@ export async function disables(): Promise<TypedFlatConfigItem[]> {
       rules: {
         // GitHub Actions supports empty values to enable features
         "yaml/no-empty-mapping-value": "off",
+      },
+    },
+    {
+      files: [`**/*.config.${GLOB_SRC_EXT}`, `**/*.config.*.${GLOB_SRC_EXT}`],
+      name: "luxass/disables/config-files",
+      rules: {
+        "antfu/no-top-level-await": "off",
+        "no-console": "off",
+        "ts/explicit-function-return-type": "off",
       },
     },
   ];
