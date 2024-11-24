@@ -54,6 +54,11 @@ export interface TypeScriptOptions {
   overrides?: TypedFlatConfigItem["rules"];
 
   /**
+   * Override type aware rules.
+   */
+  overridesTypeAware?: TypedFlatConfigItem["rules"];
+
+  /**
    * Type of the project. `lib` will enable more strict rules for libraries.
    *
    * @default "app"
@@ -68,6 +73,7 @@ export async function typescript(
     exts = [],
     overrides = {},
     parserOptions = {},
+    overridesTypeAware = {},
     type = "app",
   } = options ?? {};
 
@@ -204,8 +210,13 @@ export async function typescript(
         "ts/no-invalid-this": "error",
         "ts/no-invalid-void-type": "off",
         "ts/no-non-null-assertion": "off",
-        "ts/no-redeclare": "error",
+        "ts/no-redeclare": ["error", { builtinGlobals: false }],
         "ts/no-require-imports": "error",
+        "ts/no-unused-expressions": ["error", {
+          allowShortCircuit: true,
+          allowTaggedTemplates: true,
+          allowTernary: true,
+        }],
         "ts/no-unused-vars": "off",
         "ts/no-use-before-define": [
           "error",
@@ -235,7 +246,10 @@ export async function typescript(
           files: filesTypeAware,
           ignores: ignoresTypeAware,
           name: "luxass/typescript/rules-type-aware",
-          rules: typeAwareRules,
+          rules: {
+            ...typeAwareRules,
+            ...overridesTypeAware,
+          },
         }]
       : []),
   ];
