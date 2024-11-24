@@ -37,7 +37,7 @@ describe("vue config", async () => {
       const [snapshotPath] = await getSnapshotPath(baseUrl, "typescript/index-ts.linted.vue", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+      await await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
     });
 
     it("ignore vue files when disabled", async () => {
@@ -68,7 +68,7 @@ describe("vue config", async () => {
       ]);
 
       const [snapshotPath, snapshotContent] = await getSnapshotPath(baseUrl, "typescript/index-ts.disabled.linted.vue", fixedResults.output);
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
   });
 
@@ -97,7 +97,7 @@ describe("vue config", async () => {
       const [snapshotPath] = await getSnapshotPath(baseUrl, "javascript/index-js.linted.vue", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
     });
 
     it("ignore vue files when disabled", async () => {
@@ -128,7 +128,7 @@ describe("vue config", async () => {
       ]);
 
       const [snapshotPath, snapshotContent] = await getSnapshotPath(baseUrl, "javascript/index-js.disabled.linted.vue", fixedResults.output);
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
   });
 });

@@ -45,7 +45,7 @@ describe("json config", async () => {
       const [snapshotPath] = await getSnapshotPath(BASE_URL, `config.linted.${fileExt}`, fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
     });
   }
 
@@ -99,7 +99,7 @@ describe("json config", async () => {
 
     const [snapshotPath, snapshotContent] = await getSnapshotPath(BASE_URL, "config-without-stylistic.linted.json", fixedResults.output);
 
-    expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+    await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
   });
 
   describe("order rules", () => {
@@ -287,7 +287,7 @@ describe("json config", async () => {
       ]);
 
       const [snapshotPath, snapshotContent] = await getSnapshotPath(BASE_URL, "package.linted.json", fixedResults.output);
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
 
     it("should order keys in tsconfig.json", async () => {
@@ -421,7 +421,7 @@ describe("json config", async () => {
 
       const [snapshotPath, snapshotContent] = await getSnapshotPath(BASE_URL, "tsconfig.test.linted.json", fixedResults.output);
 
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
   });
 });

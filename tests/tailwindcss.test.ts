@@ -43,7 +43,7 @@ describe("tailwindcss config", async () => {
       const [snapshotPath] = await getSnapshotPath(BASE_URL, "vue/invalid-order.linted.vue", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
     });
 
     it("arbitrary", async () => {
@@ -139,7 +139,7 @@ describe("tailwindcss config", async () => {
         }),
       ]);
 
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
 
     it("enforce shorthands", async () => {
@@ -177,7 +177,7 @@ describe("tailwindcss config", async () => {
       const [snapshotPath, snapshotContent] = await getSnapshotPath(BASE_URL, "vue/enforce-shorthand.linted.vue", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
 
     it("should not use tailwindcss plugin when disabled", async () => {
@@ -230,7 +230,7 @@ describe("tailwindcss config", async () => {
       const [snapshotPath] = await getSnapshotPath(BASE_URL, "astro/invalid-order.linted.astro", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
     });
 
     it("arbitrary", async () => {
@@ -326,7 +326,7 @@ describe("tailwindcss config", async () => {
         }),
       ]);
 
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
 
     it("enforce shorthands", async () => {
@@ -364,7 +364,7 @@ describe("tailwindcss config", async () => {
       const [snapshotPath, snapshotContent] = await getSnapshotPath(BASE_URL, "astro/enforce-shorthand.linted.astro", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
 
     it("should not use tailwindcss plugin when disabled", async () => {
@@ -417,7 +417,7 @@ describe("tailwindcss config", async () => {
       const [snapshotPath] = await getSnapshotPath(BASE_URL, "jsx/invalid-order.linted.tsx", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
     });
 
     it("arbitrary", async () => {
@@ -513,7 +513,7 @@ describe("tailwindcss config", async () => {
         }),
       ]);
 
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
 
     it("enforce shorthands", async () => {
@@ -551,7 +551,7 @@ describe("tailwindcss config", async () => {
       const [snapshotPath, snapshotContent] = await getSnapshotPath(BASE_URL, "jsx/enforce-shorthand.linted.tsx", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
 
     it("should not use tailwindcss plugin when disabled", async () => {

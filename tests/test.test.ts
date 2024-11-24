@@ -42,7 +42,7 @@ describe("test config", async () => {
     const [snapshotPath] = await getSnapshotPath(baseUrl, "index-linted.test.ts", fixedResults.output);
 
     expect(fixedResults.messages).toEqual([]);
-    expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+    await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
   });
 
   it("should not lint test files when disabled", async () => {
@@ -91,7 +91,7 @@ describe("test config", async () => {
     const [snapshotPath] = await getSnapshotPath(baseUrl, "index-linted-no-stylistic.test.ts", fixedResults.output);
 
     expect(fixedResults.messages).toEqual([]);
-    expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+    await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
   });
 
   describe("disallow focused tests", () => {
@@ -124,7 +124,7 @@ describe("test config", async () => {
       const [snapshotPath] = await getSnapshotPath(baseUrl, "focused-editor-linted.test.ts", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
     });
 
     it("should error on focused tests", async () => {
@@ -156,7 +156,7 @@ describe("test config", async () => {
       const [snapshotPath] = await getSnapshotPath(baseUrl, "focused-ci-linted.test.ts", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
     });
   });
 });

@@ -74,7 +74,7 @@ describe("toml config", async () => {
     const [snapshotPath] = await getSnapshotPath(baseUrl, "config.linted.toml", fixedResults.output);
 
     expect(fixedResults.messages).toEqual([]);
-    expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+    await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
   });
 
   it("should error on parser errors", async () => {
@@ -181,6 +181,6 @@ describe("toml config", async () => {
     const [snapshotPath] = await getSnapshotPath(baseUrl, "config-without-stylistic.linted.toml", fixedResults.output);
 
     expect(fixedResults.messages).toEqual([]);
-    expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+    await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
   });
 });

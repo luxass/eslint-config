@@ -44,7 +44,7 @@ describe("unocss config", async () => {
       const [snapshotPath] = await getSnapshotPath(BASE_URL, "vue/invalid-order.linted.vue", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
     });
 
     it("strict mode - should use unocss plugin", async () => {
@@ -90,7 +90,7 @@ describe("unocss config", async () => {
       const [snapshotPath, snapshotContent] = await getSnapshotPath(BASE_URL, "vue/blocklist.linted.vue", fixedResults.output);
 
       expect(fixedResults.messages).toEqual(expectedMessages);
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
 
     it("attributify mode - should use unocss plugin", async () => {
@@ -129,7 +129,7 @@ describe("unocss config", async () => {
       const [snapshotPath] = await getSnapshotPath(BASE_URL, "vue/attributify.linted.vue", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
     });
 
     it("should not use unocss plugin when disabled", async () => {
@@ -183,7 +183,7 @@ describe("unocss config", async () => {
       const [snapshotPath] = await getSnapshotPath(BASE_URL, "astro/invalid-order.linted.astro", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
     });
 
     it("strict mode - should use unocss plugin", async () => {
@@ -229,7 +229,7 @@ describe("unocss config", async () => {
       const [snapshotPath, snapshotContent] = await getSnapshotPath(BASE_URL, "astro/blocklist.linted.astro", fixedResults.output);
 
       expect(fixedResults.messages).toEqual(expectedMessages);
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
 
     it("attributify mode - should use unocss plugin", async () => {
@@ -260,7 +260,7 @@ describe("unocss config", async () => {
       const [snapshotPath, snapshotContent] = await getSnapshotPath(BASE_URL, "astro/attributify.linted.astro", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
 
     it("should not use unocss plugin when disabled", async () => {
@@ -314,7 +314,7 @@ describe("unocss config", async () => {
       const [snapshotPath] = await getSnapshotPath(BASE_URL, "jsx/invalid-order.linted.tsx", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(fixedResults.output).toMatchFileSnapshot(snapshotPath);
     });
 
     it("strict mode - should use unocss plugin", async () => {
@@ -360,7 +360,7 @@ describe("unocss config", async () => {
       const [snapshotPath, snapshotContent] = await getSnapshotPath(BASE_URL, "jsx/blocklist.linted.tsx", fixedResults.output);
 
       expect(fixedResults.messages).toEqual(expectedMessages);
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
 
     it("attributify mode - should use unocss plugin", async () => {
@@ -391,7 +391,7 @@ describe("unocss config", async () => {
       const [snapshotPath, snapshotContent] = await getSnapshotPath(BASE_URL, "jsx/attributify.linted.tsx", fixedResults.output);
 
       expect(fixedResults.messages).toEqual([]);
-      expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
+      await expect.soft(snapshotContent).toMatchFileSnapshot(snapshotPath);
     });
 
     it("should not use unocss plugin when disabled", async () => {
