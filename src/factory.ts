@@ -38,14 +38,14 @@ import {
 import { getOverrides, interop, isInEditorEnv, resolveSubOptions } from "./utils";
 
 const FLAT_CONFIG_PROPS = [
-  'name',
-  'languageOptions',
-  'linterOptions',
-  'processor',
-  'plugins',
-  'rules',
-  'settings',
-] satisfies (keyof TypedFlatConfigItem)[]
+  "name",
+  "languageOptions",
+  "linterOptions",
+  "processor",
+  "plugins",
+  "rules",
+  "settings",
+] satisfies (keyof TypedFlatConfigItem)[];
 
 const VuePackages = [
   "vue",
@@ -78,9 +78,9 @@ export const defaultPluginRenaming = {
  *  The merged ESLint configurations.
  */
 export function luxass(
-    options: ConfigOptions & Omit<TypedFlatConfigItem, 'files'> = {},
-    ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.Config[]>[]
-  ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
+  options: ConfigOptions & Omit<TypedFlatConfigItem, "files"> = {},
+  ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.Config[]>[]
+): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
   const {
     astro: enableAstro = false,
     autoRenamePlugins = true,
@@ -291,13 +291,15 @@ export function luxass(
   // User can optionally pass a flat config item to the first argument
   // We pick the known keys as ESLint would do schema validation
   const fusedConfig = FLAT_CONFIG_PROPS.reduce((acc, key) => {
-    if (key in options)
-      acc[key] = options[key] as any
-    return acc
-  }, {} as TypedFlatConfigItem)
+    if (key in options) {
+      acc[key] = options[key] as any;
+    }
+    return acc;
+  }, {} as TypedFlatConfigItem);
 
-  if (Object.keys(fusedConfig).length)
-    configs.push([fusedConfig])
+  if (Object.keys(fusedConfig).length) {
+    configs.push([fusedConfig]);
+  }
 
   let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>();
 
