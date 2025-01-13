@@ -11,10 +11,12 @@ import {
   javascript,
   jsdoc,
   jsonc,
+  jsx,
   markdown,
   node,
   perfectionist,
   react,
+  regexp,
   sortPackageJson,
   sortTsconfig,
   stylistic,
@@ -26,8 +28,6 @@ import {
   unocss,
   vue,
   yaml,
-  jsx,
-  regexp
 } from "../src/configs";
 import { combine } from "../src/utils";
 

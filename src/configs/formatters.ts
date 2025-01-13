@@ -200,7 +200,7 @@ export async function formatters(
   }
 
   if (options.markdown) {
-    const formater = options.markdown === true
+    const formatter = options.markdown === true
       ? "prettier"
       : options.markdown;
 
@@ -211,13 +211,13 @@ export async function formatters(
         parser: parserPlain,
       },
       rules: {
-        [`format/${formater}`]: [
+        [`format/${formatter}`]: [
           "error",
-          formater === "prettier"
+          formatter === "prettier"
             ? mergePrettierOptions(prettierOptions, {
-              embeddedLanguageFormatting: "off",
-              parser: "markdown",
-            })
+                embeddedLanguageFormatting: "off",
+                parser: "markdown",
+              })
             : {
                 ...dprintOptions,
                 language: "markdown",
