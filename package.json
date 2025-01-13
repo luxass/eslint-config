@@ -89,7 +89,7 @@
     }
   },
   "dependencies": {
-    "@antfu/install-pkg": "^0.4.1",
+    "@antfu/install-pkg": "^1.0.0",
     "@clack/prompts": "^0.8.2",
     "@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
     "@eslint/markdown": "^6.2.1",
