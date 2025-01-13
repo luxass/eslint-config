@@ -26,6 +26,8 @@ import {
   unocss,
   vue,
   yaml,
+  jsx,
+  regexp
 } from "../src/configs";
 import { combine } from "../src/utils";
 
@@ -61,6 +63,8 @@ const configs = await combine(
   vue(),
   yaml(),
   disables(),
+  jsx(),
+  regexp(),
 );
 
 const configNames = configs.map((i) => i.name).filter(Boolean) as string[];
