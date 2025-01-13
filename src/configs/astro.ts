@@ -68,6 +68,10 @@ export async function astro(options: AstroOptions = {}): Promise<TypedFlatConfig
       },
       processor: "astro/client-side-ts",
       rules: {
+        // Astro uses top level await for e.g. data fetching
+        // https://docs.astro.build/en/guides/data-fetching/#fetch-in-astro
+        'antfu/no-top-level-await': 'off',
+
         // use recommended rules
         "astro/missing-client-only-directive-value": "error",
         "astro/no-conflict-set-directives": "error",
@@ -82,11 +86,11 @@ export async function astro(options: AstroOptions = {}): Promise<TypedFlatConfig
 
         ...stylistic
           ? {
-              "style/indent": "off",
-              "style/jsx-closing-tag-location": "off",
-              "style/jsx-one-expression-per-line": "off",
-              "style/no-multiple-empty-lines": "off",
-            }
+            "style/indent": "off",
+            "style/jsx-closing-tag-location": "off",
+            "style/jsx-one-expression-per-line": "off",
+            "style/no-multiple-empty-lines": "off",
+          }
           : {},
 
         ...overrides,
