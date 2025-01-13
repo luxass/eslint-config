@@ -43,6 +43,14 @@ declare module "@eslint-community/eslint-plugin-eslint-comments" {
   export default plugin;
 }
 
+declare module "eslint-plugin-perfectionist" {
+  import type { ESLint } from "eslint";
+
+  const plugin: ESLint.Plugin;
+
+  export default plugin;
+}
+
 declare module "eslint-plugin-yml" {
   import type { ESLint, Linter } from "eslint";
 
