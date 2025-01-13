@@ -44,7 +44,7 @@
     "test": "vitest --run",
     "typegen": "tsx ./scripts/typegen.ts",
     "test:watch": "vitest",
-    "lint": "eslint --flag unstable_ts_config .",
+    "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
