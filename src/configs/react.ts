@@ -110,6 +110,7 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
         "react-hooks-extra": plugins["@eslint-react/hooks-extra"],
         "react-naming-convention": plugins["@eslint-react/naming-convention"],
         "react-refresh": pluginReactRefresh,
+        "react-web-api": plugins["@eslint-react/web-api"],
       },
     },
     {
@@ -177,6 +178,14 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
             ],
           },
         ],
+
+        // recommended rules from @eslint-react/web-api
+        "react-web-api/no-leaked-event-listener": "warn",
+
+        "react-web-api/no-leaked-interval": "warn",
+        "react-web-api/no-leaked-resize-observer": "warn",
+
+        "react-web-api/no-leaked-timeout": "warn",
 
         // recommended rules from @eslint-react
         "react/ensure-forward-ref-using-ref": "warn",
