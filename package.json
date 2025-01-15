@@ -127,7 +127,7 @@
     "@stylistic/eslint-plugin-migrate": "^2.13.0",
     "@types/estree": "^1.0.6",
     "@types/node": "^22.10.5",
-    "@typescript-eslint/rule-tester": "^8.16.0",
+    "@typescript-eslint/rule-tester": "^8.20.0",
     "@unocss/eslint-plugin": "^65.4.0",
     "astro-eslint-parser": "^1.1.0",
     "eslint": "^9.18.0",
