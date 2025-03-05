@@ -1,7 +1,8 @@
 import type { Linter } from "eslint";
 import type { FlatConfigComposer } from "eslint-flat-config-utils";
+import type { Awaitable, ConfigNames, ConfigOptions, TypedFlatConfigItem } from "../../src";
 import eslintApi from "eslint/use-at-your-own-risk";
-import luxass, { type Awaitable, type ConfigNames, type ConfigOptions, type TypedFlatConfigItem } from "../../src";
+import luxass from "../../src";
 
 export async function createEslint(
   options: ConfigOptions & TypedFlatConfigItem = {},
