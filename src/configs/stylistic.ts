@@ -41,7 +41,6 @@ export async function stylistic(options: StylisticOptions = {}): Promise<TypedFl
   const pluginStylistic = await interop(import("@stylistic/eslint-plugin"));
 
   const config = pluginStylistic.configs.customize({
-    flat: true,
     indent,
     jsx,
     pluginName: "style",

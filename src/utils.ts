@@ -215,7 +215,7 @@ export function resolveSubOptions<K extends keyof ConfigOptions>(
 ): ResolvedOptions<ConfigOptions[K]> {
   return typeof options[key] === "boolean"
     ? {} as any
-    : options[key] || {};
+    : options[key] || {} as any;
 }
 
 /**
