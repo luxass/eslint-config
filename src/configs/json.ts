@@ -54,11 +54,11 @@ export async function jsonc(
       },
     },
     {
-      name: "luxass/jsonc/rules",
       files,
       languageOptions: {
         parser: parserJsonc,
       },
+      name: "luxass/jsonc/rules",
       rules: {
         "jsonc/no-bigint-literals": "error",
         "jsonc/no-binary-expression": "error",

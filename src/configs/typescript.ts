@@ -72,8 +72,8 @@ export async function typescript(
   const {
     exts = [],
     overrides = {},
-    parserOptions = {},
     overridesTypeAware = {},
+    parserOptions = {},
     type = "app",
   } = options ?? {};
 
@@ -130,7 +130,6 @@ export async function typescript(
     return {
       files,
       ...ignores ? { ignores } : {},
-      name: `luxass/typescript/${typeAware ? "type-aware-parser" : "parser"}`,
       languageOptions: {
         parser: parserTs,
         parserOptions: {
@@ -148,6 +147,7 @@ export async function typescript(
           ...parserOptions as any,
         },
       },
+      name: `luxass/typescript/${typeAware ? "type-aware-parser" : "parser"}`,
     };
   }
 
@@ -167,8 +167,8 @@ export async function typescript(
         ]
       : [makeParser(false, files)],
     {
-      name: "luxass/typescript/rules",
       files,
+      name: "luxass/typescript/rules",
       rules: {
         ...renameRules(
           pluginTs.configs["eslint-recommended"].overrides![0].rules!,
@@ -191,14 +191,18 @@ export async function typescript(
         "ts/ban-ts-comment": [
           "error",
           {
-            "ts-ignore": "allow-with-description",
             "ts-expect-error": "allow-with-description",
+            "ts-ignore": "allow-with-description",
           },
         ],
         "ts/consistent-type-definitions": ["error", "interface"],
         "ts/consistent-type-imports": [
           "error",
-          { disallowTypeAnnotations: false, prefer: "type-imports" },
+          {
+            disallowTypeAnnotations: false,
+            fixStyle: "separate-type-imports",
+            prefer: "type-imports",
+          },
         ],
         "ts/method-signature-style": ["error", "property"], // https://www.totaltypescript.com/method-shorthand-syntax-considered-harmful
         "ts/no-dupe-class-members": "error",

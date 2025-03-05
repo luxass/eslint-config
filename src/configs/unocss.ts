@@ -30,9 +30,9 @@ export interface UnoCSSOptions {
 export async function unocss(options: UnoCSSOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
     attributify = true,
+    configPath,
     overrides,
     strict = false,
-    configPath,
   } = options;
 
   await ensure([
@@ -51,15 +51,6 @@ export async function unocss(options: UnoCSSOptions = {}): Promise<TypedFlatConf
       plugins: {
         unocss: pluginUnoCSS,
       },
-      settings: {
-        ...(configPath != null
-          ? {
-              unocss: {
-                configPath,
-              },
-            }
-          : {}),
-      },
       rules: {
         "unocss/order": "warn",
         ...(attributify
@@ -74,6 +65,15 @@ export async function unocss(options: UnoCSSOptions = {}): Promise<TypedFlatConf
           : {}),
 
         ...overrides,
+      },
+      settings: {
+        ...(configPath != null
+          ? {
+              unocss: {
+                configPath,
+              },
+            }
+          : {}),
       },
     },
   ];

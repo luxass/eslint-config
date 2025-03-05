@@ -1,5 +1,3 @@
-// @ts-check
-
 import styleMigrate from "@stylistic/eslint-plugin-migrate";
 
 import { luxass } from "./src";
@@ -11,13 +9,18 @@ export default luxass(
     astro: true,
     typescript: true,
     formatters: true,
-    unocss: true,
     type: "lib",
   },
   {
     ignores: [
       "**/fixtures",
     ],
+  },
+  {
+    files: ["src/**/*.ts"],
+    rules: {
+      "perfectionist/sort-objects": "error",
+    },
   },
   {
     files: ["src/configs/*.ts"],

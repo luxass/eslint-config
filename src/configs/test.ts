@@ -31,8 +31,8 @@ export async function test(
   options: TestOptions = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
-    isInEditor = false,
     files = GLOB_TESTS,
+    isInEditor = false,
     overrides = {},
   } = options;
 
@@ -52,17 +52,17 @@ export async function test(
       },
     },
     {
-      name: "luxass/test/rules",
       files,
+      name: "luxass/test/rules",
       rules: {
 
         "test/consistent-test-it": [
           "error",
           { fn: "it", withinDescribe: "it" },
         ],
+        "test/no-focused-tests": isInEditor ? "off" : ["error", { fixable: true }],
         "test/no-identical-title": "error",
         "test/no-import-node-test": "error",
-        "test/no-focused-tests": isInEditor ? "off" : ["error", { fixable: true }],
         "test/prefer-hooks-in-order": "error",
         "test/prefer-lowercase-title": "error",
 

@@ -66,6 +66,9 @@ export async function stylistic(options: StylisticOptions = {}): Promise<TypedFl
         "style/arrow-parens": ["error", "always", { requireForBlockBody: true }],
         "style/brace-style": ["error", "1tbs", { allowSingleLine: true }],
 
+        "style/generator-star-spacing": ["error", { after: true, before: false }],
+        "style/yield-star-spacing": ["error", { after: true, before: false }],
+
         ...overrides,
       },
     },

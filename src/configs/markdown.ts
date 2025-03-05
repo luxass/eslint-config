@@ -47,9 +47,9 @@ export async function markdown(
       },
     },
     {
-      name: "luxass/markdown/processor",
       files,
       ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
+      name: "luxass/markdown/processor",
       // `eslint-plugin-markdown` only creates virtual files for code blocks,
       // but not the markdown file itself. We use `eslint-merge-processors` to
       // add a pass-through processor for the markdown file itself.
@@ -59,14 +59,13 @@ export async function markdown(
       ]),
     },
     {
-      name: "luxass/markdown/parser",
       files,
       languageOptions: {
         parser: parserPlain,
       },
+      name: "luxass/markdown/parser",
     },
     {
-      name: "luxass/markdown/disables",
       files: [
         GLOB_MARKDOWN_CODE,
         ...exts.map((ext) => `${GLOB_MARKDOWN}/**/*.${ext}`),
@@ -78,6 +77,7 @@ export async function markdown(
           },
         },
       },
+      name: "luxass/markdown/disables",
       rules: {
         "antfu/no-top-level-await": "off",
 

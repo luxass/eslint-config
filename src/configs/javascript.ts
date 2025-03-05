@@ -27,7 +27,6 @@ export async function javascript(
 
   return [
     {
-      name: "luxass/javascript/setup",
       languageOptions: {
         ecmaVersion: 2022,
         globals: {
@@ -50,6 +49,7 @@ export async function javascript(
       linterOptions: {
         reportUnusedDisableDirectives: true,
       },
+      name: "luxass/javascript/setup",
     },
     {
       name: "luxass/javascript/rules",
@@ -127,8 +127,8 @@ export async function javascript(
         "no-regex-spaces": "error",
         "no-restricted-globals": [
           "error",
-          { name: "global", message: "Use `globalThis` instead." },
-          { name: "self", message: "Use `globalThis` instead." },
+          { message: "Use `globalThis` instead.", name: "global" },
+          { message: "Use `globalThis` instead.", name: "self" },
         ],
         "no-restricted-properties": [
           "error",
@@ -264,12 +264,12 @@ export async function javascript(
       },
     },
     {
-      name: "luxass/disables/cli",
       files: [
         `scripts/${GLOB_SRC}`,
         `cli.${GLOB_SRC_EXT}`,
         `**/playground.${GLOB_SRC_EXT}`,
       ],
+      name: "luxass/disables/cli",
       rules: {
         "no-console": "off",
       },

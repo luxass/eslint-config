@@ -54,11 +54,11 @@ export async function toml(
       },
     },
     {
-      name: "luxass/toml/rules",
       files,
       languageOptions: {
         parser: parserToml,
       },
+      name: "luxass/toml/rules",
       rules: {
         "style/spaced-comment": "off",
 

@@ -55,16 +55,16 @@ const VuePackages = [
 ];
 
 export const defaultPluginRenaming = {
+  "@eslint-react": "react",
+  "@eslint-react/dom": "react-dom",
+  "@eslint-react/hooks-extra": "react-hooks-extra",
+  "@eslint-react/naming-convention": "react-naming-convention",
   "@stylistic": "style",
   "@typescript-eslint": "ts",
   "import-x": "import",
   "n": "node",
   "vitest": "test",
   "yml": "yaml",
-  "@eslint-react": "react",
-  "@eslint-react/dom": "react-dom",
-  "@eslint-react/hooks-extra": "react-hooks-extra",
-  "@eslint-react/naming-convention": "react-naming-convention",
 };
 
 /**
@@ -89,12 +89,12 @@ export function luxass(
     jsx: enableJsx = true,
     react: enableReact = false,
     regexp: enableRegexp = true,
+    tailwindcss: enableTailwindCSS = false,
+    type: projectType = "app",
     typescript: enableTypeScript = isPackageExists("typescript"),
     unicorn: enableUnicorn = true,
     unocss: enableUnoCSS = false,
-    tailwindcss: enableTailwindCSS = false,
     vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
-    type: projectType = "app",
   } = options;
 
   let isInEditor = options.isInEditor;

@@ -47,8 +47,8 @@ export async function disables(): Promise<TypedFlatConfigItem[]> {
       },
     },
     {
-      name: "luxass/disables/github-actions",
       files: ["**/.github/workflows/*.{yml,yaml}"],
+      name: "luxass/disables/github-actions",
       rules: {
         // GitHub Actions supports empty values to enable features
         "yaml/no-empty-mapping-value": "off",
