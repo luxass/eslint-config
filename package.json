@@ -39,7 +39,7 @@
   "scripts": {
     "build": "pnpm typegen && tsup --format esm,cjs --clean --dts",
     "stub": "tsup --format esm",
-    "dev": "pnpm eslint-config-inspector --config eslint.config.mjs",
+    "dev": "pnpm eslint-config-inspector --config eslint.config.ts",
     "build:inspector": "pnpm build && pnpm eslint-config-inspector build",
     "test": "vitest --run",
     "typegen": "tsx ./scripts/typegen.ts",
