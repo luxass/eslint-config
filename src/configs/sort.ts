@@ -8,8 +8,8 @@ import type { TypedFlatConfigItem } from "../types";
 export function sortPackageJson(): TypedFlatConfigItem[] {
   return [
     {
-      name: "luxass/sort/package-json",
       files: ["**/package.json"],
+      name: "luxass/sort/package-json",
       rules: {
         "jsonc/sort-array-values": [
           "error",
@@ -115,8 +115,8 @@ export function sortPackageJson(): TypedFlatConfigItem[] {
 export function sortTsconfig(): TypedFlatConfigItem[] {
   return [
     {
-      name: "luxass/sort/tsconfig",
       files: ["**/tsconfig.json", "**/tsconfig.*.json"],
+      name: "luxass/sort/tsconfig",
       rules: {
         "jsonc/sort-keys": [
           "error",

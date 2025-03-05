@@ -15,8 +15,8 @@ export interface TailwindCSSOptions {
 
 export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
-    overrides,
     configPath,
+    overrides,
   } = options;
 
   await ensure([
@@ -31,7 +31,6 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Typ
 
   return [
     {
-      name: "luxass/tailwindcss",
       languageOptions: {
         parserOptions: {
           ecmaFeatures: {
@@ -39,15 +38,7 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Typ
           },
         },
       },
-      settings: {
-        ...(configPath != null
-          ? {
-              tailwindcss: {
-                config: configPath,
-              },
-            }
-          : {}),
-      },
+      name: "luxass/tailwindcss",
       plugins: {
         tailwindcss: pluginTailwindCSS,
       },
@@ -74,6 +65,15 @@ export async function tailwindcss(options: TailwindCSSOptions = {}): Promise<Typ
         "tailwindcss/no-custom-classname": "warn",
 
         ...overrides,
+      },
+      settings: {
+        ...(configPath != null
+          ? {
+              tailwindcss: {
+                config: configPath,
+              },
+            }
+          : {}),
       },
     },
   ];

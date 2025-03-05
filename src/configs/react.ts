@@ -62,12 +62,12 @@ const NextJsPackages = [
 export async function react(options: ReactOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
     files = [GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX],
-    overrides = {},
     filesTypeAware = [GLOB_TS, GLOB_TSX],
     ignoresTypeAware = [
       `${GLOB_MARKDOWN}/**`,
       GLOB_ASTRO_TS,
     ],
+    overrides = {},
     tsconfigPath,
   } = options;
 
@@ -114,7 +114,6 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
       },
     },
     {
-      name: "luxass/react/rules",
       files,
       languageOptions: {
         parserOptions: {
@@ -124,6 +123,7 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
         },
         sourceType: "module",
       },
+      name: "luxass/react/rules",
       rules: {
         // recommended rules from @eslint-react/dom
         "react-dom/no-children-in-void-dom-elements": "warn",

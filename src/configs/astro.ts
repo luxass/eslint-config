@@ -55,7 +55,6 @@ export async function astro(options: AstroOptions = {}): Promise<TypedFlatConfig
       },
     },
     {
-      name: "luxass/astro/rules",
       files,
       languageOptions: {
         globals: pluginAstro.environments.astro.globals,
@@ -66,6 +65,7 @@ export async function astro(options: AstroOptions = {}): Promise<TypedFlatConfig
         },
         sourceType: "module",
       },
+      name: "luxass/astro/rules",
       processor: "astro/client-side-ts",
       rules: {
         // Astro uses top level await for e.g. data fetching

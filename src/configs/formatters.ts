@@ -134,11 +134,11 @@ export async function formatters(
   if (options.css) {
     configs.push(
       {
-        name: "luxass/formatter/css",
         files: [GLOB_CSS, GLOB_POSTCSS],
         languageOptions: {
           parser: parserPlain,
         },
+        name: "luxass/formatter/css",
         rules: {
           "format/prettier": [
             "error",
@@ -149,11 +149,11 @@ export async function formatters(
         },
       },
       {
-        name: "luxass/formatter/scss",
         files: [GLOB_SCSS],
         languageOptions: {
           parser: parserPlain,
         },
+        name: "luxass/formatter/scss",
         rules: {
           "format/prettier": [
             "error",
@@ -164,11 +164,11 @@ export async function formatters(
         },
       },
       {
-        name: "luxass/formatter/less",
         files: [GLOB_LESS],
         languageOptions: {
           parser: parserPlain,
         },
+        name: "luxass/formatter/less",
         rules: {
           "format/prettier": [
             "error",
@@ -183,11 +183,11 @@ export async function formatters(
 
   if (options.html) {
     configs.push({
-      name: "luxass/formatter/html",
       files: [GLOB_HTML],
       languageOptions: {
         parser: parserPlain,
       },
+      name: "luxass/formatter/html",
       rules: {
         "format/prettier": [
           "error",
@@ -205,11 +205,11 @@ export async function formatters(
       : options.markdown;
 
     configs.push({
-      name: "luxass/formatter/markdown",
       files: [GLOB_MARKDOWN],
       languageOptions: {
         parser: parserPlain,
       },
+      name: "luxass/formatter/markdown",
       rules: {
         [`format/${formatter}`]: [
           "error",
@@ -229,11 +229,11 @@ export async function formatters(
 
   if (options.astro) {
     configs.push({
-      name: "luxass/formatter/astro",
       files: [GLOB_ASTRO],
       languageOptions: {
         parser: parserPlain,
       },
+      name: "luxass/formatter/astro",
       rules: {
         "format/prettier": [
           "error",
@@ -250,11 +250,11 @@ export async function formatters(
 
   if (options.graphql) {
     configs.push({
-      name: "luxass/formatter/graphql",
       files: [GLOB_GRAPHQL],
       languageOptions: {
         parser: parserPlain,
       },
+      name: "luxass/formatter/graphql",
       rules: {
         "format/prettier": [
           "error",

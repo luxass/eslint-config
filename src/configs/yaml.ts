@@ -55,11 +55,11 @@ export async function yaml(
       },
     },
     {
-      name: "luxass/yaml/rules",
       files,
       languageOptions: {
         parser: parserYaml,
       },
+      name: "luxass/yaml/rules",
       rules: {
         "style/spaced-comment": "off",
 
