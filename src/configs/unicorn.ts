@@ -23,8 +23,7 @@ export async function unicorn(options: UnicornOptions = {}): Promise<TypedFlatCo
       },
       rules: {
         ...(options.allRecommended
-          // @ts-expect-error no types for unicorn configs
-          ? pluginUnicorn.configs!["flat/recommended"].rules
+          ? pluginUnicorn.configs.recommended.rules
           : {
               // Pass error message when throwing errors
               // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/error-message.md
@@ -35,8 +34,8 @@ export async function unicorn(options: UnicornOptions = {}): Promise<TypedFlatCo
               "unicorn/escape-case": "error",
 
               // Array.isArray instead of instanceof
-              // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-instanceof-array.md
-              "unicorn/no-instanceof-array": "error",
+              // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-instanceof-builtins.md
+              "unicorn/no-instanceof-builtin": "error",
 
               // Ban `new Array` as `Array` constructor's params are ambiguous
               // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-new-array.md
