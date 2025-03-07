@@ -11,10 +11,6 @@ export interface UnicornOptions {
 }
 
 export async function unicorn(options: UnicornOptions = {}): Promise<TypedFlatConfigItem[]> {
-  if (options.allRecommended && pluginUnicorn.configs == null) {
-    throw new Error("The `allRecommended` option requires `eslint-plugin-unicorn` to be installed.");
-  }
-
   return [
     {
       name: "luxass/unicorn/rules",
@@ -35,7 +31,7 @@ export async function unicorn(options: UnicornOptions = {}): Promise<TypedFlatCo
 
               // Array.isArray instead of instanceof
               // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-instanceof-builtins.md
-              "unicorn/no-instanceof-builtin": "error",
+              "unicorn/no-instanceof-builtins": "error",
 
               // Ban `new Array` as `Array` constructor's params are ambiguous
               // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-new-array.md
