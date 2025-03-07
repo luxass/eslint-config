@@ -128,9 +128,9 @@ export async function vue(
           ]),
       rules: {
         ...(pluginVue.configs.base.rules),
-        ...(pluginVue.configs["vue3-essential"].rules),
-        ...(pluginVue.configs["vue3-strongly-recommended"].rules),
-        ...(pluginVue.configs["vue3-recommended"].rules),
+        ...pluginVue.configs["flat/essential"].map((c) => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}) as any,
+        ...pluginVue.configs["flat/strongly-recommended"].map((c) => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}) as any,
+        ...pluginVue.configs["flat/recommended"].map((c) => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}) as any,
 
         "antfu/no-top-level-await": "off",
         "node/prefer-global/process": "off",
