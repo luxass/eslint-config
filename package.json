@@ -127,9 +127,9 @@
   "devDependencies": {
     "@eslint-react/eslint-plugin": "catalog:peer",
     "@eslint/config-inspector": "catalog:dev",
-    "@stylistic/eslint-plugin-migrate": "catalog:peer",
+    "@stylistic/eslint-plugin-migrate": "catalog:dev",
     "@types/node": "catalog:dev",
-    "@typescript-eslint/rule-tester": "catalog:peer",
+    "@typescript-eslint/rule-tester": "catalog:dev",
     "@unocss/eslint-plugin": "catalog:peer",
     "astro-eslint-parser": "catalog:peer",
     "eslint": "catalog:peer",
