@@ -1,5 +1,5 @@
 packages:
-  - fixtures/*
+  - tests/fixtures/*
 
 overrides:
   "@eslint-community/eslint-utils": ^4.5.0
