@@ -15,7 +15,6 @@ import {
   markdown,
   node,
   perfectionist,
-  pnpm,
   react,
   regexp,
   sortPackageJson,
