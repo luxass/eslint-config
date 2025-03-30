@@ -21,7 +21,8 @@ import type { ConfigNames, RuleOptions } from "./typegen";
 
 export type Awaitable<T> = T | Promise<T>;
 
-export type Rules = RuleOptions;
+// eslint-disable-next-line ts/no-empty-object-type
+export interface Rules extends RuleOptions {}
 
 export type { ConfigNames };
 
