@@ -226,4 +226,16 @@ export interface ConfigOptions {
    * @default true
    */
   regexp?: boolean | RegExpOptions;
+
+  /**
+   * Enable pnpm (workspace/catalogs) support.
+   *
+   * Currently it's disabled by default, as it's still experimental.
+   * In the future it will be smartly enabled based on the project usage.
+   *
+   * @see https://github.com/antfu/pnpm-workspace-utils
+   * @experimental
+   * @default false
+   */
+  pnpm?: boolean;
 }
