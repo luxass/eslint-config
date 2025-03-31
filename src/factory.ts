@@ -21,6 +21,7 @@ import {
   markdown,
   node,
   perfectionist,
+  pnpm,
   react,
   regexp,
   sortPackageJson,
@@ -87,6 +88,7 @@ export function luxass(
     exts = [],
     gitignore: enableGitignore = true,
     jsx: enableJsx = true,
+    pnpm: enableCatalogs = false,
     react: enableReact = false,
     regexp: enableRegexp = true,
     tailwindcss: enableTailwindCSS = false,
@@ -247,6 +249,12 @@ export function luxass(
       }),
       sortPackageJson(),
       sortTsconfig(),
+    );
+  }
+
+  if (enableCatalogs) {
+    configs.push(
+      pnpm(),
     );
   }
 

@@ -21,7 +21,8 @@ import type { ConfigNames, RuleOptions } from "./typegen";
 
 export type Awaitable<T> = T | Promise<T>;
 
-export type Rules = RuleOptions;
+// eslint-disable-next-line ts/no-empty-object-type
+export interface Rules extends RuleOptions {}
 
 export type { ConfigNames };
 
@@ -225,4 +226,16 @@ export interface ConfigOptions {
    * @default true
    */
   regexp?: boolean | RegExpOptions;
+
+  /**
+   * Enable pnpm (workspace/catalogs) support.
+   *
+   * Currently it's disabled by default, as it's still experimental.
+   * In the future it will be smartly enabled based on the project usage.
+   *
+   * @see https://github.com/antfu/pnpm-workspace-utils
+   * @experimental
+   * @default false
+   */
+  pnpm?: boolean;
 }
