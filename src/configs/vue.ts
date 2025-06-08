@@ -233,7 +233,7 @@ export async function vue(
               "vue/object-curly-spacing": ["error", "always"],
               "vue/object-property-newline": [
                 "error",
-                { allowMultiplePropertiesPerLine: true },
+                { allowAllPropertiesOnSameLine: true },
               ],
               "vue/operator-linebreak": ["error", "before"],
               "vue/padding-line-between-blocks": ["error", "always"],

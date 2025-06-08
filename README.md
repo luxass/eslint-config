@@ -360,10 +360,10 @@ export default luxass()
   )
   // overrides any named configs
   .override(
-    "luxass/imports",
+    "luxass/stylistic/rules",
     {
       rules: {
-        "import/order": ["error", { "newlines-between": "always" }],
+        "style/generator-star-spacing": ["error", { after: true, before: false }],
       }
     }
   )
