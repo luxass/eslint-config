@@ -40,8 +40,8 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "pnpm typegen && tsup --format esm,cjs --clean --dts",
-    "stub": "tsup --format esm",
+    "build": "pnpm typegen && tsdown --clean --dts",
+    "stub": "tsdown",
     "dev": "pnpm eslint-config-inspector --config eslint.config.ts",
     "build:inspector": "pnpm build && pnpm eslint-config-inspector build",
     "test": "vitest --run",
@@ -143,7 +143,7 @@
     "jiti": "catalog:dev",
     "prettier-plugin-astro": "catalog:peer",
     "tailwindcss": "catalog:peer",
-    "tsup": "catalog:dev",
+    "tsdown": "catalog:dev",
     "tsx": "catalog:dev",
     "typescript": "catalog:dev",
     "unocss": "catalog:peer",
