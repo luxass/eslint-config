@@ -62,7 +62,6 @@ export const defaultPluginRenaming = {
   "@eslint-react/naming-convention": "react-naming-convention",
   "@stylistic": "style",
   "@typescript-eslint": "ts",
-  "import-x": "import",
   "n": "node",
   "vitest": "test",
   "yml": "yaml",
