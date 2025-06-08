@@ -40,6 +40,7 @@ export function sortPackageJson(): TypedFlatConfigItem[] {
               "keywords",
               "categories",
               "sideEffects",
+              "imports",
               "exports",
               "main",
               "module",
