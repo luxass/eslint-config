@@ -3,6 +3,7 @@ import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
 import type {
   AstroOptions,
   FormattersOptions,
+  ImportsOptions,
   JavaScriptOptions,
   JSONOptions,
   ReactOptions,
@@ -64,6 +65,13 @@ export interface ConfigOptions {
    * @default true
    */
   unicorn?: boolean | UnicornOptions;
+
+  /**
+   * Options for eslint-plugin-import-lite.
+   *
+   * @default true
+   */
+  imports?: boolean | ImportsOptions;
 
   /**
    * Control to disable some rules in editors.
