@@ -62,6 +62,7 @@ export const defaultPluginRenaming = {
   "@eslint-react/naming-convention": "react-naming-convention",
   "@stylistic": "style",
   "@typescript-eslint": "ts",
+  "import-lite": "import",
   "n": "node",
   "vitest": "test",
   "yml": "yaml",
@@ -86,6 +87,7 @@ export function luxass(
     autoRenamePlugins = true,
     exts = [],
     gitignore: enableGitignore = true,
+    imports: enableImports = true,
     jsx: enableJsx = true,
     pnpm: enableCatalogs = false,
     react: enableReact = false,
@@ -155,6 +157,19 @@ export function luxass(
 
     perfectionist(),
   );
+
+  if (enableImports) {
+    configs.push(
+      imports(enableImports === true
+        ? {
+            stylistic: stylisticOptions,
+          }
+        : {
+            stylistic: stylisticOptions,
+            ...enableImports,
+          }),
+    );
+  }
 
   if (enableUnicorn) {
     configs.push(unicorn(enableUnicorn === true ? {} : enableUnicorn));
