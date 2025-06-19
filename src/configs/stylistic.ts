@@ -66,11 +66,6 @@ export async function stylistic(options: StylisticOptions = {}): Promise<TypedFl
         "style/brace-style": ["error", "1tbs", { allowSingleLine: true }],
 
         "style/generator-star-spacing": ["error", { after: true, before: false }],
-        "style/padding-line-between-statements": [
-          "error",
-          { blankLine: "always", next: "*", prev: "import" },
-          { blankLine: "any", next: "import", prev: "import" },
-        ],
         "style/yield-star-spacing": ["error", { after: true, before: false }],
 
         ...overrides,
