@@ -22,19 +22,24 @@ import type { ConfigNames, RuleOptions } from "./typegen";
 
 export type Awaitable<T> = T | Promise<T>;
 
-// eslint-disable-next-line ts/no-empty-object-type
-export interface Rules extends RuleOptions {}
+export type Rules = Record<string, Linter.RuleEntry<any> | undefined> & RuleOptions;
 
 export type { ConfigNames };
 
-export type TypedFlatConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, "plugins"> & {
-  // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
+export type TypedFlatConfigItem = Omit<Linter.Config, "plugins" | "rules"> & {
   /**
-   * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
+   * An object containing a name-value mapping of plugin names to plugin objects.
+   * When `files` is specified, these plugins are only available to the matching files.
    *
    * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
    */
   plugins?: Record<string, any>;
+
+  /**
+   * An object containing the configured rules. When `files` or `ignores` are
+   * specified, these rule configurations are only available to the matching files.
+   */
+  rules?: Rules;
 };
 
 export type UserConfigItem = TypedFlatConfigItem | Linter.Config;
