@@ -19,7 +19,7 @@ export async function unicorn(options: UnicornOptions = {}): Promise<TypedFlatCo
       },
       rules: {
         ...(options.allRecommended
-          ? pluginUnicorn.configs.recommended.rules
+          ? pluginUnicorn.configs.recommended.rules as any
           : {
               // Pass error message when throwing errors
               // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/error-message.md
