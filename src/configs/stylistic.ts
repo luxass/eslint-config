@@ -46,7 +46,7 @@ export async function stylistic(options: StylisticOptions = {}): Promise<TypedFl
     pluginName: "style",
     quotes,
     semi,
-  });
+  }) as TypedFlatConfigItem;
 
   return [
     {
