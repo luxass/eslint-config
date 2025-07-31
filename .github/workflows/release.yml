@@ -27,6 +27,9 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           node-version: lts/*
 
+      - name: update npm (oidc)
+        run: npm install -g npm@latest
+
       - run: pnpx changelogithub
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
