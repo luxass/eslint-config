@@ -33,6 +33,8 @@ export const GLOB_MARKDOWN_CODE = `${GLOB_MARKDOWN}/${GLOB_SRC}`;
 
 export const GLOB_TESTS = [
   `**/__tests__/**/*.${GLOB_SRC_EXT}`,
+  `**/test/**/*.${GLOB_SRC_EXT}`,
+  `**/tests/**/*.${GLOB_SRC_EXT}`,
   `**/*.spec.${GLOB_SRC_EXT}`,
   `**/*.test.${GLOB_SRC_EXT}`,
   `**/*.bench.${GLOB_SRC_EXT}`,
