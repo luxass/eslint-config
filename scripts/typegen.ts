@@ -1,37 +1,10 @@
 import fs from "node:fs/promises";
 import { flatConfigsToRulesDTS } from "eslint-typegen/core";
 import { builtinRules } from "eslint/use-at-your-own-risk";
-import {
-  astro,
-  comments,
-  disables,
-  formatters,
-  ignores,
-  imports,
-  javascript,
-  jsdoc,
-  jsonc,
-  jsx,
-  markdown,
-  node,
-  perfectionist,
-  react,
-  regexp,
-  sortPackageJson,
-  sortTsconfig,
-  stylistic,
-  tailwindcss,
-  test,
-  toml,
-  typescript,
-  unicorn,
-  unocss,
-  vue,
-  yaml,
-} from "../src/configs";
+import * as configs from "../src/configs";
 import { combine } from "../src/utils";
 
-const configs = await combine(
+const combinedConfigs = await combine(
   {
     plugins: {
       "": {
@@ -39,37 +12,12 @@ const configs = await combine(
       },
     },
   },
-  astro(),
-  comments(),
-  formatters(),
-  imports(),
-  javascript(),
-  jsdoc(),
-  jsonc(),
-  markdown(),
-  node(),
-  react(),
-  sortPackageJson(),
-  perfectionist(),
-  stylistic(),
-  tailwindcss(),
-  sortTsconfig(),
-  ignores(),
-  test(),
-  toml(),
-  typescript(),
-  unicorn(),
-  unocss(),
-  vue(),
-  yaml(),
-  disables(),
-  jsx(),
-  regexp(),
+  ...Object.values(configs).map((i) => i()),
 );
 
-const configNames = configs.map((i) => i.name).filter(Boolean) as string[];
+const configNames = combinedConfigs.map((i) => i.name).filter(Boolean) as string[];
 
-let dts = await flatConfigsToRulesDTS(configs, {
+let dts = await flatConfigsToRulesDTS(combinedConfigs, {
   includeAugmentation: false,
 });
 

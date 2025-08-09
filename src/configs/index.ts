@@ -1,4 +1,5 @@
 export { astro, type AstroOptions } from "./astro";
+export { command } from "./command";
 export { comments } from "./comments";
 export { disables } from "./disables";
 export { formatters, type FormattersOptions } from "./formatters";

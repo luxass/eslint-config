@@ -9,6 +9,7 @@ import { FlatConfigComposer } from "eslint-flat-config-utils";
 import { isPackageExists } from "local-pkg";
 import {
   astro,
+  command,
   comments,
   disables,
   formatters,
@@ -147,6 +148,9 @@ export function luxass(
       overrides: getOverrides(options, "javascript"),
     }),
     comments(),
+  );
+
+  configs.push(
     node(),
     jsdoc({
       stylistic: stylisticOptions,
@@ -155,6 +159,9 @@ export function luxass(
       stylistic: stylisticOptions,
     }),
 
+    command(),
+
+    // Optional plugins (installed but not enabled by default)
     perfectionist(),
   );
 
