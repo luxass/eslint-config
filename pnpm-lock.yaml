@@ -10,7 +10,7 @@ catalogs:
       specifier: ^1.2.0
       version: 1.2.0
     '@types/node':
-      specifier: ^22.17.1
+      specifier: ^22.18.1
       version: 22.18.1
     '@typescript-eslint/rule-tester':
       specifier: ^8.43.0
