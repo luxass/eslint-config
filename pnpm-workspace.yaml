@@ -9,7 +9,7 @@ overrides:
 catalogs:
   dev:
     "@eslint/config-inspector": ^1.2.0
-    "@types/node": 22.18.3
+    "@types/node": 22.18.4
     "@typescript-eslint/rule-tester": ^8.43.0
     eslint-typegen: ^2.3.0
     jiti: 2.5.1
