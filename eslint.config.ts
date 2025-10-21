@@ -5,7 +5,9 @@ export default luxass(
     vue: true,
     react: true,
     astro: true,
-    typescript: true,
+    typescript: {
+      erasableOnly: true,
+    },
     formatters: true,
     type: "lib",
   },

@@ -1,4 +1,5 @@
 import type { ParserOptions } from "@typescript-eslint/parser";
+import type { Linter } from "eslint";
 import type {
   ProjectType,
   TypedFlatConfigItem,
@@ -64,12 +65,21 @@ export interface TypeScriptOptions {
    * @default "app"
    */
   type?: ProjectType;
+
+  /**
+   * Enable erasable syntax only rules.
+   *
+   * @see https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only
+   * @default false
+   */
+  erasableOnly?: boolean;
 }
 
 export async function typescript(
   options: TypeScriptOptions = {},
 ): Promise<TypedFlatConfigItem[]> {
   const {
+    erasableOnly = false,
     exts = [],
     overrides = {},
     overridesTypeAware = {},
@@ -255,6 +265,22 @@ export async function typescript(
             ...overridesTypeAware,
           },
         }]
+      : []),
+    ...(erasableOnly
+      ? [
+          {
+            name: "luxas/typescript/erasable-syntax-only",
+            plugins: {
+              "erasable-syntax-only": await interop(import("eslint-plugin-erasable-syntax-only")),
+            },
+            rules: {
+              "erasable-syntax-only/enums": "error",
+              "erasable-syntax-only/import-aliases": "error",
+              "erasable-syntax-only/namespaces": "error",
+              "erasable-syntax-only/parameter-properties": "error",
+            } as Record<string, Linter.RuleEntry>,
+          },
+        ]
       : []),
   ];
 }

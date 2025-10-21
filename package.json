@@ -135,6 +135,7 @@
     "astro-eslint-parser": "catalog:peer",
     "eslint": "catalog:peer",
     "eslint-plugin-astro": "catalog:peer",
+    "eslint-plugin-erasable-syntax-only": "catalog:peer",
     "eslint-plugin-format": "catalog:peer",
     "eslint-plugin-react-hooks": "catalog:peer",
     "eslint-plugin-react-refresh": "catalog:peer",
