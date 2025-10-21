@@ -8,29 +8,29 @@ overrides:
 
 catalogs:
   dev:
-    "@eslint/config-inspector": 1.2.0
-    "@types/node": 22.18.10
-    "@typescript-eslint/rule-tester": 8.43.0
+    "@eslint/config-inspector": 1.3.0
+    "@types/node": 22.18.12
+    "@typescript-eslint/rule-tester": 8.46.2
     eslint-typegen: 2.3.0
     jiti: 2.6.1
-    tsdown: 0.15.6
+    tsdown: 0.15.9
     tsx: 4.20.6
     typescript: 5.9.3
     vitest: 3.2.4
 
   peer:
-    "@eslint-react/eslint-plugin": 1.53.1
-    "@unocss/eslint-plugin": 66.5.1
+    "@eslint-react/eslint-plugin": 2.2.2
+    "@unocss/eslint-plugin": 66.5.4
     astro-eslint-parser: 1.2.2
-    eslint: 9.35.0
+    eslint: 9.38.0
     eslint-plugin-astro: 1.3.1
-    eslint-plugin-format: 1.0.1
-    eslint-plugin-react-hooks: 5.2.0
-    eslint-plugin-react-refresh: 0.4.20
+    eslint-plugin-format: 1.0.2
+    eslint-plugin-react-hooks: 7.0.0
+    eslint-plugin-react-refresh: 0.4.24
     eslint-plugin-tailwindcss: 3.18.0
     prettier-plugin-astro: 0.14.1
     tailwindcss: 3.4.18
-    unocss: 66.5.3
+    unocss: 66.5.4
     vue: 3.5.22
 
   prod:
