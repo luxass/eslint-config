@@ -1,6 +1,10 @@
 packages:
   - tests/fixtures/*
 
+strictPeerDependencies: false
+shamefullyHoist: true
+ignoreWorkspaceRootCheck: true
+
 overrides:
   "@eslint-community/eslint-utils": ^4.9.0
   "@typescript-eslint/utils": ^8.43.0
