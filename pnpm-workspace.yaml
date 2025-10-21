@@ -8,9 +8,7 @@ engineStrict: true
 minimumReleaseAge: 1440 # 1 day
 
 overrides:
-  "@eslint-community/eslint-utils": ^4.9.0
-  "@typescript-eslint/utils": ^8.46.2
-  tsx: ^4.20.6
+  rolldown: 1.0.0-beta.44
 
 catalogs:
   dev:
