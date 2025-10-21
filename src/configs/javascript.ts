@@ -28,7 +28,7 @@ export async function javascript(
   return [
     {
       languageOptions: {
-        ecmaVersion: 'latest',
+        ecmaVersion: "latest",
         globals: {
           ...globals.browser,
           ...globals.es2021,
@@ -41,7 +41,7 @@ export async function javascript(
           ecmaFeatures: {
             jsx: true,
           },
-          ecmaVersion: 'latest',
+          ecmaVersion: "latest",
           sourceType: "module",
         },
         sourceType: "module",
