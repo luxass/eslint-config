@@ -4,6 +4,8 @@ packages:
 strictPeerDependencies: false
 shamefullyHoist: true
 ignoreWorkspaceRootCheck: true
+engineStrict: true
+minimumReleaseAge: 1440 # 1 day
 
 overrides:
   "@eslint-community/eslint-utils": ^4.9.0
