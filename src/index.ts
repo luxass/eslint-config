@@ -16,40 +16,32 @@ export function luxass(
   options?: OptionsConfig & Omit<TypedFlatConfigItem, "files">,
   ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.Config[]>[]
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
-  const opts = merge({
+  return antfu({
     formatters: true,
-    rules: {
-      "n/prefer-global/process": "off",
-
-      "no-console": "warn",
-      "no-debugger": "warn",
-    },
     stylistic: {
-      arrowParens: true,
-      braceStyle: "1tbs",
+      overrides: {
+        "style/arrow-parens": [
+          "error",
+          "always",
+          {
+            requireForBlockBody: true,
+          },
+        ],
+        "style/brace-style": [
+          "error",
+          "1tbs",
+          {
+            allowSingleLine: true,
+          },
+        ],
+        ...(options?.stylistic as any)?.overrides,
+      },
       quotes: "double",
       semi: true,
+      ...(options?.stylistic as any),
     },
-  } as Omit<TypedFlatConfigItem, "files">, options);
-
-  return antfu(opts, ...userConfigs);
+    ...options,
+  }, ...userConfigs);
 }
 
 export default luxass;
-
-function merge(defaults: any, overrides: any): any {
-  const result = { ...defaults };
-  for (const key in overrides) {
-    if (Object.prototype.hasOwnProperty.call(overrides, key)) {
-      const overrideValue = overrides[key];
-      const defaultValue = result[key];
-      if (typeof overrideValue === "object" && overrideValue !== null && typeof defaultValue === "object" && defaultValue !== null) {
-        result[key] = merge(defaultValue, overrideValue);
-      }
-      else {
-        result[key] = overrideValue;
-      }
-    }
-  }
-  return result;
-}

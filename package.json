@@ -45,7 +45,7 @@
     "dev": "pnpm eslint-config-inspector --config eslint.config.ts",
     "build:inspector": "pnpm build && pnpm eslint-config-inspector build",
     "test": "vitest --run",
-    "typegen": "node ./scripts/typegen.ts",
+    "typegen": "jiti ./scripts/typegen.ts",
     "test:watch": "vitest",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
