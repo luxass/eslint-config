@@ -1,10 +1,11 @@
 import fs from "node:fs/promises";
 import { flatConfigsToRulesDTS } from "eslint-typegen/core";
 import { builtinRules } from "eslint/use-at-your-own-risk";
-import * as configs from "../src/configs";
-import { combine } from "../src/utils";
+import { luxass } from "../src/index";
 
-const combinedConfigs = await combine(
+const configs = await luxass();
+
+const combinedConfigs = [
   {
     plugins: {
       "": {
@@ -12,8 +13,8 @@ const combinedConfigs = await combine(
       },
     },
   },
-  ...Object.values(configs).map((i) => i()),
-);
+  ...configs,
+];
 
 const configNames = combinedConfigs.map((i) => i.name).filter(Boolean) as string[];
 

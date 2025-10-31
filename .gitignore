@@ -2,3 +2,5 @@ node_modules
 dist
 src/typegen.d.ts
 .eslint-config-inspector
+
+.config-verify
