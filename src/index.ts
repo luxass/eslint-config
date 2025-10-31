@@ -20,6 +20,13 @@ export function luxass(
     formatters: true,
     stylistic: {
       overrides: {
+        "antfu/curly": "off",
+        "antfu/if-newline": "off",
+        "curly": [
+          "error",
+          "multi-line",
+          "consistent",
+        ],
         "style/arrow-parens": [
           "error",
           "always",
@@ -34,6 +41,7 @@ export function luxass(
             allowSingleLine: true,
           },
         ],
+
         ...(options?.stylistic as any)?.overrides,
       },
       quotes: "double",
