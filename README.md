@@ -98,7 +98,7 @@ Install [ESLint extension](https://marketplace.visualstudio.com/items?itemName=d
     "source.organizeImports": "never"
   },
 
-  // silent the stylistic rules in you IDE, but still auto fix them
+  // silent the stylistic rules in your IDE, but still auto fix them
   "eslint.rules.customizations": [
     { "rule": "style/*", "severity": "off", "fixable": true },
     { "rule": "format/*", "severity": "off", "fixable": true },
