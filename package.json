@@ -25,14 +25,12 @@
     "eslint-config"
   ],
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
+    ".": "./dist/index.mjs",
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "files": [
     "dist"
   ],
@@ -143,6 +141,7 @@
     "eslint-typegen": "catalog:dev",
     "jiti": "catalog:dev",
     "prettier-plugin-astro": "catalog:peer",
+    "publint": "catalog:dev",
     "tailwindcss": "catalog:peer",
     "tsdown": "catalog:dev",
     "tsx": "catalog:dev",
