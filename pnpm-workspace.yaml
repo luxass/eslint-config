@@ -47,7 +47,7 @@ catalogs:
     "@stylistic/eslint-plugin": 5.5.0
     "@typescript-eslint/eslint-plugin": 8.46.3
     "@typescript-eslint/parser": 8.46.3
-    "@vitest/eslint-plugin": 1.6.1
+    "@vitest/eslint-plugin": 1.6.4
     eslint-config-flat-gitignore: 2.1.0
     eslint-flat-config-utils: 2.1.4
     eslint-merge-processors: 2.0.0

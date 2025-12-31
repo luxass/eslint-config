@@ -102,8 +102,8 @@ catalogs:
       specifier: 8.46.3
       version: 8.46.3
     '@vitest/eslint-plugin':
-      specifier: 1.6.1
-      version: 1.6.1
+      specifier: 1.6.4
+      version: 1.6.4
     eslint-config-flat-gitignore:
       specifier: 2.1.0
       version: 2.1.0
@@ -210,7 +210,7 @@ importers:
         version: 8.46.3(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
       '@vitest/eslint-plugin':
         specifier: catalog:prod
-        version: 1.6.1(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.16(@types/node@24.10.0)(jiti@2.6.1)(tsx@4.20.6)(yaml@2.8.1))
+        version: 1.6.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.16(@types/node@24.10.0)(jiti@2.6.1)(tsx@4.20.6)(yaml@2.8.1))
       eslint-config-flat-gitignore:
         specifier: catalog:prod
         version: 2.1.0(eslint@9.39.1(jiti@2.6.1))
@@ -1251,8 +1251,8 @@ packages:
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0 || ^6.0.0-0 || ^7.0.0-0
 
-  '@vitest/eslint-plugin@1.6.1':
-    resolution: {integrity: sha512-q4ZCihsURDxhJm6bEUtJjciXtT5k3ijWR4U+0f9XdCRAzAfML5NUUSwulsFoK1AFohBieh52akKWJEIFFMLn/g==}
+  '@vitest/eslint-plugin@1.6.4':
+    resolution: {integrity: sha512-+qw32ux8HMVNrJnQOYgdjrMYmCn9vsiKnJUv5MoOg40e18WOvhWurzHdbRB3vXLfUrP7+jYyQbd6TuRhL23AkQ==}
     engines: {node: '>=18'}
     peerDependencies:
       eslint: '>=8.57.0'
@@ -4189,7 +4189,7 @@ snapshots:
       unplugin-utils: 0.3.1
       vite: 7.0.0(@types/node@24.10.0)(jiti@2.6.1)(tsx@4.20.6)(yaml@2.8.1)
 
-  '@vitest/eslint-plugin@1.6.1(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.16(@types/node@24.10.0)(jiti@2.6.1)(tsx@4.20.6)(yaml@2.8.1))':
+  '@vitest/eslint-plugin@1.6.4(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)(vitest@4.0.16(@types/node@24.10.0)(jiti@2.6.1)(tsx@4.20.6)(yaml@2.8.1))':
     dependencies:
       '@typescript-eslint/scope-manager': 8.46.3
       '@typescript-eslint/utils': 8.46.3(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
