@@ -81,7 +81,7 @@ export async function yaml(
               "yaml/flow-mapping-curly-spacing": "error",
               "yaml/flow-sequence-bracket-newline": "error",
               "yaml/flow-sequence-bracket-spacing": "error",
-              "yaml/indent": ["error", indent === "tab" ? 2 : indent],
+              "yaml/indent": ["error", (indent === "tab" ? 2 : indent) as number],
               "yaml/key-spacing": "error",
               "yaml/no-tab-indent": "error",
               "yaml/quotes": ["error", { avoidEscape: true, prefer: quotes === "backtick" ? "single" : quotes }],
