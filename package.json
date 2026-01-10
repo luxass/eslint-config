@@ -139,6 +139,7 @@
     "eslint-plugin-react-refresh": "catalog:peer",
     "eslint-plugin-tailwindcss": "catalog:peer",
     "eslint-typegen": "catalog:dev",
+    "find-up-simple": "catalog:inline",
     "jiti": "catalog:dev",
     "prettier-plugin-astro": "catalog:peer",
     "publint": "catalog:dev",

@@ -6,6 +6,7 @@ import type {
   ImportsOptions,
   JavaScriptOptions,
   JSONOptions,
+  PnpmOptions,
   ReactOptions,
   RegExpOptions,
   StylisticConfig,
@@ -250,5 +251,5 @@ export interface ConfigOptions {
    * @experimental
    * @default false
    */
-  pnpm?: boolean;
+  pnpm?: boolean | PnpmOptions;
 }

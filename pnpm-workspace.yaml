@@ -1,3 +1,6 @@
+trustPolicy: no-downgrade
+shellEmulator: true
+
 packages:
   - tests/fixtures/*
 
@@ -22,6 +25,9 @@ catalogs:
     tsx: 4.21.0
     typescript: 5.9.3
     vitest: 4.0.16
+
+  inline:
+    find-up-simple: 1.0.1
 
   peer:
     "@eslint-react/eslint-plugin": 2.5.3

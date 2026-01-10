@@ -9,6 +9,7 @@ export default luxass(
       erasableOnly: true,
     },
     formatters: true,
+    pnpm: true,
     type: "lib",
   },
   {

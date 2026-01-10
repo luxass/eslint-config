@@ -6,6 +6,7 @@ import type {
   TypedFlatConfigItem,
 } from "./types";
 import { FlatConfigComposer } from "eslint-flat-config-utils";
+import { findUpSync } from "find-up-simple";
 import { isPackageExists } from "local-pkg";
 import {
   astro,
@@ -90,7 +91,7 @@ export function luxass(
     gitignore: enableGitignore = true,
     imports: enableImports = true,
     jsx: enableJsx = true,
-    pnpm: enableCatalogs = false,
+    pnpm: enableCatalogs = !!findUpSync("pnpm-workspace.yaml"),
     react: enableReact = false,
     regexp: enableRegexp = true,
     tailwindcss: enableTailwindCSS = false,
@@ -276,7 +277,12 @@ export function luxass(
 
   if (enableCatalogs) {
     configs.push(
-      pnpm(),
+      pnpm({
+        isInEditor,
+        json: options.jsonc !== false,
+        yaml: options.yaml !== false,
+        ...(resolveSubOptions(options, "pnpm")),
+      }),
     );
   }
 
