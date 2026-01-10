@@ -89,8 +89,11 @@ export function luxass(
     autoRenamePlugins = true,
     exts = [],
     gitignore: enableGitignore = true,
+    ignores: userIgnores = [],
     imports: enableImports = true,
+    jsdoc: enableJsdoc = true,
     jsx: enableJsx = true,
+    node: enableNode = true,
     pnpm: enableCatalogs = !!findUpSync("pnpm-workspace.yaml"),
     react: enableReact = false,
     regexp: enableRegexp = true,
@@ -143,44 +146,45 @@ export function luxass(
 
   // Base configs
   configs.push(
-    ignores(),
+    ignores(userIgnores),
     javascript({
       isInEditor,
       overrides: getOverrides(options, "javascript"),
     }),
     comments(),
-  );
-
-  configs.push(
-    node(),
-    jsdoc({
-      stylistic: stylisticOptions,
-    }),
-    imports({
-      stylistic: stylisticOptions,
-    }),
-
     command(),
 
     // Optional plugins (installed but not enabled by default)
     perfectionist(),
   );
 
+  if (enableNode) {
+    configs.push(
+      node(),
+    );
+  }
+
+  if (enableJsdoc) {
+    configs.push(
+      jsdoc({
+        stylistic: stylisticOptions,
+      }),
+    );
+  }
+
   if (enableImports) {
     configs.push(
-      imports(enableImports === true
-        ? {
-            stylistic: stylisticOptions,
-          }
-        : {
-            stylistic: stylisticOptions,
-            ...enableImports,
-          }),
+      imports({
+        stylistic: stylisticOptions,
+        ...resolveSubOptions(options, "imports"),
+      }),
     );
   }
 
   if (enableUnicorn) {
-    configs.push(unicorn(enableUnicorn === true ? {} : enableUnicorn));
+    configs.push(
+      unicorn(enableUnicorn === true ? {} : enableUnicorn),
+    );
   }
 
   if (enableVue) {

@@ -93,6 +93,13 @@ export interface ConfigOptions {
   javascript?: JavaScriptOptions;
 
   /**
+   * Enable Node.js rules
+   *
+   * @default true
+   */
+  node?: boolean;
+
+  /**
    * Enable JSONC support.
    *
    * @default true
@@ -252,4 +259,11 @@ export interface ConfigOptions {
    * @default false
    */
   pnpm?: boolean | PnpmOptions;
+
+  /**
+   * Enable JSDoc rules
+   *
+   * @default true
+   */
+  jsdoc?: boolean;
 }
