@@ -112,10 +112,10 @@ describe("json config", async () => {
         fixer.lintFiles(join(BASE_URL, "package.json")),
       ]);
 
-      expect(lintResults.messages).toHaveLength(32);
+      expect(lintResults.messages).toHaveLength(33);
       expect(lintResults.messages).toMatchSnapshot();
 
-      expect(fixedResults.messages).toHaveLength(18);
+      expect(fixedResults.messages).toHaveLength(19);
       expect(fixedResults.messages.length).toBeLessThan(lintResults.messages.length);
       expect(fixedResults.messages).toMatchSnapshot();
 
