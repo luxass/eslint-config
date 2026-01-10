@@ -236,6 +236,7 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
         "react/no-useless-forward-ref": "warn",
 
         "react/prefer-use-state-lazy-initialization": "warn",
+        'react/prefer-namespace-import': 'error',
 
         // overrides
         ...overrides,
