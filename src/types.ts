@@ -1,5 +1,3 @@
-import type { Linter } from "eslint";
-import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
 import type {
   AstroOptions,
   FormattersOptions,
@@ -20,6 +18,8 @@ import type {
   YAMLOptions,
 } from "./configs";
 import type { ConfigNames, RuleOptions } from "./typegen";
+import type { Linter } from "eslint";
+import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
 
 export type Awaitable<T> = T | Promise<T>;
 

@@ -1,10 +1,10 @@
-import type { Linter } from "eslint";
 import type {
   Awaitable,
   ConfigNames,
   ConfigOptions,
   TypedFlatConfigItem,
 } from "./types";
+import type { Linter } from "eslint";
 import { FlatConfigComposer } from "eslint-flat-config-utils";
 import { findUpSync } from "find-up-simple";
 import { isPackageExists } from "local-pkg";

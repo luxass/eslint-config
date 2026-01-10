@@ -68,8 +68,8 @@ declare module "yaml-eslint-parser" {
 
 // USED IN TESTS
 declare module "eslint/use-at-your-own-risk" {
-  import type { Linter } from "eslint";
   import type { UserConfigItem } from "./types";
+  import type { Linter } from "eslint";
   import { ESLint } from "eslint";
 
   // Defined here: https://github.com/eslint/eslint/blob/54c3ca6f2dcd2a7afd53f42fc32055a25587259e/lib/eslint/flat-eslint.js#L66-L88

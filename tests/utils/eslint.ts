@@ -1,6 +1,6 @@
+import type { Awaitable, ConfigNames, ConfigOptions, TypedFlatConfigItem } from "../../src";
 import type { Linter } from "eslint";
 import type { FlatConfigComposer } from "eslint-flat-config-utils";
-import type { Awaitable, ConfigNames, ConfigOptions, TypedFlatConfigItem } from "../../src";
 import eslintApi from "eslint/use-at-your-own-risk";
 import luxass from "../../src";
 

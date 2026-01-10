@@ -1,9 +1,9 @@
-import type { ParserOptions } from "@typescript-eslint/parser";
-import type { Linter } from "eslint";
 import type {
   ProjectType,
   TypedFlatConfigItem,
 } from "../types";
+import type { ParserOptions } from "@typescript-eslint/parser";
+import type { Linter } from "eslint";
 import process from "node:process";
 import pluginAntfu from "eslint-plugin-antfu";
 import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from "../globs";

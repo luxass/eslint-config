@@ -1,8 +1,8 @@
-import type { Options as VueBlocksOptions } from "eslint-processor-vue-blocks";
 import type {
   TypedFlatConfigItem,
 } from "../types";
 import type { StylisticConfig } from "./stylistic";
+import type { Options as VueBlocksOptions } from "eslint-processor-vue-blocks";
 import { mergeProcessors } from "eslint-merge-processors";
 import { GLOB_VUE } from "../globs";
 import { interop } from "../utils";

@@ -1,23 +1,24 @@
 import fs from "node:fs/promises";
+
 import { flatConfigsToRulesDTS } from "eslint-typegen/core";
 import { builtinRules } from "eslint/use-at-your-own-risk";
-import * as configs from "../src/configs";
-import { combine } from "../src/utils";
+import { CONFIG_PRESET_FULL_ON } from "../src/config-presets";
+import { luxass } from "../src/factory";
 
-const combinedConfigs = await combine(
-  {
-    plugins: {
-      "": {
-        rules: Object.fromEntries(builtinRules.entries()),
+const configs = await luxass(CONFIG_PRESET_FULL_ON)
+  .prepend(
+    {
+      plugins: {
+        "": {
+          rules: Object.fromEntries(builtinRules.entries()),
+        },
       },
     },
-  },
-  ...Object.values(configs).map((i) => i()),
-);
+  );
 
-const configNames = combinedConfigs.map((i) => i.name).filter(Boolean) as string[];
+const configNames = configs.map((i) => i.name).filter(Boolean) as string[];
 
-let dts = await flatConfigsToRulesDTS(combinedConfigs, {
+let dts = await flatConfigsToRulesDTS(configs, {
   includeAugmentation: false,
 });
 
