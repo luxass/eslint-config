@@ -18,13 +18,13 @@ export async function perfectionist(): Promise<TypedFlatConfigItem[]> {
         "perfectionist/sort-imports": ["error", {
           groups: [
             "type",
-            ["parent-type", "sibling-type", "index-type", "internal-type"],
+            ["type-parent", "type-sibling", "type-index", "type-internal"],
+
             "builtin",
             "external",
             "internal",
             ["parent", "sibling", "index"],
             "side-effect",
-            "object",
             "unknown",
           ],
           newlinesBetween: "ignore",
