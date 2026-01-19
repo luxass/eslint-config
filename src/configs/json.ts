@@ -92,7 +92,7 @@ export async function jsonc(
               "jsonc/array-bracket-spacing": ["error", "never"],
               "jsonc/comma-dangle": ["error", "never"],
               "jsonc/comma-style": ["error", "last"],
-              "jsonc/indent": ["error", indent as number],
+              "jsonc/indent": ["error", typeof indent === "number" ? indent : indent === "tab" ? "tab" : 2],
               "jsonc/key-spacing": [
                 "error",
                 { afterColon: true, beforeColon: false },
