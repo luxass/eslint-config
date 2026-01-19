@@ -1,5 +1,5 @@
-import type { TypedFlatConfigItem } from "../types";
 import type { StylisticCustomizeOptions } from "@stylistic/eslint-plugin";
+import type { TypedFlatConfigItem } from "../types";
 import pluginAntfu from "eslint-plugin-antfu";
 import { interop } from "../utils";
 

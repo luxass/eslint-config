@@ -1,6 +1,6 @@
+import type { Linter } from "eslint";
 import type { RuleOptions } from "./typegen";
 import type { Awaitable, ConfigOptions, TypedFlatConfigItem } from "./types";
-import type { Linter } from "eslint";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
 import { isPackageExists } from "local-pkg";
