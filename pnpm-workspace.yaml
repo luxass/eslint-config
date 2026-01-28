@@ -16,11 +16,11 @@ overrides:
 catalogs:
   dev:
     "@eslint/config-inspector": 1.4.2
-    "@types/node": 24.10.0
+    "@types/node": 24.10.9
     "@typescript-eslint/rule-tester": 8.53.0
     eslint-typegen: 2.3.0
     jiti: 2.6.1
-    publint: 0.3.16
+    publint: 0.3.17
     tsdown: 0.19.0
     tsx: 4.21.0
     typescript: 5.9.3
@@ -43,7 +43,7 @@ catalogs:
     prettier-plugin-astro: 0.14.1
     tailwindcss: 3.4.19
     unocss: 66.6.0
-    vue: 3.5.26
+    vue: 3.5.27
 
   prod:
     "@antfu/install-pkg": 1.1.0
