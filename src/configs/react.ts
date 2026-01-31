@@ -222,7 +222,7 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
 
         // preconfigured rules from eslint-plugin-react-refresh https://github.com/ArnaudBarre/eslint-plugin-react-refresh/tree/main/src
         "react-refresh/only-export-components": [
-          "warn",
+          "error",
           {
             allowConstantExport: isAllowConstantExport,
             allowExportNames: [
@@ -235,12 +235,19 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
                     "runtime",
                     "preferredRegion",
                     "maxDuration",
-                    "config",
+
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-static-params
                     "generateStaticParams",
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
                     "metadata",
                     "generateMetadata",
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-viewport
                     "viewport",
                     "generateViewport",
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-image-metadata
+                    "generateImageMetadata",
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-sitemaps
+                    "generateSitemaps",
                   ]
                 : []),
               ...(isUsingRemix || isUsingReactRouter
