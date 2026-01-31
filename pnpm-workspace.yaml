@@ -30,7 +30,7 @@ catalogs:
     find-up-simple: 1.0.1
 
   peer:
-    "@eslint-react/eslint-plugin": 2.7.2
+    "@eslint-react/eslint-plugin": 2.8.1
     "@unocss/eslint-plugin": 66.6.0
     astro-eslint-parser: 1.2.2
     eslint: 9.39.2
@@ -43,7 +43,7 @@ catalogs:
     prettier-plugin-astro: 0.14.1
     tailwindcss: 3.4.19
     unocss: 66.6.0
-    vue: 3.5.26
+    vue: 3.5.27
 
   prod:
     "@antfu/install-pkg": 1.1.0
