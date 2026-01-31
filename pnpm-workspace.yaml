@@ -16,7 +16,7 @@ overrides:
 catalogs:
   dev:
     "@eslint/config-inspector": 1.4.2
-    "@types/node": 24.10.0
+    "@types/node": 24.10.9
     "@typescript-eslint/rule-tester": 8.54.0
     eslint-typegen: 2.3.0
     jiti: 2.6.1
@@ -72,7 +72,7 @@ catalogs:
     eslint-plugin-vue: 10.7.0
     eslint-plugin-yml: 3.0.0
     eslint-processor-vue-blocks: 2.0.0
-    globals: 17.2.0
+    globals: 17.1.0
     jsonc-eslint-parser: 2.4.2
     local-pkg: 1.1.2
     parse-gitignore: 2.0.0
