@@ -8,4 +8,5 @@ export default defineConfig({
   format: ["esm"],
   exports: true,
   publint: true,
+  inlineOnly: false,
 });
