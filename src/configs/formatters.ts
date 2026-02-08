@@ -1,7 +1,18 @@
 import type { TypedFlatConfigItem } from "../types";
 import type { VendoredPrettierOptions, VendoredPrettierRuleOptions } from "../vendor/prettier-types";
 import type { StylisticConfig } from "./stylistic";
-import { GLOB_ASTRO, GLOB_CSS, GLOB_GRAPHQL, GLOB_HTML, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from "../globs";
+import {
+  GLOB_ASTRO,
+  GLOB_CSS,
+  GLOB_GRAPHQL,
+  GLOB_HTML,
+  GLOB_LESS,
+  GLOB_MARKDOWN,
+  GLOB_POSTCSS,
+  GLOB_SCSS,
+  GLOB_SVG,
+  GLOB_XML,
+} from "../globs";
 import { ensure, interop, isPackageInScope, parserPlain } from "../utils";
 import { StylisticConfigDefaults } from "./stylistic";
 
@@ -19,6 +30,20 @@ export interface FormattersOptions {
    * Currently only support Prettier.
    */
   html?: "prettier" | boolean;
+
+  /**
+   * Enable formatting support for XML.
+   *
+   * Currently only support Prettier.
+   */
+  xml?: "prettier" | boolean;
+
+  /**
+   * Enable formatting support for SVG.
+   *
+   * Currently only support Prettier.
+   */
+  svg?: "prettier" | boolean;
 
   /**
    * Enable formatting support for Markdown.
@@ -58,7 +83,7 @@ export interface FormattersOptions {
 
 function mergePrettierOptions(
   options: VendoredPrettierOptions,
-  overrides: VendoredPrettierRuleOptions = {},
+  overrides: VendoredPrettierRuleOptions,
 ): VendoredPrettierRuleOptions {
   return {
     ...options,
@@ -75,18 +100,22 @@ export async function formatters(
   stylistic: StylisticConfig = {},
 ): Promise<TypedFlatConfigItem[]> {
   if (options === true) {
+    const isPrettierPluginXmlInScope = isPackageInScope("@prettier/plugin-xml");
     options = {
-      astro: isPackageInScope("astro"),
+      astro: isPackageInScope("prettier-plugin-astro"),
       css: true,
       graphql: true,
       html: true,
       markdown: true,
+      svg: isPrettierPluginXmlInScope,
+      xml: isPrettierPluginXmlInScope,
     };
   }
 
   await ensure([
     "eslint-plugin-format",
     options.astro ? "prettier-plugin-astro" : undefined,
+    (options.xml || options.svg) ? "@prettier/plugin-xml" : undefined,
   ]);
 
   const {
@@ -110,6 +139,13 @@ export async function formatters(
     } satisfies VendoredPrettierOptions,
     options.prettierOptions || {},
   );
+
+  const prettierXmlOptions: VendoredPrettierOptions = {
+    xmlQuoteAttributes: "double",
+    xmlSelfClosingSpace: true,
+    xmlSortAttributesByKey: false,
+    xmlWhitespaceSensitivity: "ignore",
+  };
 
   const dprintOptions = Object.assign(
     {
@@ -193,6 +229,48 @@ export async function formatters(
           "error",
           mergePrettierOptions(prettierOptions, {
             parser: "html",
+          }),
+        ],
+      },
+    });
+  }
+
+  if (options.xml) {
+    configs.push({
+      files: [GLOB_XML],
+      languageOptions: {
+        parser: parserPlain,
+      },
+      name: "luxass/formatter/xml",
+      rules: {
+        "format/prettier": [
+          "error",
+          mergePrettierOptions({ ...prettierXmlOptions, ...prettierOptions }, {
+            parser: "xml",
+            plugins: [
+              "@prettier/plugin-xml",
+            ],
+          }),
+        ],
+      },
+    });
+  }
+
+  if (options.svg) {
+    configs.push({
+      files: [GLOB_SVG],
+      languageOptions: {
+        parser: parserPlain,
+      },
+      name: "luxass/formatter/svg",
+      rules: {
+        "format/prettier": [
+          "error",
+          mergePrettierOptions({ ...prettierXmlOptions, ...prettierOptions }, {
+            parser: "xml",
+            plugins: [
+              "@prettier/plugin-xml",
+            ],
           }),
         ],
       },

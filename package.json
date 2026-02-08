@@ -129,6 +129,7 @@
   "devDependencies": {
     "@eslint-react/eslint-plugin": "catalog:peer",
     "@eslint/config-inspector": "catalog:dev",
+    "@prettier/plugin-xml": "catalog:peer",
     "@types/node": "catalog:dev",
     "@typescript-eslint/rule-tester": "catalog:dev",
     "@unocss/eslint-plugin": "catalog:peer",

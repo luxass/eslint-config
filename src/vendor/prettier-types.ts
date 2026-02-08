@@ -5,7 +5,7 @@
 export type VendoredPrettierOptions = Partial<VendoredPrettierOptionsRequired>;
 
 export type VendoredPrettierRuleOptions = VendoredPrettierOptions & {
-  parser?: BuiltInParserName | ExternalParserName;
+  parser: BuiltInParserName | ExternalParserName;
   [k: string]: unknown | undefined;
 };
 
@@ -44,7 +44,7 @@ export interface VendoredPrettierOptionsRequired {
    */
   bracketSpacing: boolean;
   /**
-   * Put the `>` of a multi-line HTML (HTML, JSX, Vue, Angular) element at the end of the last line instead of being
+   * Put the `>` of a multi-line HTML (HTML, XML, JSX, Vue, Angular) element at the end of the last line instead of being
    * alone on the next line (does not apply to self closing elements).
    */
   bracketSameLine: boolean;
@@ -98,10 +98,31 @@ export interface VendoredPrettierOptionsRequired {
    */
   vueIndentScriptAndStyle: boolean;
   /**
-   * Enforce single attribute per line in HTML, Vue and JSX.
+   * Enforce single attribute per line in HTML, XML, Vue and JSX.
    * @default false
    */
   singleAttributePerLine: boolean;
+
+  /**
+   * How to handle whitespaces in XML.
+   * @default "preserve"
+   */
+  xmlQuoteAttributes: "single" | "double" | "preserve";
+  /**
+   * Whether to put a space inside the brackets of self-closing XML elements.
+   * @default true
+   */
+  xmlSelfClosingSpace: boolean;
+  /**
+   * Whether to sort attributes by key in XML elements.
+   * @default false
+   */
+  xmlSortAttributesByKey: boolean;
+  /**
+   * How to handle whitespaces in XML.
+   * @default "ignore"
+   */
+  xmlWhitespaceSensitivity: "ignore" | "strict" | "preserve";
 }
 
 export type BuiltInParserName
@@ -127,6 +148,7 @@ export type BuiltInParserName
     | "scss"
     | "typescript"
     | "vue"
+    | "xml"
     | "yaml";
 
 export type ExternalParserName = "astro";
