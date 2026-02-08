@@ -25,7 +25,7 @@ export type Awaitable<T> = T | Promise<T>;
 
 export type Rules = Record<string, Linter.RuleEntry<any> | undefined> & RuleOptions;
 
-export type { ConfigNames };
+export type { ConfigNames, RuleOptions };
 
 export type TypedFlatConfigItem = Omit<Linter.Config, "plugins" | "rules"> & {
   /**
