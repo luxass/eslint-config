@@ -1,5 +1,6 @@
 import type { Linter } from "eslint";
 import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
+import type { ConfigWithExtends } from "eslint-flat-config-utils";
 import type {
   AstroOptions,
   FormattersOptions,
@@ -27,7 +28,7 @@ export type Rules = Record<string, Linter.RuleEntry<any> | undefined> & RuleOpti
 
 export type { ConfigNames, RuleOptions };
 
-export type TypedFlatConfigItem = Omit<Linter.Config, "plugins" | "rules"> & {
+export type TypedFlatConfigItem = Omit<ConfigWithExtends, "plugins" | "rules"> & {
   /**
    * An object containing a name-value mapping of plugin names to plugin objects.
    * When `files` is specified, these plugins are only available to the matching files.
