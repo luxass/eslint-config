@@ -1,5 +1,6 @@
 import type { TypedFlatConfigItem } from "../types";
 import type { StylisticConfig } from "./stylistic";
+import { GLOB_SRC } from "../globs";
 import { interop } from "../utils";
 
 export interface JSDOCOptions {
@@ -24,6 +25,7 @@ export async function jsdoc(options: JSDOCOptions = {}): Promise<TypedFlatConfig
 
   return [
     {
+      files: [GLOB_SRC],
       name: "luxass/jsdoc/rules",
       plugins: {
         jsdoc: await interop(import("eslint-plugin-jsdoc")),

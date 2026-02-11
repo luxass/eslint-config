@@ -1,9 +1,11 @@
+import { GLOB_SRC } from "../globs";
 import type { TypedFlatConfigItem } from "../types";
 import pluginNode from "eslint-plugin-n";
 
 export function node(): TypedFlatConfigItem[] {
   return [
     {
+      files: [GLOB_SRC],
       name: "luxass/node",
       plugins: {
         node: pluginNode,
