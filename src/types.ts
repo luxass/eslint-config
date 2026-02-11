@@ -67,6 +67,16 @@ export interface ConfigOptions {
   gitignore?: FlatGitignoreOptions | boolean;
 
   /**
+   * Extend the global ignores.
+   *
+   * Passing an array to extends the ignores.
+   * Passing a function to modify the default ignores.
+   *
+   * @default []
+   */
+  ignores?: string[] | ((originals: string[]) => string[]);
+
+  /**
    * Options for eslint-plugin-unicorn.
    *
    * @default true
