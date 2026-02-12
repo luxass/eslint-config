@@ -1,6 +1,6 @@
 {
   "name": "@luxass/eslint-config",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "description": "ESLint config for @luxass",
   "type": "module",
   "author": {
