@@ -60,6 +60,10 @@ const ReactRouterPackages = [
   "@react-router/dev",
 ];
 
+const TanstackRouterPackages = [
+  "@tanstack/react-router",
+];
+
 const NextJsPackages = [
   "next",
 ];
@@ -107,6 +111,7 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
   const isUsingRemix = RemixPackages.some((i) => isPackageExists(i));
   const isUsingReactRouter = ReactRouterPackages.some((i) => isPackageExists(i));
   const isUsingNext = NextJsPackages.some((i) => isPackageExists(i));
+  const isUsingTanstackRouter = TanstackRouterPackages.some((i) => isPackageExists(i));
 
   const plugins = (pluginReact.configs.all as any).plugins;
 
@@ -243,7 +248,7 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
             allowExportNames: [
               ...(isUsingNext
                 ? [
-                    // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
+                  // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
                     "dynamic",
                     "dynamicParams",
                     "revalidate",
@@ -276,6 +281,19 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
                     "clientAction",
                     "handle",
                     "shouldRevalidate",
+                  ]
+                : []),
+            ],
+            extraHOCs: [
+              ...(isUsingTanstackRouter
+                ? [
+                    "createFileRoute",
+                    "createLazyFileRoute",
+                    "createRootRoute",
+                    "createRootRouteWithContext",
+                    "createLink",
+                    "createRoute",
+                    "createLazyRoute",
                   ]
                 : []),
             ],
