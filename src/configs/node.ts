@@ -5,11 +5,14 @@ import { GLOB_SRC } from "../globs";
 export function node(): TypedFlatConfigItem[] {
   return [
     {
-      files: [GLOB_SRC],
-      name: "luxass/node",
+      name: "luxass/node/setup",
       plugins: {
         node: pluginNode,
       },
+    },
+    {
+      files: [GLOB_SRC],
+      name: "luxass/node/rules",
       rules: {
         "node/handle-callback-err": ["error", "^(err|error)$"],
         "node/no-deprecated-api": "error",
