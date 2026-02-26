@@ -54,12 +54,10 @@ export async function pnpm(options: PnpmOptions): Promise<TypedFlatConfigItem[]>
     pluginPnpm,
     pluginYaml,
     yamlParser,
-    jsoncParser,
   ] = await Promise.all([
     interop(import("eslint-plugin-pnpm")),
     interop(import("eslint-plugin-yml")),
     interop(import("yaml-eslint-parser")),
-    interop(import("jsonc-eslint-parser")),
   ]);
 
   const {
@@ -79,9 +77,7 @@ export async function pnpm(options: PnpmOptions): Promise<TypedFlatConfigItem[]>
           "package.json",
           "**/package.json",
         ],
-        languageOptions: {
-          parser: jsoncParser,
-        },
+        language: "jsonc/x",
         name: "luxass/pnpm/package-json",
         plugins: {
           pnpm: pluginPnpm,
