@@ -26,6 +26,18 @@ export interface MarkdownOptions {
    * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
    */
   files?: string[];
+
+  /**
+   * Enable GFM (GitHub Flavored Markdown) support.
+   *
+   * @default true
+   */
+  gfm?: boolean;
+
+  /**
+   * Override rules for markdown itself.
+   */
+  overridesMarkdown?: TypedFlatConfigItem["rules"];
 }
 
 export async function markdown(
@@ -34,7 +46,9 @@ export async function markdown(
   const {
     exts = [],
     files = [GLOB_MARKDOWN],
+    gfm = true,
     overrides = {},
+    overridesMarkdown = {},
   } = options;
 
   const markdown = await interop(import("@eslint/markdown"));
@@ -60,10 +74,34 @@ export async function markdown(
     },
     {
       files,
-      languageOptions: {
-        parser: parserPlain,
-      },
+      language: gfm ? "markdown/gfm" : "markdown/commonmark",
       name: "luxass/markdown/parser",
+    },
+    {
+      files,
+      name: "luxass/markdown/rules",
+      rules: {
+        ...markdown.configs.recommended.at(0)?.rules,
+        // https://github.com/eslint/markdown/issues/294
+        "markdown/no-missing-label-refs": "off",
+        ...overridesMarkdown,
+      },
+    },
+    {
+      files,
+      name: "luxass/markdown/disables/markdown",
+      rules: {
+        // Disable rules do not work with markdown sourcecode.
+        "command/command": "off",
+        "no-irregular-whitespace": "off",
+        "perfectionist/sort-exports": "off",
+        "perfectionist/sort-imports": "off",
+        "regexp/no-legacy-features": "off",
+        "regexp/no-missing-g-flag": "off",
+        "regexp/no-useless-dollar-replacements": "off",
+        "regexp/no-useless-flag": "off",
+        "style/indent": "off",
+      },
     },
     {
       files: [
@@ -77,7 +115,7 @@ export async function markdown(
           },
         },
       },
-      name: "luxass/markdown/disables",
+      name: "luxass/markdown/disables/code",
       rules: {
         "antfu/no-top-level-await": "off",
 
@@ -105,7 +143,6 @@ export async function markdown(
         "ts/no-unused-expressions": "off",
         "ts/no-unused-vars": "off",
         "ts/no-use-before-define": "off",
-        "ts/no-var-requires": "off",
 
         "unicode-bom": "off",
         "unused-imports/no-unused-imports": "off",
