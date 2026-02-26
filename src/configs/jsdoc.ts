@@ -25,11 +25,14 @@ export async function jsdoc(options: JSDOCOptions = {}): Promise<TypedFlatConfig
 
   return [
     {
-      files: [GLOB_SRC],
-      name: "luxass/jsdoc/rules",
+      name: "luxass/jsdoc/setup",
       plugins: {
         jsdoc: await interop(import("eslint-plugin-jsdoc")),
       },
+    },
+    {
+      files: [GLOB_SRC],
+      name: "luxass/jsdoc/rules",
       rules: {
         "jsdoc/check-access": "warn",
         "jsdoc/check-param-names": "warn",
