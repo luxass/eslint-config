@@ -147,14 +147,11 @@ export async function formatters(
     xmlWhitespaceSensitivity: "ignore",
   };
 
-  const dprintOptions = Object.assign(
-    {
+  const dprintOptions = {
       indentWidth: typeof indent === "number" ? indent : 2,
       quoteStyle: quotes === "single" ? "preferSingle" : "preferDouble",
       useTabs: indent === "tab",
-    },
-    options.dprintOptions || {},
-  );
+    , ...options.dprintOptions || {}};
 
   const pluginFormat = await interop(import("eslint-plugin-format"));
 
