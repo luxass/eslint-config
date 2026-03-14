@@ -2,6 +2,7 @@ export { astro, type AstroOptions } from "./astro";
 export { command } from "./command";
 export { comments } from "./comments";
 export { disables } from "./disables";
+export { e18e, type E18eOptions } from "./e18e";
 export { formatters, type FormattersOptions } from "./formatters";
 export { ignores } from "./ignores";
 export { imports, type ImportsOptions } from "./imports";

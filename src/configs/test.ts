@@ -69,6 +69,7 @@ export async function test(
         // Disables
         ...{
           "antfu/no-top-level-await": "off",
+          "e18e/prefer-static-regex": "off",
           "no-unused-expressions": "off",
           "node/prefer-global/process": "off",
           "ts/explicit-function-return-type": "off",

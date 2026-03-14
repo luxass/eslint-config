@@ -13,6 +13,7 @@ import {
   command,
   comments,
   disables,
+  e18e,
   formatters,
   ignores,
   imports,
@@ -87,6 +88,7 @@ export function luxass(
   const {
     astro: enableAstro = false,
     autoRenamePlugins = true,
+    e18e: enableE18e = true,
     exts = [],
     gitignore: enableGitignore = true,
     ignores: userIgnores = [],
@@ -177,6 +179,15 @@ export function luxass(
       imports({
         stylistic: stylisticOptions,
         ...resolveSubOptions(options, "imports"),
+      }),
+    );
+  }
+
+  if (enableE18e) {
+    configs.push(
+      e18e({
+        isInEditor,
+        ...enableE18e === true ? {} : enableE18e,
       }),
     );
   }

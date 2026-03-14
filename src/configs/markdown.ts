@@ -120,6 +120,8 @@ export async function markdown(
       rules: {
         "antfu/no-top-level-await": "off",
 
+        "e18e/prefer-static-regex": "off",
+
         "no-alert": "off",
         "no-console": "off",
         "no-labels": "off",

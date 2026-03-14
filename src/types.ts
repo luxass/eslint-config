@@ -3,6 +3,7 @@ import type { FlatGitignoreOptions } from "eslint-config-flat-gitignore";
 import type { ConfigWithExtends } from "eslint-flat-config-utils";
 import type {
   AstroOptions,
+  E18eOptions,
   FormattersOptions,
   ImportsOptions,
   JavaScriptOptions,
@@ -75,6 +76,13 @@ export interface ConfigOptions {
    * @default []
    */
   ignores?: string[] | ((originals: string[]) => string[]);
+
+  /**
+   * Options for [@e18e/eslint-plugin](https://github.com/e18e/eslint-plugin)
+   *
+   * @default true
+   */
+  e18e?: boolean | E18eOptions;
 
   /**
    * Options for eslint-plugin-unicorn.
