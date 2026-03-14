@@ -148,10 +148,13 @@ export async function formatters(
   };
 
   const dprintOptions = {
-      indentWidth: typeof indent === "number" ? indent : 2,
-      quoteStyle: quotes === "single" ? "preferSingle" : "preferDouble",
-      useTabs: indent === "tab",
-    , ...options.dprintOptions || {}};
+    indentWidth: typeof indent === "number" ? indent : 2,
+    quoteStyle: quotes === "single" ? "preferSingle" : "preferDouble",
+    useTabs: indent === "tab",
+    // TODO: refine the type of `options.dprintOptions` in the future to avoid this ts comment.
+    // @ts-expect-error - `options.dprintOptions` is boolean
+    ...options.dprintOptions || {},
+  };
 
   const pluginFormat = await interop(import("eslint-plugin-format"));
 
