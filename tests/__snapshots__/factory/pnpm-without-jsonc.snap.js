@@ -236,6 +236,30 @@
     ],
   },
   {
+    "name": "luxass/e18e/rules",
+    "plugins": [
+      "e18e",
+    ],
+    "rules": [
+      "e18e/prefer-array-at",
+      "e18e/prefer-array-fill",
+      "e18e/prefer-includes",
+      "e18e/prefer-array-to-reversed",
+      "e18e/prefer-array-to-sorted",
+      "e18e/prefer-array-to-spliced",
+      "e18e/prefer-nullish-coalescing",
+      "e18e/prefer-object-has-own",
+      "e18e/prefer-spread-syntax",
+      "e18e/prefer-url-canparse",
+      "e18e/prefer-array-from-map",
+      "e18e/prefer-timer-args",
+      "e18e/prefer-date-now",
+      "e18e/prefer-regex-test",
+      "e18e/prefer-array-some",
+      "e18e/prefer-static-regex",
+    ],
+  },
+  {
     "name": "luxass/unicorn/rules",
     "plugins": [
       "unicorn",
@@ -548,6 +572,7 @@
       "test/prefer-hooks-in-order",
       "test/prefer-lowercase-title",
       "- antfu/no-top-level-await",
+      "- e18e/prefer-static-regex",
       "- no-unused-expressions",
       "- node/prefer-global/process",
       "- ts/explicit-function-return-type",
@@ -887,7 +912,7 @@
     ],
     "name": "luxass/markdown/rules",
     "rules": [
-      "markdown/fenced-code-language",
+      "- markdown/fenced-code-language",
       "markdown/heading-increment",
       "markdown/no-duplicate-definitions",
       "markdown/no-empty-definitions",
@@ -938,6 +963,7 @@
     "name": "luxass/markdown/disables/code",
     "rules": [
       "- antfu/no-top-level-await",
+      "- e18e/prefer-static-regex",
       "- no-alert",
       "- no-console",
       "- no-labels",
