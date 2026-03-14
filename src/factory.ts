@@ -99,7 +99,7 @@ export function luxass(
     regexp: enableRegexp = true,
     tailwindcss: enableTailwindCSS = false,
     type: projectType = "app",
-    typescript: enableTypeScript = isPackageExists("typescript"),
+    typescript: enableTypeScript = isPackageExists("typescript") || isPackageExists("@typescript/native-preview"),
     unicorn: enableUnicorn = true,
     unocss: enableUnoCSS = false,
     vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
