@@ -128,54 +128,68 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
       rules: {
         ...pluginReact.configs.recommended.rules,
 
-        'react/prefer-namespace-import': 'error',
-
         // preconfigured rules from eslint-plugin-react-refresh https://github.com/ArnaudBarre/eslint-plugin-react-refresh/tree/main/src
-        'react-refresh/only-export-components': [
-          'error',
+        "react-refresh/only-export-components": [
+          "error",
           {
             allowConstantExport: isAllowConstantExport,
             allowExportNames: [
               ...(isUsingNext
                 ? [
                   // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
-                  'dynamic',
-                  'dynamicParams',
-                  'revalidate',
-                  'fetchCache',
-                  'runtime',
-                  'preferredRegion',
-                  'maxDuration',
-                  // https://nextjs.org/docs/app/api-reference/functions/generate-static-params
-                  'generateStaticParams',
-                  // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
-                  'metadata',
-                  'generateMetadata',
-                  // https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-                  'viewport',
-                  'generateViewport',
-                  // https://nextjs.org/docs/app/api-reference/functions/generate-image-metadata
-                  'generateImageMetadata',
-                  // https://nextjs.org/docs/app/api-reference/functions/generate-sitemaps
-                  'generateSitemaps',
-                ]
+                    "dynamic",
+                    "dynamicParams",
+                    "revalidate",
+                    "fetchCache",
+                    "runtime",
+                    "preferredRegion",
+                    "maxDuration",
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-static-params
+                    "generateStaticParams",
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
+                    "metadata",
+                    "generateMetadata",
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+                    "viewport",
+                    "generateViewport",
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-image-metadata
+                    "generateImageMetadata",
+                    // https://nextjs.org/docs/app/api-reference/functions/generate-sitemaps
+                    "generateSitemaps",
+                  ]
                 : []),
               ...(isUsingRemix || isUsingReactRouter
                 ? [
-                  'meta',
-                  'links',
-                  'headers',
-                  'loader',
-                  'action',
-                  'clientLoader',
-                  'clientAction',
-                  'handle',
-                  'shouldRevalidate',
-                ]
+                    "meta",
+                    "links",
+                    "headers",
+                    "loader",
+                    "action",
+                    "clientLoader",
+                    "clientAction",
+                    "handle",
+                    "shouldRevalidate",
+                  ]
+                : []),
+
+            ],
+            extraHOCs: [
+              ...(isUsingTanstackRouter
+                ? [
+                    "createFileRoute",
+                    "createLazyFileRoute",
+                    "createRootRoute",
+                    "createRootRouteWithContext",
+                    "createLink",
+                    "createRoute",
+                    "createLazyRoute",
+                  ]
                 : []),
             ],
           },
         ],
+
+        "react/prefer-namespace-import": "error",
 
         // overrides
         ...overrides,
@@ -183,22 +197,22 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
     },
     {
       files: filesTypeAware,
-      name: 'luxass/react/typescript',
+      name: "luxass/react/typescript",
       rules: {
         // Disables rules that are already handled by TypeScript
-        'react-dom/no-string-style-prop': 'off',
-        'react-dom/no-unknown-property': 'off',
+        "react-dom/no-string-style-prop": "off",
+        "react-dom/no-unknown-property": "off",
       },
     },
     ...isTypeAware
       ? [{
-        files: filesTypeAware,
-        ignores: ignoresTypeAware,
-        name: "luxass/react/type-aware-rules",
-        rules: {
-          ...typeAwareRules,
-        },
-      }]
+          files: filesTypeAware,
+          ignores: ignoresTypeAware,
+          name: "luxass/react/type-aware-rules",
+          rules: {
+            ...typeAwareRules,
+          },
+        }]
       : [],
   ];
 }
