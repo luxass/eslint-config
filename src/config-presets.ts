@@ -12,9 +12,7 @@ export const CONFIG_PRESET_FULL_ON: ConfigOptions = {
   markdown: true,
   node: true,
   pnpm: true,
-  react: {
-    reactCompiler: true,
-  },
+  react: true,
   regexp: true,
   stylistic: true,
   test: true,
