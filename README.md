@@ -271,7 +271,6 @@ Since flat config requires us to explicitly provide the plugin names (instead of
 | `test/*`                    | `vitest/*`                          | [@vitest/eslint-plugin](https://github.com/vitest-dev/eslint-plugin-vitest)                                                                      |
 | `react/*`                   | `@eslint-react/*`                   | [@eslint-react/eslint-plugin ](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin)                                  |
 | `react-dom/*`               | `@eslint-react/dom/*`               | [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom)                             |
-| `react-hooks-extra/*`       | `@eslint-react/hooks-extra/*`       | [eslint-plugin-react-hooks-extra](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-hooks-extra)             |
 | `react-naming-convention/*` | `@eslint-react/naming-convention/*` | [eslint-plugin-react-naming-convention](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-naming-convention) |
 
 When you want to override rules, or disable them inline, you need to update to the new prefix:
@@ -432,7 +431,7 @@ export default luxass({
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
 
 ```bash
-npm i -D @eslint-react/eslint-plugin eslint-plugin-react-hooks eslint-plugin-react-refresh
+npm i -D @eslint-react/eslint-plugin eslint-plugin-react-refresh
 ```
 
 #### Astro
