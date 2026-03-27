@@ -112,7 +112,7 @@
       "prefer-template",
       "symbol-description",
       "unicode-bom",
-      "- unused-imports/no-unused-imports",
+      "unused-imports/no-unused-imports",
       "unused-imports/no-unused-vars",
       "use-isnan",
       "valid-typeof",
@@ -392,6 +392,7 @@
       "ts/no-invalid-this",
       "ts/no-redeclare",
       "ts/no-use-before-define",
+      "ts/explicit-function-return-type",
     ],
   },
   {

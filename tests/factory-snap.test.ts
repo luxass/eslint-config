@@ -48,6 +48,12 @@ const suites: Suite[] = [
       isInEditor: true,
     },
   },
+  {
+    name: "lib",
+    configs: {
+      type: "lib",
+    },
+  },
 ];
 
 const ignoreConfigs: string[] = [
@@ -55,7 +61,6 @@ const ignoreConfigs: string[] = [
   "luxass/ignores",
   "luxass/javascript/setup",
 ];
-
 function serializeConfigs(configs: TypedFlatConfigItem[]) {
   return configs.map((c) => {
     if (c.name && ignoreConfigs.includes(c.name)) {

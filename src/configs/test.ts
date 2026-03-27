@@ -60,7 +60,7 @@ export async function test(
           "error",
           { fn: "it", withinDescribe: "it" },
         ],
-        "test/no-focused-tests": isInEditor ? "off" : ["error", { fixable: true }],
+        "test/no-focused-tests": isInEditor ? "warn" : "error",
         "test/no-identical-title": "error",
         "test/no-import-node-test": "error",
         "test/prefer-hooks-in-order": "error",

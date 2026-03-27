@@ -260,9 +260,11 @@ export function isInEditorEnv(): boolean {
   if (process.env.CI) {
     return false;
   }
+
   if (isInGitHooksOrLintStaged()) {
     return false;
   }
+
   return !!(false
     || process.env.VSCODE_PID
     || process.env.VSCODE_CWD

@@ -372,7 +372,7 @@ export function luxass(
     composer = composer
       .disableRulesFix([
         "unused-imports/no-unused-imports",
-        "test/no-only-tests",
+        "test/no-focused-tests",
         "prefer-const",
       ], {
         builtinRules: () => import(["eslint", "use-at-your-own-risk"].join("/")).then((r) => r.builtinRules),
