@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+permissions: {}
+
+jobs:
+  ci:
+    uses: luxass/shared-workflows/.github/workflows/ci.yaml@56bd9148cc90ee377d1e6fa3a32e43d18859dfe1 # v0.4.2
+    permissions:
+      contents: read
+
+
+  test:
+    name: "test (node: ${{ matrix.node }}"
+    strategy:
+      matrix:
+        node: [24, 22]
+      fail-fast: false
+    uses: luxass/shared-workflows/.github/workflows/test.yaml@56bd9148cc90ee377d1e6fa3a32e43d18859dfe1 # v0.4.2
+    permissions:
+      contents: read
