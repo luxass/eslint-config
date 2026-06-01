@@ -19,7 +19,7 @@ overrides:
 
 catalogs:
   dev:
-    "@eslint/config-inspector": 1.5.0
+    "@eslint/config-inspector": 3.0.3
     "@types/node": 25.2.1
     "@typescript-eslint/rule-tester": 8.58.0
     chokidar: 5.0.0
@@ -38,7 +38,7 @@ catalogs:
 
   peer:
     "@eslint-community/eslint-utils": 4.9.1
-    "@eslint-react/eslint-plugin": 3.0.0
+    "@eslint-react/eslint-plugin": 5.8.5
     "@prettier/plugin-xml": 3.4.2
     "@typescript-eslint/types": 8.58.0
     "@typescript-eslint/utils": 8.58.0
@@ -71,9 +71,9 @@ catalogs:
     eslint-plugin-antfu: 3.2.2
     eslint-plugin-command: 3.5.2
     eslint-plugin-import-lite: 0.6.0
-    eslint-plugin-jsdoc: 62.8.1
+    eslint-plugin-jsdoc: 63.0.0
     eslint-plugin-jsonc: 3.1.2
-    eslint-plugin-n: 17.24.0
+    eslint-plugin-n: 18.0.1
     eslint-plugin-perfectionist: 5.7.0
     eslint-plugin-pnpm: 1.6.0
     eslint-plugin-regexp: 3.1.0
