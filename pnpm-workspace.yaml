@@ -92,3 +92,6 @@ catalogs:
 
 onlyBuiltDependencies:
   - esbuild
+minimumReleaseAgeExclude:
+  # Renovate security update: pnpm@11.8.0
+  - pnpm@11.8.0
