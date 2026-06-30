@@ -13,7 +13,7 @@ permissions: {}
 
 jobs:
   ci:
-    uses: luxass/shared-workflows/.github/workflows/ci.yaml@56bd9148cc90ee377d1e6fa3a32e43d18859dfe1 # v0.4.2
+    uses: luxass/shared-workflows/.github/workflows/ci.yaml@f679de59851660fb23fd7e453ea66b9e76cb55aa # v0.11.0
     permissions:
       contents: read
 
@@ -24,6 +24,6 @@ jobs:
       matrix:
         node: [24, 22]
       fail-fast: false
-    uses: luxass/shared-workflows/.github/workflows/test.yaml@56bd9148cc90ee377d1e6fa3a32e43d18859dfe1 # v0.4.2
+    uses: luxass/shared-workflows/.github/workflows/test.yaml@f679de59851660fb23fd7e453ea66b9e76cb55aa # v0.11.0
     permissions:
       contents: read

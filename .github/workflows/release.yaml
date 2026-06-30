@@ -9,7 +9,7 @@ permissions: {}
 
 jobs:
   release:
-    uses: luxass/shared-workflows/.github/workflows/release-npm.yaml@56bd9148cc90ee377d1e6fa3a32e43d18859dfe1 # v0.4.2
+    uses: luxass/shared-workflows/.github/workflows/release-npm.yaml@f679de59851660fb23fd7e453ea66b9e76cb55aa # v0.11.0
     permissions:
       contents: write
       id-token: write
