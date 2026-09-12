@@ -83,6 +83,7 @@ export async function yaml(
               "yaml/flow-sequence-bracket-spacing": "error",
               "yaml/indent": ["error", typeof indent === "number" ? indent : 2],
               "yaml/key-spacing": "error",
+              "yaml/no-multiple-empty-lines": ["error", { max: 1, maxBOF: 0, maxEOF: 0 }],
               "yaml/no-tab-indent": "error",
               "yaml/quotes": ["error", { avoidEscape: true, prefer: quotes === "backtick" ? "single" : quotes }],
               "yaml/spaced-comment": "error",
@@ -90,42 +91,6 @@ export async function yaml(
           : {}),
 
         ...overrides,
-      },
-    },
-    {
-      files: ["pnpm-workspace.yaml"],
-      name: "luxass/yaml/pnpm-workspace",
-      rules: {
-        "yaml/sort-keys": [
-          "error",
-          {
-            order: [
-              "packages",
-              "overrides",
-              "patchedDependencies",
-              "hoistPattern",
-              "catalog",
-              "catalogs",
-
-              "allowedDeprecatedVersions",
-              "allowNonAppliedPatches",
-              "configDependencies",
-              "ignoredBuiltDependencies",
-              "ignoredOptionalDependencies",
-              "neverBuiltDependencies",
-              "onlyBuiltDependencies",
-              "onlyBuiltDependenciesFile",
-              "packageExtensions",
-              "peerDependencyRules",
-              "supportedArchitectures",
-            ],
-            pathPattern: "^$",
-          },
-          {
-            order: { type: "asc" },
-            pathPattern: ".*",
-          },
-        ],
       },
     },
   ];

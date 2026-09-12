@@ -3,6 +3,9 @@
   "<ignored>",
   "<ignored>",
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/javascript/rules",
     "plugins": [
       "antfu",
@@ -49,7 +52,6 @@
       "no-implied-eval",
       "no-import-assign",
       "no-invalid-regexp",
-      "no-invalid-this",
       "no-irregular-whitespace",
       "no-iterator",
       "no-labels",
@@ -132,6 +134,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/eslint-comments",
     "plugins": [
       "eslint-comments",
@@ -144,7 +149,10 @@
     ],
   },
   {
-    "name": "command",
+    "ignores": [
+      "**/*.md",
+    ],
+    "name": "luxass/command/rules",
     "plugins": [
       "command",
     ],
@@ -153,6 +161,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/perfectionist/setup",
     "plugins": [
       "perfectionist",
@@ -218,6 +229,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/imports",
     "plugins": [
       "antfu",
@@ -236,37 +250,49 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/e18e/rules",
     "plugins": [
       "e18e",
     ],
     "rules": [
-      "e18e/prefer-array-at",
+      "- e18e/prefer-array-at",
       "e18e/prefer-array-fill",
       "e18e/prefer-includes",
-      "e18e/prefer-array-to-reversed",
-      "e18e/prefer-array-to-sorted",
-      "e18e/prefer-array-to-spliced",
+      "- e18e/prefer-array-to-reversed",
+      "- e18e/prefer-array-to-sorted",
+      "- e18e/prefer-array-to-spliced",
       "e18e/prefer-nullish-coalescing",
       "e18e/prefer-object-has-own",
-      "e18e/prefer-spread-syntax",
+      "- e18e/prefer-spread-syntax",
       "e18e/prefer-url-canparse",
-      "e18e/prefer-array-from-map",
+      "- e18e/prefer-array-from-map",
       "e18e/prefer-timer-args",
       "e18e/prefer-date-now",
       "e18e/prefer-regex-test",
       "e18e/prefer-array-some",
-      "e18e/prefer-static-regex",
+      "- e18e/prefer-static-regex",
+      "e18e/prefer-string-fromcharcode",
     ],
   },
   {
-    "name": "luxass/unicorn/rules",
+    "name": "luxass/unicorn/setup",
     "plugins": [
       "unicorn",
     ],
+  },
+  {
+    "files": [
+      "**/*.?([cm])[jt]s?(x)",
+    ],
+    "name": "luxass/unicorn/rules",
     "rules": [
+      "unicorn/consistent-empty-array-spread",
       "unicorn/error-message",
       "unicorn/escape-case",
+      "unicorn/new-for-builtins",
       "unicorn/no-instanceof-builtins",
       "unicorn/no-new-array",
       "unicorn/no-new-buffer",
@@ -293,8 +319,13 @@
       },
     },
     "name": "luxass/jsx/setup",
+    "plugins": [],
+    "rules": [],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/stylistic",
     "plugins": [
       "antfu",
@@ -373,6 +404,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/regexp/rules",
     "plugins": [
       "regexp",
@@ -736,7 +770,7 @@
       "**/[jt]sconfig.json",
       "**/[jt]sconfig.*.json",
     ],
-    "name": "luxass/sort/tsconfig",
+    "name": "luxass/sort/tsconfig-json",
     "rules": [
       "jsonc/sort-keys",
     ],
@@ -772,6 +806,21 @@
       "pnpm/yaml-enforce-settings",
       "pnpm/yaml-no-duplicate-catalog-item",
       "pnpm/yaml-no-unused-catalog-item",
+    ],
+  },
+  {
+    "files": [
+      "pnpm-workspace.yaml",
+    ],
+    "languageOptions": {
+      "parser": "yaml-eslint-parser",
+    },
+    "name": "luxass/pnpm/pnpm-workspace-yaml-stylistic",
+    "plugins": [
+      "pnpm",
+    ],
+    "rules": [
+      "pnpm/yaml-blank-lines",
     ],
   },
   {
@@ -821,18 +870,10 @@
       "yaml/flow-sequence-bracket-spacing",
       "yaml/indent",
       "yaml/key-spacing",
+      "yaml/no-multiple-empty-lines",
       "yaml/no-tab-indent",
       "yaml/quotes",
       "yaml/spaced-comment",
-    ],
-  },
-  {
-    "files": [
-      "pnpm-workspace.yaml",
-    ],
-    "name": "luxass/yaml/pnpm-workspace",
-    "rules": [
-      "yaml/sort-keys",
     ],
   },
   {
@@ -918,23 +959,6 @@
       "markdown/no-unused-definitions",
       "markdown/require-alt-text",
       "markdown/table-column-count",
-    ],
-  },
-  {
-    "files": [
-      "**/*.md",
-    ],
-    "name": "luxass/markdown/disables/markdown",
-    "rules": [
-      "- command/command",
-      "- no-irregular-whitespace",
-      "- perfectionist/sort-exports",
-      "- perfectionist/sort-imports",
-      "- regexp/no-legacy-features",
-      "- regexp/no-missing-g-flag",
-      "- regexp/no-useless-dollar-replacements",
-      "- regexp/no-useless-flag",
-      "- style/indent",
     ],
   },
   {

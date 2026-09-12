@@ -1,6 +1,6 @@
 import type { TypedFlatConfigItem } from "../types";
 import { isPackageExists } from "local-pkg";
-import { GLOB_ASTRO_TS, GLOB_JS, GLOB_JSX, GLOB_MARKDOWN, GLOB_TS, GLOB_TSX } from "../globs";
+import { GLOB_ASTRO_TS, GLOB_MARKDOWN, GLOB_SRC, GLOB_TS, GLOB_TSX } from "../globs";
 import { ensure, interop } from "../utils";
 
 export interface ReactOptions {
@@ -16,10 +16,9 @@ export interface ReactOptions {
   tsconfigPath?: string | string[];
 
   /**
-   * Glob patterns for JSX & TSX files.
+   * Glob patterns for React files.
    *
-   * @default [GLOB_JS,GLOB_JSX,GLOB_TS,GLOB_TSX]
-   * @see https://github.com/luxass/eslint-config/blob/main/src/globs.ts
+   * @default [GLOB_SRC]
    */
   files?: string[];
 
@@ -55,17 +54,13 @@ const ReactRouterPackages = [
   "@react-router/dev",
 ];
 
-const TanstackRouterPackages = [
-  "@tanstack/react-router",
-];
-
 const NextJsPackages = [
   "next",
 ];
 
 export async function react(options: ReactOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
-    files = [GLOB_JS, GLOB_JSX, GLOB_TS, GLOB_TSX],
+    files = [GLOB_SRC],
     filesTypeAware = [GLOB_TS, GLOB_TSX],
     ignoresTypeAware = [
       `${GLOB_MARKDOWN}/**`,
@@ -98,7 +93,6 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
   const isUsingRemix = RemixPackages.some((i) => isPackageExists(i));
   const isUsingReactRouter = ReactRouterPackages.some((i) => isPackageExists(i));
   const isUsingNext = NextJsPackages.some((i) => isPackageExists(i));
-  const isUsingTanstackRouter = TanstackRouterPackages.some((i) => isPackageExists(i));
 
   const plugins = pluginReact.configs.all.plugins!;
 
@@ -107,11 +101,7 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
       name: "luxass/react/setup",
       plugins: {
         "react": plugins["@eslint-react"],
-        "react-dom": plugins["@eslint-react/dom"],
-        "react-naming-convention": plugins["@eslint-react/naming-convention"],
         "react-refresh": pluginReactRefresh,
-        "react-rsc": plugins["@eslint-react/rsc"],
-        "react-web-api": plugins["@eslint-react/web-api"],
       },
     },
     {
@@ -173,23 +163,8 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
                 : []),
 
             ],
-            extraHOCs: [
-              ...(isUsingTanstackRouter
-                ? [
-                    "createFileRoute",
-                    "createLazyFileRoute",
-                    "createRootRoute",
-                    "createRootRouteWithContext",
-                    "createLink",
-                    "createRoute",
-                    "createLazyRoute",
-                  ]
-                : []),
-            ],
           },
         ],
-
-        "react/prefer-namespace-import": "error",
 
         // overrides
         ...overrides,
@@ -200,8 +175,8 @@ export async function react(options: ReactOptions = {}): Promise<TypedFlatConfig
       name: "luxass/react/typescript",
       rules: {
         // Disables rules that are already handled by TypeScript
-        "react-dom/no-string-style-prop": "off",
-        "react-dom/no-unknown-property": "off",
+        "react/dom-no-string-style-prop": "off",
+        "react/dom-no-unknown-property": "off",
       },
     },
     ...isTypeAware

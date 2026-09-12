@@ -39,6 +39,7 @@ import {
   vue,
   yaml,
 } from "./configs";
+import { GLOB_MARKDOWN } from "./globs";
 import { getOverrides, interop, isInEditorEnv, resolveSubOptions } from "./utils";
 
 const FLAT_CONFIG_PROPS = [
@@ -60,10 +61,6 @@ const VuePackages = [
 
 export const defaultPluginRenaming = {
   "@eslint-react": "react",
-  "@eslint-react/dom": "react-dom",
-  "@eslint-react/naming-convention": "react-naming-convention",
-  "@eslint-react/rsc": "react-rsc",
-  "@eslint-react/web-api": "react-web-api",
 
   "@stylistic": "style",
   "@typescript-eslint": "ts",
@@ -99,6 +96,7 @@ export function luxass(
     jsdoc: enableJsdoc = true,
     jsx: enableJsx = true,
     node: enableNode = true,
+    perfectionist: enablePerfectionist = true,
     pnpm: enableCatalogs = !!findUpSync("pnpm-workspace.yaml"),
     react: enableReact = false,
     regexp: enableRegexp = true,
@@ -127,7 +125,7 @@ export function luxass(
         : {};
 
   if (stylisticOptions && !("jsx" in stylisticOptions)) {
-    stylisticOptions.jsx = enableJsx;
+    stylisticOptions.jsx = typeof enableJsx === "object" ? true : enableJsx;
   }
 
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
@@ -158,10 +156,16 @@ export function luxass(
     }),
     comments(),
     command(),
-
-    // Optional plugins (installed but not enabled by default)
-    perfectionist(),
   );
+
+  if (enablePerfectionist) {
+    configs.push(
+      perfectionist({
+        ...resolveSubOptions(options, "perfectionist"),
+        overrides: getOverrides(options, "perfectionist"),
+      }),
+    );
+  }
 
   if (enableNode) {
     configs.push(
@@ -206,7 +210,7 @@ export function luxass(
   }
 
   if (enableJsx) {
-    configs.push(jsx());
+    configs.push(jsx(enableJsx === true ? {} : enableJsx));
   }
 
   if (enableTypeScript) {
@@ -298,6 +302,7 @@ export function luxass(
       pnpm({
         isInEditor,
         json: options.jsonc !== false,
+        stylistic: !!stylisticOptions,
         yaml: options.yaml !== false,
         ...(resolveSubOptions(options, "pnpm")),
       }),
@@ -362,6 +367,11 @@ export function luxass(
       ...configs,
       ...userConfigs as any,
     );
+
+  // Unscoped JavaScript rules cannot run on Markdown's SourceCode.
+  if (options.markdown ?? true) {
+    composer = composer.setDefaultIgnores((prev) => [...prev, GLOB_MARKDOWN]);
+  }
 
   if (autoRenamePlugins) {
     composer = composer

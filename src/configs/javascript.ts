@@ -106,7 +106,6 @@ export async function javascript(
         "no-implied-eval": "error",
         "no-import-assign": "error",
         "no-invalid-regexp": "error",
-        "no-invalid-this": "error",
         "no-irregular-whitespace": "error",
         "no-iterator": "error",
         "no-labels": ["error", { allowLoop: false, allowSwitch: false }],
@@ -226,7 +225,7 @@ export async function javascript(
           },
         ],
         "prefer-const": [
-          "error",
+          isInEditor ? "warn" : "error",
           {
             destructuring: "all",
             ignoreReadBeforeAssign: true,
@@ -241,13 +240,14 @@ export async function javascript(
 
         "symbol-description": "error",
         "unicode-bom": ["error", "never"],
-        "unused-imports/no-unused-imports": isInEditor ? "off" : "error",
+        "unused-imports/no-unused-imports": isInEditor ? "warn" : "error",
 
         "unused-imports/no-unused-vars": [
           "error",
           {
             args: "after-used",
             argsIgnorePattern: "^_",
+            ignoreRestSiblings: true,
             vars: "all",
             varsIgnorePattern: "^_",
           },

@@ -5,7 +5,7 @@ import type { TypedFlatConfigItem } from "../types";
  *
  * Requires `jsonc` config
  */
-export function sortPackageJson(): TypedFlatConfigItem[] {
+export async function sortPackageJson(): Promise<TypedFlatConfigItem[]> {
   return [
     {
       files: ["**/package.json"],
@@ -22,16 +22,16 @@ export function sortPackageJson(): TypedFlatConfigItem[] {
           "error",
           {
             order: [
+              "publisher",
               "name",
               "displayName",
-              "version",
-              "description",
               "type",
+              "version",
               "private",
+              "packageManager",
+              "description",
               "author",
               "contributors",
-              "publisher",
-              "packageManager",
               "license",
               "funding",
               "homepage",
@@ -55,6 +55,7 @@ export function sortPackageJson(): TypedFlatConfigItem[] {
               "activationEvents",
               "contributes",
               "scripts",
+              "scripts-info",
               "peerDependencies",
               "peerDependenciesMeta",
               "dependencies",
@@ -72,11 +73,7 @@ export function sortPackageJson(): TypedFlatConfigItem[] {
           },
           {
             order: { type: "asc" },
-            pathPattern: "^(?:dev|peer|optional|bundled)?[Dd]ependencies$",
-          },
-          {
-            order: { type: "asc" },
-            pathPattern: "^resolutions$",
+            pathPattern: "^(?:dev|peer|optional|bundled)?[Dd]ependencies(Meta)?$",
           },
           {
             order: { type: "asc" },
@@ -125,7 +122,7 @@ export function sortTsconfig(): TypedFlatConfigItem[] {
   return [
     {
       files: ["**/[jt]sconfig.json", "**/[jt]sconfig.*.json"],
-      name: "luxass/sort/tsconfig",
+      name: "luxass/sort/tsconfig-json",
       rules: {
         "jsonc/sort-keys": [
           "error",

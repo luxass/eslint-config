@@ -172,8 +172,8 @@ export async function typescript(
     },
     ...isTypeAware
       ? [
+          makeParser(false, files),
           makeParser(true, filesTypeAware, ignoresTypeAware),
-          makeParser(false, files, filesTypeAware),
         ]
       : [makeParser(false, files)],
     {
@@ -202,7 +202,6 @@ export async function typescript(
           "error",
           {
             "ts-expect-error": "allow-with-description",
-            "ts-ignore": "allow-with-description",
           },
         ],
         "ts/consistent-type-definitions": ["error", "interface"],
@@ -217,11 +216,10 @@ export async function typescript(
         "ts/method-signature-style": ["error", "property"], // https://www.totaltypescript.com/method-shorthand-syntax-considered-harmful
         "ts/no-dupe-class-members": "error",
         "ts/no-dynamic-delete": "off",
-        "ts/no-empty-object-type": "error",
+        "ts/no-empty-object-type": ["error", { allowInterfaces: "always" }],
         "ts/no-explicit-any": "off",
         "ts/no-extraneous-class": "off",
         "ts/no-import-type-side-effects": "error",
-        "ts/no-invalid-this": "error",
         "ts/no-invalid-void-type": "off",
         "ts/no-non-null-assertion": "off",
         "ts/no-redeclare": ["error", { builtinGlobals: false }],
@@ -269,12 +267,13 @@ export async function typescript(
     ...(erasableOnly
       ? [
           {
-            name: "luxas/typescript/erasable-syntax-only",
+            name: "luxass/typescript/erasable-syntax-only",
             plugins: {
               "erasable-syntax-only": await interop(import("eslint-plugin-erasable-syntax-only")),
             },
             rules: {
               "erasable-syntax-only/enums": "error",
+              "erasable-syntax-only/export-aliases": "error",
               "erasable-syntax-only/import-aliases": "error",
               "erasable-syntax-only/namespaces": "error",
               "erasable-syntax-only/parameter-properties": "error",

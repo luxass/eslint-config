@@ -89,22 +89,6 @@ export async function markdown(
       },
     },
     {
-      files,
-      name: "luxass/markdown/disables/markdown",
-      rules: {
-        // Disable rules do not work with markdown sourcecode.
-        "command/command": "off",
-        "no-irregular-whitespace": "off",
-        "perfectionist/sort-exports": "off",
-        "perfectionist/sort-imports": "off",
-        "regexp/no-legacy-features": "off",
-        "regexp/no-missing-g-flag": "off",
-        "regexp/no-useless-dollar-replacements": "off",
-        "regexp/no-useless-flag": "off",
-        "style/indent": "off",
-      },
-    },
-    {
       files: [
         GLOB_MARKDOWN_CODE,
         ...exts.map((ext) => `${GLOB_MARKDOWN}/**/*.${ext}`),

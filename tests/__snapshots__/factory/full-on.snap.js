@@ -3,6 +3,9 @@
   "<ignored>",
   "<ignored>",
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/javascript/rules",
     "plugins": [
       "antfu",
@@ -49,7 +52,6 @@
       "no-implied-eval",
       "no-import-assign",
       "no-invalid-regexp",
-      "no-invalid-this",
       "no-irregular-whitespace",
       "no-iterator",
       "no-labels",
@@ -132,6 +134,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/eslint-comments",
     "plugins": [
       "eslint-comments",
@@ -144,7 +149,10 @@
     ],
   },
   {
-    "name": "command",
+    "ignores": [
+      "**/*.md",
+    ],
+    "name": "luxass/command/rules",
     "plugins": [
       "command",
     ],
@@ -153,6 +161,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/perfectionist/setup",
     "plugins": [
       "perfectionist",
@@ -218,6 +229,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/imports",
     "plugins": [
       "antfu",
@@ -236,37 +250,49 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/e18e/rules",
     "plugins": [
       "e18e",
     ],
     "rules": [
-      "e18e/prefer-array-at",
+      "- e18e/prefer-array-at",
       "e18e/prefer-array-fill",
       "e18e/prefer-includes",
-      "e18e/prefer-array-to-reversed",
-      "e18e/prefer-array-to-sorted",
-      "e18e/prefer-array-to-spliced",
+      "- e18e/prefer-array-to-reversed",
+      "- e18e/prefer-array-to-sorted",
+      "- e18e/prefer-array-to-spliced",
       "e18e/prefer-nullish-coalescing",
       "e18e/prefer-object-has-own",
-      "e18e/prefer-spread-syntax",
+      "- e18e/prefer-spread-syntax",
       "e18e/prefer-url-canparse",
-      "e18e/prefer-array-from-map",
+      "- e18e/prefer-array-from-map",
       "e18e/prefer-timer-args",
       "e18e/prefer-date-now",
       "e18e/prefer-regex-test",
       "e18e/prefer-array-some",
-      "e18e/prefer-static-regex",
+      "- e18e/prefer-static-regex",
+      "e18e/prefer-string-fromcharcode",
     ],
   },
   {
-    "name": "luxass/unicorn/rules",
+    "name": "luxass/unicorn/setup",
     "plugins": [
       "unicorn",
     ],
+  },
+  {
+    "files": [
+      "**/*.?([cm])[jt]s?(x)",
+    ],
+    "name": "luxass/unicorn/rules",
     "rules": [
+      "unicorn/consistent-empty-array-spread",
       "unicorn/error-message",
       "unicorn/escape-case",
+      "unicorn/new-for-builtins",
       "unicorn/no-instanceof-builtins",
       "unicorn/no-new-array",
       "unicorn/no-new-buffer",
@@ -293,6 +319,8 @@
       },
     },
     "name": "luxass/jsx/setup",
+    "plugins": [],
+    "rules": [],
   },
   {
     "name": "luxass/typescript/setup",
@@ -300,6 +328,23 @@
       "antfu",
       "ts",
     ],
+  },
+  {
+    "files": [
+      "**/*.?([cm])ts",
+      "**/*.?([cm])tsx",
+      "**/*.vue",
+    ],
+    "languageOptions": {
+      "parser": "typescript-eslint/parser",
+      "parserOptions": {
+        "extraFileExtensions": [
+          ".vue",
+        ],
+        "sourceType": "module",
+      },
+    },
+    "name": "luxass/typescript/parser",
   },
   {
     "files": [
@@ -320,27 +365,6 @@
       },
     },
     "name": "luxass/typescript/type-aware-parser",
-  },
-  {
-    "files": [
-      "**/*.?([cm])ts",
-      "**/*.?([cm])tsx",
-      "**/*.vue",
-    ],
-    "ignores": [
-      "**/*.?([cm])ts",
-      "**/*.?([cm])tsx",
-    ],
-    "languageOptions": {
-      "parser": "typescript-eslint/parser",
-      "parserOptions": {
-        "extraFileExtensions": [
-          ".vue",
-        ],
-        "sourceType": "module",
-      },
-    },
-    "name": "luxass/typescript/parser",
   },
   {
     "files": [
@@ -413,7 +437,6 @@
       "ts/method-signature-style",
       "ts/no-dupe-class-members",
       "ts/no-import-type-side-effects",
-      "ts/no-invalid-this",
       "ts/no-redeclare",
       "ts/no-use-before-define",
     ],
@@ -453,18 +476,25 @@
     ],
   },
   {
-    "name": "luxas/typescript/erasable-syntax-only",
+    "ignores": [
+      "**/*.md",
+    ],
+    "name": "luxass/typescript/erasable-syntax-only",
     "plugins": [
       "erasable-syntax-only",
     ],
     "rules": [
       "erasable-syntax-only/enums",
+      "erasable-syntax-only/export-aliases",
       "erasable-syntax-only/import-aliases",
       "erasable-syntax-only/namespaces",
       "erasable-syntax-only/parameter-properties",
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/stylistic",
     "plugins": [
       "antfu",
@@ -543,6 +573,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/regexp/rules",
     "plugins": [
       "regexp",
@@ -652,19 +685,12 @@
     "name": "luxass/react/setup",
     "plugins": [
       "react",
-      "react-dom",
-      "react-naming-convention",
       "react-refresh",
-      "react-rsc",
-      "react-web-api",
     ],
   },
   {
     "files": [
-      "**/*.?([cm])js",
-      "**/*.?([cm])jsx",
-      "**/*.?([cm])ts",
-      "**/*.?([cm])tsx",
+      "**/*.?([cm])[jt]s?(x)",
     ],
     "languageOptions": {
       "parserOptions": {
@@ -676,11 +702,8 @@
     },
     "name": "luxass/react/rules",
     "rules": [
-      "react/component-hook-factories",
       "react/error-boundaries",
       "react/exhaustive-deps",
-      "react/jsx-key-before-spread",
-      "react/jsx-no-comment-textnodes",
       "react/no-access-state-in-setstate",
       "react/no-array-index-key",
       "react/no-children-count",
@@ -699,7 +722,6 @@
       "react/no-missing-key",
       "react/no-nested-component-definitions",
       "react/no-nested-lazy-component-declarations",
-      "react/no-redundant-should-component-update",
       "react/no-set-state-in-component-did-mount",
       "react/no-set-state-in-component-did-update",
       "react/no-set-state-in-component-will-update",
@@ -713,31 +735,39 @@
       "react/rules-of-hooks",
       "react/set-state-in-effect",
       "react/set-state-in-render",
+      "react/static-components",
       "react/unsupported-syntax",
       "react/use-memo",
       "react/use-state",
-      "react-rsc/function-definition",
-      "react-dom/no-dangerously-set-innerhtml",
-      "react-dom/no-dangerously-set-innerhtml-with-children",
-      "react-dom/no-find-dom-node",
-      "react-dom/no-flush-sync",
-      "react-dom/no-hydrate",
-      "react-dom/no-namespace",
-      "react-dom/no-render",
-      "react-dom/no-render-return-value",
-      "react-dom/no-script-url",
-      "react-dom/no-unsafe-iframe-sandbox",
-      "react-dom/no-use-form-state",
-      "react-dom/no-void-elements-with-children",
-      "react-web-api/no-leaked-event-listener",
-      "react-web-api/no-leaked-interval",
-      "react-web-api/no-leaked-resize-observer",
-      "react-web-api/no-leaked-timeout",
-      "react-naming-convention/context-name",
-      "react-naming-convention/id-name",
-      "react-naming-convention/ref-name",
+      "react/jsx-no-children-prop",
+      "react/jsx-no-children-prop-with-children",
+      "react/jsx-no-comment-textnodes",
+      "react/jsx-no-key-after-spread",
+      "react/jsx-no-leaked-dollar",
+      "react/jsx-no-leaked-semicolon",
+      "react/jsx-no-namespace",
+      "react/rsc-function-definition",
+      "react/dom-no-dangerously-set-innerhtml",
+      "react/dom-no-dangerously-set-innerhtml-with-children",
+      "react/dom-no-find-dom-node",
+      "react/dom-no-flush-sync",
+      "react/dom-no-hydrate",
+      "react/dom-no-render",
+      "react/dom-no-render-return-value",
+      "react/dom-no-script-url",
+      "react/dom-no-unsafe-iframe-sandbox",
+      "react/dom-no-use-form-state",
+      "react/dom-no-void-elements-with-children",
+      "react/web-api-no-leaked-event-listener",
+      "react/web-api-no-leaked-fetch",
+      "react/web-api-no-leaked-intersection-observer",
+      "react/web-api-no-leaked-interval",
+      "react/web-api-no-leaked-resize-observer",
+      "react/web-api-no-leaked-timeout",
+      "react/naming-convention-context-name",
+      "react/naming-convention-id-name",
+      "react/naming-convention-ref-name",
       "react-refresh/only-export-components",
-      "react/prefer-namespace-import",
     ],
   },
   {
@@ -747,8 +777,8 @@
     ],
     "name": "luxass/react/typescript",
     "rules": [
-      "- react-dom/no-string-style-prop",
-      "- react-dom/no-unknown-property",
+      "- react/dom-no-string-style-prop",
+      "- react/dom-no-unknown-property",
     ],
   },
   {
@@ -995,6 +1025,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/unocss",
     "plugins": [
       "unocss",
@@ -1073,7 +1106,7 @@
       "**/[jt]sconfig.json",
       "**/[jt]sconfig.*.json",
     ],
-    "name": "luxass/sort/tsconfig",
+    "name": "luxass/sort/tsconfig-json",
     "rules": [
       "jsonc/sort-keys",
     ],
@@ -1109,6 +1142,21 @@
       "pnpm/yaml-enforce-settings",
       "pnpm/yaml-no-duplicate-catalog-item",
       "pnpm/yaml-no-unused-catalog-item",
+    ],
+  },
+  {
+    "files": [
+      "pnpm-workspace.yaml",
+    ],
+    "languageOptions": {
+      "parser": "yaml-eslint-parser",
+    },
+    "name": "luxass/pnpm/pnpm-workspace-yaml-stylistic",
+    "plugins": [
+      "pnpm",
+    ],
+    "rules": [
+      "pnpm/yaml-blank-lines",
     ],
   },
   {
@@ -1158,18 +1206,10 @@
       "yaml/flow-sequence-bracket-spacing",
       "yaml/indent",
       "yaml/key-spacing",
+      "yaml/no-multiple-empty-lines",
       "yaml/no-tab-indent",
       "yaml/quotes",
       "yaml/spaced-comment",
-    ],
-  },
-  {
-    "files": [
-      "pnpm-workspace.yaml",
-    ],
-    "name": "luxass/yaml/pnpm-workspace",
-    "rules": [
-      "yaml/sort-keys",
     ],
   },
   {
@@ -1255,23 +1295,6 @@
       "markdown/no-unused-definitions",
       "markdown/require-alt-text",
       "markdown/table-column-count",
-    ],
-  },
-  {
-    "files": [
-      "**/*.md",
-    ],
-    "name": "luxass/markdown/disables/markdown",
-    "rules": [
-      "- command/command",
-      "- no-irregular-whitespace",
-      "- perfectionist/sort-exports",
-      "- perfectionist/sort-imports",
-      "- regexp/no-legacy-features",
-      "- regexp/no-missing-g-flag",
-      "- regexp/no-useless-dollar-replacements",
-      "- regexp/no-useless-flag",
-      "- style/indent",
     ],
   },
   {
@@ -1417,6 +1440,22 @@
     "name": "luxass/formatter/astro",
     "rules": [
       "format/prettier",
+    ],
+  },
+  {
+    "files": [
+      "**/*.astro",
+      "**/*.astro/*.ts",
+    ],
+    "name": "luxass/formatter/astro/disables",
+    "rules": [
+      "- style/arrow-parens",
+      "- style/block-spacing",
+      "- style/comma-dangle",
+      "- style/indent",
+      "- style/no-multi-spaces",
+      "- style/quotes",
+      "- style/semi",
     ],
   },
   {

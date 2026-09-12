@@ -6,7 +6,18 @@ import pluginPerfectionist from "eslint-plugin-perfectionist";
  *
  * @see https://github.com/azat-io/eslint-plugin-perfectionist
  */
-export async function perfectionist(): Promise<TypedFlatConfigItem[]> {
+export interface PerfectionistOptions {
+  /**
+   * Overrides for the config.
+   */
+  overrides?: TypedFlatConfigItem["rules"];
+}
+
+export async function perfectionist(options: PerfectionistOptions = {}): Promise<TypedFlatConfigItem[]> {
+  const {
+    overrides = {},
+  } = options;
+
   return [
     {
       name: "luxass/perfectionist/setup",
@@ -35,6 +46,8 @@ export async function perfectionist(): Promise<TypedFlatConfigItem[]> {
         }],
         "perfectionist/sort-named-exports": ["error", { order: "asc", type: "natural" }],
         "perfectionist/sort-named-imports": ["error", { order: "asc", type: "natural" }],
+
+        ...overrides,
       },
     },
   ];

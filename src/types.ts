@@ -8,6 +8,8 @@ import type {
   ImportsOptions,
   JavaScriptOptions,
   JSONOptions,
+  JsxOptions,
+  PerfectionistOptions,
   PnpmOptions,
   ReactOptions,
   RegExpOptions,
@@ -132,7 +134,7 @@ export interface ConfigOptions {
    *
    * @default true
    */
-  jsx?: boolean;
+  jsx?: boolean | JsxOptions;
 
   /**
    * Enable linting for **code snippets** in Markdown.
@@ -265,6 +267,13 @@ export interface ConfigOptions {
    * @default true
    */
   regexp?: boolean | RegExpOptions;
+
+  /**
+   * Enable perfectionist sorting rules.
+   *
+   * @default true
+   */
+  perfectionist?: boolean | PerfectionistOptions;
 
   /**
    * Enable pnpm (workspace/catalogs) support.
