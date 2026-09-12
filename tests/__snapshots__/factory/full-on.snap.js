@@ -462,12 +462,13 @@
     ],
   },
   {
-    "name": "luxas/typescript/erasable-syntax-only",
+    "name": "luxass/typescript/erasable-syntax-only",
     "plugins": [
       "erasable-syntax-only",
     ],
     "rules": [
       "erasable-syntax-only/enums",
+      "erasable-syntax-only/export-aliases",
       "erasable-syntax-only/import-aliases",
       "erasable-syntax-only/namespaces",
       "erasable-syntax-only/parameter-properties",

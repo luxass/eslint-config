@@ -269,12 +269,13 @@ export async function typescript(
     ...(erasableOnly
       ? [
           {
-            name: "luxas/typescript/erasable-syntax-only",
+            name: "luxass/typescript/erasable-syntax-only",
             plugins: {
               "erasable-syntax-only": await interop(import("eslint-plugin-erasable-syntax-only")),
             },
             rules: {
               "erasable-syntax-only/enums": "error",
+              "erasable-syntax-only/export-aliases": "error",
               "erasable-syntax-only/import-aliases": "error",
               "erasable-syntax-only/namespaces": "error",
               "erasable-syntax-only/parameter-properties": "error",

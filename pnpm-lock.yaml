@@ -218,8 +218,8 @@ catalogs:
       specifier: 3.1.0
       version: 3.1.0
     eslint-plugin-erasable-syntax-only:
-      specifier: 0.4.0
-      version: 0.4.0
+      specifier: 0.7.1
+      version: 0.7.1
     eslint-plugin-format:
       specifier: 2.0.1
       version: 2.0.1
@@ -478,7 +478,7 @@ importers:
         version: 3.1.0(@emnapi/core@1.11.3)(@emnapi/runtime@1.11.3)(@typescript-eslint/parser@8.68.0(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2))(eslint@10.9.1(jiti@2.6.1))
       eslint-plugin-erasable-syntax-only:
         specifier: catalog:peer
-        version: 0.4.0(@typescript-eslint/parser@8.68.0(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2))(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2)
+        version: 0.7.1(@typescript-eslint/parser@8.68.0(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2))(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2)
       eslint-plugin-format:
         specifier: catalog:peer
         version: 2.0.1(eslint@10.9.1(jiti@2.6.1))
@@ -1878,8 +1878,8 @@ packages:
     resolution: {integrity: sha512-tixWYgm5ZoOD+3g6UTea91eow5z6AAHaho3g0V9CNSNb45gM8SmflpAc+GRd1InC4AqN/07Unrgp56Y94N9hJQ==}
     engines: {node: '>=20.19.0'}
 
-  cached-factory@0.1.0:
-    resolution: {integrity: sha512-IGOSWu+NuED5UzCRmBeqQPZ8z7SkgrD/nN67W2iY1Qv83CVhevyMexkGclJ86saXisIqxoOnbeiTWvsCHRqJBw==}
+  cached-factory@0.3.0:
+    resolution: {integrity: sha512-8PWf78SYJg9kGpUNlqOlg2iE4nu/iW7FidBVdvEZPy0GJRUyN91X7q0VzX/oyJE6bGrgr/bR0VhcGF87vgeQaw==}
     engines: {node: '>=18'}
 
   camelcase-css@2.0.1:
@@ -2150,8 +2150,8 @@ packages:
       '@typescript-eslint/utils': '*'
       eslint: '*'
 
-  eslint-plugin-erasable-syntax-only@0.4.0:
-    resolution: {integrity: sha512-7dx2gpfVn0FFEGukLqsF/izW4hGvSaySNOkcuSCO4q6Khh0ecOGYlRhW9hhDUtNryuKc+cXd1WFiQdpae3xzaQ==}
+  eslint-plugin-erasable-syntax-only@0.7.1:
+    resolution: {integrity: sha512-2zpgLgFq/HmIVQU2KNOsuuQdJQAiRdq23xpCamhatbH4ZlzinqXdDmbxGALj7VSiC9GMBHqmu4Cu7KaSqQfNhw==}
     engines: {node: '>=20.18.0'}
     peerDependencies:
       '@typescript-eslint/parser': '>=8'
@@ -4982,7 +4982,7 @@ snapshots:
 
   cac@7.0.0: {}
 
-  cached-factory@0.1.0: {}
+  cached-factory@0.3.0: {}
 
   camelcase-css@2.0.1: {}
 
@@ -5212,11 +5212,11 @@ snapshots:
       '@typescript-eslint/utils': 8.70.0(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2)
       eslint: 10.9.1(jiti@2.6.1)
 
-  eslint-plugin-erasable-syntax-only@0.4.0(@typescript-eslint/parser@8.68.0(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2))(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2):
+  eslint-plugin-erasable-syntax-only@0.7.1(@typescript-eslint/parser@8.68.0(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2))(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2):
     dependencies:
       '@typescript-eslint/parser': 8.68.0(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2)
       '@typescript-eslint/utils': 8.70.0(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2)
-      cached-factory: 0.1.0
+      cached-factory: 0.3.0
       eslint: 10.9.1(jiti@2.6.1)
       typescript: 6.0.2
     transitivePeerDependencies:
