@@ -863,15 +863,6 @@
     ],
   },
   {
-    "files": [
-      "pnpm-workspace.yaml",
-    ],
-    "name": "luxass/yaml/pnpm-workspace",
-    "rules": [
-      "yaml/sort-keys",
-    ],
-  },
-  {
     "name": "luxass/toml/setup",
     "plugins": [
       "toml",

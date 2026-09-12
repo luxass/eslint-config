@@ -1,24 +1,27 @@
-catalogMode: prefer
 ignoreWorkspaceRootCheck: true
-shamefullyHoist: true
-shellEmulator: true
-strictPeerDependencies: false
+catalogMode: prefer
+blockExoticSubdeps: true
+minimumReleaseAge: 5760 # 4 days
+minimumReleaseAgeExcludePrune: true
 
 trustPolicy: no-downgrade
 trustPolicyExclude:
   - cached-factory@0.1.0
 
+strictPeerDependencies: false
+shamefullyHoist: true
 ignoreScripts: true
-minimumReleaseAge: 5760 # 4 days
-minimumReleaseAgeExcludePrune: true
+shellEmulator: true
 strictDepBuilds: true
-blockExoticSubdeps: true
 
 packages:
   - tests/fixtures/*
 
 overrides:
   rolldown: 1.0.0-rc.12
+
+onlyBuiltDependencies:
+  - esbuild
 
 catalogs:
   dev:
@@ -95,6 +98,3 @@ catalogs:
     toml-eslint-parser: 1.0.3
     vue-eslint-parser: 10.4.1
     yaml-eslint-parser: 2.1.0
-
-onlyBuiltDependencies:
-  - esbuild
