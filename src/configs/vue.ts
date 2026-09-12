@@ -5,7 +5,7 @@ import type {
 import type { StylisticConfig } from "./stylistic";
 import { mergeProcessors } from "eslint-merge-processors";
 import { GLOB_VUE } from "../globs";
-import { interop } from "../utils";
+import { ensure, interop } from "../utils";
 
 export interface VueOptions {
   /**
@@ -71,6 +71,10 @@ export async function vue(
     stylistic = true,
     vueVersion = 3,
   } = options;
+
+  if (a11y) {
+    await ensure(["eslint-plugin-vuejs-accessibility"]);
+  }
 
   const [
     pluginVue,
