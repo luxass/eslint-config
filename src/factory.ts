@@ -124,7 +124,7 @@ export function luxass(
         : {};
 
   if (stylisticOptions && !("jsx" in stylisticOptions)) {
-    stylisticOptions.jsx = enableJsx;
+    stylisticOptions.jsx = typeof enableJsx === "object" ? true : enableJsx;
   }
 
   const configs: Awaitable<TypedFlatConfigItem[]>[] = [];
@@ -209,7 +209,7 @@ export function luxass(
   }
 
   if (enableJsx) {
-    configs.push(jsx());
+    configs.push(jsx(enableJsx === true ? {} : enableJsx));
   }
 
   if (enableTypeScript) {

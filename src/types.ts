@@ -8,6 +8,7 @@ import type {
   ImportsOptions,
   JavaScriptOptions,
   JSONOptions,
+  JsxOptions,
   PerfectionistOptions,
   PnpmOptions,
   ReactOptions,
@@ -133,7 +134,7 @@ export interface ConfigOptions {
    *
    * @default true
    */
-  jsx?: boolean;
+  jsx?: boolean | JsxOptions;
 
   /**
    * Enable linting for **code snippets** in Markdown.

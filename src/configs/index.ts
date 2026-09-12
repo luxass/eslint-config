@@ -9,7 +9,7 @@ export { imports, type ImportsOptions } from "./imports";
 export { javascript, type JavaScriptOptions } from "./javascript";
 export { jsdoc, type JSDOCOptions } from "./jsdoc";
 export { jsonc, type JSONOptions } from "./json";
-export { jsx } from "./jsx";
+export { jsx, type JsxA11yOptions, type JsxOptions } from "./jsx";
 export { markdown, type MarkdownOptions } from "./markdown";
 export { node } from "./node";
 export { perfectionist, type PerfectionistOptions } from "./perfectionist";

@@ -301,6 +301,8 @@
       },
     },
     "name": "luxass/jsx/setup",
+    "plugins": [],
+    "rules": [],
   },
   {
     "name": "luxass/typescript/setup",
