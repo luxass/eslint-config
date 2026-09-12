@@ -1443,6 +1443,22 @@
   },
   {
     "files": [
+      "**/*.astro",
+      "**/*.astro/*.ts",
+    ],
+    "name": "luxass/formatter/astro/disables",
+    "rules": [
+      "- style/arrow-parens",
+      "- style/block-spacing",
+      "- style/comma-dangle",
+      "- style/indent",
+      "- style/no-multi-spaces",
+      "- style/quotes",
+      "- style/semi",
+    ],
+  },
+  {
+    "files": [
       "**/*.{g,graph}ql",
     ],
     "languageOptions": {
