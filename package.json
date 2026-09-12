@@ -160,17 +160,17 @@
     "tsx": "catalog:dev"
   },
   "inlinedDependencies": {
-    "find-up-simple": "1.0.1",
+    "@eslint-community/eslint-utils": "4.10.1",
+    "@typescript-eslint/scope-manager": "8.70.0",
+    "@typescript-eslint/types": "8.70.0",
+    "@typescript-eslint/utils": "8.70.0",
+    "@typescript-eslint/visitor-keys": "8.70.0",
+    "cached-factory": "0.1.0",
+    "eslint-plugin-erasable-syntax-only": "0.4.0",
     "eslint-visitor-keys": [
       "3.4.3",
       "5.0.1"
     ],
-    "@eslint-community/eslint-utils": "4.9.1",
-    "@typescript-eslint/utils": "8.57.0",
-    "@typescript-eslint/types": "8.57.0",
-    "@typescript-eslint/visitor-keys": "8.57.0",
-    "@typescript-eslint/scope-manager": "8.57.0",
-    "eslint-plugin-erasable-syntax-only": "0.4.0",
-    "cached-factory": "0.1.0"
+    "find-up-simple": "1.0.1"
   }
 }
