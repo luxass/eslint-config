@@ -144,7 +144,7 @@
     ],
   },
   {
-    "name": "command",
+    "name": "luxass/command/rules",
     "plugins": [
       "command",
     ],

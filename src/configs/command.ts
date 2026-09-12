@@ -5,8 +5,8 @@ import createCommand from "eslint-plugin-command/config";
 export async function command(): Promise<TypedFlatConfigItem[]> {
   return [
     {
+      ...createCommand(),
       name: "luxass/command/rules",
-      ...createCommand() as any,
     },
   ];
 }
