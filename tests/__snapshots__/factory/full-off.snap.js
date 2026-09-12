@@ -48,7 +48,6 @@
       "no-implied-eval",
       "no-import-assign",
       "no-invalid-regexp",
-      "no-invalid-this",
       "no-irregular-whitespace",
       "no-iterator",
       "no-labels",
