@@ -314,6 +314,23 @@
     "files": [
       "**/*.?([cm])ts",
       "**/*.?([cm])tsx",
+      "**/*.vue",
+    ],
+    "languageOptions": {
+      "parser": "typescript-eslint/parser",
+      "parserOptions": {
+        "extraFileExtensions": [
+          ".vue",
+        ],
+        "sourceType": "module",
+      },
+    },
+    "name": "luxass/typescript/parser",
+  },
+  {
+    "files": [
+      "**/*.?([cm])ts",
+      "**/*.?([cm])tsx",
     ],
     "ignores": [
       "**/*.md/**",
@@ -329,27 +346,6 @@
       },
     },
     "name": "luxass/typescript/type-aware-parser",
-  },
-  {
-    "files": [
-      "**/*.?([cm])ts",
-      "**/*.?([cm])tsx",
-      "**/*.vue",
-    ],
-    "ignores": [
-      "**/*.?([cm])ts",
-      "**/*.?([cm])tsx",
-    ],
-    "languageOptions": {
-      "parser": "typescript-eslint/parser",
-      "parserOptions": {
-        "extraFileExtensions": [
-          ".vue",
-        ],
-        "sourceType": "module",
-      },
-    },
-    "name": "luxass/typescript/parser",
   },
   {
     "files": [
