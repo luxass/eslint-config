@@ -260,13 +260,21 @@
     ],
   },
   {
-    "name": "luxass/unicorn/rules",
+    "name": "luxass/unicorn/setup",
     "plugins": [
       "unicorn",
     ],
+  },
+  {
+    "files": [
+      "**/*.?([cm])[jt]s?(x)",
+    ],
+    "name": "luxass/unicorn/rules",
     "rules": [
+      "unicorn/consistent-empty-array-spread",
       "unicorn/error-message",
       "unicorn/escape-case",
+      "unicorn/new-for-builtins",
       "unicorn/no-instanceof-builtins",
       "unicorn/no-new-array",
       "unicorn/no-new-buffer",

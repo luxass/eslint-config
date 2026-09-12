@@ -1,5 +1,6 @@
 import type { TypedFlatConfigItem } from "../types";
 import pluginUnicorn from "eslint-plugin-unicorn";
+import { GLOB_SRC } from "../globs";
 
 export interface UnicornOptions {
   /**
@@ -8,19 +9,36 @@ export interface UnicornOptions {
    * @default false
    */
   allRecommended?: boolean;
+
+  /**
+   * Overrides for the config.
+   */
+  overrides?: TypedFlatConfigItem["rules"];
 }
 
 export async function unicorn(options: UnicornOptions = {}): Promise<TypedFlatConfigItem[]> {
+  const {
+    allRecommended = false,
+    overrides = {},
+  } = options;
+
   return [
     {
-      name: "luxass/unicorn/rules",
+      name: "luxass/unicorn/setup",
       plugins: {
         unicorn: pluginUnicorn,
       },
+    },
+    {
+      files: [GLOB_SRC],
+      name: "luxass/unicorn/rules",
       rules: {
-        ...(options.allRecommended
+        ...(allRecommended
           ? pluginUnicorn.configs.recommended.rules as any
           : {
+              // Consistent empty array spread
+              "unicorn/consistent-empty-array-spread": "error",
+
               // Pass error message when throwing errors
               // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/error-message.md
               "unicorn/error-message": "error",
@@ -28,6 +46,9 @@ export async function unicorn(options: UnicornOptions = {}): Promise<TypedFlatCo
               // Uppercase regex escapes
               // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/escape-case.md
               "unicorn/escape-case": "error",
+
+              // Enforce correct use of `new` with builtins
+              "unicorn/new-for-builtins": "error",
 
               // Array.isArray instead of instanceof
               // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-instanceof-builtins.md
@@ -74,6 +95,7 @@ export async function unicorn(options: UnicornOptions = {}): Promise<TypedFlatCo
               "unicorn/throw-new-error": "error",
             }
         ),
+        ...overrides,
       },
     },
   ];
