@@ -220,7 +220,6 @@ export async function typescript(
         "ts/no-explicit-any": "off",
         "ts/no-extraneous-class": "off",
         "ts/no-import-type-side-effects": "error",
-        "ts/no-invalid-this": "error",
         "ts/no-invalid-void-type": "off",
         "ts/no-non-null-assertion": "off",
         "ts/no-redeclare": ["error", { builtinGlobals: false }],

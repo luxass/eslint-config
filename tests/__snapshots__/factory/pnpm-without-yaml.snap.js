@@ -417,7 +417,6 @@
       "ts/method-signature-style",
       "ts/no-dupe-class-members",
       "ts/no-import-type-side-effects",
-      "ts/no-invalid-this",
       "ts/no-redeclare",
       "ts/no-use-before-define",
     ],
