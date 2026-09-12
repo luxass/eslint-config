@@ -21,17 +21,17 @@ catalogs:
   dev:
     "@eslint/config-inspector": 1.5.0
     "@types/node": 25.2.1
-    "@typescript-eslint/rule-tester": 8.58.0
+    "@typescript-eslint/rule-tester": 8.68.0
     chokidar: 5.0.0
     eslint-typegen: 2.3.1
-    jiti: 2.6.1
+    jiti: 2.7.0
     publint: 0.3.18
-    semver: 7.7.4
-    synckit: 0.11.12
-    tsdown: 0.21.7
-    tsx: 4.21.0
-    typescript: 6.0.2
-    vitest: 4.1.2
+    semver: 7.8.5
+    synckit: 0.11.13
+    tsdown: 0.22.14
+    tsx: 4.23.13
+    typescript: 6.0.3
+    vitest: 4.1.11
 
   inline:
     find-up-simple: 1.0.1
