@@ -39,6 +39,7 @@ import {
   vue,
   yaml,
 } from "./configs";
+import { GLOB_MARKDOWN } from "./globs";
 import { getOverrides, interop, isInEditorEnv, resolveSubOptions } from "./utils";
 
 const FLAT_CONFIG_PROPS = [
@@ -366,6 +367,11 @@ export function luxass(
       ...configs,
       ...userConfigs as any,
     );
+
+  // Unscoped JavaScript rules cannot run on Markdown's SourceCode.
+  if (options.markdown ?? true) {
+    composer = composer.setDefaultIgnores((prev) => [...prev, GLOB_MARKDOWN]);
+  }
 
   if (autoRenamePlugins) {
     composer = composer

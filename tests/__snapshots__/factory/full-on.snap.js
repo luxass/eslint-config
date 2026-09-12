@@ -3,6 +3,9 @@
   "<ignored>",
   "<ignored>",
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/javascript/rules",
     "plugins": [
       "antfu",
@@ -131,6 +134,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/eslint-comments",
     "plugins": [
       "eslint-comments",
@@ -143,6 +149,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/command/rules",
     "plugins": [
       "command",
@@ -152,6 +161,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/perfectionist/setup",
     "plugins": [
       "perfectionist",
@@ -217,6 +229,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/imports",
     "plugins": [
       "antfu",
@@ -235,6 +250,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/e18e/rules",
     "plugins": [
       "e18e",
@@ -459,6 +477,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/typescript/erasable-syntax-only",
     "plugins": [
       "erasable-syntax-only",
@@ -472,6 +493,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/stylistic",
     "plugins": [
       "antfu",
@@ -550,6 +574,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/regexp/rules",
     "plugins": [
       "regexp",
@@ -999,6 +1026,9 @@
     ],
   },
   {
+    "ignores": [
+      "**/*.md",
+    ],
     "name": "luxass/unocss",
     "plugins": [
       "unocss",
@@ -1265,23 +1295,6 @@
       "markdown/no-unused-definitions",
       "markdown/require-alt-text",
       "markdown/table-column-count",
-    ],
-  },
-  {
-    "files": [
-      "**/*.md",
-    ],
-    "name": "luxass/markdown/disables/markdown",
-    "rules": [
-      "- command/command",
-      "- no-irregular-whitespace",
-      "- perfectionist/sort-exports",
-      "- perfectionist/sort-imports",
-      "- regexp/no-legacy-features",
-      "- regexp/no-missing-g-flag",
-      "- regexp/no-useless-dollar-replacements",
-      "- regexp/no-useless-flag",
-      "- style/indent",
     ],
   },
   {
