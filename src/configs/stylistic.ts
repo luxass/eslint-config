@@ -6,13 +6,15 @@ import { interop } from "../utils";
 export type StylisticConfig = Pick<StylisticCustomizeOptions, "jsx" | "indent" | "quotes" | "semi" | "braceStyle" | "experimental">;
 
 export const StylisticConfigDefaults: StylisticConfig = {
+  braceStyle: "1tbs",
+  experimental: false,
   indent: 2,
   jsx: true,
   quotes: "double",
   semi: true,
 };
 
-export interface StylisticOptions {
+export interface StylisticOptions extends StylisticConfig {
   /**
    * Enable stylistic rules.
    *
@@ -28,6 +30,8 @@ export interface StylisticOptions {
 
 export async function stylistic(options: StylisticOptions = {}): Promise<TypedFlatConfigItem[]> {
   const {
+    braceStyle,
+    experimental,
     indent,
     jsx,
     overrides = {},
@@ -35,12 +39,15 @@ export async function stylistic(options: StylisticOptions = {}): Promise<TypedFl
     semi,
   } = {
     ...StylisticConfigDefaults,
+    ...typeof options.stylistic === "object" ? options.stylistic : {},
     ...options,
   };
 
   const pluginStylistic = await interop(import("@stylistic/eslint-plugin"));
 
   const config = pluginStylistic.configs.customize({
+    braceStyle,
+    experimental,
     indent,
     jsx,
     pluginName: "style",
@@ -57,13 +64,13 @@ export async function stylistic(options: StylisticOptions = {}): Promise<TypedFl
       },
       rules: {
         ...config.rules,
-        "antfu/consistent-list-newline": "error",
+        ...experimental ? {} : { "antfu/consistent-list-newline": "error" },
         "antfu/if-newline": "off",
         "antfu/top-level-function": "error",
 
         "curly": ["error", "multi-line", "consistent"],
         "style/arrow-parens": ["error", "always", { requireForBlockBody: true }],
-        "style/brace-style": ["error", "1tbs", { allowSingleLine: true }],
+        "style/brace-style": ["error", braceStyle, { allowSingleLine: true }],
 
         "style/generator-star-spacing": ["error", { after: true, before: false }],
         "style/yield-star-spacing": ["error", { after: true, before: false }],
