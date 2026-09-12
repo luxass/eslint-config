@@ -57,6 +57,7 @@
     "eslint-plugin-format": ">=0.1.0",
     "eslint-plugin-react-refresh": "^0.5.0",
     "eslint-plugin-tailwindcss": "^3.17.0",
+    "eslint-plugin-vuejs-accessibility": "^2.4.1",
     "prettier-plugin-astro": "^0.14.0"
   },
   "peerDependenciesMeta": {
@@ -85,6 +86,9 @@
       "optional": true
     },
     "eslint-plugin-tailwindcss": {
+      "optional": true
+    },
+    "eslint-plugin-vuejs-accessibility": {
       "optional": true
     },
     "prettier-plugin-astro": {
@@ -140,6 +144,7 @@
     "eslint-plugin-format": "catalog:peer",
     "eslint-plugin-react-refresh": "catalog:peer",
     "eslint-plugin-tailwindcss": "catalog:peer",
+    "eslint-plugin-vuejs-accessibility": "catalog:peer",
     "eslint-typegen": "catalog:dev",
     "find-up-simple": "catalog:inline",
     "jiti": "catalog:dev",

@@ -3,7 +3,7 @@ import type { TypedFlatConfigItem } from "../types";
 import pluginAntfu from "eslint-plugin-antfu";
 import { interop } from "../utils";
 
-export type StylisticConfig = Pick<StylisticCustomizeOptions, "jsx" | "indent" | "quotes" | "semi">;
+export type StylisticConfig = Pick<StylisticCustomizeOptions, "jsx" | "indent" | "quotes" | "semi" | "braceStyle" | "experimental">;
 
 export const StylisticConfigDefaults: StylisticConfig = {
   indent: 2,
