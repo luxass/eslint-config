@@ -249,8 +249,8 @@ catalogs:
       specifier: 1.1.0
       version: 1.1.0
     '@e18e/eslint-plugin':
-      specifier: 0.3.0
-      version: 0.3.0
+      specifier: 0.8.0
+      version: 0.8.0
     '@eslint-community/eslint-plugin-eslint-comments':
       specifier: 4.7.1
       version: 4.7.1
@@ -357,7 +357,7 @@ importers:
         version: 1.1.0
       '@e18e/eslint-plugin':
         specifier: catalog:prod
-        version: 0.3.0(eslint@10.9.1(jiti@2.6.1))
+        version: 0.8.0(eslint@10.9.1(jiti@2.6.1))
       '@eslint-community/eslint-plugin-eslint-comments':
         specifier: catalog:prod
         version: 4.7.1(eslint@10.9.1(jiti@2.6.1))
@@ -614,11 +614,11 @@ packages:
   '@dprint/toml@0.7.0':
     resolution: {integrity: sha512-eFaQTcfxKHB+YyTh83x7GEv+gDPuj9q5NFOTaoj5rZmQTbj6OgjjMxUicmS1R8zYcx8YAq5oA9J3YFa5U6x2gA==}
 
-  '@e18e/eslint-plugin@0.3.0':
-    resolution: {integrity: sha512-hHgfpxsrZ2UYHcicA+tGZnmk19uJTaye9VH79O+XS8R4ona2Hx3xjhXghclNW58uXMk3xXlbYEOMr8thsoBmWg==}
+  '@e18e/eslint-plugin@0.8.0':
+    resolution: {integrity: sha512-js/TeM+XJyoJ2Zk4if5uTEchv3MEbqugc9gLgq8YdB6Dy+LvwGACpQiAwcul0r4LUl0TvhuzAKUeIUPtGp2cew==}
     peerDependencies:
       eslint: ^9.0.0 || ^10.0.0
-      oxlint: ^1.55.0
+      oxlint: ^1.72.0
     peerDependenciesMeta:
       eslint:
         optional: true
@@ -2028,11 +2028,6 @@ packages:
       '@typescript-eslint/utils': '*'
       eslint: '*'
 
-  eslint-plugin-depend@1.5.0:
-    resolution: {integrity: sha512-i3UeLYmclf1Icp35+6W7CR4Bp2PIpDgBuf/mpmXK5UeLkZlvYJ21VuQKKHHAIBKRTPivPGX/gZl5JGno1o9Y0A==}
-    peerDependencies:
-      eslint: '>=8.40.0'
-
   eslint-plugin-erasable-syntax-only@0.4.0:
     resolution: {integrity: sha512-7dx2gpfVn0FFEGukLqsF/izW4hGvSaySNOkcuSCO4q6Khh0ecOGYlRhW9hhDUtNryuKc+cXd1WFiQdpae3xzaQ==}
     engines: {node: '>=20.18.0'}
@@ -2767,8 +2762,8 @@ packages:
   mlly@1.8.2:
     resolution: {integrity: sha512-d+ObxMQFmbt10sretNDytwt85VrbkhhUA/JBGm1MPaWJ65Cl4wOgLaB1NYvJSZ0Ef03MMEU/0xpPMXUIQ29UfA==}
 
-  module-replacements@2.11.0:
-    resolution: {integrity: sha512-j5sNQm3VCpQQ7nTqGeOZtoJtV3uKERgCBm9QRhmGRiXiqkf7iRFOkfxdJRZWLkqYY8PNf4cDQF/WfXUYLENrRA==}
+  module-replacements@3.3.0:
+    resolution: {integrity: sha512-AVZL23uePazQOZlb/QMGwxsUa1oWA62Cfe6ApPzgasUoF4cdCWAiRPVq4KkaQzXbIDAlpLhLG61Jx8Lju4wjTg==}
 
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
@@ -3608,9 +3603,11 @@ snapshots:
 
   '@dprint/toml@0.7.0': {}
 
-  '@e18e/eslint-plugin@0.3.0(eslint@10.9.1(jiti@2.6.1))':
+  '@e18e/eslint-plugin@0.8.0(eslint@10.9.1(jiti@2.6.1))':
     dependencies:
-      eslint-plugin-depend: 1.5.0(eslint@10.9.1(jiti@2.6.1))
+      empathic: 2.0.1
+      module-replacements: 3.3.0
+      semver: 7.8.5
     optionalDependencies:
       eslint: 10.9.1(jiti@2.6.1)
 
@@ -4946,13 +4943,6 @@ snapshots:
       '@typescript-eslint/utils': 8.70.0(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2)
       eslint: 10.9.1(jiti@2.6.1)
 
-  eslint-plugin-depend@1.5.0(eslint@10.9.1(jiti@2.6.1)):
-    dependencies:
-      empathic: 2.0.1
-      eslint: 10.9.1(jiti@2.6.1)
-      module-replacements: 2.11.0
-      semver: 7.8.5
-
   eslint-plugin-erasable-syntax-only@0.4.0(@typescript-eslint/parser@8.58.0(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2))(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2):
     dependencies:
       '@typescript-eslint/parser': 8.58.0(eslint@10.9.1(jiti@2.6.1))(typescript@6.0.2)
@@ -5983,7 +5973,7 @@ snapshots:
       pkg-types: 1.3.1
       ufo: 1.6.4
 
-  module-replacements@2.11.0: {}
+  module-replacements@3.3.0: {}
 
   mri@1.2.0: {}
 
