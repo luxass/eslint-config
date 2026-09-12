@@ -12,7 +12,7 @@ export { jsonc, type JSONOptions } from "./json";
 export { jsx } from "./jsx";
 export { markdown, type MarkdownOptions } from "./markdown";
 export { node } from "./node";
-export { perfectionist } from "./perfectionist";
+export { perfectionist, type PerfectionistOptions } from "./perfectionist";
 export { pnpm, type PnpmOptions } from "./pnpm";
 export { react, type ReactOptions } from "./react";
 export { regexp, type RegExpOptions } from "./regexp";

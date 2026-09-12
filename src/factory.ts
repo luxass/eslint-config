@@ -95,6 +95,7 @@ export function luxass(
     jsdoc: enableJsdoc = true,
     jsx: enableJsx = true,
     node: enableNode = true,
+    perfectionist: enablePerfectionist = true,
     pnpm: enableCatalogs = !!findUpSync("pnpm-workspace.yaml"),
     react: enableReact = false,
     regexp: enableRegexp = true,
@@ -154,10 +155,16 @@ export function luxass(
     }),
     comments(),
     command(),
-
-    // Optional plugins (installed but not enabled by default)
-    perfectionist(),
   );
+
+  if (enablePerfectionist) {
+    configs.push(
+      perfectionist({
+        ...resolveSubOptions(options, "perfectionist"),
+        overrides: getOverrides(options, "perfectionist"),
+      }),
+    );
+  }
 
   if (enableNode) {
     configs.push(
