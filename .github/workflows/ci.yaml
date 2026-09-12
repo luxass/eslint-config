@@ -17,7 +17,6 @@ jobs:
     permissions:
       contents: read
 
-
   test:
     name: "test (node: ${{ matrix.node }}"
     strategy:
