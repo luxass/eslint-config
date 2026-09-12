@@ -19,8 +19,8 @@ overrides:
 
 catalogs:
   dev:
-    "@eslint/config-inspector": 1.5.0
-    "@types/node": 25.2.1
+    "@eslint/config-inspector": 3.4.0
+    "@types/node": 26.4.0
     "@typescript-eslint/rule-tester": 8.68.0
     chokidar: 5.0.0
     eslint-typegen: 2.3.1
