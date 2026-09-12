@@ -301,6 +301,7 @@ export function luxass(
       pnpm({
         isInEditor,
         json: options.jsonc !== false,
+        stylistic: !!stylisticOptions,
         yaml: options.yaml !== false,
         ...(resolveSubOptions(options, "pnpm")),
       }),
