@@ -744,7 +744,7 @@
       "**/[jt]sconfig.json",
       "**/[jt]sconfig.*.json",
     ],
-    "name": "luxass/sort/tsconfig",
+    "name": "luxass/sort/tsconfig-json",
     "rules": [
       "jsonc/sort-keys",
     ],

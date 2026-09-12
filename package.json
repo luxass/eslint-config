@@ -1,14 +1,14 @@
 {
   "name": "@luxass/eslint-config",
-  "version": "7.4.2",
-  "description": "ESLint config for @luxass",
   "type": "module",
+  "version": "7.4.2",
+  "packageManager": "pnpm@12.4.1",
+  "description": "ESLint config for @luxass",
   "author": {
     "name": "Lucas Nørgård",
     "email": "lucasnrgaard@gmail.com",
     "url": "https://luxass.dev"
   },
-  "packageManager": "pnpm@12.4.1",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -60,6 +60,12 @@
     "prettier-plugin-astro": "^0.14.0"
   },
   "peerDependenciesMeta": {
+    "@eslint-react/eslint-plugin": {
+      "optional": true
+    },
+    "@prettier/plugin-xml": {
+      "optional": true
+    },
     "@unocss/eslint-plugin": {
       "optional": true
     },
@@ -75,19 +81,13 @@
     "eslint-plugin-format": {
       "optional": true
     },
-    "@eslint-react/eslint-plugin": {
-      "optional": true
-    },
     "eslint-plugin-react-refresh": {
-      "optional": true
-    },
-    "prettier-plugin-astro": {
       "optional": true
     },
     "eslint-plugin-tailwindcss": {
       "optional": true
     },
-    "@prettier/plugin-xml": {
+    "prettier-plugin-astro": {
       "optional": true
     }
   },
