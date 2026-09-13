@@ -13,16 +13,11 @@ permissions: {}
 
 jobs:
   ci:
-    uses: luxass/shared-workflows/.github/workflows/ci.yaml@56bd9148cc90ee377d1e6fa3a32e43d18859dfe1 # v0.4.2
+    uses: luxass/shared-workflows/.github/workflows/reusable-ci.yaml@dc5bd39f7ea1504fb0ff9745fbc65c629178d8b3 # v0.11.2
     permissions:
       contents: read
 
   test:
-    name: "test (node: ${{ matrix.node }}"
-    strategy:
-      matrix:
-        node: [24]
-      fail-fast: false
-    uses: luxass/shared-workflows/.github/workflows/test.yaml@56bd9148cc90ee377d1e6fa3a32e43d18859dfe1 # v0.4.2
+    uses: luxass/shared-workflows/.github/workflows/reusable-test.yaml@dc5bd39f7ea1504fb0ff9745fbc65c629178d8b3 # v0.11.2
     permissions:
       contents: read
