@@ -9,7 +9,7 @@ permissions: {}
 
 jobs:
   release:
-    uses: luxass/shared-workflows/.github/workflows/reusable-release-npm.yaml@dc5bd39f7ea1504fb0ff9745fbc65c629178d8b3 # v0.11.2
+    uses: luxass/shared-workflows/.github/workflows/reusable-release-npm.yaml@9770f7268daf358179c45895de8becc2e8525984 # v0.14.0
     permissions:
       id-token: write
       contents: write

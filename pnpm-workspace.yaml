@@ -18,7 +18,7 @@ packages:
   - tests/fixtures/*
 
 overrides:
-  rolldown: 1.0.0-rc.12
+  rolldown: 1.2.13
 
 onlyBuiltDependencies:
   - esbuild
@@ -27,16 +27,16 @@ catalogs:
   dev:
     "@eslint/config-inspector": 3.4.0
     "@types/eslint-plugin-jsx-a11y": 6.10.1
-    "@types/node": 26.4.0
+    "@types/node": 26.6.5
     "@typescript-eslint/rule-tester": 8.68.0
     chokidar: 5.0.0
     eslint-typegen: 2.3.1
     jiti: 2.7.0
-    publint: 0.3.18
+    publint: 0.3.25
     semver: 7.8.5
-    synckit: 0.11.13
-    tsdown: 0.22.14
-    tsx: 4.23.13
+    synckit: 0.12.1
+    tsdown: 0.23.0
+    tsx: 4.23.15
     typescript: 6.0.3
     vitest: 4.1.11
 
@@ -61,12 +61,12 @@ catalogs:
     eslint-plugin-vuejs-accessibility: 2.6.0
     prettier-plugin-astro: 0.14.1
     tailwindcss: 3.4.19
-    unocss: 66.6.7
-    vue: 3.5.42
+    unocss: 66.10.5
+    vue: 3.5.43
 
   prod:
-    "@antfu/install-pkg": 2.0.1
-    "@clack/prompts": 1.7.0
+    "@antfu/install-pkg": 2.1.0
+    "@clack/prompts": 1.8.1
     "@e18e/eslint-plugin": 0.8.0
     "@eslint-community/eslint-plugin-eslint-comments": 4.7.2
     "@eslint/markdown": 8.0.3
@@ -92,7 +92,7 @@ catalogs:
     eslint-plugin-vue: 10.10.0
     eslint-plugin-yml: 3.8.1
     eslint-processor-vue-blocks: 2.0.0
-    globals: 17.11.0
+    globals: 17.13.0
     local-pkg: 1.2.1
     parse-gitignore: 2.0.0
     toml-eslint-parser: 1.0.3
