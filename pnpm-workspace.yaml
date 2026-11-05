@@ -57,9 +57,9 @@ catalogs:
     eslint-plugin-format: 2.0.1
     eslint-plugin-jsx-a11y: 6.10.2
     eslint-plugin-react-refresh: 0.5.5
-    eslint-plugin-tailwindcss: 3.18.2
+    eslint-plugin-tailwindcss: 4.4.0
     eslint-plugin-vuejs-accessibility: 2.6.0
-    prettier-plugin-astro: 0.14.1
+    prettier-plugin-astro: 1.1.2
     tailwindcss: 3.4.19
     unocss: 66.6.7
     vue: 3.5.42
@@ -80,14 +80,14 @@ catalogs:
     eslint-plugin-antfu: 3.2.3
     eslint-plugin-command: 4.0.0
     eslint-plugin-import-lite: 0.6.0
-    eslint-plugin-jsdoc: 64.3.2
+    eslint-plugin-jsdoc: 65.4.2
     eslint-plugin-jsonc: 3.4.2
     eslint-plugin-n: 18.3.0
     eslint-plugin-perfectionist: 5.10.1
     eslint-plugin-pnpm: 1.9.1
     eslint-plugin-regexp: 3.2.0
     eslint-plugin-toml: 1.5.0
-    eslint-plugin-unicorn: 74.0.0
+    eslint-plugin-unicorn: 79.0.0
     eslint-plugin-unused-imports: 4.4.1
     eslint-plugin-vue: 10.10.0
     eslint-plugin-yml: 3.8.1
