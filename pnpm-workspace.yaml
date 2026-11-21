@@ -38,7 +38,7 @@ catalogs:
     tsdown: 0.22.14
     tsx: 4.23.13
     typescript: 6.0.3
-    vitest: 4.1.11
+    vitest: 4.1.12
 
   inline:
     find-up-simple: 1.0.1
@@ -73,7 +73,7 @@ catalogs:
     "@stylistic/eslint-plugin": 5.10.0
     "@typescript-eslint/eslint-plugin": 8.68.0
     "@typescript-eslint/parser": 8.68.0
-    "@vitest/eslint-plugin": 1.6.27
+    "@vitest/eslint-plugin": 1.6.28
     eslint-config-flat-gitignore: 2.4.0
     eslint-flat-config-utils: 3.2.0
     eslint-merge-processors: 2.0.0
